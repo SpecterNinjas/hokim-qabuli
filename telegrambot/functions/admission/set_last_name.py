@@ -39,4 +39,4 @@ def set_last_name(bot: Bot, update: Update):
     request['last_name'] = last_name
     cache.set(f'request_{update.effective_chat.id}', request)
 
-    return functions.admission.get_middle_name(bot, update, edit=False, data=None)
+    return functions.admission.get_middle_name(bot, update)

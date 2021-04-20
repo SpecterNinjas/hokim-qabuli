@@ -25,4 +25,5 @@ def get_first_name(bot: Bot, update: Update):
         reply_markup=InlineKeyboardMarkup(inline_keyboard),
         parse_mode='Markdown'
     )
+
     return states.GET_FIRST_NAME

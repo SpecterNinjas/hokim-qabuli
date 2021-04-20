@@ -18,27 +18,14 @@ class Text(models.Model):
         return f'{self.text_id}{self.buttons_ru}{self.buttons_uz}'
 
 
-class Region(models.Model):
-    title = models.CharField(max_length=255)
-    title_uz = models.CharField(max_length=255, null=True)
-    title_ru = models.CharField(max_length=255, null=True)
-
-    def __str__(self):
-        return f'{self.title}'
-
-    class Meta:
-        verbose_name = 'Район'
-        verbose_name_plural = 'Районы'
-
-
 class District(models.Model):
-    title = models.CharField(max_length=255)
-    region = models.ForeignKey(to='Region', on_delete=models.CASCADE)
+    region = models.CharField(verbose_name='Tuman', max_length=255, null=True)
     title_uz = models.CharField(max_length=255, null=True)
     title_ru = models.CharField(max_length=255, null=True)
+    token = models.CharField(max_length=1024, null=True)
 
     def __str__(self):
-        return f'{self.title}'
+        return f'{self.title_uz}'
 
     class Meta:
         verbose_name = 'Махаля'
@@ -49,7 +36,3 @@ class District(models.Model):
 #     first_name = models.CharField(max_length=255, null=True)
 #     middle_name = models.CharField(max_length=255, null=True)
 #     last_name = models.CharField(max_length=255, null=True)
-
-
-
-

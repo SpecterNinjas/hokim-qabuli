@@ -2,7 +2,7 @@ import re
 from django.apps import apps
 from django.core.cache import cache
 from telegram import Bot, Update
-from telegrambot import states
+from telegrambot import states, functions
 from telegrambot.apps import log_errors
 
 
@@ -37,4 +37,4 @@ def set_middle_name(bot: Bot, update: Update):
     request['middle_name'] = middle_name
     cache.set(f'request_{update.effective_chat.id}', request)
 
-    # return functions.admission.get_region(bot, update)
+    return functions.admission.get_district(bot, update)

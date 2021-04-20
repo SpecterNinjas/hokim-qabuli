@@ -125,5 +125,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-TELEGRAM_TOKEN = '1628596506:AAG8hCkj5NqOW-XB2Kd8i21zo4QglHz_Zy4'
-HOST = 'https://84ff12005e2e.ngrok.io'
+TELEGRAM_TOKEN = '1628596506:AAE3TPfGu3_Eds4OWkJ3z2DcCv0VNoF9hZU'
+HOST = 'https://2a7f936c579e.ngrok.io'
