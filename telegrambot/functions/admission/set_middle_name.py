@@ -25,16 +25,19 @@ def set_middle_name(bot: Bot, update: Update):
             parse_mode='Markdown'
         )
         return states.GET_MIDDLE_NAME
-    try:
-        bot.delete_message(
-            chat_id=update.effective_chat.id,
-            message_id=update.callback_query.message.message_id
-        )
-    except Exception as e:
-        print(e)
 
     request = cache.get(f'request_{update.effective_chat.id}')
     request['middle_name'] = middle_name
     cache.set(f'request_{update.effective_chat.id}', request)
+
+    if user.lang == 'uz':
+        text = 'Saqlandi'
+    else:
+        text = 'Сохранено'
+
+    bot.send_message(
+        chat_id=update.effective_chat.id,
+        text=text,
+    )
 
     return functions.admission.get_district(bot, update)

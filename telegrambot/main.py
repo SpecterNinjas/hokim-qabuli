@@ -52,7 +52,13 @@ conv_handler = ConversationHandler(
         ],
         states.GET_COMMUNAL_PROBLEM: [
             start_handler,
+            main_handler,
             CallbackQueryHandler(admission.set_communal_problem),
+        ],
+        states.GET_SHORT_DESCRIPTION: [
+            start_handler,
+            main_handler,
+            MessageHandler(Filters.text, admission.set_short_description),
         ],
     },
     fallbacks=[],

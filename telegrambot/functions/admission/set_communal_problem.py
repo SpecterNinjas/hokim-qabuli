@@ -26,9 +26,9 @@ def set_communal_problem(bot: Bot, update: Update):
     if callback_data == 'back_to_problem_type':
         return admission.get_problem_type(bot, update)
 
-    request = cache.get(f'additional_info_{update.effective_chat.id}')
+    request = cache.get(f'request_{update.effective_chat.id}')
     request['sub_problem'] = sub_problem
-    cache.set(f'additional_info_{update.effective_chat.id}', request)
+    cache.set(f'request_{update.effective_chat.id}', request)
 
     if user.lang == 'uz':
         text = 'Saqlandi'
@@ -39,3 +39,5 @@ def set_communal_problem(bot: Bot, update: Update):
         chat_id=update.effective_chat.id,
         text=text,
     )
+
+    return admission.get_short_description(bot, update)

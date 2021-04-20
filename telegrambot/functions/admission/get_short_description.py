@@ -7,23 +7,27 @@ from telegrambot.helpers import generate_inline_keyboard
 
 
 @log_errors
-def get_last_name(bot: Bot, update: Update):
-    print('get_last_name')
+def get_short_description(bot: Bot, update: Update):
+    print('get_short_description')
+
     user_model = apps.get_model('telegrambot', 'TelegramProfile')
     user = user_model.objects.get(external_id=update.effective_chat.id)
 
-    data = text_manager.objects.filter(text_id='GET_LAST_NAME').values()[0]
+    data = text_manager.objects.filter(text_id='GET_SHORT_DESCRIPTION').values()[0]
     text = data[user.lang]
 
     inline_keyboard = generate_inline_keyboard(data[f"buttons_{user.lang}"], update.effective_chat.id)
 
     try:
-        bot.edit_message_text(
+        bot.delete_message(
+            chat_id=update.effective_chat.id,
+            message_id=update.callback_query.message.message_id,
+        )
+        bot.send_message(
             chat_id=update.effective_chat.id,
             text=text,
-            message_id=update.callback_query.message.message_id,
             reply_markup=InlineKeyboardMarkup(inline_keyboard),
-            parse_mode='Markdown'
+            parse_mode='Markdown',
         )
     except:
         bot.send_message(
@@ -32,4 +36,5 @@ def get_last_name(bot: Bot, update: Update):
             reply_markup=InlineKeyboardMarkup(inline_keyboard),
             parse_mode='Markdown',
         )
-    return states.GET_LAST_NAME
+
+    return states.GET_SHORT_DESCRIPTION

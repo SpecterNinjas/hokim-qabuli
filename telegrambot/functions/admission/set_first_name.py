@@ -33,4 +33,14 @@ def set_first_name(bot: Bot, update: Update):
     request['first_name'] = name
     cache.set(f'request_{update.effective_chat.id}', request)
 
+    if user.lang == 'uz':
+        text = 'Saqlandi'
+    else:
+        text = 'Сохранено'
+
+    bot.send_message(
+        chat_id=update.effective_chat.id,
+        text=text,
+    )
+
     return functions.admission.get_last_name(bot, update)
