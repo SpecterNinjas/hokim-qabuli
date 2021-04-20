@@ -14,8 +14,10 @@ def inline_button_handler(bot: Bot, update: Update):
 
     if callback_data == 'ru_':
         functions.set_ru(bot, update)
+
     if callback_data == 'uz_':
         functions.set_uz(bot, update)
+
     if callback_data == 'admission':
         functions.admission_menu(bot, update)
 
@@ -38,16 +40,6 @@ def inline_button_handler(bot: Bot, update: Update):
     if callback_data == 'problem_type':
         admission.get_problem_type(bot, update)
         return states.GET_PROBLEM_TYPE
-
-    if callback_data == 'Communal':
-        admission.get_communal_problem(bot, update)
-        return states.GET_COMMUNAL_PROBLEM
-
-    if callback_data == 'land_issues':
-        pass
-
-    if callback_data == 'social_security':
-        pass
 
     if callback_data == 'back_to_problem_type':
         admission.get_problem_type(bot, update)

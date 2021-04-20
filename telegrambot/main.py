@@ -47,8 +47,8 @@ conv_handler = ConversationHandler(
         ],
         states.GET_PROBLEM_TYPE: [
             start_handler,
+            CallbackQueryHandler(admission.set_problem_type),
             main_handler,
-            MessageHandler(Filters.text, admission.set_problem_type),
         ],
         states.GET_COMMUNAL_PROBLEM: [
             start_handler,
