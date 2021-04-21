@@ -52,13 +52,24 @@ conv_handler = ConversationHandler(
         ],
         states.GET_COMMUNAL_PROBLEM: [
             start_handler,
-            main_handler,
             CallbackQueryHandler(admission.set_communal_problem),
+        ],
+        states.GET_LAND_ISSUES_PROBLEM: [
+            start_handler,
+            CallbackQueryHandler(admission.set_land_issues_problem),
+        ],
+        states.GET_SOCIAL_SECURITY_PROBLEM: [
+            start_handler,
+            CallbackQueryHandler(admission.set_social_security_problem),
         ],
         states.GET_SHORT_DESCRIPTION: [
             start_handler,
             main_handler,
             MessageHandler(Filters.text, admission.set_short_description),
+        ],
+        states.GET_PHONE_NUMBER: [
+            start_handler,
+            MessageHandler(Filters.contact, admission.set_phone_number),
         ],
     },
     fallbacks=[],

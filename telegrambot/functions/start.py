@@ -10,7 +10,6 @@ from telegrambot.helpers import get_request_data
 @log_errors
 def start(bot: Bot, update: Update):
     print('START')
-    print(bot.token)
     user_model = apps.get_model('telegrambot', 'TelegramProfile')
     try:
         user = user_model.objects.get(external_id=update.effective_chat.id)
@@ -19,6 +18,7 @@ def start(bot: Bot, update: Update):
             external_id=update.effective_chat.id,
             username=update.message.from_user.username,
         )
+
 
     if cache.get(f'request_{update.effective_chat.id}') is None:
         request = get_request_data()

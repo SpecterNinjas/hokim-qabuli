@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from telegrambot.models import TelegramProfile, Text, District
+from telegrambot.models import TelegramProfile, Text, District, Admission, RegionBot
 
 
 @admin.register(TelegramProfile)
@@ -17,3 +17,14 @@ class TextAdmin(admin.ModelAdmin):
 @admin.register(District)
 class DistrictAdmin(admin.ModelAdmin):
     list_display = ('region', 'title_uz', 'title_ru', 'token')
+
+
+@admin.register(Admission)
+class AdmissionAdmin(admin.ModelAdmin):
+    list_display = ('external_id', 'first_name', 'middle_name', 'last_name', 'district', 'problem_type', 'sub_problem',
+                    'short_description', 'phone_number')
+
+
+@admin.register(RegionBot)
+class RegionBotAdmin(admin.ModelAdmin):
+    list_display = ('title', 'region', 'token')

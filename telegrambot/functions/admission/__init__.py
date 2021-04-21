@@ -24,3 +24,7 @@ from .set_social_security_problem import set_social_security_problem
 
 from .get_short_description import get_short_description
 from .set_short_description import set_short_description
+
+from .get_phone_number import get_phone_number
+from .set_phone_number import set_phone_number
+

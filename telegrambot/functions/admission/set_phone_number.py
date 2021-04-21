@@ -1,20 +1,20 @@
 from django.apps import apps
 from django.core.cache import cache
-from telegram import Bot, Update, ReplyKeyboardRemove
+from telegram import Bot, Update
 
-from telegrambot.functions import admission
+from telegrambot import functions
 
 
-def set_short_description(bot: Bot, update: Update):
-    print('set_short_description')
+def set_phone_number(bot: Bot, update: Update):
+    print('set_phone_number')
 
     user_model = apps.get_model('telegrambot', 'TelegramProfile')
     user = user_model.objects.get(external_id=update.effective_chat.id)
 
-    short_description = update.message.text
+    phone_number = update.message.contact.phone_number
 
     request = cache.get(f'request_{update.effective_chat.id}')
-    request['short_description'] = short_description
+    request['phone_number'] = phone_number
     cache.set(f'request_{update.effective_chat.id}', request)
 
     if user.lang == 'uz':
@@ -26,5 +26,4 @@ def set_short_description(bot: Bot, update: Update):
         chat_id=update.effective_chat.id,
         text=text,
     )
-
-    return admission.get_phone_number(bot, update)
+    return functions.admission_menu(bot, update)

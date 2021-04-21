@@ -1,10 +1,10 @@
 from django.apps import apps
 from django.core.cache import cache
-from telegram import Bot, Update, InlineKeyboardMarkup
+from telegram import Bot, Update, InlineKeyboardMarkup, InlineKeyboardButton
 
 from telegrambot import states
 from telegrambot.apps import log_errors, text_manager
-from telegrambot.helpers import get_request_data, generate_inline_keyboard
+from telegrambot.helpers import get_request_data, generate_inline_keyboard, validate_admission_info
 
 
 @log_errors
@@ -45,6 +45,9 @@ def admission_menu(bot: Bot, update: Update):
     short_description_sign = '✅️ ' if request['short_description'] else '❗️'
     short_description = request['short_description'] if request['short_description'] else no_data[user.lang]
 
+    phone_number_sign = '✅️ ' if request['phone_number'] else '❗️'
+    phone_number = request['phone_number'] if request['phone_number'] else no_data[user.lang]
+
     data = text_manager.objects.filter(text_id='ADMISSION_MENU').values()[0]
 
     text = data[user.lang].format(
@@ -56,9 +59,24 @@ def admission_menu(bot: Bot, update: Update):
 
         sub_problem_sign=sub_problem_sign, sub_problem=sub_problem,
         short_description_sign=short_description_sign, short_description=short_description,
+        phone_number_sign=phone_number_sign, phone_number=phone_number,
     )
 
     inline_keyboard = generate_inline_keyboard(data[f"buttons_{user.lang}"], update.effective_chat.id)
+    if validate_admission_info(request):
+        save_btn_text = "✉️Saqlash" if user.lang == 'uz' else '✉️Сохранить'
+        back_btn_text = "⬅️️Orqaga" if user.lang == 'uz' else '⬅️ Назад'
+        inline_keyboard.append(
+            [
+                InlineKeyboardButton(back_btn_text, callback_data='back_to_statement_type'),
+                InlineKeyboardButton(save_btn_text, callback_data='save_admission_info'),
+            ],
+        )
+    else:
+        back_btn_text = "⬅️️Orqaga" if user.lang == 'uz' else '⬅️ Назад'
+        inline_keyboard.append(
+            [InlineKeyboardButton(back_btn_text, callback_data='back_to_statement_type')]
+        )
 
     try:
         bot.edit_message_text(

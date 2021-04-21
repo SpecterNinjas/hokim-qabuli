@@ -31,6 +31,7 @@ def set_first_name(bot: Bot, update: Update):
 
     request = cache.get(f'request_{update.effective_chat.id}')
     request['first_name'] = name
+    request['telegram_id'] = update.effective_chat.id
     cache.set(f'request_{update.effective_chat.id}', request)
 
     if user.lang == 'uz':

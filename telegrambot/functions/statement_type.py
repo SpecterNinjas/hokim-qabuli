@@ -1,9 +1,12 @@
 from django.apps import apps
 from telegram import Update, Bot, InlineKeyboardMarkup
 
+from telegrambot import states
+from telegrambot.apps import log_errors
 from telegrambot.helpers import generate_inline_keyboard
 
 
+@log_errors
 def statement_type(bot: Bot, update: Update):
     print('statement_type')
     user_model = apps.get_model('telegrambot', 'TelegramProfile')
@@ -30,3 +33,4 @@ def statement_type(bot: Bot, update: Update):
             text=text,
             reply_markup=InlineKeyboardMarkup(inline_keyboard)
         )
+    return states.STATEMENT_TYPE
