@@ -9,7 +9,7 @@
                 <a class="navbar-brand" href="{% url 'panel:main_page' %}">
                     {#                <a class="navbar-brand" href="{% url 'index-admin_temp' %}">#}
                     <div class="brand-logo">
-                        <img class="logo" style="width: 130px; height: 60px;" src="{% static 'admin/img/Group.svg' %}"/>
+                        <img class="logo" style="width: 130px; height: 60px;" src="{% static 'panel/login/images/Group.svg' %}"/>
                     </div>
                 </a></li>
         </ul>
@@ -20,11 +20,33 @@
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation"
             data-icon-style="lines">
 
-            <li class=" navigation-header"><span>{% trans "Ma'muriyat" %}</span></li>
+            <li class="navigation-header"><span>{% trans "Ma'muriyat" %}</span></li>
 
-            {#  Navigation Part #}
+
+
+            <li class="nav-item news {% if 'murojatchi' in request.path %}aaa{% endif %}">
+                <a href="{% url 'panel:murojatchi' %}">
+                         <span class="menu-item"><i class="fa fa-list mr-1" aria-hidden="true"></i>
+                             Barcha Murojatlar</span></a>
+            </li>
+
+
             <li class="nav-item news">
-                <a href="#"><i class="menu-livicon" data-icon="list"></i>
+                <a href="#">
+                         <span class="menu-item"><i class="fa fa-users mr-1" aria-hidden="true"></i>
+                            Murojatchilar</span></a>
+            </li>
+
+
+            <li class="nav-item news {% if 'qabul' in request.path %}aaa{% endif %}">
+                <a href="{% url 'panel:qabul' %}">
+                         <span class="menu-item"><i class="fa fa-envelope mr-1" aria-hidden="true"></i>
+                            Ommaviy Qabul</span></a>
+            </li>
+
+
+            <li class="nav-item news {% if 'mahalla' in request.path %}aaa{% endif %}">
+                <a href="#"><i class=""></i>
                     <span class="menu-title">Mahalla </span>
                 </a>
                 <ul class="menu-content">
@@ -42,9 +64,8 @@
                 </ul>
             </li>
 
-            {#  Slider #}
-            <li class=" nav-item news">
-                <a href="#"><i class="menu-livicon" data-icon="swap-horizontal"></i>
+            <li class=" nav-item news {% if 'muammo' in request.path %}aaa{% endif %}">
+                <a href="#"><i class=""></i>
                     <span class="menu-title">Muammo</span>
                 </a>
                 <ul class="menu-content">
@@ -61,9 +82,8 @@
                 </ul>
             </li>
 
-            {#  Slider #}
-            <li class=" nav-item news">
-                <a href="#"><i class="menu-livicon" data-icon="swap-horizontal"></i>
+            <li class=" nav-item news {% if 'kategoriya' in request.path %}aaa{% endif %}">
+                <a href="#"><i class=""></i>
                     <span class="menu-title">Kategoriya</span>
                 </a>
                 <ul class="menu-content">
@@ -74,40 +94,6 @@
                     </li>
                     <li>
                         <a href="{% url 'panel:kategoriya_create' %}">
-                            <i class="bx bx-plus"></i><span
-                                class="menu-item">Yangi Qo'shish</span></a>
-                    </li>
-                </ul>
-            </li>
-
-            {#  Services #}
-            <li class=" nav-item news">
-                <a href="#"><i class="menu-livicon" data-icon="box-add"></i>
-                    <span class="menu-title">Murojatchi</span>
-                </a>
-                <ul class="menu-content">
-                    <li>
-                        <a href="{% url 'panel:murojatchi' %}">
-                            <i class="bx bx-list-ul"></i><span
-                                class="menu-item">Barch Murojatchilar</span></a>
-                    </li>
-
-                </ul>
-            </li>
-
-            {#  Anons Bar #}
-            <li class=" nav-item news">
-                <a href="#"><i class="menu-livicon" data-icon="grid"></i>
-                    <span class="menu-title">Qabul</span>
-                </a>
-                <ul class="menu-content">
-{#                    <li>#}
-{#                        <a href="#">#}
-{#                            <i class="bx bx-list-ul"></i><span#}
-{#                                class="menu-item">Barcha Qabullar</span></a>#}
-{#                    </li>#}
-                    <li>
-                        <a href="{% url 'panel:qabul' %}">
                             <i class="bx bx-plus"></i><span
                                 class="menu-item">Yangi Qo'shish</span></a>
                     </li>

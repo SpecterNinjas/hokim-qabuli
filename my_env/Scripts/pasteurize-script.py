@@ -1,4 +1,4 @@
-#!C:\Users\User\PycharmProjects\QR\Hokim-Qabuli\my_env\Scripts\python.exe
+#!C:\Users\User\PycharmProjects\QR\hokim-qabul2\my_env\Scripts\python.exe
 # EASY-INSTALL-ENTRY-SCRIPT: 'future==0.18.2','console_scripts','pasteurize'
 import re
 import sys

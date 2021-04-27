@@ -1,5 +1,3 @@
-import json
-
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
@@ -11,7 +9,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DeleteView, UpdateView, CreateView
 from .forms import *
-from .models import Murojatchi
+from .models import *
 
 
 def admin_login_view(request):
@@ -177,6 +175,37 @@ class MurojatchiView(LoginRequiredMixin, ListView):
     template_name = 'panel/murojatchi/index.html'
     context_object_name = 'murojatchi_list'
     queryset = Murojatchi.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(MurojatchiView, self).get_context_data(**kwargs)
+        context['mahallalar'] = Mahalla.objects.all()
+        context['muammolar'] = Muammo.objects.all()
+
+        return context
+
+
+class MurojatchiSearchView(LoginRequiredMixin, ListView):
+    template_name = 'panel/murojatchi/search.html'
+    model = Murojatchi
+
+    def get_queryset(self):
+        queryset = Murojatchi.objects.all()
+        if self.request.GET.get('fullname') != '':
+            fullname = self.request.GET.get('fullname')
+            queryset = self.model.objects.filter(fullname__icontains=fullname)
+        if self.request.GET.get('phone') != '':
+            phone = self.request.GET.get('phone')
+            queryset &= self.model.objects.filter(phone__icontains=phone)
+        if self.request.GET.get('mahalla') != '':
+            mahalla = self.request.GET.get('mahalla')
+            queryset &= self.model.objects.filter(mahalla_id=mahalla)
+        if self.request.GET.get('muammo') != '':
+            muammo = self.request.GET.get('muammo')
+            queryset &= self.model.objects.filter(muammo_id=muammo)
+        if self.request.GET.get('status') != '':
+            status = self.request.GET.get('status')
+            queryset &= self.model.objects.filter(status= status)
+        return queryset
 
 
 class MurojatchiUpdateView(LoginRequiredMixin, UpdateView):
