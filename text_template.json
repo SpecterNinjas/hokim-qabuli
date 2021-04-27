@@ -1,0 +1,132 @@
+[
+   {
+      "model":"telegrambot.text",
+      "pk":"ADMISSION_MENU",
+      "fields":{
+         "buttons_uz":"Ism>first_name| Familita>last_name| Sharf>middle_name| Mahalla>district| Muammo turi>problem_type|Qisqacha mazmun>short_description|Telefon raqami>phone_number",
+         "buttons_ru":"Имя>first_name| Фамилия>last_name| Отчество>middle_name| Махаля>district| Тип проблемы>problem_type| Короткое описание>short_description|Номер телефона>phone_number",
+         "uz":"{first_name_sign}Ism: {first_name}\r\n{last_name_sign}Familita: {last_name}\r\n{middle_name_sign}Sharf: {middle_name}\r\n{district_sign}Mahalla: {district}\r\n{problem_type_sign}Muammo: {problem_type}\r\n{sub_problem_sign}Sub muammo: {sub_problem}\r\n{short_description_sign}Qisqacha mazmun: {short_description}\r\n{phone_number_sign}Telefon raqami: {phone_number}",
+         "ru":"{first_name_sign}Имя: {first_name}\r\n{last_name_sign}Фамилия: {last_name}\r\n{middle_name_sign}Отчество: {middle_name}\r\n{district_sign}Махаля: {district}\r\n{problem_type_sign}Тип проблемы: {problem_type}\r\n{sub_problem_sign}Дополнительная проблема: {sub_problem}\r\n{short_description_sign}Короткое описание: {short_description}\r\n{phone_number_sign}Номер телефона: {phone_number}"
+      }
+   },
+   {
+      "model":"telegrambot.text",
+      "pk":"GET_COMMUNAL_PROBLEM",
+      "fields":{
+         "buttons_uz":"Gaz kamligi>lack_of_gas| Suv kamligi>lack_of_water| Yorug'lik kamligi>lack_of_light| ⬅Orqaga>back_to_problem_type",
+         "buttons_ru":"Нехватка газа>lack_of_gas| Нехватка воды>lack_of_water| Недостаток света>lack_of_light| ⬅Назад>back_to_problem_type",
+         "uz":"Kommunal muammoni tanlang:",
+         "ru":"Выберите проблему связанная с коммуналом:"
+      }
+   },
+   {
+      "model":"telegrambot.text",
+      "pk":"GET_DISTRICT",
+      "fields":{
+         "buttons_uz":"⬅Orqaga>back_to_admission_menu",
+         "buttons_ru":"⬅Назад>back_to_admission_menu",
+         "uz":"Mahallangizni tanlang:",
+         "ru":"Выберите свою махалю:"
+      }
+   },
+   {
+      "model":"telegrambot.text",
+      "pk":"GET_FIRST_NAME",
+      "fields":{
+         "buttons_uz":"⬅Orqaga>back_to_admission_menu",
+         "buttons_ru":"⬅Назад>back_to_admission_menu",
+         "uz":"Ismingizni kiriting:",
+         "ru":"Введите имя:"
+      }
+   },
+   {
+      "model":"telegrambot.text",
+      "pk":"GET_LAND_ISSUES_PROBLEM",
+      "fields":{
+         "buttons_uz":"Yer ajratish>allocation_of_land| Kadastr masalalari bo'yicha>on_cadastral_issues| ⬅Orqaga>back_to_problem_type",
+         "buttons_ru":"Выделение земли>allocation_of_land| По кадастровым вопросам>on_cadastral_issues| ⬅Назад>back_to_problem_type",
+         "uz":"Yer masalalari bo'yicha muammoni tanlang:",
+         "ru":"Выберите проблему касающийся земельных вопросов:"
+      }
+   },
+   {
+      "model":"telegrambot.text",
+      "pk":"GET_LAST_NAME",
+      "fields":{
+         "buttons_uz":"⬅Orqaga>back_to_admission_menu",
+         "buttons_ru":"⬅Назад>back_to_admission_menu",
+         "uz":"Familyangizni kiriting:",
+         "ru":"Введите фамилию:"
+      }
+   },
+   {
+      "model":"telegrambot.text",
+      "pk":"GET_MIDDLE_NAME",
+      "fields":{
+         "buttons_uz":"⬅Orqaga>back_to_admission_menu",
+         "buttons_ru":"⬅Назад>back_to_admission_menu",
+         "uz":"Sharfingizni kiriting:",
+         "ru":"Введите отчество:"
+      }
+   },
+   {
+      "model":"telegrambot.text",
+      "pk":"GET_PHONE_NUMBER",
+      "fields":{
+         "buttons_uz":null,
+         "buttons_ru":null,
+         "uz":"Telefon raqamingizni jonating:",
+         "ru":"Отправьте номер телефона:"
+      }
+   },
+   {
+      "model":"telegrambot.text",
+      "pk":"GET_PROBLEM_TYPE",
+      "fields":{
+         "buttons_uz":"Kommunal>Communal| Yer masalalari>land_issues| Ijtimoiy ta'minot>social_security| ⬅Orqaga>back_to_admission_menu",
+         "buttons_ru":"Коммунал>Communal| Земельные вопросы>land_issues| Социальное обеспечение>social_security| ⬅Назад>back_to_admission_menu",
+         "uz":"Muammoni turini tanlang:",
+         "ru":"Выберите тип проблемы:"
+      }
+   },
+   {
+      "model":"telegrambot.text",
+      "pk":"GET_SHORT_DESCRIPTION",
+      "fields":{
+         "buttons_uz":"⬅Orqaga>back_to_admission_menu",
+         "buttons_ru":"⬅Назад>back_to_admission_menu",
+         "uz":"Muammo haqida qisqacha ma'lumot kiriting:",
+         "ru":"Введите короткую информацию о проблеме:"
+      }
+   },
+   {
+      "model":"telegrambot.text",
+      "pk":"GET_SOCIAL_SECURITY_PROBLEM",
+      "fields":{
+         "buttons_uz":"Moddiy yordam>financial_help| # Ijtimoiy himoya>social_protection| # ⬅Orqaga>back_to_problem_type",
+         "buttons_ru":"Финансовая помощь>financial_help| Социальная защита>social_protection| ⬅Назад>back_to_problem_type",
+         "uz":"Ijtimoiy ta'minot masalalari bo'yicha muammonni tanlang:",
+         "ru":"Выберите проблему по социальному обеспечению:"
+      }
+   },
+   {
+      "model":"telegrambot.text",
+      "pk":"MAIN_MENU",
+      "fields":{
+         "buttons_uz":null,
+         "buttons_ru":null,
+         "uz":"Murojatingiz qabul qilindi. Siz bilan yaqin orada ulanishadi!",
+         "ru":"Ваша заявка принята. С вами скоро свяжутся!"
+      }
+   },
+   {
+      "model":"telegrambot.text",
+      "pk":"STATEMENT_TYPE",
+      "fields":{
+         "buttons_uz":"Qabul>admission",
+         "buttons_ru":"Допуск>admission",
+         "uz":"Qabul turini tanlang!",
+         "ru":"Выберите тип допуска!"
+      }
+   }
+]
