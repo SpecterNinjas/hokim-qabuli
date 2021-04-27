@@ -2,7 +2,8 @@ from django.apps import apps
 from telegram import Bot, Update, KeyboardButton, ReplyKeyboardMarkup
 
 from telegrambot import states
-from telegrambot.apps import log_errors, text_manager
+from telegrambot.apps import log_errors
+from telegrambot.models import Text
 
 
 @log_errors
@@ -12,7 +13,7 @@ def get_phone_number(bot: Bot, update: Update):
     user_model = apps.get_model('telegrambot', 'TelegramProfile')
     user = user_model.objects.get(external_id=update.effective_chat.id)
 
-    data = text_manager.objects.filter(text_id='GET_PHONE_NUMBER').values()[0]
+    data = Text.objects.filter(text_id='GET_PHONE_NUMBER').values()[0]
     text = data[user.lang]
     if user.lang == 'ru':
         keyboard = [

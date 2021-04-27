@@ -1,0 +1,398 @@
+{% extends 'panel/layout/layout.html' %}
+{% load static i18n %}
+
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/vendors/css/vue-ctk-date-time-picker.css' %}">
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/vendors/css/vue2-editor.css' %}">
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/vendors/css/katex.min.css' %}">
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/vendors/css/monokai-sublime.min.css' %}">
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/css/quill.snow.css' %}"/>
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/css/quill.imageUploader.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/css/main-editor.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'panel/back/app-assets/vendors/css/ui/prism.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'panel/back/app-assets/vendors/css/file-uploaders/dropzone.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'panel/back/app-assets/css/plugins/file-uploaders/dropzone.min.css' %}">
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/vendors/css/filepond.min.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'panel/back/app-assets/vendors/css/filepond-plugin-image-preview.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'panel/back/app-assets/vendors/css/forms/select/select2.min.css' %}">
+{% endblock %}
+
+{% block body %}
+    {#    {% if user|has_role:"admin_temp" %}#}
+    {% include 'panel/inc/sidebar.html' %}
+    {#    {% endif %}#}
+    <!-- BEGIN: Content-->
+
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="content-wrapper">
+            <h1 class="text-center mb-2">{% trans 'Murojatchini Yangilash' %}</h1>
+            <div class="content-body">
+                <!-- app invoice View Page -->
+                <form method="POST" enctype="multipart/form-data" autocomplete="off">
+                    {% csrf_token %}
+                    <section class="invoice-edit-wrapper">
+                        <div class="row">
+                            <!-- invoice view page -->
+                            <div class="col-xl-12 col-md-12 col-12">
+                                {#                                <ul class="nav nav-pills">#}
+                                {#                                    <li class="nav-item">#}
+                                {#                                        <a class="nav-link active" id="uzbek-tab" data-toggle="pill" href="#uzbek"#}
+                                {#                                           aria-expanded="true"><i class="flag-icon flag-icon-uz mr-50"></i>#}
+                                {#                                            O‘zbekcha</a>#}
+                                {#                                    </li>#}
+                                {#                                    <li class="nav-item">#}
+                                {#                                        <a class="nav-link" id="russian-tab" data-toggle="pill" href="#russian"#}
+                                {#                                           aria-expanded="false"><i class="flag-icon flag-icon-ru mr-50"></i> Русский#}
+                                {#                                        </a>#}
+                                {#                                    </li>#}
+                                {#                                    <li class="nav-item">#}
+                                {#                                        <a class="nav-link" id="english-tab" data-toggle="pill" href="#english"#}
+                                {#                                           aria-expanded="false"><i class="flag-icon flag-icon-gb mr-50"></i> English#}
+                                {#                                        </a>#}
+                                {#                                    </li>#}
+                                {#                                </ul>#}
+
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="tab-content main-editor">
+                                            <div class="tab-pane active" id="uzbek" role="tabpanel"
+                                                 aria-labelledby="home-tab"
+                                                 aria-expanded="false">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h4 class="card-title" style="text-transform: inherit;">
+                                                            {% trans 'Murojatchi' %}</h4>
+                                                    </div>
+                                                    <div class="card-content">
+                                                        <div class="card-body pb-0 mx-25">
+                                                            <div class="row invoice-info">
+                                                                <div class="col-lg-12 col-md-12">
+                                                                    <fieldset class="invoice-address form-group">
+                                                                        <input type="text" required
+                                                                               class="form-control"
+                                                                               v-model="fullname_uz"
+                                                                               name="fullname"
+                                                                               value="{{ murojatchi.fullname }}"
+                                                                               placeholder="{% trans 'Murojatchining Ism Sharifi' %}">
+                                                                    </fieldset>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="col">
+                                        <div class="tab-content main-editor">
+                                            <div class="tab-pane active" id="uzbek" role="tabpanel"
+                                                 aria-labelledby="home-tab"
+                                                 aria-expanded="false">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h4 class="card-title"
+                                                            style="text-transform: inherit;">{% trans 'Mahalla' %}</h4>
+                                                    </div>
+                                                    <div class="card-content">
+                                                        <div class="card-body pb-0 mx-25">
+                                                            <div class="row invoice-info">
+                                                                <div class="col-lg-12 col-md-12">
+                                                                    <select class="form-control mb-1" name="mahalla">
+                                                                        {% for mahalla in mahallalar %}
+                                                                            <option {% if mahalla.id == murojatchi.mahalla.id %}selected{% endif %}
+                                                                                    value="{{ mahalla.id }}">{{ mahalla.title }}</option>
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="tab-content main-editor">
+                                            <div class="tab-pane active" id="uzbek" role="tabpanel"
+                                                 aria-labelledby="home-tab"
+                                                 aria-expanded="false">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h4 class="card-title"
+                                                            style="text-transform: inherit;">{% trans 'Muammo' %}</h4>
+                                                    </div>
+                                                    <div class="card-content">
+                                                        <div class="card-body pb-0 mx-25">
+                                                            <div class="row invoice-info">
+                                                                <div class="col-lg-12 col-md-12">
+                                                                    <fieldset class="invoice-address form-group">
+                                                                        <select class="form-control" name="muammo">
+                                                                            {% for muammo in muammolar %}
+                                                                                <option {% if muammo.id == murojatchi.muammo.id %}selected{% endif %}
+                                                                                        value="{{ muammo.id }}">{{ muammo.title }}</option>
+                                                                            {% endfor %}
+                                                                        </select>
+                                                                    </fieldset>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="tab-content main-editor">
+                                            <div class="tab-pane active" id="uzbek" role="tabpanel"
+                                                 aria-labelledby="home-tab"
+                                                 aria-expanded="false">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h4 class="card-title"
+                                                            style="text-transform: inherit;">{% trans 'Kategoriya' %}</h4>
+                                                    </div>
+                                                    <div class="card-content">
+                                                        <div class="card-body pb-0 mx-25">
+                                                            <div class="row invoice-info">
+                                                                <div class="col-lg-12 col-md-12 mb-1">
+                                                                    {{ form.category }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="tab-content main-editor">
+                                                <div class="tab-pane active" id="uzbek" role="tabpanel"
+                                                     aria-labelledby="home-tab"
+                                                     aria-expanded="false">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h4 class="card-title" style="text-transform: inherit;">
+                                                                {% trans 'Muammoga aloqador media' %} </h4>
+                                                        </div>
+                                                        <div class="card-content">
+                                                            <div class="card-body pb-0 mx-25">
+                                                                <div class="row invoice-info">
+                                                                    <div class="col-lg-12 col-md-12 mb-3">
+                                                                        {% if murojatchi.media %}
+                                                                        <a target="_blank" href="{{ murojatchi.media.url }}">Muammoga
+                                                                            oid
+                                                                            Media</a>
+                                                                        {% else %}
+                                                                            <p>Muammoga aloqador media mavjud emas.</p>
+                                                                            <input type="file" name="media">
+                                                                        {% endif %}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                         <div class="col-md-6">
+                                            <div class="tab-content main-editor">
+                                                <div class="tab-pane active" id="uzbek" role="tabpanel"
+                                                     aria-labelledby="home-tab"
+                                                     aria-expanded="false">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h4 class="card-title" style="text-transform: inherit;">
+                                                                {% trans 'Muammoga aloqador manzil' %} </h4>
+                                                        </div>
+                                                        <div class="card-content">
+                                                            <div class="card-body pb-0 mx-25">
+                                                                <div class="row invoice-info">
+                                                                    <div class="col-lg-12 col-md-12 mb-2">
+                                                                        <input type="text" name="location" value="{% if murojatchi.location %}{{ murojatchi.location }}{% endif %}" class="form-control" placeholder="{% trans 'Muammo manzili mavjud emas' %}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="tab-content main-editor">
+                                            <div class="tab-pane active" id="uzbek" role="tabpanel"
+                                                 aria-labelledby="home-tab"
+                                                 aria-expanded="false">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h4 class="card-title" style="text-transform: inherit;">
+                                                            {% trans 'Telefon' %}</h4>
+                                                    </div>
+                                                    <div class="card-content">
+                                                        <div class="card-body pb-0 mx-25">
+                                                            <div class="row invoice-info">
+                                                                <div class="col-lg-12 col-md-12">
+                                                                    <fieldset class="invoice-address form-group">
+                                                                        <input type="text" required
+                                                                               class="form-control"
+                                                                               maxlength="12"
+                                                                               v-model="phone_uz"
+                                                                               name="phone"
+                                                                               value="{{ murojatchi.phone }}"
+                                                                               placeholder="{% trans 'Murojatchi telefon raqami' %}">
+                                                                    </fieldset>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="tab-content main-editor">
+                                            <div class="tab-pane active" id="uzbek" role="tabpanel"
+                                                 aria-labelledby="home-tab"
+                                                 aria-expanded="false">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h4 class="card-title"
+                                                            style="text-transform: inherit;">{% trans 'Murojat Vaqti' %}</h4>
+                                                    </div>
+                                                    <div class="card-content">
+                                                        <div class="card-body pb-0 mx-25">
+                                                            <div class="row invoice-info">
+                                                                <div class="col-lg-12 col-md-12">
+                                                                    <fieldset class="invoice-address form-group">
+                                                                        <input type="date" required
+                                                                               class="form-control"
+                                                                               name="pickup_date"
+                                                                               value="{{ murojatchi.created | date:"Y-m-d" }}"
+                                                                               placeholder="{% trans 'Murojat vaqtini kiriting' %}">
+                                                                    </fieldset>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tab-content main-editor">
+                                    <div class="tab-pane active" id="uzbek" role="tabpanel"
+                                         aria-labelledby="home-tab"
+                                         aria-expanded="false">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4 class="card-title" style="text-transform: inherit;">
+                                                    {% trans "Muammo haqida ma'lumot" %}</h4>
+                                            </div>
+
+                                            <div class="card-content">
+                                                <div class="card-body pb-0">
+                                                    <div class="row invoice-info">
+                                                        <div class="col-lg-12 col-md-12">
+                                                                    <textarea rows="7" cols="30"
+                                                                              class="form-control invoice-address form-group"
+                                                                              name="description"
+                                                                              placeholder="{% trans "Muammo haqida ma'lumot bering" %}"
+                                                                              required>{{ murojatchi.description }}</textarea>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- invoice action  -->
+                                </div>
+                                <div class="row">
+                                     <div class="col-md-6">
+                                        <div class="tab-content main-editor">
+                                            <div class="tab-pane active" id="uzbek" role="tabpanel"
+                                                 aria-labelledby="home-tab"
+                                                 aria-expanded="false">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h4 class="card-title" style="text-transform: inherit;">
+                                                            {% trans 'Murojat Holati' %}</h4>
+                                                    </div>
+                                                    <div class="card-content">
+                                                        <div class="card-body pb-0 mx-25">
+                                                            <div class="row invoice-info">
+                                                                <div class="col-lg-12 col-md-12">
+                                                                    <fieldset class="invoice-address form-group">
+{#                                                                          <select class="form-control mb-1" name="status">#}
+{#                                                                        {% for holat in status %}#}
+{#                                                                            <option {% if holat.id == murojatchi.status.id %}selected{% endif %}#}
+{#                                                                                    value="{{ holat.id }}">{{ murojatchi.status }}</option>#}
+{#                                                                        {% endfor %}#}
+{#                                                                    </select>#}
+                                                                                {{ form.status }}
+                                                                    </fieldset>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </section>
+                    <div class="invoice-action-btn mb-1">
+                        <button type="submit" class="btn btn-primary btn-block invoice-send-btn">
+                            <i class="bx bxs-save"></i>
+                            <span>Save</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+{% endblock %}
+
+
+{% block js %}
+    <script src="{% static 'back/app-assets/vendors/js/filepond-plugin-image-preview.js' %}"></script>
+    <script src="{% static 'back/app-assets/vendors/js/filepond.js' %}"></script>
+    <script src="https://cdn.quilljs.com/1.3.4/quill.js"></script>
+    <script src="{% static 'back/app-assets/js/vue.js' %}"></script>
+    <script src="{% static 'back/app-assets/vendors/js/vue-ctk-date-time-picker.umd.js' %}"></script>
+    <script src="{% static 'back/app-assets/vendors/js/katex.min.js' %}"></script>
+    <script src="{% static 'back/app-assets/vendors/js/highlight.min.js' %}"></script>
+    <script src="{% static 'back/app-assets/vendors/js/quill.imageUploader.min.js' %}"></script>
+    <!-- Quill JS Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue-quill-editor@3.0.6/dist/vue-quill-editor.js"></script>
+    <!-- Include stylesheet -->
+    <link href="https://cdn.quilljs.com/1.3.4/quill.core.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.4/quill.snow.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.4/quill.bubble.css" rel="stylesheet">
+    <script src="{% static 'back/app-assets/vendors/js/vue-filepond.min.js' %}"></script>
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{% static 'back/app-assets/vendors/js/forms/select/select2.full.min.js' %}"></script>
+    <!-- END: Page Vendor JS-->
+    <script src="{% static 'back/app-assets/js/scripts/forms/select/form-select2.min.js' %}"></script>
+{% endblock %}

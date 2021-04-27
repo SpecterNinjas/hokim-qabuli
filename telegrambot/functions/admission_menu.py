@@ -3,8 +3,9 @@ from django.core.cache import cache
 from telegram import Bot, Update, InlineKeyboardMarkup, InlineKeyboardButton
 
 from telegrambot import states
-from telegrambot.apps import log_errors, text_manager
+from telegrambot.apps import log_errors
 from telegrambot.helpers import get_request_data, generate_inline_keyboard, validate_admission_info
+from telegrambot.models import Text
 
 
 @log_errors
@@ -48,7 +49,7 @@ def admission_menu(bot: Bot, update: Update):
     phone_number_sign = '✅️ ' if request['phone_number'] else '❗️'
     phone_number = request['phone_number'] if request['phone_number'] else no_data[user.lang]
 
-    data = text_manager.objects.filter(text_id='ADMISSION_MENU').values()[0]
+    data = Text.objects.filter(text_id='ADMISSION_MENU').values()[0]
 
     text = data[user.lang].format(
         first_name_sign=first_name_sign, first_name=first_name,

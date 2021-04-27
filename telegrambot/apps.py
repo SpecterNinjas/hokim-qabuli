@@ -1,8 +1,6 @@
 from django.apps import AppConfig, apps
 import logging
 
-text_manager = apps.get_model('telegrambot', 'Text')
-
 
 def log_errors(f):
     def inner(*args, **kwargs):

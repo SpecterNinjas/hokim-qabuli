@@ -1,0 +1,144 @@
+{% load static i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login V1</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="{% static 'login/images/icons/favicon.ico' %}"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'login/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/animate/animate.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/css-hamburgers/hamburgers.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/select2/select2.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/util.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/main.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--===============================================================================================-->
+
+</head>
+<body>
+
+<div class="limiter" style="background-color: rgb(242,244,244);">
+    <div class="container-login100">
+        <div class="wrap-login100" style="border: 1px solid lightgrey;
+  box-shadow: 5px 10px 18px #888888;">
+            <div class="login100-pic js-tilt" data-tilt>
+                <img src="{% static 'login/images/img-01.png' %}" alt="IMG">
+            </div>
+
+            <form class="login100-form validate-form" id="wdh_form" method="POST"
+                  action=""
+                  autocomplete="off">
+
+                {% csrf_token %}
+
+                <span class="login100-form-title">
+						{% trans "Ma'muriyat" %}
+					</span>
+
+                <div class="wrap-input100 validate-input" data-validate="Valid username must be entered.">
+                    <input class="input100" type="text" name="username" placeholder="{% trans 'Foydalanuvchi Nomi' %}"
+                           required>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+							<i class="fa fa-user" aria-hidden="true"></i>
+						</span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Password is required">
+                    <input class="input100" type="password" name="password" placeholder="{% trans 'Parol' %}" required>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+                </div>
+
+                <script src='https://www.google.com/recaptcha/api.js'></script>
+
+                <div
+                        class="g-recaptcha"
+                        data-callback="gCBS"
+                        data-expired-callback="gCBE"
+                        data-error-callback="gCBE"
+                        data-sitekey="6LfWIbAaAAAAACQtAFIrCW77_98d6IuKDy4WKwFB">
+                </div>
+
+                <div id="captchaerror"></div>
+
+
+                {% for message in messages %}
+                    <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" type="submit">
+                        {% trans 'Kirish' %}
+                    </button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--===============================================================================================-->
+<script src="{% static 'login/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+<script src="{% static 'login/vendor/bootstrap/js/popper.js' %}"></script>
+<script src="{% static 'login/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+<script src="{% static 'login/vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+<script src="{% static 'login/vendor/tilt/tilt.jquery.min.js' %}"></script>
+<script>
+    $('.js-tilt').tilt({
+        scale: 1.1
+    });
+
+
+    var gCS = false
+
+    function gCBS() {
+        gCS = true;
+        $('#captchaerror').empty()
+    }
+
+    function gCBE() {
+        gCS = false
+    }
+
+    $('#wdh_form').submit(function (e) {
+        if (!gCS) {
+            e.preventDefault()
+            $('#captchaerror').empty().append('<div class="alert alert-danger alert-dismissible" role="alert">' +
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                '<span aria-hidden="true">&times;</span>' +
+                '</button>' +
+                'ReCaptchani belgilang' +
+                '</div>')
+        }
+    })
+
+</script>
+<!--===============================================================================================-->
+<script src="{% static 'login/js/main.js' %}"></script>
+</body>
+</html>

@@ -2,7 +2,7 @@ from django.apps import apps
 from telegram import Bot, Update, KeyboardButton, ReplyKeyboardMarkup
 
 from telegrambot import states
-from telegrambot.apps import text_manager, log_errors
+from telegrambot.apps import log_errors
 
 
 @log_errors
@@ -12,7 +12,7 @@ def main_menu(bot: Bot, update: Update):
     user_model = apps.get_model('telegrambot', 'TelegramProfile')
     user = user_model.objects.get(external_id=update.effective_chat.id)
 
-    data = text_manager.objects.filter(text_id='MAIN_MENU').values()[0]
+    data = Text.objects.filter(text_id='MAIN_MENU').values()[0]
     text = data[user.lang]
 
     keyboard = []

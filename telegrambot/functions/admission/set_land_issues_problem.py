@@ -2,7 +2,7 @@ from django.apps import apps
 from django.core.cache import cache
 from telegram import Bot, Update
 
-from telegrambot.apps import text_manager, log_errors
+from telegrambot.apps import log_errors
 from telegrambot.functions import admission
 
 
@@ -13,7 +13,7 @@ def set_land_issues_problem(bot: Bot, update: Update):
     user_model = apps.get_model('telegrambot', 'TelegramProfile')
     user = user_model.objects.get(external_id=update.effective_chat.id)
 
-    data = text_manager.objects.filter(text_id='GET_LAND_ISSUES_PROBLEM').values()[0]
+    data = Text.objects.filter(text_id='GET_LAND_ISSUES_PROBLEM').values()[0]
     callback_data = update.callback_query.data
 
     texts = data[f"buttons_{user.lang}"].splitlines()

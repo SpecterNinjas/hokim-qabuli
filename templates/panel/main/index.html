@@ -1,0 +1,311 @@
+{% extends 'panel/layout/layout.html' %}
+{% load static %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+    {#    {% if user|has_role:"admin_temp" %}#}
+    {% include 'panel/inc/sidebar.html' %}
+    {#    {% endif %}#}
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            {#            {% if user|has_role:"admin_temp" %}#}
+            <div class="row">
+                <div class="col-12 mt-1 mb-2">
+                    <h4>Quick Menu</h4>
+                    <hr>
+                </div>
+                <div class="col-xl-2 col-md-6 col-sm-12">
+                    <div class="card text-center">
+                        <a href="#">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="badge-circle badge-circle-lg badge-circle-light-danger mx-auto my-1">
+                                        <i class="bx bx-briefcase font-medium-5"></i>
+                                    </div>
+                                    <p class="text-muted mb-0 line-ellipsis">Vacancies</p>
+                                    <h2 class="mb-0">{{ news_count }}</h2>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-xl-2 col-md-6 col-sm-12">
+                    <div class="card text-center">
+                        <a href="#">
+
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="badge-circle badge-circle-lg badge-circle-light-info mx-auto my-1">
+                                        <i class="bx bxs-pencil font-medium-5"></i>
+                                    </div>
+                                    <p class="text-muted mb-0 line-ellipsis">Carrier Forms</p>
+                                    <h2 class="mb-0">{{ project_count }}</h2>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-6 col-sm-12">
+                    <div class="card text-center">
+                        <a href="#">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="badge-circle badge-circle-lg badge-circle-light-warning mx-auto my-1">
+                                        <i class="bx bx-folder-open font-medium-5"></i>
+                                    </div>
+                                    <p class="text-muted mb-0 line-ellipsis">Shippers</p>
+                                    <h2 class="mb-0">{{ media_count }}</h2>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-6 col-sm-12">
+                    <div class="card text-center">
+                        <a href="#">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="badge-circle badge-circle-lg badge-circle-light-primary mx-auto my-1">
+                                        <i class="bx bx-list-plus font-medium-5"></i>
+                                    </div>
+                                    <p class="text-muted mb-0 line-ellipsis">Services</p>
+                                    <h2 class="mb-0">{{ event_count }}</h2>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-6 col-sm-12">
+                    <div class="card text-center">
+                        <a href="#">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="badge-circle badge-circle-lg badge-circle-light-warning mx-auto my-1">
+                                        <i class="bx bx-book font-medium-5"></i>
+                                    </div>
+                                    <p class="text-muted mb-0 line-ellipsis">FAQ</p>
+                                    <h2 class="mb-0">{{ activity_count }}</h2>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-6 col-sm-12">
+                    <div class="card text-center">
+                        <a href="#">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="badge-circle badge-circle-lg badge-circle-light-success mx-auto my-1">
+                                        <i class="bx bxs-group font-medium-5"></i>
+                                    </div>
+                                    <p class="text-muted mb-0 line-ellipsis">Team</p>
+                                    <h2 class="mb-0">{{ staff_count }}</h2>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {#            {% endif %}#}
+            <div class="row widgets-text-chart">
+                <div class="col-12 mt-1 mb-2">
+                    <h4>Regular Checking</h4>
+                    <hr>
+                </div>
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card widget-todo">
+                                <div class="card-header border-bottom d-flex justify-content-between align-items-center">
+                                    <h4 class="card-title d-flex">
+                                        <i class="bx bx-news font-medium-5 pl-25 pr-75"></i>Contact Us
+                                    </h4>
+                                    <ul class="list-inline d-flex mb-0">
+
+                                        <div class="heading-elements">
+                                            <a href="#">
+                                                <button type="button"
+                                                        class="btn btn-sm btn-light-danger">All
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </ul>
+
+                                </div>
+                                {#                                {% if user|has_role:"admin_temp" %}#}
+                                {#                                <div class="card-body px-0 py-0">#}
+                                {#                                    <ul class="list-group list-group-flush">#}
+                                {#                                            {% for news in latest_news %}#}
+                                {#                                        <li class="list-group-item list-group-item-action border-0 d-flex align-items-center justify-content-between">#}
+                                {#                                            <div class="list-left d-flex">#}
+                                {#                                                <div class="list-content">#}
+                                {#                                                    <a href="#">#}
+                                {#                                                                <span class="list-title">{{ news.title|safe|truncatechars:135 }}</span>#}
+                                {#                                                        <span class="list-title">Test</span>#}
+                                {#                                                    </a>#}
+                                {#                                                            <small class="text-muted d-block">{{ news.created_at|date:"d-F, H:i" }}</small>     #}
+                                {#                                                    <small class="text-muted d-block">06/04/21</small>#}
+                                {#                                                </div>#}
+                                {#                                            </div>#}
+                                {#                                                    <a href="{% url 'news:news-update' news.id %}">#}
+                                {#                                            <a href="#">#}
+                                {#                                                <div class="list-icon mr-0">#}
+                                {#                                                    <div class="avatar bg-rgba-danger m-0 p-25">#}
+                                {#                                                        <div class="avatar-content">#}
+                                {#                                                            <i class="bx bx-edit-alt text-danger font-medium-5 "></i>#}
+                                {#                                                        </div>#}
+                                {#                                                    </div>#}
+                                {#                                                </div>#}
+                                {#                                            </a>#}
+                                {#                                        </li>#}
+                                {#                                            {% endfor %}#}
+                                {#                                    </ul>#}
+                                {#                                </div>#}
+
+                                {% comment %}         {% else %}
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <ul class="widget-timeline mb-0">
+                                                {% for news in latest_news %}
+                                                    <li class="timeline-items timeline-icon-primary active pb-0">
+                                                        <div class="timeline-time">{{ news.created_at|date:"F, d" }}</div>
+
+                                                        <h5 class="timeline-title">
+                                                            <a href="{% url 'news:news-update' news.id %}">
+                                                                {{ news.title|safe|truncatechars:135 }}
+                                                            </a>
+                                                        </h5>
+
+                                                        <p class="timeline-text">{{ news.publish_date|date:"H:i" }}</p>
+                                                        <div class="timeline-content">
+                                                            <i class="bx bx-folder text-black font-medium-3"></i>
+                                                            <h6 class="timeline-title ml-1">{{ news.category|safe }}</h6>
+                                                            {#                                                    <img src="{% static 'app-assets/images/icon/pdf.png' %}" alt="document" height="23" width="19" class="mr-50">New Order.pdf#}
+                                                        </div>
+                                                    </li>
+                                                {% endfor %}
+
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                {% endif %}{% endcomment %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% comment %}{% if user|has_role:"admin_temp" %}{% endcomment %}
+                <div class="col-lg-4">
+                    <div class="card widget-notification">
+                        <div class="card-header border-bottom">
+                            <h4 class="card-title d-flex align-items-center">
+                                <i class="bx bx-edit font-medium-2 mr-1"></i>Request Quotes</h4>
+                            <div class="heading-elements">
+                                <a href="#">
+                                    <button type="button"
+                                            class="btn btn-sm btn-light-primary">All
+                                    </button>
+                                </a>
+
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body p-0">
+                                <ul class="list-group list-group-flush">
+                                    {#                                    {% for item in latest_events %}#}
+                                    {##}
+                                    {#                                        <li class="list-group-item list-group-item-action border-0 d-flex align-items-center justify-content-between">#}
+                                    {#                                            <div class="list-left d-flex">#}
+                                    {##}
+                                    {#                                                <div class="list-content">#}
+                                    {#                                                        <a href="{% url 'event:event-update' item.id %}">#}
+                                    {#                                                    <a href="#">#}
+                                    {#                                                            <span class="list-title">{{ item.title|safe|truncatechars:50 }}</span>#}
+                                    {#                                                        <span class="list-title">Test</span>#}
+                                    {#                                                    </a>#}
+                                    {#                                                        <small class="text-muted d-block">{{ item.created_at|date:"d-F, H:i" }}</small>#}
+                                    {#                                                    <small class="text-muted d-block">06/04/21}</small>#}
+                                    {#                                                </div>#}
+                                    {#                                            </div>#}
+                                    {#                                                <a href="{% url 'event:event-update' item.id %}">#}
+                                    {#                                            <a href="#">#}
+                                    {#                                                <div class="list-icon mr-0">#}
+                                    {#                                                    <div class="avatar bg-rgba-primary m-0 p-25">#}
+                                    {#                                                        <div class="avatar-content">#}
+                                    {#                                                            <i class="bx bx-edit-alt text-primary font-medium-5"></i>#}
+                                    {#                                                        </div>#}
+                                    {#                                                    </div>#}
+                                    {#                                                </div>#}
+                                    {#                                            </a>#}
+                                    {#                                        </li>#}
+                                    {#                                    {% endfor %}#}
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% comment %}        {% else %}
+                    <div class="col-lg-4">
+                        <div class="card widget-notification">
+                            <div class="card-header border-bottom">
+                                <h4 class="card-title d-flex align-items-center">
+                                    <i class="bx bx-edit font-medium-4 mr-1"></i>{% trans 'Ommabop' %}</h4>
+                                <div class="heading-elements">
+                                    <a href="{% url 'news:news-list' %}">
+                                        <button type="button"
+                                                class="btn btn-sm btn-light-primary">{% trans 'Barcha' %}</button>
+                                    </a>
+
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body p-0">
+                                    <ul class="list-group list-group-flush">
+                                        {% for item in popular_news %}
+
+                                            <li class="list-group-item list-group-item-action border-0 d-flex align-items-center justify-content-between">
+                                                <div class="list-left d-flex">
+
+                                                    <div class="list-content">
+                                                        <a href="{% url 'news:news-update' item.id %}">
+                                                            <span class="list-title">{{ item.title|safe|truncatechars:50 }}</span>
+                                                        </a>
+                                                        <small class="text-muted d-block">{{ item.created_at|date:"d-F, H:i" }}</small>
+                                                    </div>
+                                                </div>
+                                                <div class="list-icon mr-0">
+                                                    <div class="card-title d-flex">
+                                                        <i class="bx bx-show font-medium-2"></i>
+                                                        <h6>{{ item.views }}</h6>
+
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}{% endcomment %}
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+{% endblock %}
+
+{% block js %}
+{% endblock %}

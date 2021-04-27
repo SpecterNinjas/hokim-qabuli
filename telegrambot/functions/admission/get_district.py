@@ -2,7 +2,7 @@ from django.apps import apps
 from telegram import Bot, Update, KeyboardButton, ReplyKeyboardMarkup
 
 from telegrambot import states
-from telegrambot.apps import text_manager, log_errors
+from telegrambot.apps import log_errors
 
 
 @log_errors
@@ -14,7 +14,7 @@ def get_district(bot: Bot, update: Update):
 
     districts = apps.get_model('telegrambot', 'District').objects.all().order_by('title_uz')
 
-    data = text_manager.objects.filter(text_id='GET_DISTRICT').values()[0]
+    data = Text.objects.filter(text_id='GET_DISTRICT').values()[0]
     text = data[user.lang]
 
     keyboard = []

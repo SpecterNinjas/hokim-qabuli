@@ -12,8 +12,8 @@ def statement_type(bot: Bot, update: Update):
     user_model = apps.get_model('telegrambot', 'TelegramProfile')
     user = user_model.objects.get(external_id=update.effective_chat.id)
 
-    text_manager = apps.get_model('telegrambot', 'Text')
-    data = text_manager.objects.filter(text_id='STATEMENT_TYPE').values()[0]
+    Text = apps.get_model('telegrambot', 'Text')
+    data = Text.objects.filter(text_id='STATEMENT_TYPE').values()[0]
 
     inline_keyboard = generate_inline_keyboard(data[f"buttons_{user.lang}"], update.effective_chat.id)
     text = data[user.lang]

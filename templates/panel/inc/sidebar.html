@@ -1,0 +1,121 @@
+{% load static i18n %}
+{#{% load permission_tags %}#}
+
+<!-- BEGIN: Main Menu-->
+<div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
+    <div class="navbar-header">
+        <ul class="nav navbar-nav flex-row">
+            <li class="nav-item mr-auto">
+                <a class="navbar-brand" href="{% url 'panel:main_page' %}">
+                    {#                <a class="navbar-brand" href="{% url 'index-admin_temp' %}">#}
+                    <div class="brand-logo">
+                        <img class="logo" style="width: 130px; height: 60px;" src="{% static 'admin/img/Group.svg' %}"/>
+                    </div>
+                </a></li>
+        </ul>
+    </div>
+
+    <div class="shadow-bottom"></div>
+    <div class="main-menu-content">
+        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation"
+            data-icon-style="lines">
+
+            <li class=" navigation-header"><span>{% trans "Ma'muriyat" %}</span></li>
+
+            {#  Navigation Part #}
+            <li class="nav-item news">
+                <a href="#"><i class="menu-livicon" data-icon="list"></i>
+                    <span class="menu-title">Mahalla </span>
+                </a>
+                <ul class="menu-content">
+                    <li>
+                        <a href="{% url 'panel:mahalla' %}">
+                            <i class="bx bx-list-ul"></i><span
+                                class="menu-item">Barcha Mahallalar</span></a>
+                    </li>
+                    <li>
+                        <a href="{% url 'panel:mahalla_create' %}">
+                            <i class="bx bx-plus"></i><span
+                                class="menu-item">Yangi Qo'shish</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            {#  Slider #}
+            <li class=" nav-item news">
+                <a href="#"><i class="menu-livicon" data-icon="swap-horizontal"></i>
+                    <span class="menu-title">Muammo</span>
+                </a>
+                <ul class="menu-content">
+                    <li>
+                        <a href="{% url 'panel:muammo' %}">
+                            <i class="bx bx-list-ul"></i><span
+                                class="menu-item">Barcha Muammolar</span></a>
+                    </li>
+                    <li>
+                        <a href="{% url 'panel:muammo_create' %}">
+                            <i class="bx bx-plus"></i><span
+                                class="menu-item">Yangi Qo'shish</span></a>
+                    </li>
+                </ul>
+            </li>
+
+            {#  Slider #}
+            <li class=" nav-item news">
+                <a href="#"><i class="menu-livicon" data-icon="swap-horizontal"></i>
+                    <span class="menu-title">Kategoriya</span>
+                </a>
+                <ul class="menu-content">
+                    <li>
+                        <a href="{% url 'panel:kategoriya' %}">
+                            <i class="bx bx-list-ul"></i><span
+                                class="menu-item">Barcha Kategoriyalar</span></a>
+                    </li>
+                    <li>
+                        <a href="{% url 'panel:kategoriya_create' %}">
+                            <i class="bx bx-plus"></i><span
+                                class="menu-item">Yangi Qo'shish</span></a>
+                    </li>
+                </ul>
+            </li>
+
+            {#  Services #}
+            <li class=" nav-item news">
+                <a href="#"><i class="menu-livicon" data-icon="box-add"></i>
+                    <span class="menu-title">Murojatchi</span>
+                </a>
+                <ul class="menu-content">
+                    <li>
+                        <a href="{% url 'panel:murojatchi' %}">
+                            <i class="bx bx-list-ul"></i><span
+                                class="menu-item">Barch Murojatchilar</span></a>
+                    </li>
+
+                </ul>
+            </li>
+
+            {#  Anons Bar #}
+            <li class=" nav-item news">
+                <a href="#"><i class="menu-livicon" data-icon="grid"></i>
+                    <span class="menu-title">Qabul</span>
+                </a>
+                <ul class="menu-content">
+{#                    <li>#}
+{#                        <a href="#">#}
+{#                            <i class="bx bx-list-ul"></i><span#}
+{#                                class="menu-item">Barcha Qabullar</span></a>#}
+{#                    </li>#}
+                    <li>
+                        <a href="{% url 'panel:qabul' %}">
+                            <i class="bx bx-plus"></i><span
+                                class="menu-item">Yangi Qo'shish</span></a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+<!-- END: Main Menu-->

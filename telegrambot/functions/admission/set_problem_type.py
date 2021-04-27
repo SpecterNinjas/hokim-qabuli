@@ -3,8 +3,9 @@ from django.core.cache import cache
 from telegram import Bot, Update
 
 from telegrambot import states, functions
-from telegrambot.apps import log_errors, text_manager
+from telegrambot.apps import log_errors
 from telegrambot.functions import admission
+from telegrambot.models import Text
 
 
 @log_errors
@@ -14,7 +15,7 @@ def set_problem_type(bot: Bot, update: Update):
     user = user_model.objects.get(external_id=update.effective_chat.id)
 
     callback_data = update.callback_query.data
-    data = text_manager.objects.filter(text_id='GET_PROBLEM_TYPE').values()[0]
+    data = Text.objects.filter(text_id='GET_PROBLEM_TYPE').values()[0]
 
     texts = data[f"buttons_{user.lang}"].splitlines()
     for text in texts:
