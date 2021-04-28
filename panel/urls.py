@@ -48,6 +48,7 @@ urlpatterns = [
     # MUROJATCHI
     path("murojatchi/", MurojatchiView.as_view(), name="murojatchi"),
     path("murojatchi/search/", MurojatchiSearchView.as_view(), name="murojatchi_search"),
+    path("murojatchi/see/<int:pk>", MurojatchiDetailView.as_view(), name="murojatchi_detail"),
     path("murojatchi/<int:pk>/", MurojatchiUpdateView.as_view(), name="murojatchi_update"),
     path("murojatchi_uchirish/<int:pk>/", MurojatchiDeleteView.as_view(), name="murojatchi_delete"),
 

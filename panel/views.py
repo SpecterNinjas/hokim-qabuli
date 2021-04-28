@@ -7,7 +7,7 @@ from django.core import serializers
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DeleteView, UpdateView, CreateView
+from django.views.generic import ListView, DeleteView, UpdateView, CreateView, DetailView
 from .forms import *
 from .models import *
 
@@ -243,6 +243,16 @@ class MurojatchiSearchView(LoginRequiredMixin, ListView):
             status = self.request.GET.get('status')
             queryset &= self.model.objects.filter(status=status)
         return queryset
+
+
+class MurojatchiDetailView(DetailView):
+    model = Murojatchi
+    context_object_name = 'murojatchi'
+    queryset = Murojatchi.objects.all()
+    template_name = 'panel/murojatchi/see.html'
+
+
+
 
 
 class FoydalanuvchiSearchView(LoginRequiredMixin, ListView):

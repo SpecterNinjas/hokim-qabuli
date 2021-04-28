@@ -13,7 +13,7 @@
     <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="content-wrapper">
-            <h1 class="text-center">{% trans "Murojatlar Ro'yxati" %}</h1>
+            <h1 class="text-center">{% trans "Murojatchilar Ro'yxati" %}</h1>
             <div class="content-header row">
                 <div class="content-header-left col-12 mb-2 mt-1">
                     <div class="row breadcrumbs-top">
@@ -128,8 +128,9 @@
                                         <td class="text-left">{{ murojatchi.username }}</td>
                                         <td class="text-left">{{ murojatchi.created | date:"d.m.Y" }}</td>
                                         <td class="text-left amallar">
-                                            <a class="mr-2" href="{% url 'panel:murojatchi_update' murojatchi.id %}"><i class="fa fa-eye" style="font-size: 19px;" aria-hidden="true"></i></a>
-                                            <a href="{% url 'panel:murojatchi_delete' murojatchi.id %}"><i class="fa fa-trash" style="font-size: 19px;" aria-hidden="true"></i></a>
+
+                                             <a class="mr-1"  href="{% url 'panel:murojatchi_update' murojatchi.id %}"><i class="fa fa-eye" style="font-size: 19px;" aria-hidden="true"></i></a>
+                                            <a  href="{% url 'panel:murojatchi_delete' murojatchi.id %}"><i class="fa fa-edit" style="font-size: 19px;" aria-hidden="true"></i></a>
 
                                         </td>
                                     </tr>
