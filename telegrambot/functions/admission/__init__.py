@@ -25,6 +25,11 @@ from .set_social_security_problem import set_social_security_problem
 from .get_short_description import get_short_description
 from .set_short_description import set_short_description
 
+from .get_file import get_file
+from .set_file import set_file
+
+from .get_location import get_location
+from .set_location import set_location
+
 from .get_phone_number import get_phone_number
 from .set_phone_number import set_phone_number
-

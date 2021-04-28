@@ -18,9 +18,9 @@ def inline_button_handler(bot: Bot, update: Update):
     if callback_data == 'uz_':
         functions.set_uz(bot, update)
 
-    if callback_data == 'admission':
-        functions.admission_menu(bot, update)
-
+    if callback_data == 'admission' or callback_data == 'appeal':
+        functions.main_menu(bot, update)
+        return states.MAIN
     # ---ADMISSION MENU BUTTONS HANDLERS--- #
     if callback_data == 'first_name':
         admission.get_first_name(bot, update)
@@ -46,6 +46,14 @@ def inline_button_handler(bot: Bot, update: Update):
         admission.get_short_description(bot, update)
         return states.GET_SHORT_DESCRIPTION
 
+    if callback_data == 'file':
+        admission.get_file(bot, update)
+        return states.GET_FILE
+
+    if callback_data == 'location':
+        admission.get_file(bot, update)
+        return states.GET_FILE
+
     if callback_data == 'phone_number':
         admission.get_phone_number(bot, update)
         return states.GET_PHONE_NUMBER
@@ -56,12 +64,20 @@ def inline_button_handler(bot: Bot, update: Update):
         return states.GET_PROBLEM_TYPE
 
     if callback_data == 'back_to_admission_menu':
-        functions.admission_menu(bot, update)
+        functions.main_menu(bot, update)
         return states.MAIN
 
     if callback_data == 'back_to_statement_type':
         functions.statement_type(bot, update)
         return states.STATEMENT_TYPE
 
+    if callback_data == 'skip_file':
+        admission.get_location(bot, update)
+        return states.GET_LOCATION
+
+    if callback_data == 'skip_location':
+        admission.get_phone_number(bot, update)
+        return states.GET_PHONE_NUMBER
+
     if callback_data == 'save_admission_info':
-        functions.main_menu(bot, update)
+        functions.last_menu(bot, update)

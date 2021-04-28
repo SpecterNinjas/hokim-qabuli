@@ -21,7 +21,7 @@ class DistrictAdmin(admin.ModelAdmin):
 
 @admin.register(Admission)
 class AdmissionAdmin(admin.ModelAdmin):
-    list_display = ('external_id', 'first_name', 'middle_name', 'last_name', 'district', 'problem_type', 'sub_problem',
+    list_display = ('external_id', 'request_type', 'first_name', 'middle_name', 'last_name', 'district', 'problem_type', 'sub_problem',
                     'short_description', 'phone_number')
 
 

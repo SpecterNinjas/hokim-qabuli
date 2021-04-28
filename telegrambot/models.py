@@ -37,6 +37,7 @@ class District(models.Model):
 
 class Admission(models.Model):
     external_id = models.CharField(max_length=255, null=True)
+    request_type = models.CharField(max_length=255, null=True)
     first_name = models.CharField(max_length=255, null=True)
     middle_name = models.CharField(max_length=255, null=True)
     last_name = models.CharField(max_length=255, null=True)

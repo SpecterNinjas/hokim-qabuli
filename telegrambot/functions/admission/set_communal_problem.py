@@ -1,7 +1,7 @@
 from django.apps import apps
 from django.core.cache import cache
 from telegram import Update, Bot
-
+from telegrambot.models import Text
 from telegrambot.apps import log_errors
 from telegrambot.functions import admission
 
