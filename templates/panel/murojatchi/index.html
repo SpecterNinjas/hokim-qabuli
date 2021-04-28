@@ -58,7 +58,7 @@
              <section id="table-transactions">
                     <div class="card">
                         <!-- datatable start -->
-                        <form method="get" action="{% url 'panel:murojatchi_search' %}">
+                        <form method="get" action="{% url 'panel:murojatchi_search' %}" autocomplete="off">
                             {% csrf_token %}
                         <div class="table-responsive">
                             <table id="table-extended-transactions" class="table mb-0">

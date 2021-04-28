@@ -103,6 +103,13 @@ class MuammoView(LoginRequiredMixin, ListView):
     form = MuammoForm
 
 
+class HududView(LoginRequiredMixin, ListView):
+    template_name = 'panel/hudud/index.html'
+    context_object_name = 'hudud_list'
+    queryset = Hudud.objects.all()
+    form = HududForm
+
+
 class MuammoCreateView(LoginRequiredMixin, ListView):
 
     def get(self, request, *args, **kwargs):
@@ -117,6 +124,20 @@ class MuammoCreateView(LoginRequiredMixin, ListView):
             return render(request, 'panel/muammo/create.html', {'form': form})
 
 
+class HududCreateView(LoginRequiredMixin, ListView):
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'panel/hudud/create.html')
+
+    def post(self, request):
+        form = HududForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('panel:hudud')
+        else:
+            return render(request, 'panel/hudud/create.html', {'form': form})
+
+
 class MuammoUpdateView(LoginRequiredMixin, UpdateView):
     model = Muammo
     template_name = "panel/muammo/update.html"
@@ -125,9 +146,25 @@ class MuammoUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy("panel:muammo")
 
 
+class HududUpdateView(LoginRequiredMixin, UpdateView):
+    model = Hudud
+    template_name = "panel/hudud/update.html"
+    context_object_name = 'hudud'
+    form_class = HududForm
+    success_url = reverse_lazy("panel:hudud")
+
+
 class MuammoDeleteView(LoginRequiredMixin, DeleteView):
     model = Muammo
     success_url = reverse_lazy("panel:muammo")
+
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
+
+
+class HududDeleteView(LoginRequiredMixin, DeleteView):
+    model = Hudud
+    success_url = reverse_lazy("panel:hudud")
 
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
@@ -204,7 +241,25 @@ class MurojatchiSearchView(LoginRequiredMixin, ListView):
             queryset &= self.model.objects.filter(muammo_id=muammo)
         if self.request.GET.get('status') != '':
             status = self.request.GET.get('status')
-            queryset &= self.model.objects.filter(status= status)
+            queryset &= self.model.objects.filter(status=status)
+        return queryset
+
+
+class FoydalanuvchiSearchView(LoginRequiredMixin, ListView):
+    template_name = 'panel/foydalanuvchi/search.html'
+    model = Murojatchi
+
+    def get_queryset(self):
+        queryset = Murojatchi.objects.all()
+        if self.request.GET.get('telegram_id') != '':
+            telegram_id = self.request.GET.get('telegram_id')
+            queryset = self.model.objects.filter(telegram_id__icontains=telegram_id)
+        if self.request.GET.get('fullname') != '':
+            fullname = self.request.GET.get('fullname')
+            queryset &= self.model.objects.filter(fullname__icontains=fullname)
+        if self.request.GET.get('username') != '':
+            username = self.request.GET.get('username')
+            queryset &= self.model.objects.filter(username__icontains=username)
         return queryset
 
 
@@ -241,6 +296,12 @@ class KategoriyaView(LoginRequiredMixin, ListView):
     template_name = 'panel/kategoriya/index.html'
     context_object_name = 'kategoriya_list'
     queryset = SubMuammo.objects.all()
+
+
+class FoydalanuvchiView(LoginRequiredMixin, ListView):
+    template_name = 'panel/foydalanuvchi/index.html'
+    context_object_name = 'foydalanuvchi_list'
+    queryset = Murojatchi.objects.all()
 
 
 class KategoriyaCreateView(LoginRequiredMixin, CreateView):

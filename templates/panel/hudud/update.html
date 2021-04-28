@@ -31,7 +31,7 @@
     <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="content-wrapper">
-            <h1 class="text-center mb-3">{% trans "Muammo Nomini O'zgartirish" %}</h1>
+            <h1 class="text-center mb-3">{% trans "Hudud Nomini O'zgartirish" %}</h1>
             <div class="content-body">
                 <!-- app invoice View Page -->
                 <form method="POST" autocomplete="off">
@@ -62,7 +62,7 @@
                                          aria-expanded="false">
                                         <div class="card">
                                             <div class="card-header">
-                                                <h4 class="card-title" style="text-transform: inherit;">{% trans "Muammo" %}</h4>
+                                                <h4 class="card-title" style="text-transform: inherit;">{% trans "Hudud" %}</h4>
                                             </div>
                                             <div class="card-content">
                                                 <div class="card-body pb-0 mx-25">
@@ -71,9 +71,9 @@
                                                             <fieldset class="invoice-address form-group">
                                                                 <input type="text" required
                                                                        class="form-control"
-                                                                       v-model="title_uz" value="{{ muammo.title }}"
-                                                                       name="title" maxlength="256"
-                                                                       placeholder="{% trans "Muammo nomini kiriting" %}">
+                                                                       v-model="title_uz" value="{{ hudud.title }}"
+                                                                       name="title" maxlength="128"
+                                                                       placeholder="{% trans "Hudud nomini kiriting" %}">
                                                             </fieldset>
                                                         </div>
                                                     </div>

@@ -32,6 +32,19 @@ urlpatterns = [
     path("kategoriya/<int:pk>/", KategoriyaUpdateView.as_view(), name="kategoriya_update"),
     path("kategoriya_uchirish/<int:pk>/", KategoriyaDeleteView.as_view(), name="kategoriya_delete"),
 
+    # Foydalanuvchi
+    path("foydalanuvchi/", FoydalanuvchiView.as_view(), name="foydalanuvchi"),
+    path("foydalanuvchi/search/", FoydalanuvchiSearchView.as_view(), name="foydalanuvchi_search"),
+
+    # HUDUD
+    path("hudud/", HududView.as_view(), name="hudud"),
+    path("hudud_yaratish/", HududCreateView.as_view(), name="hudud_create"),
+    path("hudud/<int:pk>/", HududUpdateView.as_view(), name="hudud_update"),
+    path("hudud_uchirish/<int:pk>/", HududDeleteView.as_view(), name="hudud_delete"),
+
+
+
+
     # MUROJATCHI
     path("murojatchi/", MurojatchiView.as_view(), name="murojatchi"),
     path("murojatchi/search/", MurojatchiSearchView.as_view(), name="murojatchi_search"),

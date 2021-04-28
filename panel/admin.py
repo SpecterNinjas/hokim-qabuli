@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Mahalla, Muammo, Murojatchi, SubMuammo
+from .models import Mahalla, Muammo, Murojatchi, SubMuammo, Hudud
 
 
 @admin.register(Mahalla)
@@ -15,6 +15,12 @@ class MuammoAdmin(admin.ModelAdmin):
     search_fields = ['title', ]
 
 
+@admin.register(Hudud)
+class HududAdmin(admin.ModelAdmin):
+    list_display = ['title', ]
+    search_fields = ['title', ]
+
+
 @admin.register(SubMuammo)
 class SubMuammoAdmin(admin.ModelAdmin):
     list_display = ['category', ]
@@ -23,7 +29,8 @@ class SubMuammoAdmin(admin.ModelAdmin):
 
 @admin.register(Murojatchi)
 class MurojatchiAdmin(admin.ModelAdmin):
-    list_display = ['fullname', 'mahalla', 'muammo', 'category', 'phone', 'created', 'status']
+    list_display = ['telegram_id', 'username', 'fullname', 'hudud', 'mahalla', 'muammo', 'category', 'phone', 'created',
+                    'status']
     search_fields = ['fullname', ]
 
     # def render_change_form(self, request, context, *args, **kwargs):

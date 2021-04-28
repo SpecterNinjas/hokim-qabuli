@@ -79,22 +79,8 @@
                                             {{ kategoriya.title }}
                                         </td>
                                         <td class="text-right amallar">
-                                            <div class="dropdown">
-                                                <span class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer"
-                                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                      role="menu"></span>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item"
-                                                       href="{% url 'panel:kategoriya_update' kategoriya.id %}"><i
-                                                            class="bx bx-edit-alt mr-1"></i>{% trans "O'zgartirish" %}
-                                                    </a>
-
-                                                    <a class="dropdown-item" data-id="{{ kategoriya.id }}"
-                                                       href="{% url 'panel:kategoriya_delete' kategoriya.id %}"><i
-                                                            class="bx bx-trash mr-1"></i>
-                                                        {% trans "O'chirish" %}</a>
-                                                </div>
-                                            </div>
+                                             <a class="mr-2" href="{% url 'panel:kategoriya_update' kategoriya.id %}"><i class="fa fa-edit" style="font-size: 19px;" aria-hidden="true"></i></a>
+                                            <a href="{% url 'panel:kategoriya_delete' kategoriya.id %}"><i class="fa fa-trash" style="font-size: 19px;" aria-hidden="true"></i></a>
                                         </td>
                                     </tr>
                                 {% endfor %}

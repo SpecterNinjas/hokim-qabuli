@@ -14,6 +14,12 @@ class MuammoForm(forms.ModelForm):
         fields = ("title",)
 
 
+class HududForm(forms.ModelForm):
+    class Meta:
+        model = Hudud
+        fields = ("title",)
+
+
 class KategoriyaForm(forms.ModelForm):
     class Meta:
         model = SubMuammo

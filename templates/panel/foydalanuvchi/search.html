@@ -1,5 +1,6 @@
 {% extends 'panel/layout/layout.html' %}
 {% load static i18n %}
+
 {% block head %}
 {% endblock %}
 
@@ -12,14 +13,14 @@
     <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="content-wrapper">
-            <h1 class="text-center">{% trans 'Muammo' %}</h1>
+            <h1 class="text-center">{% trans "Foydalanuvchilar Qidiruv" %}</h1>
             <div class="content-header row">
                 <div class="content-header-left col-12 mb-2 mt-1">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
                             <div class="heading-elements">
                                 <ul class="list-inline mb-0 main-list-heading">
-                                    <li class="main-searchh">
+                                    <li class="main-search">
                                         {% comment %} {% if request.GET.q %}
                                             <fieldset class="position-relative">
                                                 <form action="" method="GET">
@@ -44,9 +45,7 @@
                                             </fieldset>
                                         {% endif %}{% endcomment %}
                                     </li>
-                                    <li class="add-new-button"><a class="btn btn-primary"
-                                                                  href="{% url 'panel:muammo_create' %}"><i
-                                            class="bx bxs-plus-square mr-1"></i>{% trans 'Yaratish' %}</a></li>
+
                                 </ul>
                             </div>
                         </div>
@@ -55,6 +54,13 @@
             </div>
             <div class="content-body">
                 <!-- table Transactions start -->
+
+            <a style="float: right;margin-bottom: 15px;" href="{% url 'panel:foydalanuvchi' %}"><button class="btn btn-info"><i class="fa fa-angle-double-left" style="padding-right: 3px;font-size: 20px;" aria-hidden="true"></i> {% trans 'Orqaga' %}</button></a>
+
+                <br><br>
+                <hr>
+              <p class="font-weight-bold">{% trans 'Barcha Foydalanuvchilar Soni:' %} {{ foydalanuvchi_list.count }}</p>
+
                 <section id="table-transactions">
                     <div class="card">
                         <!-- datatable start -->
@@ -63,20 +69,27 @@
                                 <thead>
                                 <tr>
                                     <th class="pr-2">№</th>
-                                    <th class="pl-0">{% trans 'Muammo Turi' %}</th>
-                                    <th class="text-right">{% trans 'Amallar' %}</th>
+                                    <th class="pl-0">{% trans 'Telegram ID' %}</th>
+                                    <th class="pl-2">{% trans 'Foydalanuvchi' %}</th>
+                                    <th class="pl-2">{% trans 'Username' %}</th>
+                                    <th class="pl-2">{% trans 'Sana' %}</th>
+                                    <th class="pr-0">{% trans 'Amallar' %}</th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for muammo in muammo_list %}
+                                {% for murojatchi in object_list %}
                                     <tr>
                                         <td class="pr-2">{{ forloop.counter }}</td>
                                         <td class="pl-0">
-                                            <a href="{% url 'panel:muammo_update' muammo.pk %}">{{ muammo.title|safe | truncatechars:"150" }}</a>
+                                            <a href="{% url 'panel:murojatchi_update' murojatchi.id %}">{{ murojatchi.telegram_id|safe | truncatechars:"150" }}</a>
                                         </td>
-                                        <td class="text-right amallar">
-                                             <a class="mr-2" href="{% url 'panel:muammo_update' muammo.pk %}"><i class="fa fa-edit" style="font-size: 19px;" aria-hidden="true"></i></a>
-                                            <a href="{% url 'panel:muammo_delete' muammo.pk %}"><i class="fa fa-trash" style="font-size: 19px;" aria-hidden="true"></i></a>
+                                         <td class="text-left">{{ murojatchi.fullname }}</td>
+                                        <td class="text-left">{{ murojatchi.username }}</td>
+                                        <td class="text-left">{{ murojatchi.created | date:"d.m.Y" }}</td>
+                                        <td class="text-left amallar">
+                                            <a class="mr-2" href="{% url 'panel:murojatchi_update' murojatchi.id %}"><i class="fa fa-eye" style="font-size: 19px;" aria-hidden="true"></i></a>
+                                            <a href="{% url 'panel:murojatchi_delete' murojatchi.id %}"><i class="fa fa-trash" style="font-size: 19px;" aria-hidden="true"></i></a>
 
                                         </td>
                                     </tr>
@@ -84,9 +97,12 @@
                                 </tbody>
                             </table>
                         </div>
+
                         <!-- datatable ends -->
                     </div>
+
                 </section>
+
                 <!-- table Transactions end -->
             </div>
         </div>

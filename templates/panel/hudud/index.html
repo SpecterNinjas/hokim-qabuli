@@ -12,14 +12,14 @@
     <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="content-wrapper">
-            <h1 class="text-center">{% trans 'Muammo' %}</h1>
+            <h1 class="text-center">{% trans 'Barcha Hududlar' %}</h1>
             <div class="content-header row">
                 <div class="content-header-left col-12 mb-2 mt-1">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
                             <div class="heading-elements">
                                 <ul class="list-inline mb-0 main-list-heading">
-                                    <li class="main-searchh">
+                                    <li class="main-search">
                                         {% comment %} {% if request.GET.q %}
                                             <fieldset class="position-relative">
                                                 <form action="" method="GET">
@@ -45,7 +45,7 @@
                                         {% endif %}{% endcomment %}
                                     </li>
                                     <li class="add-new-button"><a class="btn btn-primary"
-                                                                  href="{% url 'panel:muammo_create' %}"><i
+                                                                  href="{% url 'panel:hudud_create' %}"><i
                                             class="bx bxs-plus-square mr-1"></i>{% trans 'Yaratish' %}</a></li>
                                 </ul>
                             </div>
@@ -63,20 +63,20 @@
                                 <thead>
                                 <tr>
                                     <th class="pr-2">№</th>
-                                    <th class="pl-0">{% trans 'Muammo Turi' %}</th>
+                                    <th class="pl-0">{% trans 'Hudud' %}</th>
                                     <th class="text-right">{% trans 'Amallar' %}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for muammo in muammo_list %}
+                                {% for hudud in hudud_list %}
                                     <tr>
                                         <td class="pr-2">{{ forloop.counter }}</td>
                                         <td class="pl-0">
-                                            <a href="{% url 'panel:muammo_update' muammo.pk %}">{{ muammo.title|safe | truncatechars:"150" }}</a>
+                                            <a href="{% url 'panel:hudud_update' hudud.id %}">{{ hudud.title|safe | truncatechars:"150" }}</a>
                                         </td>
                                         <td class="text-right amallar">
-                                             <a class="mr-2" href="{% url 'panel:muammo_update' muammo.pk %}"><i class="fa fa-edit" style="font-size: 19px;" aria-hidden="true"></i></a>
-                                            <a href="{% url 'panel:muammo_delete' muammo.pk %}"><i class="fa fa-trash" style="font-size: 19px;" aria-hidden="true"></i></a>
+                                             <a class="mr-2" href="{% url 'panel:hudud_update' hudud.id %}"><i class="fa fa-edit" style="font-size: 19px;" aria-hidden="true"></i></a>
+                                            <a href="{% url 'panel:hudud_delete' hudud.id %}"><i class="fa fa-trash" style="font-size: 19px;" aria-hidden="true"></i></a>
 
                                         </td>
                                     </tr>

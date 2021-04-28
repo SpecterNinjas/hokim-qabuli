@@ -38,13 +38,28 @@ class SubMuammo(models.Model):
         verbose_name_plural = _('Kategoriyalar')
 
 
+class Hudud(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(_("Hudud"), max_length=128)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = _("Hudud")
+        verbose_name_plural = _('Hudud')
+
+
 class Murojatchi(models.Model):
     MUROJATCHI_STATUSI = (
         ('yopiq', _('yopiq')),
         ('ochiq', _('ochiq')),
     )
-
+    id = models.AutoField(primary_key=True)
+    telegram_id = models.PositiveBigIntegerField(_("Telegram ID"))
     fullname = models.CharField(_("Ism Sharifi"), max_length=256)
+    username = models.CharField(_("Username"),max_length=32)
+    hudud = models.ForeignKey(Hudud, on_delete=models.CASCADE, default=0)
     mahalla = models.ForeignKey(Mahalla, on_delete=models.CASCADE)
     muammo = models.ForeignKey(Muammo, on_delete=models.CASCADE)
     category = models.ForeignKey(SubMuammo, on_delete=models.CASCADE, null=True, blank=True, default=_('Boshqa'))
