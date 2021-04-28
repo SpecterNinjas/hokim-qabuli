@@ -35,6 +35,9 @@ urlpatterns = [
     # Foydalanuvchi
     path("foydalanuvchi/", FoydalanuvchiView.as_view(), name="foydalanuvchi"),
     path("foydalanuvchi/search/", FoydalanuvchiSearchView.as_view(), name="foydalanuvchi_search"),
+    path("foydalanuvchi/detail/<int:pk>", FoydalanuvchiDetailView.as_view(), name="foydalanuvchi_detail"),
+
+
 
     # HUDUD
     path("hudud/", HududView.as_view(), name="hudud"),

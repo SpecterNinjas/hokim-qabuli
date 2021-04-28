@@ -217,6 +217,7 @@ class MurojatchiView(LoginRequiredMixin, ListView):
         context = super(MurojatchiView, self).get_context_data(**kwargs)
         context['mahallalar'] = Mahalla.objects.all()
         context['muammolar'] = Muammo.objects.all()
+        context['hududlar'] = Hudud.objects.all()
 
         return context
 
@@ -236,6 +237,9 @@ class MurojatchiSearchView(LoginRequiredMixin, ListView):
         if self.request.GET.get('mahalla') != '':
             mahalla = self.request.GET.get('mahalla')
             queryset &= self.model.objects.filter(mahalla_id=mahalla)
+        if self.request.GET.get('hudud') != '':
+            hudud = self.request.GET.get('hudud')
+            queryset &= self.model.objects.filter(hudud_id=hudud)
         if self.request.GET.get('muammo') != '':
             muammo = self.request.GET.get('muammo')
             queryset &= self.model.objects.filter(muammo_id=muammo)
@@ -252,7 +256,18 @@ class MurojatchiDetailView(DetailView):
     template_name = 'panel/murojatchi/see.html'
 
 
+class FoydalanuvchiDetailView(DetailView):
+    model = Murojatchi
+    context_object_name = 'murojatchi'
+    queryset = Murojatchi.objects.all()
+    template_name = 'panel/foydalanuvchi/see.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(FoydalanuvchiDetailView, self).get_context_data(**kwargs)
+        context['hududlar'] = Hudud.objects.all()
+        context['mahallalar'] = Mahalla.objects.all()
+        context['murojatlar'] = Murojatchi.objects.all()
+        return context
 
 
 class FoydalanuvchiSearchView(LoginRequiredMixin, ListView):

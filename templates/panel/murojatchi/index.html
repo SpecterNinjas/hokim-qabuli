@@ -66,8 +66,8 @@
                                 <tr>
 
                                     <th class="pl-1">{% trans 'Murojatchi' %}</th>
-                                    <th class="pl-0">{% trans 'Mahalla' %}</th>
                                     <th class="pl-0">{% trans 'Hudud' %}</th>
+                                    <th class="pl-0">{% trans 'Mahalla' %}</th>
                                     <th class="pl-0">{% trans 'Muammo' %}</th>
                                     <th class="pl-0">{% trans 'Telefon' %}</th>
                                     <th class="pl-0">{% trans 'Status' %}</th>
@@ -82,6 +82,14 @@
                                         <td class="pl-1">
                                             <input type="text" name="fullname" style="width: 100px;" class="form-control" placeholder="Murojatchi">
                                         </td>
+                                    <td class="text-left">
+                                            <select name="hudud" class="form-control" style="margin-left: -25px;width: 110px;">
+                                                <option selected value="">{% trans 'Tanlang' %}</option>
+                                                {% for hudud in hududlar %}
+                                                <option value="{{ hudud.id }}">{{ hudud.title }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </td>
                                         <td class="text-left">
                                             <select name="mahalla" class="form-control" style="margin-left: -20px; width: 110px;">
                                                 <option selected value="">{% trans 'Tanlang' %}</option>
@@ -91,14 +99,7 @@
                                             </select>
 
                                         </td>
-                                        <td class="text-left">
-<select name="muammo" class="form-control" style="margin-left: -25px;width: 110px;">
-                                                <option selected value="">{% trans 'Tanlang' %}</option>
-                                                {% for muammo in muammolar %}
-                                                <option value="{{ muammo.id }}">--------</option>
-                                                {% endfor %}
-                                            </select>
-                                        </td>
+
                                        <td class="text-left">
                                             <select name="muammo" class="form-control" style="margin-left: -33px;">
                                                 <option selected value="">{% trans 'Tanlang' %}</option>
@@ -144,10 +145,9 @@
                                 <tr>
                                     <th class="pr-2">№</th>
                                     <th class="pl-0">{% trans 'Murojatchi' %}</th>
+                                     <th class="pl-2">{% trans 'Hudud' %}</th>
                                     <th class="pl-2">{% trans 'Mahalla' %}</th>
                                     <th class="pl-2">{% trans 'Muammo' %}</th>
-                                    <th class="pl-2">{% trans 'Kategoriya' %}</th>
-
                                     <th class="pl-2">{% trans 'Murojat Vaqti' %}</th>
                                     <th class="pl-2">{% trans 'Status' %}</th>
                                     <th class="pl-2">{% trans 'Amallar' %}</th>
@@ -161,10 +161,9 @@
                                         <td class="pl-0">
                                             <a href="{% url 'panel:murojatchi_update' murojatchi.id %}">{{ murojatchi.fullname|safe | truncatechars:"150" }}</a>
                                         </td>
+                                        <td class="text-left">{{ murojatchi.hudud }}</td>
                                         <td class="text-left">{{ murojatchi.mahalla }}</td>
                                         <td class="text-left">{{ murojatchi.muammo }}</td>
-                                       <td class="text-left">{{ murojatchi.category }}</td>
-
                                         <td class="text-left">{{ murojatchi.created | date:"d.m.Y" }}</td>
                                         <td class="text-left">{{ murojatchi.status }}</td>
 

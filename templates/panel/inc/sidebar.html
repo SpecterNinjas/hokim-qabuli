@@ -46,76 +46,36 @@
             </li>
 
 
-            <li class="nav-item news {% if 'hudud' in request.path %}aaa{% endif %}">
-                <a href="#"><i class=""></i>
-                    <span class="menu-title">Hudud </span>
+            <li class="nav-item news">
+                <a href="#"><i class="fa fa-share"></i>
+                    <span class="menu-title">Qo'shimcha sahifalar</span>
                 </a>
                 <ul class="menu-content">
                     <li>
                         <a href="{% url 'panel:hudud' %}">
-                            <i class="bx bx-list-ul"></i><span
-                                class="menu-item">Barcha Hududlar</span></a>
+                            <i class="fa fa-circle-o"></i><span
+                                class="menu-item">Hududlar</span></a>
                     </li>
-                    <li>
-                        <a href="{% url 'panel:hudud_create' %}">
-                            <i class="bx bx-plus"></i><span
-                                class="menu-item">Yangi Qo'shish</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item news {% if 'mahalla' in request.path %}aaa{% endif %}">
-                <a href="#"><i class=""></i>
-                    <span class="menu-title">Mahalla </span>
-                </a>
-                <ul class="menu-content">
                     <li>
                         <a href="{% url 'panel:mahalla' %}">
-                            <i class="bx bx-list-ul"></i><span
-                                class="menu-item">Barcha Mahallalar</span></a>
+                            <i class="fa fa-circle-o"></i><span
+                                class="menu-item">Mahallalar</span></a>
                     </li>
-                    <li>
-                        <a href="{% url 'panel:mahalla_create' %}">
-                            <i class="bx bx-plus"></i><span
-                                class="menu-item">Yangi Qo'shish</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class=" nav-item news {% if 'muammo' in request.path %}aaa{% endif %}">
-                <a href="#"><i class=""></i>
-                    <span class="menu-title">Muammo</span>
-                </a>
-                <ul class="menu-content">
-                    <li>
+                     <li>
                         <a href="{% url 'panel:muammo' %}">
-                            <i class="bx bx-list-ul"></i><span
-                                class="menu-item">Barcha Muammolar</span></a>
+                            <i class="fa fa-circle-o"></i><span
+                                class="menu-item">Muammolar</span></a>
                     </li>
-                    <li>
-                        <a href="{% url 'panel:muammo_create' %}">
-                            <i class="bx bx-plus"></i><span
-                                class="menu-item">Yangi Qo'shish</span></a>
-                    </li>
-                </ul>
-            </li>
-            <li class=" nav-item news {% if 'kategoriya' in request.path %}aaa{% endif %}">
-                <a href="#"><i class=""></i>
-                    <span class="menu-title">Kategoriya</span>
-                </a>
-                <ul class="menu-content">
                     <li>
                         <a href="{% url 'panel:kategoriya' %}">
-                            <i class="bx bx-list-ul"></i><span
-                                class="menu-item">Barcha Kategoriyalar</span></a>
+                            <i class="fa fa-circle-o"></i><span
+                                class="menu-item">Kategoriyalar</span></a>
                     </li>
-                    <li>
-                        <a href="{% url 'panel:kategoriya_create' %}">
-                            <i class="bx bx-plus"></i><span
-                                class="menu-item">Yangi Qo'shish</span></a>
-                    </li>
+
+
                 </ul>
             </li>
+
 
         </ul>
     </div>
