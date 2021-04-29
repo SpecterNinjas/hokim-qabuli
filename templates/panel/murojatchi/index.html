@@ -15,7 +15,6 @@
             padding: 8px 16px;
             text-decoration: none;
         }
-
     </style>
 {% endblock %}
 
@@ -167,7 +166,7 @@
                         </div>
                     </section>
                     <div class="text-right">
-                        <button class="btn btn-outline-info"
+                        <button class="btn btn-info"
                                 type="submit">{% trans 'Qidirish' %}</button>
                     </div>
                 </form>
@@ -203,7 +202,7 @@
                                         <td class="text-left">{{ murojatchi.mahalla }}</td>
                                         <td class="text-left">{{ murojatchi.muammo }}</td>
                                         <td class="text-left">{{ murojatchi.created | date:"d.m.Y" }}</td>
-                                        <td class="text-left">{{ murojatchi.status }}</td>
+                                        <td class="text-left" id="status-row">{{ murojatchi.status }}</td>
 
 
                                         <td class="text-center amallar">
@@ -286,4 +285,5 @@
 {% endblock %}
 
 {% block js %}
+
 {% endblock %}

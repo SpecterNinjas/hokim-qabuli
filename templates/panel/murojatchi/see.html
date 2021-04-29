@@ -73,6 +73,7 @@
                                           <hr></span></h6>{% endif %}
                                       {% if murojatchi.phone %} <h6>Telefon: <span class="text-dark">{{ murojatchi.phone }}</span></h6>{% endif %}
 
+                                        <a href="{% url 'panel:foydalanuvchi_detail' murojatchi.id  %}"><button class="btn btn-success mt-1 mx-auto d-block">Barcha Murojatlar</button></a>
 
                                     </div>
 

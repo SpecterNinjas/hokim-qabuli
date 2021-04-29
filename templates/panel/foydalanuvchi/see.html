@@ -19,8 +19,10 @@
           href="{% static 'panel/back/app-assets/vendors/css/filepond-plugin-image-preview.min.css' %}">
     <link rel="stylesheet" type="text/css"
           href="{% static 'panel/back/app-assets/vendors/css/forms/select/select2.min.css' %}">
-
-
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 {% endblock %}
 
 
@@ -69,20 +71,24 @@
                                         <h5 class="text-center pt-1">{{ murojatchi.fullname }}</h5>
                                         <p class="title text-center">Telegram</p>
                                         {% if murojatchi.username %}
-                                            <h6>Username: <span class="text-dark">{{ murojatchi.username }}</span></h6>
+                                            <h6 class="ml-2">Username: <span class="text-dark">{{ murojatchi.username }}</span></h6>
                                             <hr>{% endif %}
                                         {% if murojatchi.telegram_id %}
-                                            <h6>Telegram ID: <span class="text-dark">{{ murojatchi.telegram_id }}
+                                            <h6 class="ml-2">Telegram ID: <span class="text-dark">{{ murojatchi.telegram_id }}
                                           <hr></span></h6>{% endif %}
                                         {% if murojatchi.phone %}
-                                            <h6>Telefon: <span class="text-dark">{{ murojatchi.phone }}</span>
+                                            <h6 class="ml-2">Telefon: <span class="text-dark">{{ murojatchi.phone }}</span>
                                             </h6>{% endif %}
 
 
                                     </div>
 
                                 </div>
+
+
+
                                 <div class="col-md-9">
+                                <input id="myInput" type="text" maxlength="50" class="form-control mb-3" placeholder="Qidirish">
                                     <section id="table-transactions box-shadow-3">
                                         <div class="card">
                                             <!-- datatable start -->
@@ -92,63 +98,21 @@
                                                     <thead>
                                                     <tr>
 
-                                                        <th class="pl-1">{% trans 'F.I.SH' %}</th>
+                                                        <th class="pl-3">{% trans 'F.I.SH' %}</th>
                                                         <th class="pl-0">{% trans 'Hudud' %}</th>
                                                         <th class="pl-0">{% trans 'Mahalla' %}</th>
+                                                        <th class="pl-0">{% trans 'Muammo' %}</th>
                                                         <th class="pl-0">{% trans 'Status' %}</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
 
-                                                    <tr>
-
-                                                        <td class="pl-1">
-                                                            <input type="text" name="fullname" style="width: 150px;"
-                                                                   class="form-control" placeholder="F.I.SH">
-                                                        </td>
-                                                        <td class="pl-0 text-left">
-
-                                                            <select name="hudud" class="form-control"
-                                                                    style="margin-left: -25px;width: 110px;">
-                                                                <option selected value="">{% trans 'Tanlang' %}</option>
-                                                                {% for hudud in hududlar %}
-                                                                    <option value="{{ hudud.id }}">{{ hudud.title }}</option>
-                                                                {% endfor %}
-                                                            </select>
-
-                                                        </td>
-
-                                                        <td class="text-left">
-
-                                                            <select name="mahalla" class="form-control"
-                                                                    style="margin-left: -20px; width: 110px;">
-                                                                <option selected value="">{% trans 'Tanlang' %}</option>
-                                                                {% for mahalla in mahallalar %}
-                                                                    <option value="{{ mahalla.id }}">{{ mahalla.title }}</option>
-                                                                {% endfor %}
-                                                            </select>
-
-                                                        </td>
-
-                                                        <td class="text-left">
-                                                            <select name="status" class="form-control"
-                                                                    style="margin-left: -33px;width: 100px;">
-                                                                <option selected value="">{% trans 'Tanlang' %}</option>
-                                                                <option value="ko'rib chiqilmagan">{% trans "Ko'rib Chiqilmagan" %}</option>
-                                                                <option value="ko'rib chiqilmoqda">{% trans "Ko'rib Chiqilmoqda" %}</option>
-                                                                <option value="qabulga chaqirildi">{% trans "Qabulga Chaqirildi" %}</option>
-                                                                <option value="ko'rib chiqildi">{% trans "Ko'rib Chiqildi" %}</option>
-                                                                <option value="rad etildi">{% trans "Rad Etildi" %}</option>
-                                                            </select>
-                                                        </td>
-
-                                                    </tr>
-
                                                     {% for murojat in murojatlar %}
-                                                        {% if murojat.id == murojatchi.id %}
-                                                            <tr>
+                                                        {% if murojat.telegram_id == murojatchi.telegram_id %}
 
-                                                                <td class="pl-2 pr-0">
+                                                            <tr id="js-filter">
+
+                                                                <td class="pl-3 pr-0">
                                                                     {{ murojat.fullname }}
                                                                 </td>
                                                                 <td class="pl-0 text-left">
@@ -158,14 +122,17 @@
                                                                 <td class="text-left">
                                                                     {{ murojat.mahalla.title }}
                                                                 </td>
-
                                                                 <td class="text-left">
+                                                                   {{ murojat.muammo }}
+                                                                </td>
+
+                                                                <td class="text-left pl-1">
                                                                     <span class="pr-2">{{ murojat.status }}</span>
 
-                                                                    <a class="mr-1 ml-1" href="#"><i class="fa fa-eye"
+                                                                    <a class="mr-1 ml-1" href="{% url 'panel:murojatchi_detail' murojat.id %}"><i class="fa fa-eye"
                                                                                                      style="font-size: 19px;"
                                                                                                      aria-hidden="true"></i></a>
-                                                                    <a href="#"><i class="fa fa-edit"
+                                                                    <a href="{% url 'panel:murojatchi_reply' murojat.id %}"><i class="fa fa-edit"
                                                                                    style="font-size: 19px;"
                                                                                    aria-hidden="true"></i></a>
 
@@ -173,6 +140,7 @@
 
 
                                                             </tr>
+
                                                         {% endif %}
                                                     {% endfor %}
                                                     </tbody>
@@ -216,4 +184,18 @@
     <script src="{% static 'panel/back/app-assets/vendors/js/forms/select/select2.full.min.js' %}"></script>
     <!-- END: Page Vendor JS-->
     <script src="{% static 'panel/back/app-assets/js/scripts/forms/select/form-select2.min.js' %}"></script>
+
+
+<script>
+        $(document).ready(function(){
+          $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#js-filter").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+</script>
+
+
 {% endblock %}
