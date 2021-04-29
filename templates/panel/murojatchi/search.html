@@ -67,10 +67,9 @@
                                 <tr>
                                     <th class="pr-2">№</th>
                                     <th class="pl-0">{% trans 'Murojatchi' %}</th>
+                                     <th class="pl-2">{% trans 'Hudud' %}</th>
                                     <th class="pl-2">{% trans 'Mahalla' %}</th>
                                     <th class="pl-2">{% trans 'Muammo' %}</th>
-                                    <th class="pl-2">{% trans 'Kategoriya' %}</th>
-
                                     <th class="pl-2">{% trans 'Murojat Vaqti' %}</th>
                                     <th class="pl-2">{% trans 'Status' %}</th>
                                     <th class="pl-2">{% trans 'Amallar' %}</th>
@@ -84,9 +83,10 @@
                                         <td class="pl-0">
                                             <a href="{% url 'panel:murojatchi_update' murojatchi.id %}">{{ murojatchi.fullname|safe | truncatechars:"150" }}</a>
                                         </td>
+                                        <td class="text-left">{{ murojatchi.hudud }}</td>
                                         <td class="text-left">{{ murojatchi.mahalla }}</td>
                                         <td class="text-left">{{ murojatchi.muammo }}</td>
-                                       <td class="text-left">{{ murojatchi.category }}</td>
+
 
                                         <td class="text-left">{{ murojatchi.created | date:"d.m.Y" }}</td>
                                         <td class="text-left">{{ murojatchi.status }}</td>

@@ -3,6 +3,21 @@
 
 {% block head %}
 {% endblock %}
+{% block custom_css %}
+    <style>
+        .pagination {
+            display: inline-block;
+        }
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+
+    </style>
+{% endblock %}
 
 {% block body %}
     {#    {% if user|has_role:"admin_temp" %}#}
@@ -54,86 +69,93 @@
             </div>
             <div class="content-body">
                 <!-- table Transactions start -->
-            <h3>Qidiruv</h3>
-             <section id="table-transactions">
+                <h3>Qidiruv</h3>
+                <section id="table-transactions">
                     <div class="card">
                         <!-- datatable start -->
                         <form method="get" action="{% url 'panel:murojatchi_search' %}" autocomplete="off">
                             {% csrf_token %}
-                        <div class="table-responsive">
-                            <table id="table-extended-transactions" class="table mb-0">
-                                <thead>
-                                <tr>
+                            <div class="table-responsive">
+                                <table id="table-extended-transactions" class="table mb-0">
+                                    <thead>
+                                    <tr>
 
-                                    <th class="pl-1">{% trans 'Murojatchi' %}</th>
-                                    <th class="pl-0">{% trans 'Mahalla' %}</th>
-                                    <th class="pl-0">{% trans 'Hudud' %}</th>
-                                    <th class="pl-0">{% trans 'Muammo' %}</th>
-                                    <th class="pl-0">{% trans 'Telefon' %}</th>
-                                    <th class="pl-0">{% trans 'Status' %}</th>
-                                    <th class="pr-0"></th>
+                                        <th class="pl-1">{% trans 'Murojatchi' %}</th>
+                                        <th class="pl-0">{% trans 'Hudud' %}</th>
+                                        <th class="pl-0">{% trans 'Mahalla' %}</th>
+                                        <th class="pl-0">{% trans 'Muammo' %}</th>
+                                        <th class="pl-0">{% trans 'Telefon' %}</th>
+                                        <th class="pl-0">{% trans 'Status' %}</th>
+                                        <th class="pr-0"></th>
 
-                                </tr>
-                                </thead>
-                                <tbody>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
 
                                     <tr>
 
                                         <td class="pl-1">
-                                            <input type="text" name="fullname" style="width: 100px;" class="form-control" placeholder="Murojatchi">
+                                            <input type="text" name="fullname" style="width: 100px;"
+                                                   class="form-control" placeholder="Murojatchi">
                                         </td>
                                         <td class="text-left">
-                                            <select name="mahalla" class="form-control" style="margin-left: -20px; width: 110px;">
+                                            <select name="hudud" class="form-control"
+                                                    style="margin-left: -25px;width: 110px;">
+                                                <option selected value="">{% trans 'Tanlang' %}</option>
+                                                {% for hudud in hududlar %}
+                                                    <option value="{{ hudud.id }}">{{ hudud.title }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </td>
+                                        <td class="text-left">
+                                            <select name="mahalla" class="form-control"
+                                                    style="margin-left: -20px; width: 110px;">
                                                 <option selected value="">{% trans 'Tanlang' %}</option>
                                                 {% for mahalla in mahallalar %}
-                                                <option value="{{ mahalla.id }}">{{ mahalla.title }}</option>
+                                                    <option value="{{ mahalla.id }}">{{ mahalla.title }}</option>
                                                 {% endfor %}
                                             </select>
 
                                         </td>
+
                                         <td class="text-left">
-<select name="muammo" class="form-control" style="margin-left: -25px;width: 110px;">
-                                                <option selected value="">{% trans 'Tanlang' %}</option>
-                                                {% for muammo in muammolar %}
-                                                <option value="{{ muammo.id }}">--------</option>
-                                                {% endfor %}
-                                            </select>
-                                        </td>
-                                       <td class="text-left">
                                             <select name="muammo" class="form-control" style="margin-left: -33px;">
                                                 <option selected value="">{% trans 'Tanlang' %}</option>
                                                 {% for muammo in muammolar %}
-                                                <option value="{{ muammo.id }}">{{ muammo.title }}</option>
+                                                    <option value="{{ muammo.id }}">{{ muammo.title }}</option>
                                                 {% endfor %}
                                             </select>
-                                       </td>
+                                        </td>
 
                                         <td class="text-left">
-                                             <input type="number" name="phone" style="width: 100px;margin-left: -35px;" class="form-control" placeholder="998******">
+                                            <input type="number" name="phone" style="width: 100px;margin-left: -35px;"
+                                                   class="form-control" placeholder="998******">
                                         </td>
                                         <td class="text-left">
-                                            <select name="status" class="form-control" style="margin-left: -33px;width: 100px;">
+                                            <select name="status" class="form-control"
+                                                    style="margin-left: -33px;width: 100px;">
                                                 <option selected value="">{% trans 'Tanlang' %}</option>
-                                                <option  value="ochiq">{% trans 'ochiq' %}</option>
-                                                <option  value="yopiq">{% trans 'yopiq' %}</option>
+                                                <option value="ochiq">{% trans 'ochiq' %}</option>
+                                                <option value="yopiq">{% trans 'yopiq' %}</option>
 
                                             </select>
                                         </td>
-                                        <td class="text-right"><button class="btn btn-outline-info" type="submit">{% trans 'Qidirish' %}</button></td>
-
+                                        <td class="text-right">
+                                            <button class="btn btn-outline-info"
+                                                    type="submit">{% trans 'Qidirish' %}</button>
+                                        </td>
 
 
                                     </tr>
 
-                                </tbody>
-                            </table>
-                        </div>
-                            </form>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
                         <!-- datatable ends -->
                     </div>
                 </section>
                 <hr>
-              <p class="font-weight-bold">{% trans 'Barcha Murojatlar Soni:' %} {{ murojatchi_list.count }}</p>
 
                 <section id="table-transactions">
                     <div class="card">
@@ -144,10 +166,9 @@
                                 <tr>
                                     <th class="pr-2">№</th>
                                     <th class="pl-0">{% trans 'Murojatchi' %}</th>
+                                    <th class="pl-2">{% trans 'Hudud' %}</th>
                                     <th class="pl-2">{% trans 'Mahalla' %}</th>
                                     <th class="pl-2">{% trans 'Muammo' %}</th>
-                                    <th class="pl-2">{% trans 'Kategoriya' %}</th>
-
                                     <th class="pl-2">{% trans 'Murojat Vaqti' %}</th>
                                     <th class="pl-2">{% trans 'Status' %}</th>
                                     <th class="pl-2">{% trans 'Amallar' %}</th>
@@ -161,33 +182,35 @@
                                         <td class="pl-0">
                                             <a href="{% url 'panel:murojatchi_update' murojatchi.id %}">{{ murojatchi.fullname|safe | truncatechars:"150" }}</a>
                                         </td>
+                                        <td class="text-left">{{ murojatchi.hudud }}</td>
                                         <td class="text-left">{{ murojatchi.mahalla }}</td>
                                         <td class="text-left">{{ murojatchi.muammo }}</td>
-                                       <td class="text-left">{{ murojatchi.category }}</td>
-
                                         <td class="text-left">{{ murojatchi.created | date:"d.m.Y" }}</td>
                                         <td class="text-left">{{ murojatchi.status }}</td>
 
 
                                         <td class="text-center amallar">
 
-                                             <a class="mr-1"  href="{% url 'panel:murojatchi_detail' murojatchi.id %}"><i class="fa fa-eye" style="font-size: 19px;" aria-hidden="true"></i></a>
-                                            <a  href="{% url 'panel:murojatchi_update' murojatchi.id %}"><i class="fa fa-edit" style="font-size: 19px;" aria-hidden="true"></i></a>
+                                            <a class="mr-1" href="{% url 'panel:murojatchi_detail' murojatchi.id %}"><i
+                                                    class="fa fa-eye" style="font-size: 19px;"
+                                                    aria-hidden="true"></i></a>
+                                            <a href="{% url 'panel:murojatchi_update' murojatchi.id %}"><i
+                                                    class="fa fa-edit" style="font-size: 19px;" aria-hidden="true"></i></a>
 
-{#                                              <div class="dropdown">#}
-{#                                                <span class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer"#}
-{#                                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"#}
-{#                                                      role="menu"></span>#}
-{#                                                <div class="dropdown-menu dropdown-menu-right">#}
-{#                                                    <a class="dropdown-item"#}
-{#                                                       href="{% url 'panel:murojatchi_update' murojatchi.id %}"><i#}
-{#                                                            class="bx bx-edit-alt mr-1"></i>{% trans "O'zgartirish" %}</a>#}
-{##}
-{#                                                    <a class="dropdown-item" data-id="{{ murojatchi.id }}"#}
-{#                                                       href="{% url 'panel:murojatchi_delete' murojatchi.id %}"><i#}
-{#                                                            class="bx bx-trash mr-1"></i>#}
-{#                                                        {% trans "O'chirish" %}</a>#}
-{#                                                </div>#}
+                                            {#                                              <div class="dropdown">#}
+                                            {#                                                <span class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer"#}
+                                            {#                                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"#}
+                                            {#                                                      role="menu"></span>#}
+                                            {#                                                <div class="dropdown-menu dropdown-menu-right">#}
+                                            {#                                                    <a class="dropdown-item"#}
+                                            {#                                                       href="{% url 'panel:murojatchi_update' murojatchi.id %}"><i#}
+                                            {#                                                            class="bx bx-edit-alt mr-1"></i>{% trans "O'zgartirish" %}</a>#}
+                                            {##}
+                                            {#                                                    <a class="dropdown-item" data-id="{{ murojatchi.id }}"#}
+                                            {#                                                       href="{% url 'panel:murojatchi_delete' murojatchi.id %}"><i#}
+                                            {#                                                            class="bx bx-trash mr-1"></i>#}
+                                            {#                                                        {% trans "O'chirish" %}</a>#}
+                                            {#                                                </div>#}
 
                                         </td>
                                     </tr>
@@ -200,6 +223,35 @@
                     </div>
 
                 </section>
+
+                {% if is_paginated %}
+                    <ul class="pagination">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#">&laquo;</a>
+                            </li>
+                        {% endif %} {% for i in paginator.page_range %} {% if page_obj.number == i %}
+
+                        <li class="page-item"><a class="page-link" style="background-color: rgb(51,122,183);color: white;">{{ i }}</a></li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                        </li>
+                    {% endif %} {% endfor %} {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a href="?page={{ page_obj.next_page_number }}" class="page-link">&raquo;</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link">&raquo;</a>
+                        </li>
+                    {% endif %}
+                    </ul>
+                {% endif %}
 
                 <!-- table Transactions end -->
             </div>

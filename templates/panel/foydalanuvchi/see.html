@@ -1,0 +1,216 @@
+{% extends 'panel/layout/layout.html' %}
+{% load static i18n %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/vendors/css/vue-ctk-date-time-picker.css' %}">
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/vendors/css/vue2-editor.css' %}">
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/vendors/css/katex.min.css' %}">
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/vendors/css/monokai-sublime.min.css' %}">
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/css/quill.snow.css' %}"/>
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/css/quill.imageUploader.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/css/main-editor.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'panel/back/app-assets/vendors/css/ui/prism.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'panel/back/app-assets/vendors/css/file-uploaders/dropzone.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'panel/back/app-assets/css/plugins/file-uploaders/dropzone.min.css' %}">
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/vendors/css/filepond.min.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'panel/back/app-assets/vendors/css/filepond-plugin-image-preview.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'panel/back/app-assets/vendors/css/forms/select/select2.min.css' %}">
+
+
+{% endblock %}
+
+
+{% block body %}
+    {#    {% if user|has_role:"admin_temp" %}#}
+    {% include 'panel/inc/sidebar.html' %}
+    {#    {% endif %}#}
+    <!-- BEGIN: Content-->
+
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="content-wrapper">
+            <h1 class="text-center mb-3">{{ murojatchi.fullname }} #{{ murojatchi.id }}</h1>
+            <div class="content-body">
+                <!-- app invoice View Page -->
+
+                <section class="invoice-edit-wrapper">
+                    <div class="row">
+                        <!-- invoice view page -->
+                        <div class="col-xl-12 col-md-12 col-12">
+                            {#                                <ul class="nav nav-pills">#}
+                            {#                                    <li class="nav-item">#}
+                            {#                                        <a class="nav-link active" id="uzbek-tab" data-toggle="pill" href="#uzbek"#}
+                            {#                                           aria-expanded="true"><i class="flag-icon flag-icon-uz mr-50"></i>#}
+                            {#                                            O‘zbekcha</a>#}
+                            {#                                    </li>#}
+                            {#                                    <li class="nav-item">#}
+                            {#                                        <a class="nav-link" id="russian-tab" data-toggle="pill" href="#russian"#}
+                            {#                                           aria-expanded="false"><i class="flag-icon flag-icon-ru mr-50"></i> Русский#}
+                            {#                                        </a>#}
+                            {#                                    </li>#}
+                            {#                                    <li class="nav-item">#}
+                            {#                                        <a class="nav-link" id="english-tab" data-toggle="pill" href="#english"#}
+                            {#                                           aria-expanded="false"><i class="flag-icon flag-icon-gb mr-50"></i> English#}
+                            {#                                        </a>#}
+                            {#                                    </li>#}
+                            {#                                </ul>#}
+
+                            <div class="row">
+                                <div class="col-md-3">
+
+                                    <div class="card p-2 box-shadow-3" style="border-top: 4px solid rgb(60,141,188);">
+                                        <img class="rounded-circle"
+                                             src="{% static 'panel/login/images/user2-160x160.jpg' %}"
+                                             alt="{{ murojatchi.fullname }}" style="width:70%;padding-left: 50px;">
+                                        <h5 class="text-center pt-1">{{ murojatchi.fullname }}</h5>
+                                        <p class="title text-center">Telegram</p>
+                                        {% if murojatchi.username %}
+                                            <h6>Username: <span class="text-dark">{{ murojatchi.username }}</span></h6>
+                                            <hr>{% endif %}
+                                        {% if murojatchi.telegram_id %}
+                                            <h6>Telegram ID: <span class="text-dark">{{ murojatchi.telegram_id }}
+                                          <hr></span></h6>{% endif %}
+                                        {% if murojatchi.phone %}
+                                            <h6>Telefon: <span class="text-dark">{{ murojatchi.phone }}</span>
+                                            </h6>{% endif %}
+
+
+                                    </div>
+
+                                </div>
+                                <div class="col-md-9">
+                                    <section id="table-transactions box-shadow-3">
+                                        <div class="card">
+                                            <!-- datatable start -->
+
+                                            <div class="table-responsive">
+                                                <table id="table-extended-transactions" class="table mb-0">
+                                                    <thead>
+                                                    <tr>
+
+                                                        <th class="pl-1">{% trans 'F.I.SH' %}</th>
+                                                        <th class="pl-0">{% trans 'Hudud' %}</th>
+                                                        <th class="pl-0">{% trans 'Mahalla' %}</th>
+                                                        <th class="pl-0">{% trans 'Status' %}</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    <tr>
+
+                                                        <td class="pl-1">
+                                                            <input type="text" name="fullname" style="width: 150px;"
+                                                                   class="form-control" placeholder="F.I.SH">
+                                                        </td>
+                                                        <td class="pl-0 text-left">
+
+                                                            <select name="hudud" class="form-control"
+                                                                    style="margin-left: -25px;width: 110px;">
+                                                                <option selected value="">{% trans 'Tanlang' %}</option>
+                                                                {% for hudud in hududlar %}
+                                                                    <option value="{{ hudud.id }}">{{ hudud.title }}</option>
+                                                                {% endfor %}
+                                                            </select>
+
+                                                        </td>
+
+                                                        <td class="text-left">
+
+                                                            <select name="mahalla" class="form-control"
+                                                                    style="margin-left: -20px; width: 110px;">
+                                                                <option selected value="">{% trans 'Tanlang' %}</option>
+                                                                {% for mahalla in mahallalar %}
+                                                                    <option value="{{ mahalla.id }}">{{ mahalla.title }}</option>
+                                                                {% endfor %}
+                                                            </select>
+
+                                                        </td>
+
+                                                        <td class="text-left">
+                                                            <select name="status" class="form-control"
+                                                                    style="margin-left: -33px;width: 100px;">
+                                                                <option selected value="">{% trans 'Tanlang' %}</option>
+                                                                <option value="ochiq">{% trans 'ochiq' %}</option>
+                                                                <option value="yopiq">{% trans 'yopiq' %}</option>
+                                                            </select>
+                                                        </td>
+
+                                                    </tr>
+
+                                                    {% for murojat in murojatlar %}
+                                                        {% if murojat.id == murojatchi.id %}
+                                                        <tr>
+
+                                                            <td class="pl-2 pr-0">
+                                                                {{ forloop.counter }}. {{ murojat.fullname }}
+                                                            </td>
+                                                            <td class="pl-0 text-left">
+                                                                {{ murojat.hudud.title }}
+                                                            </td>
+
+                                                            <td class="text-left">
+                                                               {{ murojat.mahalla.title }}
+                                                            </td>
+
+                                                            <td class="text-left">
+                                                              <span class="pr-2">{{ murojat.status }}</span>
+
+                                                                <a class="mr-1 ml-1" href="#"><i class="fa fa-eye"
+                                                                                            style="font-size: 19px;"
+                                                                                            aria-hidden="true"></i></a>
+                                                                <a href="#"><i class="fa fa-edit"
+                                                                               style="font-size: 19px;"
+                                                                               aria-hidden="true"></i></a>
+
+                                                            </td>
+
+
+                                                        </tr>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <!-- datatable ends -->
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </section>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+{% endblock %}
+
+
+{% block js %}
+    <script src="{% static 'panel/back/app-assets/vendors/js/filepond-plugin-image-preview.js' %}"></script>
+    <script src="{% static 'panel/back/app-assets/vendors/js/filepond.js' %}"></script>
+    <script src="{% static 'panel/back/app-assets/js/vue.js' %}"></script>
+    <script src="{% static 'panel/back/app-assets/vendors/js/vue-ctk-date-time-picker.umd.js' %}"></script>
+    <script src="{% static 'panel/back/app-assets/vendors/js/katex.min.js' %}"></script>
+    <script src="{% static 'panel/back/app-assets/vendors/js/highlight.min.js' %}"></script>
+    <script src="{% static 'panel/back/app-assets/vendors/js/quill.imageUploader.min.js' %}"></script>
+
+    <script src="{% static 'panel/back/app-assets/vendors/js/vue-filepond.min.js' %}"></script>
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{% static 'panel/back/app-assets/vendors/js/forms/select/select2.full.min.js' %}"></script>
+    <!-- END: Page Vendor JS-->
+    <script src="{% static 'panel/back/app-assets/js/scripts/forms/select/form-select2.min.js' %}"></script>
+{% endblock %}
