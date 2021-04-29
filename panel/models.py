@@ -55,6 +55,7 @@ class Murojatchi(models.Model):
         ("ko'rib chiqilmagan", _("ko'rib chiqilmagan")),
         ("ko'rib chiqilmoqda", _("ko'rib chiqilmoqda")),
         ("ko'rib chiqildi", _("ko'rib chiqildi")),
+        ("qabulga chaqirildi", _("qabulga chaqirildi")),
         ("rad etildi", _("rad etildi")),
         # qabulga chaqirildi, qabulda ko'rib chiqildi
     )
