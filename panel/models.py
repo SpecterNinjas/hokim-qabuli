@@ -57,7 +57,6 @@ class Murojatchi(models.Model):
         ("ko'rib chiqildi", _("ko'rib chiqildi")),
         ("qabulga chaqirildi", _("qabulga chaqirildi")),
         ("rad etildi", _("rad etildi")),
-        # qabulga chaqirildi, qabulda ko'rib chiqildi
     )
     MUROJAT_TURI = (
         ("Taklif", _("Taklif")),
