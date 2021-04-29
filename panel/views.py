@@ -240,6 +240,9 @@ class MurojatchiSearchView(LoginRequiredMixin, ListView):
         if self.request.GET.get('mahalla') != '':
             mahalla = self.request.GET.get('mahalla')
             queryset &= self.model.objects.filter(mahalla_id=mahalla)
+        if self.request.GET.get('murojat_turi') != '':
+            murojat_turi = self.request.GET.get('murojat_turi')
+            queryset &= self.model.objects.filter(murojat_turi=murojat_turi)
         if self.request.GET.get('hudud') != '':
             hudud = self.request.GET.get('hudud')
             queryset &= self.model.objects.filter(hudud_id=hudud)
@@ -305,6 +308,7 @@ class MurojatchiReplyMessageView(LoginRequiredMixin, UpdateView):
     context_object_name = 'murojatchi'
     form_class = MurojatchiReplyMessageForm
     success_url = reverse_lazy("panel:murojatchi")
+
 
 
 class MurojatchiDeleteView(LoginRequiredMixin, DeleteView):

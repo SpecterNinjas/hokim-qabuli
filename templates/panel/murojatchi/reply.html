@@ -91,6 +91,10 @@
                                                     <th class="font-weight-bold">Mahalla</th>
                                                     <td>{{ murojatchi.mahalla.title }}</td>
                                                 </tr>
+                                                    <tr>
+                                                        <th class="font-weight-bold">Murojat Turi</th>
+                                                        <td>{{ murojatchi.murojat_turi}}</td>
+                                                    </tr>
                                                 <tr>
                                                     <th class="font-weight-bold">Muammo</th>
                                                     <td>{{ murojatchi.muammo.title }}</td>
@@ -141,12 +145,20 @@
 
 
                                             </table>
-                                            <label for="reply_message" class="text-capitalize font-weight-bold pl-2 text-dark" style="font-size: 1em;">Javob Matni</label><textarea name="reply_message" class="form-control mx-3"
-                                                                                                    id="reply_message" style="position: relative;width: 900px;" required
-                                                                                                    rows="7"
-                                                                                                    placeholder="Javob xatini kiriting."></textarea>
+                                            <div style="width: 175px;">
+                                                <label for="id_status"><span class="text-capitalize font-weight-bold pl-2 text-dark" style="font-size: 1.2em;"><strong>Statusni tanlang</strong></span></label>
+                                                {{ form.status }}
+                                            </div>
+                                            <label for="reply_message"
+                                                   class="text-capitalize font-weight-bold pl-2 text-dark"
+                                                   style="font-size: 1em;"><strong>Javob Matni</strong></label><textarea
+                                                name="reply_message" class="form-control mx-3"
+                                                id="reply_message" style="position: relative;width: 900px;" required
+                                                rows="7"
+                                                placeholder="Javob xatini kiriting."></textarea>
 
-                                            <button type="submit" class="btn btn-outline-info my-1 ml-3">Yuborish</button>
+                                            <button type="submit" class="btn btn-outline-info my-1 ml-3">Yuborish
+                                            </button>
                                         </form>
                                     </div>
 

@@ -56,4 +56,7 @@ class FoydalanuvchiForm(forms.ModelForm):
 class MurojatchiReplyMessageForm(forms.ModelForm):
     class Meta:
         model = Murojatchi
-        fields = ("reply_message",)
+        fields = ("reply_message", "status")
+        widgets = {
+            'status': forms.Select(attrs={'class': 'form-control px-1 ml-3 mb-2'}),
+        }

@@ -56,16 +56,23 @@ class Murojatchi(models.Model):
         ("ko'rib chiqilmoqda", _("ko'rib chiqilmoqda")),
         ("ko'rib chiqildi", _("ko'rib chiqildi")),
         ("rad etildi", _("rad etildi")),
-
+        # qabulga chaqirildi, qabulda ko'rib chiqildi
     )
-    id = models.AutoField(primary_key=True)
+    MUROJAT_TURI = (
+        ("Taklif", _("Taklif")),
+        ("Murojat", _("Murojat")),
+        ("Qabul", _("Qabul")),
+    )
+
+    id = models.BigAutoField(primary_key = True)
     telegram_id = models.PositiveBigIntegerField(_("Telegram ID"))
     fullname = models.CharField(_("Ism Sharifi"), max_length=256)
     username = models.CharField(_("Username"), max_length=32)
     hudud = models.ForeignKey(Hudud, on_delete=models.CASCADE, default=0)
     mahalla = models.ForeignKey(Mahalla, on_delete=models.CASCADE)
+    murojat_turi = models.CharField(max_length=16, choices=MUROJAT_TURI,default=2)
     muammo = models.ForeignKey(Muammo, on_delete=models.CASCADE)
-    category = models.ForeignKey(SubMuammo, on_delete=models.CASCADE, null=True, blank=True, default=_('Boshqa'))
+    category = models.ForeignKey(SubMuammo, on_delete=models.CASCADE)
     media = models.FileField(_("Media"), upload_to='muammo_media/', blank=True, null=True)
     location = models.CharField(_("Manzil"), max_length=300, blank=True, null=True)
     description = models.TextField(_("Murojat Matni"))
@@ -83,10 +90,4 @@ class Murojatchi(models.Model):
         verbose_name = _('Murojatchi')
         verbose_name_plural = _('Murojatchilar')
 
-# class ReplyMessage(models.Model):
-#     telegram_id = models.ForeignKey(Murojatchi, on_delete=models.CASCADE)
-#     message = models.TextField(_("Javob Matni"))
-#     updated = models.DateField(_("Oxirgi O'zgartirish Kiritilgan Sana"), auto_now=True)
-#
-#     def __str__(self):
-#         return str(self.telegram_id)
+
