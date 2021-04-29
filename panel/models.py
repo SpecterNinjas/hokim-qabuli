@@ -77,11 +77,17 @@ class Murojatchi(models.Model):
     location = models.CharField(_("Manzil"), max_length=300, blank=True, null=True)
     description = models.TextField(_("Murojat Matni"))
     phone = models.CharField(_("Telefon"), max_length=13)
+<<<<<<< HEAD
+    status = models.CharField(_("Murojatchi Statusi"), max_length=32, choices=MUROJATCHI_STATUSI)
+    created = models.DateField(_("Murojat Sanasi"), auto_now_add=True)
+    updated = models.DateField(_("O'zgartish Kiritilgan Sana"), auto_now_add=True)
+=======
     reply_message = models.TextField(_("Javob Matni"), default=_("Javob berilmagan"))
     created = models.DateField(_("Murojat Sanasi"), auto_now_add=True)
     updated = models.DateField(_("O'zgartish Kiritilgan Sana"), auto_now_add=True)
     status = models.CharField(_("Murojatchi Statusi"), max_length=32, choices=MUROJATCHI_STATUSI,
                               default=MUROJATCHI_STATUSI[0][0])
+>>>>>>> c0fc57f40c3636c3b7a947b5dacf771e5cc5d105
 
     def __str__(self):
         return self.fullname

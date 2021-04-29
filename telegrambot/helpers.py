@@ -3,6 +3,7 @@ from telegram import InlineKeyboardButton
 
 def get_request_data(
         telegram_id=None,
+        request_type=None,
         first_name=None,
         last_name=None,
         middle_name=None,
@@ -11,17 +12,23 @@ def get_request_data(
         problem_type=None,
         sub_problem=None,
         short_description=None,
+        file=None,
+        location=None,
         phone_number=None,
 ):
     request = {
         'telegram_id': telegram_id,
+        'request_type': request_type,
         'first_name': first_name,
         'last_name': last_name,
         'middle_name': middle_name,
         'district': district,
+
         'problem_type': problem_type,
         'sub_problem': sub_problem,
         'short_description': short_description,
+        'file': file,
+        'location': location,
         'phone_number': phone_number,
     }
 

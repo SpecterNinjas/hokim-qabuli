@@ -26,4 +26,4 @@ def set_phone_number(bot: Bot, update: Update):
         chat_id=update.effective_chat.id,
         text=text,
     )
-    return functions.admission_menu(bot, update)
+    return functions.main_menu(bot, update)

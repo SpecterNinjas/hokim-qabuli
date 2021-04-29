@@ -6,7 +6,6 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from telegram.ext import Dispatcher
 
-from telegrambot.apps import log_errors
 from telegrambot.main import conv_handler
 from telegrambot.models import RegionBot
 

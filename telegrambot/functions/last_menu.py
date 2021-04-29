@@ -1,23 +1,26 @@
 from django.apps import apps
-from telegram import Bot, Update, InlineKeyboardMarkup
+from telegram import Bot, Update, KeyboardButton, ReplyKeyboardMarkup
 from telegrambot.models import Text
 from telegrambot import states
 from telegrambot.apps import log_errors
-from telegrambot.helpers import generate_inline_keyboard
 
 
 @log_errors
-def get_short_description(bot: Bot, update: Update):
-    print('get_short_description')
+def last_menu(bot: Bot, update: Update):
+    print('main_menu')
 
     user_model = apps.get_model('telegrambot', 'TelegramProfile')
     user = user_model.objects.get(external_id=update.effective_chat.id)
 
-    data = Text.objects.filter(text_id='GET_SHORT_DESCRIPTION').values()[0]
+    data = Text.objects.filter(text_id='MAIN_MENU').values()[0]
     text = data[user.lang]
 
-    inline_keyboard = generate_inline_keyboard(data[f"buttons_{user.lang}"], update.effective_chat.id)
+    keyboard = []
+    my_admissions_text = "Murojatlar" if user.lang == 'uz' else 'Заявки'
+    lang_text = "Tilni o'zgartirish" if user.lang == 'uz' else 'Поменять язык'
 
+    keyboard.append([KeyboardButton(my_admissions_text)])
+    keyboard.append([KeyboardButton(lang_text)])
     try:
         bot.delete_message(
             chat_id=update.effective_chat.id,
@@ -26,15 +29,11 @@ def get_short_description(bot: Bot, update: Update):
         bot.send_message(
             chat_id=update.effective_chat.id,
             text=text,
-            reply_markup=InlineKeyboardMarkup(inline_keyboard),
-            parse_mode='Markdown',
+            reply_markup=ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
         )
     except:
         bot.send_message(
             chat_id=update.effective_chat.id,
             text=text,
-            reply_markup=InlineKeyboardMarkup(inline_keyboard),
-            parse_mode='Markdown',
         )
-
-    return states.GET_SHORT_DESCRIPTION
+    return states.MAIN_MENU

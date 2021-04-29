@@ -42,7 +42,7 @@ conv_handler = ConversationHandler(
         ],
         states.GET_DISTRICT: [
             start_handler,
-            MessageHandler(Filters.regex("(Назад|Orqaga)"), functions.admission_menu),
+            MessageHandler(Filters.regex("(Назад|Orqaga)"), functions.main_menu),
             MessageHandler(Filters.text, admission.set_district),
         ],
         states.GET_PROBLEM_TYPE: [
@@ -66,6 +66,16 @@ conv_handler = ConversationHandler(
             start_handler,
             main_handler,
             MessageHandler(Filters.text, admission.set_short_description),
+        ],
+        states.GET_FILE: [
+            start_handler,
+            main_handler,
+            MessageHandler(Filters.all, admission.set_file),
+        ],
+        states.GET_LOCATION: [
+            start_handler,
+            main_handler,
+            MessageHandler(Filters.all, admission.set_location),
         ],
         states.GET_PHONE_NUMBER: [
             start_handler,

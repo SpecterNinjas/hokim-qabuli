@@ -1,6 +1,6 @@
 from django.apps import apps
 from telegram import Bot, Update, KeyboardButton, ReplyKeyboardMarkup
-
+from telegrambot.models import Text
 from telegrambot import states
 from telegrambot.apps import log_errors
 

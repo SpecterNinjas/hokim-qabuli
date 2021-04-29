@@ -26,5 +26,7 @@ def set_short_description(bot: Bot, update: Update):
         chat_id=update.effective_chat.id,
         text=text,
     )
-
-    return admission.get_phone_number(bot, update)
+    if request['request_type'] == 'appeal':
+        return admission.get_file(bot, update)
+    else:
+        return admission.get_phone_number(bot, update)

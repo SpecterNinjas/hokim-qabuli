@@ -29,7 +29,7 @@ def set_problem_type(bot: Bot, update: Update):
         return states.GET_PROBLEM_TYPE
 
     elif callback_data == 'back_to_admission_menu':
-        functions.admission_menu(bot, update)
+        functions.main_menu(bot, update)
         return states.MAIN
 
     request = cache.get(f'request_{update.effective_chat.id}')
@@ -47,3 +47,5 @@ def set_problem_type(bot: Bot, update: Update):
     elif callback_data == 'social_security':
         admission.get_social_security_problem(bot, update)
         return states.GET_SOCIAL_SECURITY_PROBLEM
+
+
