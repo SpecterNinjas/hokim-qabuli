@@ -54,9 +54,14 @@
             </div>
             <div class="content-body">
                 <!-- table Transactions start -->
-                <a style="float: right;margin-bottom: 15px;" href="{% url 'panel:murojatchi' %}"><button class="btn btn-info"><i class="fa fa-angle-double-left" style="padding-right: 3px;font-size: 20px;" aria-hidden="true"></i> {% trans 'Orqaga' %}</button></a>
-                <br><br><hr>
-              <p class="font-weight-bold">{% trans 'Murojatlar Soni:' %} {{ murojatchi_list.count }}</p>
+                <a style="float: right;margin-bottom: 15px;" href="{% url 'panel:murojatchi' %}">
+                    <button class="btn btn-info"><i class="fa fa-angle-double-left"
+                                                    style="padding-right: 3px;font-size: 20px;"
+                                                    aria-hidden="true"></i> {% trans 'Orqaga' %}</button>
+                </a>
+                <br><br>
+                <hr>
+                <p class="font-weight-bold">{% trans 'Murojatlar Soni:' %} {{ murojatchi_list.count }}</p>
 
                 <section id="table-transactions">
                     <div class="card">
@@ -67,7 +72,7 @@
                                 <tr>
                                     <th class="pr-2">№</th>
                                     <th class="pl-0">{% trans 'Murojatchi' %}</th>
-                                     <th class="pl-2">{% trans 'Hudud' %}</th>
+                                    <th class="pl-2">{% trans 'Hudud' %}</th>
                                     <th class="pl-2">{% trans 'Mahalla' %}</th>
                                     <th class="pl-2">{% trans 'Muammo' %}</th>
                                     <th class="pl-2">{% trans 'Murojat Vaqti' %}</th>
@@ -81,7 +86,7 @@
                                     <tr>
                                         <td class="pr-2">{{ forloop.counter }}</td>
                                         <td class="pl-0">
-                                            <a href="{% url 'panel:murojatchi_update' murojatchi.id %}">{{ murojatchi.fullname|safe | truncatechars:"150" }}</a>
+                                            <a href="{% url 'panel:murojatchi_reply' murojatchi.id %}">{{ murojatchi.fullname|safe | truncatechars:"150" }}</a>
                                         </td>
                                         <td class="text-left">{{ murojatchi.hudud }}</td>
                                         <td class="text-left">{{ murojatchi.mahalla }}</td>
@@ -93,23 +98,27 @@
 
 
                                         <td class="text-center amallar">
+                                            <a class="mr-1" href="{% url 'panel:murojatchi_detail' murojatchi.id %}"><i
+                                                    class="fa fa-eye" style="font-size: 19px;"
+                                                    aria-hidden="true"></i></a>
+                                            <a href="{% url 'panel:murojatchi_reply' murojatchi.id %}"><i
+                                                    class="fa fa-edit" style="font-size: 19px;" aria-hidden="true"></i></a>
 
-                                            <a class="mr-2" href="{% url 'panel:murojatchi_update' murojatchi.id %}"><i class="fa fa-eye" style="font-size: 19px;" aria-hidden="true"></i></a>
-                                            <a href="{% url 'panel:murojatchi_delete' murojatchi.id %}"><i class="fa fa-trash" style="font-size: 19px;" aria-hidden="true"></i></a>
-{#                                            <div class="dropdown">#}
-{#                                                <span class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer"#}
-{#                                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"#}
-{#                                                      role="menu"></span>#}
-{#                                                <div class="dropdown-menu dropdown-menu-right">#}
-{#                                                    <a class="dropdown-item"#}
-{#                                                       href="{% url 'panel:murojatchi_update' murojatchi.id %}"><i#}
-{#                                                            class="bx bx-edit-alt mr-1"></i>{% trans "O'zgartirish" %}</a>#}
-{##}
-{#                                                    <a class="dropdown-item" data-id="{{ murojatchi.id }}"#}
-{#                                                       href="{% url 'panel:murojatchi_delete' murojatchi.id %}"><i#}
-{#                                                            class="bx bx-trash mr-1"></i>#}
-{#                                                        {% trans "O'chirish" %}</a>#}
-{#                                                </div>#}
+
+                                            {#                                            <div class="dropdown">#}
+                                            {#                                                <span class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer"#}
+                                            {#                                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"#}
+                                            {#                                                      role="menu"></span>#}
+                                            {#                                                <div class="dropdown-menu dropdown-menu-right">#}
+                                            {#                                                    <a class="dropdown-item"#}
+                                            {#                                                       href="{% url 'panel:murojatchi_update' murojatchi.id %}"><i#}
+                                            {#                                                            class="bx bx-edit-alt mr-1"></i>{% trans "O'zgartirish" %}</a>#}
+                                            {##}
+                                            {#                                                    <a class="dropdown-item" data-id="{{ murojatchi.id }}"#}
+                                            {#                                                       href="{% url 'panel:murojatchi_delete' murojatchi.id %}"><i#}
+                                            {#                                                            class="bx bx-trash mr-1"></i>#}
+                                            {#                                                        {% trans "O'chirish" %}</a>#}
+                                            {#                                                </div>#}
 
                                         </td>
                                     </tr>

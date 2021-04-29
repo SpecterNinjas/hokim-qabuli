@@ -265,7 +265,6 @@ class FoydalanuvchiDetailView(DetailView):
     queryset = Murojatchi.objects.all()
     template_name = 'panel/foydalanuvchi/see.html'
 
-
     def get_context_data(self, **kwargs):
         context = super(FoydalanuvchiDetailView, self).get_context_data(**kwargs)
         context['hududlar'] = Hudud.objects.all()
@@ -292,22 +291,20 @@ class FoydalanuvchiSearchView(LoginRequiredMixin, ListView):
         return queryset
 
 
-class MurojatchiUpdateView(LoginRequiredMixin, UpdateView):
-    model = Murojatchi
-    template_name = "panel/murojatchi/update.html"
-    context_object_name = 'murojatchi'
-    form_class = MurojatchiForm
-    success_url = reverse_lazy("panel:murojatchi")
+# class MurojatchiUpdateView(LoginRequiredMixin, UpdateView):
+#     model = Murojatchi
+#     template_name = "panel/murojatchi/update.html"
+#     context_object_name = 'murojatchi'
+#     form_class = MurojatchiForm
+#     success_url = reverse_lazy("panel:murojatchi")
 
-    def get_context_data(self, **kwargs):
-        mahallalar = Mahalla.objects.all()
-        muammolar = Muammo.objects.all()
-        kategoriyalar = SubMuammo.objects.all()
-        context = super(MurojatchiUpdateView, self).get_context_data(**kwargs)
-        context['mahallalar'] = mahallalar
-        context['muammolar'] = muammolar
-        context['kategoriyalar'] = kategoriyalar
-        return context
+
+class MurojatchiReplyMessageView(LoginRequiredMixin, UpdateView):
+    model = Murojatchi
+    template_name = "panel/murojatchi/reply.html"
+    context_object_name = 'murojatchi'
+    form_class = MurojatchiReplyMessageForm
+    success_url = reverse_lazy("panel:murojatchi")
 
 
 class MurojatchiDeleteView(LoginRequiredMixin, DeleteView):
@@ -363,6 +360,14 @@ class KategoriyaDeleteView(LoginRequiredMixin, DeleteView):
 
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
+
+
+class FoydalanuvchiUpdateView(LoginRequiredMixin, UpdateView):
+    model = Murojatchi
+    template_name = "panel/foydalanuvchi/update.html"
+    context_object_name = 'murojatchi'
+    form_class = FoydalanuvchiForm
+    success_url = reverse_lazy("panel:foydalanuvchi")
 
 
 class QabulView(LoginRequiredMixin, ListView):

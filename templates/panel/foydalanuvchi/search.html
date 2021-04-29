@@ -59,7 +59,7 @@
 
                 <br><br>
                 <hr>
-              <p class="font-weight-bold">{% trans 'Barcha Foydalanuvchilar Soni:' %} {{ foydalanuvchi_list.count }}</p>
+              <p class="font-weight-bold" style="font-size: 1.1em;">{% trans 'Topilgan Foydalanuvchilar' %}</p>
 
                 <section id="table-transactions">
                     <div class="card">
@@ -82,14 +82,14 @@
                                     <tr>
                                         <td class="pr-2">{{ forloop.counter }}</td>
                                         <td class="pl-0">
-                                            <a href="{% url 'panel:murojatchi_update' murojatchi.id %}">{{ murojatchi.telegram_id|safe | truncatechars:"150" }}</a>
+                                            <a href="{% url 'panel:foydalanuvchi_detail' murojatchi.id %}">{{ murojatchi.telegram_id|safe | truncatechars:"150" }}</a>
                                         </td>
                                          <td class="text-left">{{ murojatchi.fullname }}</td>
                                         <td class="text-left">{{ murojatchi.username }}</td>
                                         <td class="text-left">{{ murojatchi.created | date:"d.m.Y" }}</td>
                                         <td class="text-left amallar">
-                                            <a class="mr-2" href="{% url 'panel:murojatchi_update' murojatchi.id %}"><i class="fa fa-eye" style="font-size: 19px;" aria-hidden="true"></i></a>
-                                            <a href="{% url 'panel:murojatchi_delete' murojatchi.id %}"><i class="fa fa-trash" style="font-size: 19px;" aria-hidden="true"></i></a>
+                                            <a class="mr-2" href="{% url 'panel:foydalanuvchi_detail' murojatchi.id %}"><i class="fa fa-eye" style="font-size: 19px;" aria-hidden="true"></i></a>
+                                            <a href="{% url 'panel:murojatchi_reply' murojatchi.id %}"><i class="fa fa-edit" style="font-size: 19px;" aria-hidden="true"></i></a>
 
                                         </td>
                                     </tr>

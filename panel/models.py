@@ -52,24 +52,29 @@ class Hudud(models.Model):
 
 class Murojatchi(models.Model):
     MUROJATCHI_STATUSI = (
-        ('yopiq', _('yopiq')),
-        ('ochiq', _('ochiq')),
+        ("ko'rib chiqilmagan", _("ko'rib chiqilmagan")),
+        ("ko'rib chiqilmoqda", _("ko'rib chiqilmoqda")),
+        ("ko'rib chiqildi", _("ko'rib chiqildi")),
+        ("rad etildi", _("rad etildi")),
+
     )
     id = models.AutoField(primary_key=True)
     telegram_id = models.PositiveBigIntegerField(_("Telegram ID"))
     fullname = models.CharField(_("Ism Sharifi"), max_length=256)
-    username = models.CharField(_("Username"),max_length=32)
+    username = models.CharField(_("Username"), max_length=32)
     hudud = models.ForeignKey(Hudud, on_delete=models.CASCADE, default=0)
     mahalla = models.ForeignKey(Mahalla, on_delete=models.CASCADE)
     muammo = models.ForeignKey(Muammo, on_delete=models.CASCADE)
     category = models.ForeignKey(SubMuammo, on_delete=models.CASCADE, null=True, blank=True, default=_('Boshqa'))
     media = models.FileField(_("Media"), upload_to='muammo_media/', blank=True, null=True)
     location = models.CharField(_("Manzil"), max_length=300, blank=True, null=True)
-    description = models.TextField(_("Qisqacha Ma'lumot"))
+    description = models.TextField(_("Murojat Matni"))
     phone = models.CharField(_("Telefon"), max_length=13)
+    reply_message = models.TextField(_("Javob Matni"), default=_("Javob berilmagan"))
     created = models.DateField(_("Murojat Sanasi"), auto_now_add=True)
     updated = models.DateField(_("O'zgartish Kiritilgan Sana"), auto_now_add=True)
-    status = models.CharField(_("Murojatchi Statusi"), max_length=32, choices=MUROJATCHI_STATUSI)
+    status = models.CharField(_("Murojatchi Statusi"), max_length=32, choices=MUROJATCHI_STATUSI,
+                              default=MUROJATCHI_STATUSI[0][0])
 
     def __str__(self):
         return self.fullname
@@ -77,3 +82,11 @@ class Murojatchi(models.Model):
     class Meta:
         verbose_name = _('Murojatchi')
         verbose_name_plural = _('Murojatchilar')
+
+# class ReplyMessage(models.Model):
+#     telegram_id = models.ForeignKey(Murojatchi, on_delete=models.CASCADE)
+#     message = models.TextField(_("Javob Matni"))
+#     updated = models.DateField(_("Oxirgi O'zgartirish Kiritilgan Sana"), auto_now=True)
+#
+#     def __str__(self):
+#         return str(self.telegram_id)

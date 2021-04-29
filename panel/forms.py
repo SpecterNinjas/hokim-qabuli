@@ -29,16 +29,31 @@ class KategoriyaForm(forms.ModelForm):
         }
 
 
-class MurojatchiForm(forms.ModelForm):
+class FoydalanuvchiForm(forms.ModelForm):
     class Meta:
         model = Murojatchi
-        fields = ("fullname", "mahalla", "muammo", "category", "media", "location", "description", "phone", "status")
-        widgets = {
-            'status': forms.Select(attrs={'class': 'form-control'}),
-            'category': forms.Select(attrs={'class': 'form-control'})
-        }
+        fields = ("telegram_id", "username", "fullname", "phone")
 
-    def __init__(self, *args, **kwargs):
-        super(MurojatchiForm, self).__init__(*args, **kwargs)
-        field = self.fields.get('status')
-        field.choices = field.choices[1:]
+
+# class MurojatchiForm(forms.ModelForm):
+#     class Meta:
+#         model = Murojatchi
+#         fields = (
+#         "fullname", "telegram_id", "hudud", "mahalla", "muammo", "category", "media", "location", "description",
+#         "phone",
+#         "reply_message", "status")
+#         widgets = {
+#             'status': forms.Select(attrs={'class': 'form-control'}),
+#             'category': forms.Select(attrs={'class': 'form-control'})
+#         }
+#
+#     def __init__(self, *args, **kwargs):
+#         super(MurojatchiForm, self).__init__(*args, **kwargs)
+#         field = self.fields.get('status')
+#         field.choices = field.choices[1:]
+
+
+class MurojatchiReplyMessageForm(forms.ModelForm):
+    class Meta:
+        model = Murojatchi
+        fields = ("reply_message",)

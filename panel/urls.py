@@ -36,6 +36,7 @@ urlpatterns = [
     path("foydalanuvchi/", FoydalanuvchiView.as_view(), name="foydalanuvchi"),
     path("foydalanuvchi/search/", FoydalanuvchiSearchView.as_view(), name="foydalanuvchi_search"),
     path("foydalanuvchi/detail/<int:pk>", FoydalanuvchiDetailView.as_view(), name="foydalanuvchi_detail"),
+    path("foydalanuvchi/update/<int:pk>", FoydalanuvchiUpdateView.as_view(), name="foydalanuvchi_update"),
 
 
 
@@ -52,8 +53,11 @@ urlpatterns = [
     path("murojatchi/", MurojatchiView.as_view(), name="murojatchi"),
     path("murojatchi/search/", MurojatchiSearchView.as_view(), name="murojatchi_search"),
     path("murojatchi/see/<int:pk>", MurojatchiDetailView.as_view(), name="murojatchi_detail"),
-    path("murojatchi/<int:pk>/", MurojatchiUpdateView.as_view(), name="murojatchi_update"),
+    path("murojatchi/<int:pk>/", MurojatchiReplyMessageView.as_view(), name="murojatchi_reply"),
     path("murojatchi_uchirish/<int:pk>/", MurojatchiDeleteView.as_view(), name="murojatchi_delete"),
+
+
+
 
     path("murojatchi_filter/", murojatchi_filter, name="murojatchi_filter"),
     # QABUL
