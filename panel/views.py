@@ -240,6 +240,9 @@ class MurojatchiSearchView(LoginRequiredMixin, ListView):
         if self.request.GET.get('mahalla') != '':
             mahalla = self.request.GET.get('mahalla')
             queryset &= self.model.objects.filter(mahalla_id=mahalla)
+        if self.request.GET.get('murojat_turi') != '':
+            murojat_turi = self.request.GET.get('murojat_turi')
+            queryset &= self.model.objects.filter(murojat_turi=murojat_turi)
         if self.request.GET.get('hudud') != '':
             hudud = self.request.GET.get('hudud')
             queryset &= self.model.objects.filter(hudud_id=hudud)
@@ -264,7 +267,6 @@ class FoydalanuvchiDetailView(DetailView):
     context_object_name = 'murojatchi'
     queryset = Murojatchi.objects.all()
     template_name = 'panel/foydalanuvchi/see.html'
-
 
     def get_context_data(self, **kwargs):
         context = super(FoydalanuvchiDetailView, self).get_context_data(**kwargs)
@@ -292,22 +294,21 @@ class FoydalanuvchiSearchView(LoginRequiredMixin, ListView):
         return queryset
 
 
-class MurojatchiUpdateView(LoginRequiredMixin, UpdateView):
+# class MurojatchiUpdateView(LoginRequiredMixin, UpdateView):
+#     model = Murojatchi
+#     template_name = "panel/murojatchi/update.html"
+#     context_object_name = 'murojatchi'
+#     form_class = MurojatchiForm
+#     success_url = reverse_lazy("panel:murojatchi")
+
+
+class MurojatchiReplyMessageView(LoginRequiredMixin, UpdateView):
     model = Murojatchi
-    template_name = "panel/murojatchi/update.html"
+    template_name = "panel/murojatchi/reply.html"
     context_object_name = 'murojatchi'
-    form_class = MurojatchiForm
+    form_class = MurojatchiReplyMessageForm
     success_url = reverse_lazy("panel:murojatchi")
 
-    def get_context_data(self, **kwargs):
-        mahallalar = Mahalla.objects.all()
-        muammolar = Muammo.objects.all()
-        kategoriyalar = SubMuammo.objects.all()
-        context = super(MurojatchiUpdateView, self).get_context_data(**kwargs)
-        context['mahallalar'] = mahallalar
-        context['muammolar'] = muammolar
-        context['kategoriyalar'] = kategoriyalar
-        return context
 
 
 class MurojatchiDeleteView(LoginRequiredMixin, DeleteView):
@@ -363,6 +364,14 @@ class KategoriyaDeleteView(LoginRequiredMixin, DeleteView):
 
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
+
+
+class FoydalanuvchiUpdateView(LoginRequiredMixin, UpdateView):
+    model = Murojatchi
+    template_name = "panel/foydalanuvchi/update.html"
+    context_object_name = 'murojatchi'
+    form_class = FoydalanuvchiForm
+    success_url = reverse_lazy("panel:foydalanuvchi")
 
 
 class QabulView(LoginRequiredMixin, ListView):

@@ -1,0 +1,199 @@
+{% extends 'panel/layout/layout.html' %}
+{% load static i18n %}
+
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/vendors/css/vue-ctk-date-time-picker.css' %}">
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/vendors/css/vue2-editor.css' %}">
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/vendors/css/katex.min.css' %}">
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/vendors/css/monokai-sublime.min.css' %}">
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/css/quill.snow.css' %}"/>
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/css/quill.imageUploader.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/css/main-editor.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'panel/back/app-assets/vendors/css/ui/prism.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'panel/back/app-assets/vendors/css/file-uploaders/dropzone.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'panel/back/app-assets/css/plugins/file-uploaders/dropzone.min.css' %}">
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/vendors/css/filepond.min.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'panel/back/app-assets/vendors/css/filepond-plugin-image-preview.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'panel/back/app-assets/vendors/css/forms/select/select2.min.css' %}">
+
+
+{% endblock %}
+
+
+{% block body %}
+    {#    {% if user|has_role:"admin_temp" %}#}
+    {% include 'panel/inc/sidebar.html' %}
+    {#    {% endif %}#}
+    <!-- BEGIN: Content-->
+
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="content-wrapper">
+            <h1 class="text-center mb-3">{{ murojatchi.fullname }} #{{ murojatchi.id }}</h1>
+            <div class="content-body">
+                <!-- app invoice View Page -->
+
+                <section class="invoice-edit-wrapper">
+                    <div class="row">
+                        <!-- invoice view page -->
+                        <div class="col-xl-12 col-md-12 col-12">
+                            {#                                <ul class="nav nav-pills">#}
+                            {#                                    <li class="nav-item">#}
+                            {#                                        <a class="nav-link active" id="uzbek-tab" data-toggle="pill" href="#uzbek"#}
+                            {#                                           aria-expanded="true"><i class="flag-icon flag-icon-uz mr-50"></i>#}
+                            {#                                            O‘zbekcha</a>#}
+                            {#                                    </li>#}
+                            {#                                    <li class="nav-item">#}
+                            {#                                        <a class="nav-link" id="russian-tab" data-toggle="pill" href="#russian"#}
+                            {#                                           aria-expanded="false"><i class="flag-icon flag-icon-ru mr-50"></i> Русский#}
+                            {#                                        </a>#}
+                            {#                                    </li>#}
+                            {#                                    <li class="nav-item">#}
+                            {#                                        <a class="nav-link" id="english-tab" data-toggle="pill" href="#english"#}
+                            {#                                           aria-expanded="false"><i class="flag-icon flag-icon-gb mr-50"></i> English#}
+                            {#                                        </a>#}
+                            {#                                    </li>#}
+                            {#                                </ul>#}
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+
+                                    <div class="card box-shadow-2">
+                                        <form method="POST" action="{% url 'panel:murojatchi_reply' murojatchi.id %}">
+                                            {% csrf_token %}
+                                            <table class="table table-striped table-bordered">
+                                                <tr>
+                                                    <th class="font-weight-bold">№</th>
+
+                                                    <td>{{ murojatchi.id }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="font-weight-bold">Telegram ID</th>
+
+                                                    <td>{{ murojatchi.telegram_id }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="font-weight-bold">F.I.SH</th>
+
+                                                    <td>{{ murojatchi.fullname }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="font-weight-bold">Hudud</th>
+                                                    <td>{{ murojatchi.hudud.title }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="font-weight-bold">Mahalla</th>
+                                                    <td>{{ murojatchi.mahalla.title }}</td>
+                                                </tr>
+                                                    <tr>
+                                                        <th class="font-weight-bold">Murojat Turi</th>
+                                                        <td>{{ murojatchi.murojat_turi}}</td>
+                                                    </tr>
+                                                <tr>
+                                                    <th class="font-weight-bold">Muammo</th>
+                                                    <td>{{ murojatchi.muammo.title }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="font-weight-bold">Kategoriya</th>
+                                                    <td>{{ murojatchi.category.category }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="font-weight-bold">Media</th>
+                                                    <td>{% if murojatchi.media %}
+                                                        <a href="{{ murojatchi.media.url }}">{{ murojatchi.media.url }}</a>{% else %}
+                                                        Muammoga aloqador <u>media</u> mavjud emas.{% endif %}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="font-weight-bold">Manzil</th>
+                                                    <td>{% if murojatchi.location %}
+                                                        {{ murojatchi.location }}{% else %}Muammoga aloqador
+                                                        <u>manzil</u> mavjud emas.{% endif %}</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th class="font-weight-bold">Ma'lumot</th>
+                                                    <td>{% if murojatchi.description %}
+                                                        {{ murojatchi.description }}{% else %}Muammoga aloqador
+                                                        <u>ma'lumot</u> mavjud emas.{% endif %}</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="font-weight-bold">Status</th>
+                                                    <td class="text-lowercase">
+                                                        {{ murojatchi.status.title }}
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th class="font-weight-bold">Javob Matni</th>
+                                                    <td>
+                                                        {{ murojatchi.reply_message }}
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th class="font-weight-bold">Sana</th>
+                                                    <td>{{ murojatchi.created | date:"d.m.Y" }}</td>
+                                                </tr>
+
+
+                                            </table>
+                                            <div style="width: 175px;">
+                                                <label for="id_status"><span class="text-capitalize font-weight-bold pl-2 text-dark" style="font-size: 1.2em;"><strong>Statusni tanlang</strong></span></label>
+                                                {{ form.status }}
+                                            </div>
+                                            <label for="reply_message"
+                                                   class="text-capitalize font-weight-bold pl-2 text-dark"
+                                                   style="font-size: 1em;"><strong>Javob Matni</strong></label><textarea
+                                                name="reply_message" class="form-control mx-3"
+                                                id="reply_message" style="position: relative;width: 900px;" required
+                                                rows="7"
+                                                placeholder="Javob xatini kiriting."></textarea>
+
+                                            <button type="submit" class="btn btn-outline-info my-1 ml-3">Yuborish
+                                            </button>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </section>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+{% endblock %}
+
+
+{% block js %}
+    <script src="{% static 'panel/back/app-assets/vendors/js/filepond-plugin-image-preview.js' %}"></script>
+    <script src="{% static 'panel/back/app-assets/vendors/js/filepond.js' %}"></script>
+    <script src="{% static 'panel/back/app-assets/js/vue.js' %}"></script>
+    <script src="{% static 'panel/back/app-assets/vendors/js/vue-ctk-date-time-picker.umd.js' %}"></script>
+    <script src="{% static 'panel/back/app-assets/vendors/js/katex.min.js' %}"></script>
+    <script src="{% static 'panel/back/app-assets/vendors/js/highlight.min.js' %}"></script>
+    <script src="{% static 'panel/back/app-assets/vendors/js/quill.imageUploader.min.js' %}"></script>
+    <script src="{% static 'panel/back/app-assets/vendors/js/vue-filepond.min.js' %}"></script>
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{% static 'panel/back/app-assets/vendors/js/forms/select/select2.full.min.js' %}"></script>
+    <!-- END: Page Vendor JS-->
+    <script src="{% static 'panel/back/app-assets/js/scripts/forms/select/form-select2.min.js' %}"></script>
+{% endblock %}

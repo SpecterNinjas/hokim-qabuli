@@ -70,11 +70,12 @@
             <div class="content-body">
                 <!-- table Transactions start -->
                 <h3>Qidiruv</h3>
-                <section id="table-transactions">
-                    <div class="card">
-                        <!-- datatable start -->
-                        <form method="get" action="{% url 'panel:murojatchi_search' %}" autocomplete="off">
-                            {% csrf_token %}
+                <form method="get" action="{% url 'panel:murojatchi_search' %}" autocomplete="off">
+                    {% csrf_token %}
+                    <section id="table-transactions">
+                        <div class="card">
+                            <!-- datatable start -->
+
                             <div class="table-responsive">
                                 <table id="table-extended-transactions" class="table mb-0">
                                     <thead>
@@ -83,10 +84,11 @@
                                         <th class="pl-1">{% trans 'Murojatchi' %}</th>
                                         <th class="pl-0">{% trans 'Hudud' %}</th>
                                         <th class="pl-0">{% trans 'Mahalla' %}</th>
+                                        <th class="pl-0">{% trans 'Murojat Turi' %}</th>
                                         <th class="pl-0">{% trans 'Muammo' %}</th>
                                         <th class="pl-0">{% trans 'Telefon' %}</th>
                                         <th class="pl-0">{% trans 'Status' %}</th>
-                                        <th class="pr-0"></th>
+
 
                                     </tr>
                                     </thead>
@@ -117,6 +119,15 @@
                                             </select>
 
                                         </td>
+                                        <td class="text-left">
+                                            <select name="murojat_turi" class="form-control"
+                                                    style="margin-left: -33px;width: 100px;">
+                                                <option selected value="">{% trans 'Tanlang' %}</option>
+                                                <option value="Taklif">{% trans "Taklif" %}</option>
+                                                <option value="Murojat">{% trans "Murojat" %}</option>
+                                                <option value="Qabul">{% trans "Qabul" %}</option>
+                                            </select>
+                                        </td>
 
                                         <td class="text-left">
                                             <select name="muammo" class="form-control" style="margin-left: -33px;">
@@ -135,14 +146,11 @@
                                             <select name="status" class="form-control"
                                                     style="margin-left: -33px;width: 100px;">
                                                 <option selected value="">{% trans 'Tanlang' %}</option>
-                                                <option value="ochiq">{% trans 'ochiq' %}</option>
-                                                <option value="yopiq">{% trans 'yopiq' %}</option>
-
+                                                <option value="ko'rib chiqilmagan">{% trans "Ko'rib Chiqilmagan" %}</option>
+                                                <option value="ko'rib chiqilmoqda">{% trans "Ko'rib Chiqilmoqda" %}</option>
+                                                <option value="ko'rib chiqildi">{% trans "Ko'rib Chiqildi" %}</option>
+                                                <option value="rad etildi">{% trans "Rad Etildi" %}</option>
                                             </select>
-                                        </td>
-                                        <td class="text-right">
-                                            <button class="btn btn-outline-info"
-                                                    type="submit">{% trans 'Qidirish' %}</button>
                                         </td>
 
 
@@ -150,11 +158,18 @@
 
                                     </tbody>
                                 </table>
+
                             </div>
-                        </form>
-                        <!-- datatable ends -->
+
+
+                            <!-- datatable ends -->
+                        </div>
+                    </section>
+                    <div class="text-right">
+                        <button class="btn btn-outline-info"
+                                type="submit">{% trans 'Qidirish' %}</button>
                     </div>
-                </section>
+                </form>
                 <hr>
 
                 <section id="table-transactions">
@@ -168,8 +183,9 @@
                                     <th class="pl-0">{% trans 'Murojatchi' %}</th>
                                     <th class="pl-2">{% trans 'Hudud' %}</th>
                                     <th class="pl-2">{% trans 'Mahalla' %}</th>
+
                                     <th class="pl-2">{% trans 'Muammo' %}</th>
-                                    <th class="pl-2">{% trans 'Murojat Vaqti' %}</th>
+                                    <th class="pl-2">{% trans 'Sana' %}</th>
                                     <th class="pl-2">{% trans 'Status' %}</th>
                                     <th class="pl-2">{% trans 'Amallar' %}</th>
 
@@ -180,7 +196,7 @@
                                     <tr>
                                         <td class="pr-2">{{ forloop.counter }}</td>
                                         <td class="pl-0">
-                                            <a href="{% url 'panel:murojatchi_update' murojatchi.id %}">{{ murojatchi.fullname|safe | truncatechars:"150" }}</a>
+                                            <a href="{% url 'panel:murojatchi_reply' murojatchi.id %}">{{ murojatchi.fullname|safe | truncatechars:"150" }}</a>
                                         </td>
                                         <td class="text-left">{{ murojatchi.hudud }}</td>
                                         <td class="text-left">{{ murojatchi.mahalla }}</td>
@@ -194,8 +210,11 @@
                                             <a class="mr-1" href="{% url 'panel:murojatchi_detail' murojatchi.id %}"><i
                                                     class="fa fa-eye" style="font-size: 19px;"
                                                     aria-hidden="true"></i></a>
-                                            <a href="{% url 'panel:murojatchi_update' murojatchi.id %}"><i
+                                            <a href="{% url 'panel:murojatchi_reply' murojatchi.id %}"><i
                                                     class="fa fa-edit" style="font-size: 19px;" aria-hidden="true"></i></a>
+
+                                            {#                                            <a href="{% url 'panel:murojatchi_update' murojatchi.id %}"><i#}
+                                            {#                                                    class="fa fa-edit" style="font-size: 19px;" aria-hidden="true"></i></a>#}
 
                                             {#                                              <div class="dropdown">#}
                                             {#                                                <span class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer"#}
@@ -236,7 +255,9 @@
                             </li>
                         {% endif %} {% for i in paginator.page_range %} {% if page_obj.number == i %}
 
-                        <li class="page-item"><a class="page-link" style="background-color: rgb(51,122,183);color: white;">{{ i }}</a></li>
+                        <li class="page-item"><a class="page-link"
+                                                 style="background-color: rgb(51,122,183);color: white;">{{ i }}</a>
+                        </li>
                     {% else %}
                         <li class="page-item">
                             <a class="page-link" href="?page={{ i }}">{{ i }}</a>

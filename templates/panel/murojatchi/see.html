@@ -88,7 +88,7 @@
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link text-white" style="background-color: rgb(0,166,90)" id="profile-tab"
-                                                   href="{% url 'panel:murojatchi_update' murojatchi.id %}" role="tab" aria-controls="profile"
+                                                   href="{% url 'panel:murojatchi_reply' murojatchi.id %}" role="tab" aria-controls="profile"
                                                    aria-selected="false">Tahrirlash</a>
                                             </li>
                                             <li class="nav-item">
@@ -115,6 +115,10 @@
                                                         <th class="font-weight-bold">Mahalla</th>
                                                         <td>{{ murojatchi.mahalla.title }}</td>
                                                     </tr>
+                                                 <tr>
+                                                        <th class="font-weight-bold">Murojat Turi</th>
+                                                        <td>{{ murojatchi.murojat_turi}}</td>
+                                                    </tr>
                                                     <tr>
                                                         <th class="font-weight-bold">Muammo</th>
                                                         <td>{{ murojatchi.muammo.title }}</td>
@@ -137,18 +141,23 @@
 
                                                     </tr>
                                                     <tr>
-                                                        <th class="font-weight-bold">Ma'lumot</th>
+                                                        <th class="font-weight-bold">Murojat Matni</th>
                                                         <td>{% if murojatchi.description %}
                                                             {{ murojatchi.description }}{% else %}Muammoga aloqador
-                                                            <u>ma'lumot</u> mavjud emas.{% endif %}</td>
+                                                            <u>murojat matni</u> mavjud emas.{% endif %}</td>
 
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="font-weight-bold">Javob Matni</th>
+                                                        <td>
+                                                            {{ murojatchi.reply_message }}
+                                                        </td>
                                                     </tr>
 
                                                     <tr>
                                                         <th class="font-weight-bold">Status</th>
-                                                        <td>{% if murojatchi.status.title == 'Ochiq' %}
-                                                            <span class="text-danger font-weight-bold">{{ murojatchi.status.title }}</span>{% else %}
-                                                            <span class="text-dark font-weight-bold">{{ murojatchi.status.title }}</span> {% endif %}
+                                                        <td>
+                                                          <span class="text-lowercase"> {{ murojatchi.status.title }}</span>
                                                         </td>
 
                                                     </tr>

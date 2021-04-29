@@ -68,47 +68,53 @@
             </div>
             <div class="content-body">
                 <!-- table Transactions start -->
-            <h3>Qidiruv</h3>
-             <section id="table-transactions">
+                <h3>Qidiruv</h3>
+                <section id="table-transactions">
                     <div class="card">
                         <!-- datatable start -->
                         <form method="get" action="{% url 'panel:foydalanuvchi_search' %}" autocomplete="off">
                             {% csrf_token %}
-                        <div class="table-responsive">
-                            <table id="table-extended-transactions" class="table mb-0">
-                                <thead>
-                                <tr>
+                            <div class="table-responsive">
+                                <table id="table-extended-transactions" class="table mb-0">
+                                    <thead>
+                                    <tr>
 
-                                    <th class="pl-1">{% trans 'telegram ID' %}</th>
-                                    <th class="pl-0">{% trans 'Foydalanuvchi' %}</th>
-                                    <th class="pl-0">{% trans 'Username' %}</th>
+                                        <th class="pl-1">{% trans 'telegram ID' %}</th>
+                                        <th class="pl-0">{% trans 'Foydalanuvchi' %}</th>
+                                        <th class="pl-0">{% trans 'Username' %}</th>
 
-                                    <th class="pr-0"></th>
+                                        <th class="pr-0"></th>
 
-                                </tr>
-                                </thead>
-                                <tbody>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
 
                                     <tr>
 
                                         <td class="pl-1">
-                                            <input type="number" name="telegram_id" style="width: 150px;" class="form-control" placeholder="ID">
+                                            <input type="number" name="telegram_id" style="width: 150px;"
+                                                   class="form-control" placeholder="ID">
                                         </td>
                                         <td class="pl-0">
-                                            <input type="text" name="fullname" style="width: 150px;" class="form-control" placeholder="Foydalanuvchi">
+                                            <input type="text" name="fullname" style="width: 150px;"
+                                                   class="form-control" placeholder="Foydalanuvchi">
                                         </td>
 
                                         <td class="text-left">
-                                             <input type="text" name="username" style="width: 150px;margin-left: -35px;" class="form-control" placeholder="Username">
+                                            <input type="text" name="username" style="width: 150px;margin-left: -35px;"
+                                                   class="form-control" placeholder="Username">
                                         </td>
 
-                                        <td class="text-right"><button class="btn btn-outline-info" type="submit">{% trans 'Qidirish' %}</button></td>
+                                        <td class="text-right">
+                                            <button class="btn btn-outline-info"
+                                                    type="submit">{% trans 'Qidirish' %}</button>
+                                        </td>
                                     </tr>
 
-                                </tbody>
-                            </table>
-                        </div>
-                            </form>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
                         <!-- datatable ends -->
                     </div>
                 </section>
@@ -135,15 +141,18 @@
                                     <tr>
                                         <td class="pr-2">{{ forloop.counter }}</td>
                                         <td class="pl-0">
-                                            <a href="{% url 'panel:murojatchi_update' murojatchi.id %}">{{ murojatchi.telegram_id|safe | truncatechars:"150" }}</a>
+                                            <a href="{% url 'panel:foydalanuvchi_detail' murojatchi.id %}">{{ murojatchi.telegram_id|safe | truncatechars:"150" }}</a>
                                         </td>
-                                         <td class="text-left">{{ murojatchi.fullname }}</td>
+                                        <td class="text-left">{{ murojatchi.fullname }}</td>
                                         <td class="text-left">{{ murojatchi.username }}</td>
                                         <td class="text-left">{{ murojatchi.created | date:"d.m.Y" }}</td>
                                         <td class="text-left amallar">
 
-                                             <a class="mr-1"  href="{% url 'panel:foydalanuvchi_detail' murojatchi.id %}"><i class="fa fa-eye" style="font-size: 19px;" aria-hidden="true"></i></a>
-                                            <a  href="{% url 'panel:murojatchi_delete' murojatchi.id %}"><i class="fa fa-edit" style="font-size: 19px;" aria-hidden="true"></i></a>
+                                            <a class="mr-1" href="{% url 'panel:foydalanuvchi_detail' murojatchi.id %}"><i
+                                                    class="fa fa-eye" style="font-size: 19px;"
+                                                    aria-hidden="true"></i></a>
+                                            <a href="{% url 'panel:foydalanuvchi_update' murojatchi.id %}"><i
+                                                    class="fa fa-edit" style="font-size: 19px;" aria-hidden="true"></i></a>
 
                                         </td>
                                     </tr>
@@ -156,7 +165,7 @@
                     </div>
 
                 </section>
-                   {% if is_paginated %}
+                {% if is_paginated %}
                     <ul class="pagination">
                         {% if page_obj.has_previous %}
                             <li class="page-item">
@@ -168,7 +177,9 @@
                             </li>
                         {% endif %} {% for i in paginator.page_range %} {% if page_obj.number == i %}
 
-                        <li class="page-item"><a class="page-link" style="background-color: rgb(51,122,183);color: white;">{{ i }}</a></li>
+                        <li class="page-item"><a class="page-link"
+                                                 style="background-color: rgb(51,122,183);color: white;">{{ i }}</a>
+                        </li>
                     {% else %}
                         <li class="page-item">
                             <a class="page-link" href="?page={{ i }}">{{ i }}</a>

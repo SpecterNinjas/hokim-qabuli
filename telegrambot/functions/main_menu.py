@@ -30,7 +30,6 @@ def main_menu(bot: Bot, update: Update):
         'ru': "Нет данных",
     }
 
-
     first_name_sign = '✅️ ' if request['first_name'] else '❗️'
     first_name = request['first_name'] if request['first_name'] else no_data[user.lang]
 

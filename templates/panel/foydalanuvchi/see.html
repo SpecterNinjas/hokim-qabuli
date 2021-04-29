@@ -134,8 +134,10 @@
                                                             <select name="status" class="form-control"
                                                                     style="margin-left: -33px;width: 100px;">
                                                                 <option selected value="">{% trans 'Tanlang' %}</option>
-                                                                <option value="ochiq">{% trans 'ochiq' %}</option>
-                                                                <option value="yopiq">{% trans 'yopiq' %}</option>
+                                                                <option value="ko'rib chiqilmagan">{% trans "Ko'rib Chiqilmagan" %}</option>
+                                                                <option value="ko'rib chiqilmoqda">{% trans "Ko'rib Chiqilmoqda" %}</option>
+                                                                <option value="ko'rib chiqildi">{% trans "Ko'rib Chiqildi" %}</option>
+                                                                <option value="rad etildi">{% trans "Rad Etildi" %}</option>
                                                             </select>
                                                         </td>
 
@@ -143,33 +145,33 @@
 
                                                     {% for murojat in murojatlar %}
                                                         {% if murojat.id == murojatchi.id %}
-                                                        <tr>
+                                                            <tr>
 
-                                                            <td class="pl-2 pr-0">
-                                                                {{ forloop.counter }}. {{ murojat.fullname }}
-                                                            </td>
-                                                            <td class="pl-0 text-left">
-                                                                {{ murojat.hudud.title }}
-                                                            </td>
+                                                                <td class="pl-2 pr-0">
+                                                                    {{ murojat.fullname }}
+                                                                </td>
+                                                                <td class="pl-0 text-left">
+                                                                    {{ murojat.hudud.title }}
+                                                                </td>
 
-                                                            <td class="text-left">
-                                                               {{ murojat.mahalla.title }}
-                                                            </td>
+                                                                <td class="text-left">
+                                                                    {{ murojat.mahalla.title }}
+                                                                </td>
 
-                                                            <td class="text-left">
-                                                              <span class="pr-2">{{ murojat.status }}</span>
+                                                                <td class="text-left">
+                                                                    <span class="pr-2">{{ murojat.status }}</span>
 
-                                                                <a class="mr-1 ml-1" href="#"><i class="fa fa-eye"
-                                                                                            style="font-size: 19px;"
-                                                                                            aria-hidden="true"></i></a>
-                                                                <a href="#"><i class="fa fa-edit"
-                                                                               style="font-size: 19px;"
-                                                                               aria-hidden="true"></i></a>
+                                                                    <a class="mr-1 ml-1" href="#"><i class="fa fa-eye"
+                                                                                                     style="font-size: 19px;"
+                                                                                                     aria-hidden="true"></i></a>
+                                                                    <a href="#"><i class="fa fa-edit"
+                                                                                   style="font-size: 19px;"
+                                                                                   aria-hidden="true"></i></a>
 
-                                                            </td>
+                                                                </td>
 
 
-                                                        </tr>
+                                                            </tr>
                                                         {% endif %}
                                                     {% endfor %}
                                                     </tbody>
