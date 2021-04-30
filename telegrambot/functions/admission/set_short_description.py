@@ -12,13 +12,12 @@ def set_short_description(bot: Bot, update: Update):
 
     short_description = update.message.text
 
-    request = cache.get(f'request_{update.effective_chat.id}')
-
     save_data_to_cache(external_id=update.effective_chat.id, data=short_description, request_name='short_description')
 
     send_saved_message_text(user, bot, update)
 
+    request = cache.get(f'request_{update.effective_chat.id}')
     if request['request_type'] == 'appeal':
-        return admission.get_file(bot, update)
+        return admission.get_problem_address(bot, update)
     else:
         return admission.get_phone_number(bot, update)

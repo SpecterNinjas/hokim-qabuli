@@ -92,10 +92,10 @@ conv_handler = ConversationHandler(
             start_handler,
             MessageHandler(Filters.all, admission.set_problem_address)
         ],
-        states.GET_FILE: [
+        states.GET_MEDIA: [
             start_handler,
             main_handler,
-            MessageHandler(Filters.all, admission.set_file),
+            MessageHandler(Filters.photo, admission.set_media),
         ],
         states.GET_LOCATION: [
             start_handler,

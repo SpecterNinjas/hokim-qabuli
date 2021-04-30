@@ -20,7 +20,6 @@ def start(bot: Bot, update: Update):
             username=update.message.from_user.username,
         )
 
-
     if cache.get(f'request_{update.effective_chat.id}') is None:
         request = get_request_data()
         cache.set(f'request_{update.effective_chat.id}', request)
