@@ -1,18 +1,17 @@
-from django.apps import apps
 from django.core.cache import cache
 from telegram import Bot, Update
-
 from telegrambot import states, functions
 from telegrambot.apps import log_errors
 from telegrambot.functions import admission
 from telegrambot.models import Text
+from telegrambot.services import get_user_lang
 
 
 @log_errors
 def set_problem_type(bot: Bot, update: Update):
     print('set_problem_type')
-    user_model = apps.get_model('telegrambot', 'TelegramProfile')
-    user = user_model.objects.get(external_id=update.effective_chat.id)
+    
+    user = get_user_lang(update.effective_chat.id)
 
     callback_data = update.callback_query.data
     data = Text.objects.filter(text_id='GET_PROBLEM_TYPE').values()[0]

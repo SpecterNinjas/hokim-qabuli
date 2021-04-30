@@ -1,18 +1,17 @@
 import re
-
-from django.apps import apps
 from django.core.cache import cache
 from telegram import Bot, Update
 
 from telegrambot import states, functions
 from telegrambot.apps import log_errors
+from telegrambot.services import get_user_lang, saved_message_text
 
 
 @log_errors
 def set_first_name(bot: Bot, update: Update):
     print('set_first_name')
-    user_model = apps.get_model('telegrambot', 'TelegramProfile')
-    user = user_model.objects.get(external_id=update.effective_chat.id)
+
+    user = get_user_lang(update.effective_chat.id)
     name = update.message.text
 
     if re.search(r"[0-9]", name):
@@ -34,10 +33,7 @@ def set_first_name(bot: Bot, update: Update):
     request['telegram_id'] = update.effective_chat.id
     cache.set(f'request_{update.effective_chat.id}', request)
 
-    if user.lang == 'uz':
-        text = 'Saqlandi'
-    else:
-        text = 'Сохранено'
+    text = saved_message_text(user)
 
     bot.send_message(
         chat_id=update.effective_chat.id,

@@ -1,16 +1,15 @@
-from django.apps import apps
 from telegram import Bot, Update, InlineKeyboardMarkup
 
 from telegrambot import states
 from telegrambot.helpers import generate_inline_keyboard
 from telegrambot.models import Text
+from telegrambot.services import get_user_lang
 
 
 def get_problem_type(bot: Bot, update: Update):
     print('get_problem_type')
 
-    user_model = apps.get_model('telegrambot', 'TelegramProfile')
-    user = user_model.objects.get(external_id=update.effective_chat.id)
+    user = get_user_lang(update.effective_chat.id)
 
     data = Text.objects.filter(text_id='GET_PROBLEM_TYPE').values()[0]
     text = data[user.lang]

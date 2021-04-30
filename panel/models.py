@@ -3,9 +3,13 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class Mahalla(models.Model):
-    title = models.CharField(_("Mahalla nomi"), max_length=256)
-    location = models.CharField(_("Manzil"), max_length=256)
-    phone = models.CharField(_("Telefon"), max_length=13)
+    title = models.CharField(_("Mahalla nomi"), max_length=256, null=True)
+    region = models.CharField(verbose_name='Tuman', max_length=255, null=True)
+    title_uz = models.CharField(max_length=255, null=True)
+    title_ru = models.CharField(max_length=255, null=True)
+    token = models.CharField(max_length=1024, null=True)
+    location = models.CharField(_("Manzil"), max_length=256, null=True)
+    phone = models.CharField(_("Telefon"), max_length=13, null=True)
 
     def __str__(self):
         return self.title
@@ -64,36 +68,28 @@ class Murojatchi(models.Model):
         ("Qabul", _("Qabul")),
     )
 
-    id = models.BigAutoField(primary_key = True)
-    telegram_id = models.PositiveBigIntegerField(_("Telegram ID"))
-    fullname = models.CharField(_("Ism Sharifi"), max_length=256)
-    username = models.CharField(_("Username"), max_length=32)
-    hudud = models.ForeignKey(Hudud, on_delete=models.CASCADE, default=0)
-    mahalla = models.ForeignKey(Mahalla, on_delete=models.CASCADE)
-    murojat_turi = models.CharField(max_length=16, choices=MUROJAT_TURI,default=2)
-    muammo = models.ForeignKey(Muammo, on_delete=models.CASCADE)
-    category = models.ForeignKey(SubMuammo, on_delete=models.CASCADE)
+    id = models.BigAutoField(primary_key=True)
+    telegram_id = models.PositiveBigIntegerField(_("Telegram ID"), null=True)
+    fullname = models.CharField(_("Ism Sharifi"), max_length=256, null=True)
+    username = models.CharField(_("Username"), max_length=32, null=True)
+    hudud = models.ForeignKey(Hudud, on_delete=models.CASCADE, null=True)
+    mahalla = models.ForeignKey(Mahalla, on_delete=models.CASCADE, null=True)
+    murojat_turi = models.CharField(max_length=16, choices=MUROJAT_TURI, default=2, null=True)
+    muammo = models.ForeignKey(Muammo, on_delete=models.CASCADE, null=True)
+    category = models.ForeignKey(SubMuammo, on_delete=models.CASCADE, null=True)
     media = models.FileField(_("Media"), upload_to='muammo_media/', blank=True, null=True)
     location = models.CharField(_("Manzil"), max_length=300, blank=True, null=True)
-    description = models.TextField(_("Murojat Matni"))
-    phone = models.CharField(_("Telefon"), max_length=13)
-<<<<<<< HEAD
-    status = models.CharField(_("Murojatchi Statusi"), max_length=32, choices=MUROJATCHI_STATUSI)
-    created = models.DateField(_("Murojat Sanasi"), auto_now_add=True)
-    updated = models.DateField(_("O'zgartish Kiritilgan Sana"), auto_now_add=True)
-=======
-    reply_message = models.TextField(_("Javob Matni"), default=_("Javob berilmagan"))
-    created = models.DateField(_("Murojat Sanasi"), auto_now_add=True)
-    updated = models.DateField(_("O'zgartish Kiritilgan Sana"), auto_now_add=True)
+    description = models.TextField(_("Murojat Matni"), null=True)
+    phone = models.CharField(_("Telefon"), max_length=13, null=True)
+    reply_message = models.TextField(_("Javob Matni"), default=_("Javob berilmagan"), null=True)
+    created = models.DateField(_("Murojat Sanasi"), auto_now_add=True, null=True)
+    updated = models.DateField(_("O'zgartish Kiritilgan Sana"), auto_now_add=True, null=True)
     status = models.CharField(_("Murojatchi Statusi"), max_length=32, choices=MUROJATCHI_STATUSI,
-                              default=MUROJATCHI_STATUSI[0][0])
->>>>>>> c0fc57f40c3636c3b7a947b5dacf771e5cc5d105
+                              default=MUROJATCHI_STATUSI[0][0], null=True)
 
     def __str__(self):
-        return self.fullname
+        return f"{self.fullname}"
 
     class Meta:
         verbose_name = _('Murojatchi')
         verbose_name_plural = _('Murojatchilar')
-
-

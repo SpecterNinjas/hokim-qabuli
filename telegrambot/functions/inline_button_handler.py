@@ -9,18 +9,16 @@ def inline_button_handler(bot: Bot, update: Update):
 
     callback_data = update.callback_query.data
 
-    user_model = apps.get_model('telegrambot', 'TelegramProfile')
-    user = user_model.objects.get(external_id=update.effective_chat.id)
-
     if callback_data == 'ru_':
         functions.set_ru(bot, update)
 
     if callback_data == 'uz_':
         functions.set_uz(bot, update)
 
-    if callback_data == 'admission' or callback_data == 'appeal':
+    if callback_data == 'admission' or callback_data == 'appeal' or callback_data == 'offer':
         functions.main_menu(bot, update)
         return states.MAIN
+
     # ---ADMISSION MENU BUTTONS HANDLERS--- #
     if callback_data == 'first_name':
         admission.get_first_name(bot, update)
@@ -51,7 +49,7 @@ def inline_button_handler(bot: Bot, update: Update):
         return states.GET_FILE
 
     if callback_data == 'location':
-        admission.get_file(bot, update)
+        admission.get_location(bot, update)
         return states.GET_FILE
 
     if callback_data == 'phone_number':

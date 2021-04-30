@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'hokim_qabuli.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR,'db.sqlite3')
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
     }
 }
 
@@ -163,8 +163,6 @@ LOGIN_URL = 'panel:login'
 
 LOGOUT_REDIRECT_URL = 'panel:login'
 
-
-
 STATIC_URL = '/static/'
 
 # Default primary key field type
@@ -177,7 +175,5 @@ MEDIA_ROOT = MEDIA_DIR
 STATICFILES_DIRS = [STATIC_DIR, ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-
-
 TELEGRAM_TOKEN = '688249185:AAHYsn4bQcauJDmd7zUN-MWoaJZSnKQcZJI'
-HOST = 'https://56c556eec9bf.ngrok.io'
+HOST = 'https://3f003cb68395.ngrok.io'

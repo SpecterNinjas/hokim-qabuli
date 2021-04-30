@@ -17,10 +17,10 @@ def set_district(bot: Bot, update: Update):
     district = update.message.text
     print(district)
     if user.lang == 'ru':
-        districts = apps.get_model('telegrambot', 'District').objects.filter(token=bot.token).values_list('title_ru',
+        districts = apps.get_model('panel', 'Mahalla').objects.filter(token=bot.token).values_list('title_ru',
                                                                                                           flat=True)
     else:
-        districts = apps.get_model('telegrambot', 'District').objects.filter(token=bot.token).values_list('title_uz',
+        districts = apps.get_model('panel', 'Mahalla').objects.filter(token=bot.token).values_list('title_uz',
                                                                                                           flat=True)
     if district not in districts and district not in ["Ro'yxatda yo'q", "Нет в списке"]:
         if user.lang == 'ru':

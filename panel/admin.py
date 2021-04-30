@@ -5,7 +5,7 @@ from .models import *
 
 @admin.register(Mahalla)
 class MahallaAdmin(admin.ModelAdmin):
-    list_display = ['title', 'location', 'phone']
+    list_display = ['title', 'region', 'title_uz', 'title_ru', 'token', 'location', 'phone', ]
     search_fields = ['location', 'title']
 
 
@@ -29,22 +29,6 @@ class SubMuammoAdmin(admin.ModelAdmin):
 
 @admin.register(Murojatchi)
 class MurojatchiAdmin(admin.ModelAdmin):
-    list_display = ['telegram_id', 'username', 'fullname', 'hudud', 'mahalla', 'muammo', 'category', 'phone','reply_message', 'created',
-                    'status']
+    list_display = ['telegram_id', 'username', 'fullname', 'hudud', 'mahalla', 'muammo', 'category', 'phone',
+                    'description', 'reply_message', 'created', 'status']
     search_fields = ['fullname', ]
-
-
-# @admin.register(ReplyMessage)
-# class ReplyMessageAdmin(admin.ModelAdmin):
-#     list_display = ['telegram_id', 'updated']
-#     search_fields = ['telegram_id', ]
-
-
-
-    # def render_change_form(self, request, context, *args, **kwargs):
-    #
-    #     print("Before:",context['adminform'].form.fields['muammo'])
-    #     context['adminform'].form.fields['category'].queryset = SubMuammo.objects.filter(category__icontains='suv')
-    #
-    #     return super(MurojatchiAdmin, self).render_change_form(request, context, *args, **kwargs)
-

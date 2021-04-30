@@ -27,4 +27,4 @@ class AdmissionAdmin(admin.ModelAdmin):
 
 @admin.register(RegionBot)
 class RegionBotAdmin(admin.ModelAdmin):
-    list_display = ('title', 'region', 'token')
+    list_display = ('title', 'region', 'district', 'token')

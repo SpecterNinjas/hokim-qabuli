@@ -4,14 +4,14 @@ from telegram import Update, Bot
 from telegrambot.models import Text
 from telegrambot.apps import log_errors
 from telegrambot.functions import admission
+from telegrambot.services import get_user_lang
 
 
 @log_errors
 def set_communal_problem(bot: Bot, update: Update):
     print('set_communal_problem')
 
-    user_model = apps.get_model('telegrambot', 'TelegramProfile')
-    user = user_model.objects.get(external_id=update.effective_chat.id)
+    user = get_user_lang(update.effective_chat.id)
 
     data = Text.objects.filter(text_id='GET_COMMUNAL_PROBLEM').values()[0]
     callback_data = update.callback_query.data

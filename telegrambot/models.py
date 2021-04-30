@@ -57,8 +57,9 @@ class Admission(models.Model):
 
 
 class RegionBot(models.Model):
-    title = models.CharField(verbose_name='Bot nomi', max_length=255, null=True)
-    region = models.CharField(verbose_name='Tuman', max_length=255, null=True)
+    title = models.CharField(verbose_name='Bot nomi', max_length=1024, null=True)
+    region = models.CharField(verbose_name='Tuman', max_length=1024, null=True)
+    district = models.CharField(verbose_name='Mahalla', max_length=1024, null=True)
     token = models.CharField(max_length=1024, null=True)
 
     def save(self, *args, **kwargs):
