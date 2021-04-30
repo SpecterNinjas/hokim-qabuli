@@ -1,5 +1,4 @@
 import re
-from django.core.cache import cache
 from telegram import Bot, Update
 from telegrambot import states, functions
 from telegrambot.apps import log_errors

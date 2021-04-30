@@ -1,4 +1,6 @@
 from telegram import Bot, Update
+
+from telegrambot import states, functions
 from telegrambot.apps import log_errors
 from telegrambot.functions import admission
 from telegrambot.models import Text
@@ -20,7 +22,9 @@ def set_gender(bot: Bot, update: Update):
         for button in buttons:
             if callback_data == button.split('>')[1]:
                 gender = button.split('>')[0]
-
+    if callback_data == 'back_to_admission_menu':
+        functions.main_menu(bot, update)
+        return states.MAIN
     save_data_to_cache(external_id=update.effective_chat.id, data=gender, request_name='gender')
     send_saved_message_text(user, bot, update)
 

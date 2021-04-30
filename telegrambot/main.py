@@ -88,6 +88,10 @@ conv_handler = ConversationHandler(
             main_handler,
             MessageHandler(Filters.text, admission.set_short_description),
         ],
+        states.GET_PROBLEM_ADDRESS: [
+            start_handler,
+            MessageHandler(Filters.all, admission.set_problem_address)
+        ],
         states.GET_FILE: [
             start_handler,
             main_handler,
@@ -100,6 +104,7 @@ conv_handler = ConversationHandler(
         ],
         states.GET_PHONE_NUMBER: [
             start_handler,
+            MessageHandler(Filters.text, admission.set_phone_number),
             MessageHandler(Filters.contact, admission.set_phone_number),
         ],
     },

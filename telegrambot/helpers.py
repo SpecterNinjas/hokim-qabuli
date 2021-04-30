@@ -17,7 +17,8 @@ def get_request_data(
         problem_type=None,
         sub_problem=None,
         short_description=None,
-        file=None,
+        problem_address=None,
+        media=None,
         location=None,
         phone_number=None,
 ):
@@ -37,7 +38,8 @@ def get_request_data(
         'problem_type': problem_type,
         'sub_problem': sub_problem,
         'short_description': short_description,
-        'file': file,
+        'problem_address': problem_address,
+        'media': media,
         'location': location,
         'phone_number': phone_number,
     }

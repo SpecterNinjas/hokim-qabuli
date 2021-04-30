@@ -43,6 +43,9 @@ from .set_short_description import set_short_description
 from .get_file import get_file
 from .set_file import set_file
 
+from .get_problem_address import get_problem_address
+from .set_problem_address import set_problem_address
+
 from .get_location import get_location
 from .set_location import set_location
 

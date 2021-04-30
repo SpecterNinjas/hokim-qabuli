@@ -1,19 +1,17 @@
-from django.apps import apps
 from django.core.cache import cache
 from telegram import Bot, Update, InlineKeyboardMarkup, InlineKeyboardButton
-
 from telegrambot import states
 from telegrambot.apps import log_errors
 from telegrambot.helpers import get_request_data, generate_inline_keyboard, validate_admission_info
 from telegrambot.models import Text
+from telegrambot.services.services import get_user_lang
 
 
 @log_errors
 def main_menu(bot: Bot, update: Update):
     print('main_menu')
 
-    user_model = apps.get_model('telegrambot', 'TelegramProfile')
-    user = user_model.objects.get(external_id=update.effective_chat.id)
+    user = get_user_lang(update.effective_chat.id)
     try:
         if update.callback_query.data != 'back_to_admission_menu':
             request_type = update.callback_query.data
@@ -65,12 +63,12 @@ def main_menu(bot: Bot, update: Update):
     short_description_sign = '✅️ ' if request['short_description'] else '❗️'
     short_description = request['short_description'] if request['short_description'] else no_data[user.lang]
 
-    if request['request_type'] == 'appeal' or request['request_type'] == 'offer':
-        file_sign = '✅️ ' if request['file'] else '❗️'
-        file = request['file'] if request['file'] else no_data[user.lang]
+    if request['request_type'] == 'appeal':
+        problem_address_sign = '✅️ ' if request['problem_address'] else '❗️'
+        problem_address = request['problem_address'] if request['problem_address'] else no_data[user.lang]
 
-        location_sign = '✅️ ' if request['location'] else '❗️'
-        location = request['location'] if request['location'] else no_data[user.lang]
+        media_sign = '✅️ ' if request['media'] else '❗️'
+        media = request['media'] if request['media'] else no_data[user.lang]
 
     phone_number_sign = '✅️ ' if request['phone_number'] else '❗️'
     phone_number = request['phone_number'] if request['phone_number'] else no_data[user.lang]
@@ -80,7 +78,7 @@ def main_menu(bot: Bot, update: Update):
     else:
         data = Text.objects.filter(text_id='ADMISSION_MENU').values()[0]
 
-    if request['request_type'] == 'appeal' or request['request_type'] == 'offer':
+    if request['request_type'] == 'appeal':
         text = data[user.lang].format(
             first_name_sign=first_name_sign, first_name=first_name,
             middle_name_sign=middle_name_sign, middle_name=middle_name,
@@ -92,9 +90,9 @@ def main_menu(bot: Bot, update: Update):
             problem_type_sign=problem_type_sign, problem_type=problem_type,
             sub_problem_sign=sub_problem_sign, sub_problem=sub_problem,
             short_description_sign=short_description_sign, short_description=short_description,
-            file_sign=file_sign, file=file,
+            problem_address_sign=problem_address_sign, problem_address=problem_address,
 
-            location_sign=location_sign, location=location,
+            media_sign=media_sign, media=media,
             phone_number_sign=phone_number_sign, phone_number=phone_number,
         )
     else:
