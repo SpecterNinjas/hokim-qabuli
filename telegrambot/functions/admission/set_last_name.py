@@ -30,11 +30,6 @@ def set_last_name(bot: Bot, update: Update):
 
     save_data_to_cache(external_id=update.effective_chat.id, data=last_name, request_name='last_name')
 
-    text = saved_message_text(user)
-
-    bot.send_message(
-        chat_id=update.effective_chat.id,
-        text=text,
-    )
+    saved_message_text(user, bot, update)
 
     return functions.admission.get_middle_name(bot, update)

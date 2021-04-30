@@ -7,6 +7,12 @@ from .set_last_name import set_last_name
 from .get_middle_name import get_middle_name
 from .set_middle_name import set_middle_name
 
+from .get_gender import get_gender
+from .set_gender import set_gender
+
+from .get_date_of_birth import get_date_of_birth
+from .set_date_of_birth import set_date_of_birth
+
 from .get_district import get_district
 from .set_district import set_district
 

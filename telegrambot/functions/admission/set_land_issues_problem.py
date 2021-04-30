@@ -29,10 +29,6 @@ def set_land_issues_problem(bot: Bot, update: Update):
         return admission.get_problem_type(bot, update)
 
     save_data_to_cache(external_id=update.effective_chat.id, data=sub_problem, request_name='sub_problem')
-    text = saved_message_text(user)
+    saved_message_text(user, bot, update)
 
-    bot.send_message(
-        chat_id=update.effective_chat.id,
-        text=text,
-    )
     return admission.get_short_description(bot, update)

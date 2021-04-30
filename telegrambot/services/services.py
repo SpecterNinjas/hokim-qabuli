@@ -9,13 +9,16 @@ def get_user_lang(external_id):
     return user
 
 
-def saved_message_text(user: get_user_lang):
+def saved_message_text(user: get_user_lang, bot: Bot, update: Update):
     if user.lang == 'uz':
         text = 'Saqlandi'
     else:
         text = 'Сохранено'
 
-    return text
+    bot.send_message(
+        chat_id=update.effective_chat.id,
+        text=text,
+    )
 
 
 def save_data_to_cache(external_id, data, request_name):

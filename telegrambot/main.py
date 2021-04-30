@@ -40,6 +40,10 @@ conv_handler = ConversationHandler(
             MessageHandler(Filters.text, admission.set_middle_name),
             main_handler,
         ],
+        states.GET_GENDER: [
+            start_handler,
+            CallbackQueryHandler(admission.set_gender),
+        ],
         states.GET_DISTRICT: [
             start_handler,
             MessageHandler(Filters.regex("(Назад|Orqaga)"), functions.main_menu),

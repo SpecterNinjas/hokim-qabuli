@@ -13,14 +13,11 @@ def set_short_description(bot: Bot, update: Update):
     short_description = update.message.text
 
     request = cache.get(f'request_{update.effective_chat.id}')
+
     save_data_to_cache(external_id=update.effective_chat.id, data=short_description, request_name='short_description')
 
-    text = saved_message_text(user)
+    saved_message_text(user, bot, update)
 
-    bot.send_message(
-        chat_id=update.effective_chat.id,
-        text=text,
-    )
     if request['request_type'] == 'appeal':
         return admission.get_file(bot, update)
     else:

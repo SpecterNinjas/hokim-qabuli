@@ -45,6 +45,12 @@ def main_menu(bot: Bot, update: Update):
     middle_name_sign = '✅️ ' if request['middle_name'] else '❗️'
     middle_name = request['middle_name'] if request['middle_name'] else no_data[user.lang]
 
+    date_of_birth_sign = '✅️ ' if request['date_of_birth'] else '❗️'
+    date_of_birth = request['date_of_birth'] if request['date_of_birth'] else no_data[user.lang]
+
+    gender_sign = '✅️ ' if request['gender'] else '❗️'
+    gender = request['gender'] if request['gender'] else no_data[user.lang]
+
     district_sign = '✅️ ' if request['district'] else '❗️'
     district = request['district'] if request['district'] else no_data[user.lang]
 
@@ -77,12 +83,15 @@ def main_menu(bot: Bot, update: Update):
             first_name_sign=first_name_sign, first_name=first_name,
             middle_name_sign=middle_name_sign, middle_name=middle_name,
             last_name_sign=last_name_sign, last_name=last_name,
+            date_of_birth_sign=date_of_birth_sign, date_of_birth=date_of_birth,
+            gender_sign=gender_sign, gender=gender,
+
             district_sign=district_sign, district=district,
             problem_type_sign=problem_type_sign, problem_type=problem_type,
-
             sub_problem_sign=sub_problem_sign, sub_problem=sub_problem,
             short_description_sign=short_description_sign, short_description=short_description,
             file_sign=file_sign, file=file,
+
             location_sign=location_sign, location=location,
             phone_number_sign=phone_number_sign, phone_number=phone_number,
         )
@@ -91,15 +100,18 @@ def main_menu(bot: Bot, update: Update):
             first_name_sign=first_name_sign, first_name=first_name,
             middle_name_sign=middle_name_sign, middle_name=middle_name,
             last_name_sign=last_name_sign, last_name=last_name,
+            date_of_birth_sign=date_of_birth_sign, date_of_birth=date_of_birth,
+            gender_sign=gender_sign, gender=gender,
+
             district_sign=district_sign, district=district,
             problem_type_sign=problem_type_sign, problem_type=problem_type,
-
             sub_problem_sign=sub_problem_sign, sub_problem=sub_problem,
             short_description_sign=short_description_sign, short_description=short_description,
             phone_number_sign=phone_number_sign, phone_number=phone_number,
         )
 
     inline_keyboard = generate_inline_keyboard(data[f"buttons_{user.lang}"], update.effective_chat.id)
+
     if validate_admission_info(request):
         save_btn_text = "✉️Saqlash" if user.lang == 'uz' else '✉️Сохранить'
         back_btn_text = "⬅️️Orqaga" if user.lang == 'uz' else '⬅️ Назад'

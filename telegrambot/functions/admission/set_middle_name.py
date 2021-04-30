@@ -12,7 +12,6 @@ def set_middle_name(bot: Bot, update: Update):
     print('set_middle_name')
 
     user = get_user_lang(update.effective_chat.id)
-
     middle_name = update.message.text
 
     if re.search(r"[0-9]", middle_name):
@@ -30,11 +29,6 @@ def set_middle_name(bot: Bot, update: Update):
 
     save_data_to_cache(external_id=update.effective_chat.id, data=middle_name, request_name='middle_name')
 
-    text = saved_message_text(user)
-
-    bot.send_message(
-        chat_id=update.effective_chat.id,
-        text=text,
-    )
+    saved_message_text(user, bot, update)
 
     return functions.admission.get_district(bot, update)

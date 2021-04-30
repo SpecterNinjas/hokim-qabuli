@@ -15,7 +15,7 @@ def inline_button_handler(bot: Bot, update: Update):
     if callback_data == 'uz_':
         functions.set_uz(bot, update)
 
-    if callback_data == 'admission' or callback_data == 'appeal' or callback_data == 'offer':
+    if callback_data == 'admission' or callback_data == 'appeal':
         functions.main_menu(bot, update)
         return states.MAIN
 
@@ -31,6 +31,14 @@ def inline_button_handler(bot: Bot, update: Update):
     if callback_data == 'middle_name':
         admission.get_middle_name(bot, update)
         return states.GET_MIDDLE_NAME
+
+    if callback_data == 'date_of_birth':
+        admission.get_date_of_birth(bot, update)
+        return states.GET_DATE_OF_BIRTH
+
+    if callback_data == 'gender':
+        admission.get_gender(bot, update)
+        return states.GET_GENDER
 
     if callback_data == 'district':
         admission.get_district(bot, update)

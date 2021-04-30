@@ -27,11 +27,6 @@ def set_social_security_problem(bot: Bot, update: Update):
         return admission.get_problem_type(bot, update)
 
     save_data_to_cache(external_id=update.effective_chat.id, data=sub_problem, request_name='sub_problem')
+    saved_message_text(user, bot, update)
 
-    text = saved_message_text(user)
-
-    bot.send_message(
-        chat_id=update.effective_chat.id,
-        text=text,
-    )
     return admission.get_short_description(bot, update)
