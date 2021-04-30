@@ -1,7 +1,7 @@
 from django.core.cache import cache
-from telegram import Bot, Update, ReplyKeyboardRemove
+from telegram import Bot, Update
 from telegrambot.functions import admission
-from telegrambot.services import get_user_lang, saved_message_text
+from telegrambot.services import get_user_lang, send_saved_message_text
 from telegrambot.services.services import save_data_to_cache
 
 
@@ -16,7 +16,7 @@ def set_short_description(bot: Bot, update: Update):
 
     save_data_to_cache(external_id=update.effective_chat.id, data=short_description, request_name='short_description')
 
-    saved_message_text(user, bot, update)
+    send_saved_message_text(user, bot, update)
 
     if request['request_type'] == 'appeal':
         return admission.get_file(bot, update)

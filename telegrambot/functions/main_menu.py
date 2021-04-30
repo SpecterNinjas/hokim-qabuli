@@ -45,8 +45,10 @@ def main_menu(bot: Bot, update: Update):
     middle_name_sign = '✅️ ' if request['middle_name'] else '❗️'
     middle_name = request['middle_name'] if request['middle_name'] else no_data[user.lang]
 
-    date_of_birth_sign = '✅️ ' if request['date_of_birth'] else '❗️'
-    date_of_birth = request['date_of_birth'] if request['date_of_birth'] else no_data[user.lang]
+    date_of_birth_sign = '✅️ ' if request['year_of_birth'] and request['month_of_birth'] and request[
+        'day_of_birth'] else '❗️'
+    date_of_birth = request['year_of_birth'] and request['month_of_birth'] and request['day_of_birth'] if request[
+        'year_of_birth'] and request['month_of_birth'] and request['day_of_birth'] else no_data[user.lang]
 
     gender_sign = '✅️ ' if request['gender'] else '❗️'
     gender = request['gender'] if request['gender'] else no_data[user.lang]

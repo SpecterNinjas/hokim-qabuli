@@ -4,7 +4,7 @@ from telegram import Bot, Update
 
 from telegrambot import states, functions
 from telegrambot.apps import log_errors
-from telegrambot.services import get_user_lang, saved_message_text
+from telegrambot.services import get_user_lang, send_saved_message_text
 
 
 @log_errors
@@ -33,6 +33,6 @@ def set_first_name(bot: Bot, update: Update):
     request['telegram_id'] = update.effective_chat.id
     cache.set(f'request_{update.effective_chat.id}', request)
 
-    saved_message_text(user, bot, update)
+    send_saved_message_text(user, bot, update)
 
     return functions.admission.get_last_name(bot, update)

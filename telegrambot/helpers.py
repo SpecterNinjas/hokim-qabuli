@@ -7,14 +7,16 @@ def get_request_data(
         first_name=None,
         last_name=None,
         middle_name=None,
-        date_of_birth=None,
 
+        year_of_birth=None,
+        month_of_birth=None,
+        day_of_birth=None,
         gender=None,
         district=None,
+
         problem_type=None,
         sub_problem=None,
         short_description=None,
-
         file=None,
         location=None,
         phone_number=None,
@@ -25,14 +27,16 @@ def get_request_data(
         'first_name': first_name,
         'last_name': last_name,
         'middle_name': middle_name,
-        'date_of_birth': date_of_birth,
 
+        'year_of_birth': year_of_birth,
+        'month_of_birth': month_of_birth,
+        'day_of_birth': day_of_birth,
         'gender': gender,
         'district': district,
+
         'problem_type': problem_type,
         'sub_problem': sub_problem,
         'short_description': short_description,
-
         'file': file,
         'location': location,
         'phone_number': phone_number,
@@ -65,10 +69,13 @@ def validate_admission_info(request):
             request['first_name'] and
             request['last_name'] and
             request['middle_name'] and
+            request['year_of_birth'] and
+            request['month_of_birth'] and
+            request['day_of_birth'] and
+            request['gender'] and
 
             request['district'] and
             request['problem_type'] and
-
             request['sub_problem'] and
             request['short_description'] and
             request['phone_number']):

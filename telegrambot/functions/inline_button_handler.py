@@ -33,8 +33,8 @@ def inline_button_handler(bot: Bot, update: Update):
         return states.GET_MIDDLE_NAME
 
     if callback_data == 'date_of_birth':
-        admission.get_date_of_birth(bot, update)
-        return states.GET_DATE_OF_BIRTH
+        admission.get_birth_year(bot, update)
+        return states.GET_BIRTH_YEAR
 
     if callback_data == 'gender':
         admission.get_gender(bot, update)

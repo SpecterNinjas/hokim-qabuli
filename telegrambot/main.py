@@ -40,6 +40,23 @@ conv_handler = ConversationHandler(
             MessageHandler(Filters.text, admission.set_middle_name),
             main_handler,
         ],
+        states.GET_BIRTH_YEAR: [
+            start_handler,
+            MessageHandler(Filters.regex("(Назад|Orqaga)"), functions.main_menu),
+            MessageHandler(Filters.text, admission.set_birth_year),
+            main_handler,
+        ],
+        states.GET_BIRTH_MONTH: [
+            start_handler,
+            MessageHandler(Filters.regex("(Назад|Orqaga)"), functions.main_menu),
+            MessageHandler(Filters.text, admission.set_birth_month),
+            main_handler,
+        ],
+        states.GET_BIRTH_DAY: [
+            start_handler,
+            MessageHandler(Filters.text, admission.set_birth_day),
+            main_handler,
+        ],
         states.GET_GENDER: [
             start_handler,
             CallbackQueryHandler(admission.set_gender),

@@ -9,7 +9,7 @@ def get_user_lang(external_id):
     return user
 
 
-def saved_message_text(user: get_user_lang, bot: Bot, update: Update):
+def send_saved_message_text(user: get_user_lang, bot: Bot, update: Update):
     if user.lang == 'uz':
         text = 'Saqlandi'
     else:

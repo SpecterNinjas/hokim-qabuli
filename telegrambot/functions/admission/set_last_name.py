@@ -3,7 +3,7 @@ from django.core.cache import cache
 from telegram import Bot, Update
 from telegrambot import states, functions
 from telegrambot.apps import log_errors
-from telegrambot.services import get_user_lang, saved_message_text
+from telegrambot.services import get_user_lang, send_saved_message_text
 from telegrambot.services.services import save_data_to_cache
 
 
@@ -30,6 +30,6 @@ def set_last_name(bot: Bot, update: Update):
 
     save_data_to_cache(external_id=update.effective_chat.id, data=last_name, request_name='last_name')
 
-    saved_message_text(user, bot, update)
+    send_saved_message_text(user, bot, update)
 
     return functions.admission.get_middle_name(bot, update)
