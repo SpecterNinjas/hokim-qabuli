@@ -1,6 +1,4 @@
-from django.apps import apps
 from telegram import Bot, Update, InlineKeyboardMarkup
-
 from telegrambot import states
 from telegrambot.apps import log_errors
 from telegrambot.helpers import generate_inline_keyboard

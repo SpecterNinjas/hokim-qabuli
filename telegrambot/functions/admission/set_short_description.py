@@ -2,6 +2,7 @@ from django.core.cache import cache
 from telegram import Bot, Update, ReplyKeyboardRemove
 from telegrambot.functions import admission
 from telegrambot.services import get_user_lang, saved_message_text
+from telegrambot.services.services import save_data_to_cache
 
 
 def set_short_description(bot: Bot, update: Update):
@@ -12,8 +13,7 @@ def set_short_description(bot: Bot, update: Update):
     short_description = update.message.text
 
     request = cache.get(f'request_{update.effective_chat.id}')
-    request['short_description'] = short_description
-    cache.set(f'request_{update.effective_chat.id}', request)
+    save_data_to_cache(external_id=update.effective_chat.id, data=short_description, request_name='short_description')
 
     text = saved_message_text(user)
 

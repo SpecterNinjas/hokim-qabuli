@@ -4,6 +4,7 @@ from telegram import Bot, Update
 from telegrambot import states, functions
 from telegrambot.apps import log_errors
 from telegrambot.services import get_user_lang, saved_message_text
+from telegrambot.services.services import save_data_to_cache
 
 
 @log_errors
@@ -27,9 +28,7 @@ def set_middle_name(bot: Bot, update: Update):
         )
         return states.GET_MIDDLE_NAME
 
-    request = cache.get(f'request_{update.effective_chat.id}')
-    request['middle_name'] = middle_name
-    cache.set(f'request_{update.effective_chat.id}', request)
+    save_data_to_cache(external_id=update.effective_chat.id, data=middle_name, request_name='middle_name')
 
     text = saved_message_text(user)
 

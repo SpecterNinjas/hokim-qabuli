@@ -5,6 +5,7 @@ from telegrambot.apps import log_errors
 from telegrambot.functions import admission
 from telegrambot.models import Text
 from telegrambot.services import get_user_lang
+from telegrambot.services.services import save_data_to_cache
 
 
 @log_errors
@@ -31,10 +32,7 @@ def set_problem_type(bot: Bot, update: Update):
         functions.main_menu(bot, update)
         return states.MAIN
 
-    request = cache.get(f'request_{update.effective_chat.id}')
-    request['problem_type'] = problem_type
-    cache.set(f'request_{update.effective_chat.id}', request)
-
+    save_data_to_cache(external_id=update.effective_chat.id, data=problem_type, request_name='problem_type')
     if callback_data == 'Communal':
         admission.get_communal_problem(bot, update)
         return states.GET_COMMUNAL_PROBLEM

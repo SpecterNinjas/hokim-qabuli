@@ -1,4 +1,5 @@
 from django.apps import apps
+from django.core.cache import cache
 from telegram import Update, Bot
 
 
@@ -15,3 +16,9 @@ def saved_message_text(user: get_user_lang):
         text = 'Сохранено'
 
     return text
+
+
+def save_data_to_cache(external_id, data, request_name):
+    request = cache.get(f'request_{external_id}')
+    request[f'{request_name}'] = data
+    cache.set(f'request_{external_id}', request)

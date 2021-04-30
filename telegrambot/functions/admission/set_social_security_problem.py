@@ -4,6 +4,7 @@ from telegrambot.apps import log_errors
 from telegrambot.functions import admission
 from telegrambot.models import Text
 from telegrambot.services import get_user_lang, saved_message_text
+from telegrambot.services.services import save_data_to_cache
 
 
 @log_errors
@@ -25,9 +26,7 @@ def set_social_security_problem(bot: Bot, update: Update):
     if callback_data == 'back_to_problem_type':
         return admission.get_problem_type(bot, update)
 
-    request = cache.get(f'request_{update.effective_chat.id}')
-    request['sub_problem'] = sub_problem
-    cache.set(f'request_{update.effective_chat.id}', request)
+    save_data_to_cache(external_id=update.effective_chat.id, data=sub_problem, request_name='sub_problem')
 
     text = saved_message_text(user)
 
