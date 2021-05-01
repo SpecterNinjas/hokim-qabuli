@@ -3,10 +3,50 @@
       "model":"telegrambot.text",
       "pk":"ADMISSION_MENU",
       "fields":{
-         "buttons_uz":"Ism>first_name| Familita>last_name| Sharf>middle_name| Mahalla>district| Muammo turi>problem_type|Qisqacha mazmun>short_description|Telefon raqami>phone_number",
-         "buttons_ru":"Имя>first_name| Фамилия>last_name| Отчество>middle_name| Махаля>district| Тип проблемы>problem_type| Короткое описание>short_description|Номер телефона>phone_number",
-         "uz":"{first_name_sign}Ism: {first_name}\r\n{last_name_sign}Familita: {last_name}\r\n{middle_name_sign}Sharf: {middle_name}\r\n{district_sign}Mahalla: {district}\r\n{problem_type_sign}Muammo: {problem_type}\r\n{sub_problem_sign}Sub muammo: {sub_problem}\r\n{short_description_sign}Qisqacha mazmun: {short_description}\r\n{phone_number_sign}Telefon raqami: {phone_number}",
-         "ru":"{first_name_sign}Имя: {first_name}\r\n{last_name_sign}Фамилия: {last_name}\r\n{middle_name_sign}Отчество: {middle_name}\r\n{district_sign}Махаля: {district}\r\n{problem_type_sign}Тип проблемы: {problem_type}\r\n{sub_problem_sign}Дополнительная проблема: {sub_problem}\r\n{short_description_sign}Короткое описание: {short_description}\r\n{phone_number_sign}Номер телефона: {phone_number}"
+         "buttons_uz":"Ism>first_name| Familita>last_name| Sharf>middle_name| Tug'ilgan sana>date_of_birth| Jins>gender| Mahalla>district| Muammo turi>problem_type| Qisqacha mazmun>short_description| Telefon raqami>phone_number",
+         "buttons_ru":"Имя>first_name| Фамилия>last_name| Отчество>middle_name| Дата рождения>date_of_birth|Пол>gender| Махаля>district| Тип проблемы>problem_type| Короткое описание>short_description|Номер телефона>phone_number",
+         "uz":"<b>Hokim qabuliga yozish! </b>\r\n\r\n{first_name_sign}<b>Ism:</b> {first_name}\r\n{last_name_sign}<b>Familita:</b> {last_name}\r\n{middle_name_sign}<b>Sharf:</b> {middle_name}\r\n{date_of_birth_sign}<b>Tug'ilgan sana:</b> {date_of_birth}\r\n{gender_sign}<b>Jins:</b> {gender}\r\n{district_sign}<b>Mahalla:</b> {district}\r\n{problem_type_sign}<b>Muammo:</b> {problem_type}\r\n{sub_problem_sign}<b>Sub muammo:</b> {sub_problem}\r\n{short_description_sign}<b>Qisqacha mazmun:</b> {short_description}\r\n{phone_number_sign}<b>Telefon raqami:</b> {phone_number}",
+         "ru":"<b> Письмо к приему Хакима!</b>\r\n\r\n{first_name_sign}<b>Имя:</b> {first_name}\r\n{last_name_sign}<b>Фамилия:</b> {last_name}\r\n{middle_name_sign}<b>Отчество:</b> {middle_name}\r\n{date_of_birth_sign}<b>Дата рождения:</b> {date_of_birth}\r\n{gender_sign}<b>Пол:</b> {gender}\r\n{district_sign}<b>Махаля:</b> {district}\r\n{problem_type_sign}<b>Тип проблемы:</b> {problem_type}\r\n{sub_problem_sign}<b>Дополнительная проблема:</b> {sub_problem}\r\n{short_description_sign}<b>Короткое описание:</b> {short_description}\r\n{phone_number_sign}<b>Номер телефона:</b> {phone_number}"
+      }
+   },
+   {
+      "model":"telegrambot.text",
+      "pk":"APPEAL_MENU",
+      "fields":{
+         "buttons_uz":"Ism > first_name | Familiya > last_name | Sharf > middle_name | Tug'ilgan sana>date_of_birth | Jins>gender| Mahalla > district | Muammo turi > problem_type | Qisqacha mazmun > short_description |Muammo yuzaga kelgan joy>problem_address| Muammo aks etgan foto>media| Telefon raqami > phone_number",
+         "buttons_ru":"Имя>first_name| Фамилия>last_name| Отчество>middle_name| Дата рождения>date_of_birth| Пол>gender| Махаля>district| Тип проблемы>problem_type| Описание проблемы>short_description| Место происшествия>problem_address| Фото причастные к проблеме>media| Номер телефона>phone_number",
+         "uz":"<b> Hokimga murojat! </b>\r\n\r\n{first_name_sign}<b>Ism:</b> {first_name}\r\n{last_name_sign}<b>Familita:</b> {last_name}\r\n{middle_name_sign}<b>Sharf:</b> {middle_name}\r\n{date_of_birth_sign}<b>Tug'ilgan sana:</b> {date_of_birth}\r\n{gender_sign}<b>Jins:</b> {gender}\r\n{district_sign}<b>Mahalla:</b> {district}\r\n{problem_type_sign}<b>Muammo:</b> {problem_type}\r\n{sub_problem_sign}<b>Sub muammo:</b> {sub_problem}\r\n{short_description_sign}<b>Muammo mazmuni:</b> {short_description}\r\n{problem_address_sign}<b>Muammo yuzaga kelgan joy:</b> {problem_address}\r\n{media_sign}<b>Muammo aks etgan foto:</b> {media}\r\n{phone_number_sign}<b>Telefon raqami:</b> {phone_number}",
+         "ru":"<b>Обращение к Хакиму </b>\r\n\r\n{first_name_sign}<b>Имя:</b> {first_name}\r\n{last_name_sign}<b>Фамилия:</b> {last_name}\r\n{middle_name_sign}<b>Отчество:</b> {middle_name}\r\n{date_of_birth_sign}<b>Дата рождения:</b> {date_of_birth}\r\n{gender_sign}<b>Пол:</b> {gender}\r\n{district_sign}<b>Махаля:</b> {district}\r\n{problem_type_sign}<b>Тип проблемы:</b> {problem_type}\r\n{sub_problem_sign}<b>Дополнительная проблема:</b> {sub_problem}\r\n{short_description_sign}<b>Описание проблемы:</b> {short_description}\r\n{problem_address_sign}<b>Место происшествия: </b>{problem_address}\r\n{media_sign}<b>Фото причастные к проблеме:</b> {media}\r\n{phone_number_sign}<b>Номер телефона:</b> {phone_number}"
+      }
+   },
+   {
+      "model":"telegrambot.text",
+      "pk":"GET_BIRTH_DAY",
+      "fields":{
+         "buttons_uz":"⬅Orqaga>back_to_admission_menu",
+         "buttons_ru":"⬅Назад>back_to_admission_menu",
+         "uz":"Tug'ilgan kuningizni kiriting:\r\nMisol uchun: 13.",
+         "ru":"Введите день своего рождения:\r\nПример: 13."
+      }
+   },
+   {
+      "model":"telegrambot.text",
+      "pk":"GET_BIRTH_MONTH",
+      "fields":{
+         "buttons_uz":null,
+         "buttons_ru":null,
+         "uz":"Tug'ilgan oyingizni tanlang:",
+         "ru":"Выберите месяц своего рождения:"
+      }
+   },
+   {
+      "model":"telegrambot.text",
+      "pk":"GET_BIRTH_YEAR",
+      "fields":{
+         "buttons_uz":"⬅Orqaga>back_to_admission_menu",
+         "buttons_ru":"⬅Назад>back_to_admission_menu",
+         "uz":"Tug'ilgan yilingizni kirintg:\r\nMisol uchun: 1984",
+         "ru":"Введите год своего рождения:\r\nПример: 1984"
       }
    },
    {
@@ -33,10 +73,20 @@
       "model":"telegrambot.text",
       "pk":"GET_FIRST_NAME",
       "fields":{
-         "buttons_uz":"⬅Orqaga>back_to_admission_menu",
-         "buttons_ru":"⬅Назад>back_to_admission_menu",
+         "buttons_uz":null,
+         "buttons_ru":null,
          "uz":"Ismingizni kiriting:",
          "ru":"Введите имя:"
+      }
+   },
+   {
+      "model":"telegrambot.text",
+      "pk":"GET_GENDER",
+      "fields":{
+         "buttons_uz":"Erkak>male|Ayol>female|⬅Orqaga>back_to_admission_menu",
+         "buttons_ru":"Мужчина>male|Женщина>female|⬅Назад>back_to_admission_menu",
+         "uz":"Jinsingizni tanlang:",
+         "ru":"Выберите свой пол:"
       }
    },
    {
@@ -61,6 +111,16 @@
    },
    {
       "model":"telegrambot.text",
+      "pk":"GET_MEDIA",
+      "fields":{
+         "buttons_uz":"⬅Orqaga>back_to_admission_menu",
+         "buttons_ru":"⬅Назад>back_to_admission_menu",
+         "uz":"Muammo aks etilgan 3ta foto <a =\"https://www.google.com/\">yuboring</a>:",
+         "ru":"<a href=\"https://www.google.com/\">Отправьте</a> <b>3</b> фотографии проблемы"
+      }
+   },
+   {
+      "model":"telegrambot.text",
       "pk":"GET_MIDDLE_NAME",
       "fields":{
          "buttons_uz":"⬅Orqaga>back_to_admission_menu",
@@ -75,8 +135,18 @@
       "fields":{
          "buttons_uz":null,
          "buttons_ru":null,
-         "uz":"Telefon raqamingizni jonating:",
-         "ru":"Отправьте номер телефона:"
+         "uz":"Telefon raqamingizni jonating:\r\nMisol uchun: 91 1234567",
+         "ru":"Отправьте номер телефона:\r\nПример: 91 1234567"
+      }
+   },
+   {
+      "model":"telegrambot.text",
+      "pk":"GET_PROBLEM_ADDRESS",
+      "fields":{
+         "buttons_uz":null,
+         "buttons_ru":null,
+         "uz":"Shu muammo qayerda yuzaga keldi. Geo joylashuv tugmasi bilan ulasing 👇 yoki matn xolatida yozib kirting ✍️:",
+         "ru":"Где произошла это проблема. Поделить локацией при помощи кнопки снизу👇 или напишите в виде текста✍️:"
       }
    },
    {
@@ -111,7 +181,7 @@
    },
    {
       "model":"telegrambot.text",
-      "pk":"MAIN_MENU",
+      "pk":"LAST_MENU",
       "fields":{
          "buttons_uz":null,
          "buttons_ru":null,
@@ -123,8 +193,8 @@
       "model":"telegrambot.text",
       "pk":"STATEMENT_TYPE",
       "fields":{
-         "buttons_uz":"Qabul>admission",
-         "buttons_ru":"Допуск>admission",
+         "buttons_uz":"Qabul>admission|Murojat>appeal",
+         "buttons_ru":"Допуск>admission|Обращение>appeal",
          "uz":"Qabul turini tanlang!",
          "ru":"Выберите тип допуска!"
       }
