@@ -20,3 +20,5 @@ pycparser==2.20
 python-telegram-bot==12.4.2
 tornado==6.1
 tzlocal==2.1
+django-modeltranslation==0.1
+django-cors-headers==3.2.1

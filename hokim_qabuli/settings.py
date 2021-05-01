@@ -33,11 +33,22 @@ SECRET_KEY = '+n@(f_-r!k6%l&o^s&os!wmq=5oxo20^30lcnh)9kymqo64+la'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*',]
+
+CORS_ALLOW_METHODS = [
+    '*'
+]
+
+CORS_ALLOW_HEADERS = [
+    '*'
+]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
 INSTALLED_APPS = [
+    'modeltranslation',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -49,9 +60,13 @@ INSTALLED_APPS = [
     # APPS
     'panel',
     'telegrambot',
+
+    # INSTALLED
+    'corsheaders',  # To avoid Cors Error
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -88,7 +103,7 @@ WSGI_APPLICATION = 'hokim_qabuli.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR,'db.sqlite3')
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
     }
 }
 
@@ -163,8 +178,6 @@ LOGIN_URL = 'panel:login'
 
 LOGOUT_REDIRECT_URL = 'panel:login'
 
-
-
 STATIC_URL = '/static/'
 
 # Default primary key field type
@@ -176,8 +189,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = MEDIA_DIR
 STATICFILES_DIRS = [STATIC_DIR, ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-
 
 TELEGRAM_TOKEN = '688249185:AAHYsn4bQcauJDmd7zUN-MWoaJZSnKQcZJI'
 HOST = 'https://56c556eec9bf.ngrok.io'

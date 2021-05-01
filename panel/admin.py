@@ -1,34 +1,34 @@
 from django.contrib import admin
-
+from modeltranslation.admin import TranslationAdmin
 from .models import *
 
 
 @admin.register(Mahalla)
-class MahallaAdmin(admin.ModelAdmin):
+class MahallaAdmin(TranslationAdmin):
     list_display = ['title', 'location', 'phone']
     search_fields = ['location', 'title']
 
 
 @admin.register(Muammo)
-class MuammoAdmin(admin.ModelAdmin):
+class MuammoAdmin(TranslationAdmin):
     list_display = ['title', ]
     search_fields = ['title', ]
 
 
 @admin.register(Hudud)
-class HududAdmin(admin.ModelAdmin):
+class HududAdmin(TranslationAdmin):
     list_display = ['title', ]
     search_fields = ['title', ]
 
 
 @admin.register(SubMuammo)
-class SubMuammoAdmin(admin.ModelAdmin):
+class SubMuammoAdmin(TranslationAdmin):
     list_display = ['category', ]
     search_fields = ['category', ]
 
 
 @admin.register(Murojatchi)
-class MurojatchiAdmin(admin.ModelAdmin):
+class MurojatchiAdmin(TranslationAdmin):
     list_display = ['telegram_id', 'username', 'fullname', 'hudud', 'mahalla', 'muammo', 'category', 'phone','reply_message', 'created',
                     'status']
     search_fields = ['fullname', ]

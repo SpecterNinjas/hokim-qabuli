@@ -172,39 +172,6 @@ class HududDeleteView(LoginRequiredMixin, DeleteView):
         return self.post(request, *args, **kwargs)
 
 
-def ajaxfilter(request):
-    if request.is_ajax() and request.method == 'GET':
-
-        muammolar, query, add, json_add = [], [], [], {}
-
-        for key, val in request.GET.items():
-            muammolar.append(key[8:-1])
-        checked_muammolar = muammolar[:-1]
-
-        for muammo in checked_muammolar:
-            query_item = SubMuammo.objects.filter(title__title=muammo)
-            add.extend(query_item)
-
-        for muammo in checked_muammolar:
-            query_item = SubMuammo.objects.filter(title__title=muammo)
-            add.extend(query_item)
-
-        for i in add:
-            json_add[str(i)] = Murojatchi.objects.filter(category__category=str(i)).count()
-
-        print(json_add)
-        data = {
-            'query': json_add
-        }
-
-    else:
-        data = {
-            'query': []
-        }
-
-    return JsonResponse(data, safe=False)
-
-
 """ End Muammo Part """
 
 """ Murojatchi Part """
@@ -310,7 +277,6 @@ class MurojatchiReplyMessageView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy("panel:murojatchi")
 
 
-
 class MurojatchiDeleteView(LoginRequiredMixin, DeleteView):
     model = Murojatchi
     success_url = reverse_lazy("panel:murojatchi")
@@ -391,7 +357,7 @@ class QabulView(LoginRequiredMixin, ListView):
 def ajax_mahalla(request):
     if request.is_ajax() and request.method == 'GET':
 
-        mahallar, query, add, json_add = [], [], [], {}
+        mahallar, query, add, add2, json_add = [], [], [], [], {}
 
         for key, val in request.GET.items():
             mahallar.append(key[8:-1])
@@ -401,8 +367,47 @@ def ajax_mahalla(request):
             query_item = Murojatchi.objects.filter(mahalla__title=mahalla)
             add.extend(query_item)
 
-        json_add = serializers.serialize("json", add, fields=['fullname', 'phone', 'created'])
+        muammo = Muammo.objects.all()
 
+        json_add = serializers.serialize("json", add, fields=['fullname', 'phone', 'created', 'muammo'],
+                                         use_natural_foreign_keys=True, use_natural_primary_keys=True)
+        json_add2 = serializers.serialize("json", muammo, fields=['pk', 'title'])
+
+        data = {
+            'query': json_add,
+            'query2': json_add2
+        }
+
+    else:
+        data = {
+            'query': [],
+            'query2': []
+        }
+
+    return JsonResponse(data, safe=False)
+
+
+def ajaxfilter(request):
+    if request.is_ajax() and request.method == 'GET':
+
+        muammolar, query, add, json_add = [], [], [], {}
+
+        for key, val in request.GET.items():
+            muammolar.append(key[8:-1])
+        checked_muammolar = muammolar[:-1]
+
+        for muammo in checked_muammolar:
+            query_item = SubMuammo.objects.filter(title__title=muammo)
+            add.extend(query_item)
+
+        for muammo in checked_muammolar:
+            query_item = SubMuammo.objects.filter(title__title=muammo)
+            add.extend(query_item)
+
+        for i in add:
+            json_add[str(i)] = Murojatchi.objects.filter(category__category=str(i)).count()
+
+        print(json_add)
         data = {
             'query': json_add
         }
@@ -414,6 +419,40 @@ def ajax_mahalla(request):
 
     return JsonResponse(data, safe=False)
 
+
+# def ajax_mahalla_muammo(request):
+#
+#     if request.is_ajax() and request.method == 'GET':
+#
+#         mahallalar, query, add, json_add = [], [], [], {}
+#
+#         for key, val in request.GET.items():
+#             mahallalar.append(key[8:-1])
+#         checked_mahallalar = mahallalar[:-1]
+#
+#         print(checked_mahallalar)
+#
+#         for mahalla in checked_mahallalar:
+#             query_item = Murojatchi.objects.filter(mahalla__title=mahalla)
+#             add.extend(query_item)
+#
+#         print(add)
+#
+#         # for i in add:
+#         #     json_add[str(i)] = Murojatchi.objects.filter(category__category=str(i)).count()
+#         #
+#         #
+#         # print(json_add)
+#         data = {
+#             'query': []
+#         }
+#
+#     else:
+#         data = {
+#             'query': []
+#         }
+#
+#     return JsonResponse(data, safe=False)
 
 def murojatchi_filter(request):
     pass

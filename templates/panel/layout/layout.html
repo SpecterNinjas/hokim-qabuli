@@ -1,4 +1,6 @@
-{% load static %}
+{% load templatetags %}
+{% load static i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 
 <!DOCTYPE html>
 <html class="loading" lang="uz" data-textdirection="ltr">
@@ -26,7 +28,6 @@
             src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             crossorigin="anonymous"></script>
-
 
     <!-- BEGIN: Theme CSS-->
     <link rel="stylesheet" type="text/css" href="{% static 'panel/back/app-assets/css/bootstrap.css' %}">
@@ -94,26 +95,23 @@
                             <i class="ficon bx bx-fullscreen"></i>
                         </a>
                     </li>
-{#                    <li class="dropdown dropdown-language nav-item"><a class="dropdown-toggle nav-link"#}
-{#                                                                       id="dropdown-flag" href="#"#}
-{#                                                                       data-toggle="dropdown" aria-haspopup="true"#}
-{#                                                                       aria-expanded="false">#}
-{#                        {% if LANGUAGE_CODE == 'ru' %}<i class="flag-icon flag-icon-ru"></i><span#}
-{#                                class="selected-language">Русский </span>#}
-{#                        {% elif LANGUAGE_CODE == 'uz' %}<i class="flag-icon flag-icon-uz"></i><span#}
-{#                                class="selected-language"> O`zbekcha</span>#}
-                            {#                    		                        {% elif LANGUAGE_CODE == 'en' %}<i class="flag-icon flag-icon-gb"></i><span#}
-                            {#                    		                                class="selected-language"> English</span> {% endif %} </a>#}
-{#                        {% endif %} </a>#}
-{#                        <div class="dropdown-menu" aria-labelledby="dropdown-flag">#}
-{#                            <a class="dropdown-item" href="{% get_language_url request=request lang='uz' %}">#}
-{#                                <i class="flag-icon flag-icon-uz mr-50"></i> O'zbekcha</a>#}
-{#                            <a class="dropdown-item" href="{% get_language_url request=request lang='ru' %}">#}
-{#                                <i class="flag-icon flag-icon-ru mr-50"></i> Русский</a>#}
-{#                            <a class="dropdown-item" href="{% get_language_url request=request lang='en' %}">#}
-{#                                <i class="flag-icon flag-icon-gb mr-50"></i> English</a>#}
-{#                        </div>#}
-{#                    </li>#}
+                    <li class="dropdown dropdown-language nav-item" style="padding-top: 2px;"><a class="dropdown-toggle nav-link"
+                                                                       id="dropdown-flag" href="#" style="padding: 0;"
+                                                                       data-toggle="dropdown" aria-haspopup="true"
+                                                                       aria-expanded="false">
+                        {% if LANGUAGE_CODE == 'ru' %}<i class="flag-icon flag-icon-ru"></i><span
+                                class="selected-language">Русский </span>
+                        {% elif LANGUAGE_CODE == 'uz' %}<i class="flag-icon flag-icon-uz"></i><span
+                                class="selected-language"> O`zbekcha</span>
+                            </a>
+                        {% endif %}
+                        <div class="dropdown-menu" aria-labelledby="dropdown-flag">
+                            <a class="dropdown-item" href="{% get_language_url request=request lang='uz' %}">
+                                <i class="flag-icon flag-icon-uz mr-50"></i> O'zbekcha</a>
+                            <a class="dropdown-item" href="{% get_language_url request=request lang='ru' %}">
+                                <i class="flag-icon flag-icon-ru mr-50"></i> Русский</a>
+                        </div>
+                    </li>
                     <li class="dropdown dropdown-user nav-item">
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                             <div class="user-nav d-sm-flex d-none">
@@ -133,7 +131,7 @@
                             {#                            </a>#}
 
                             <a class="dropdown-item" href="{% url 'panel:logout' %}"><i class="bx bx-power-off mr-50"></i>
-                                Logout</a>
+                                {% trans 'Logout' %}</a>
                         </div>
                     </li>
                 </ul>
@@ -182,7 +180,7 @@
 <!-- BEGIN: Footer-->
 <br>
 <footer class="footer footer-static footer-light">
-    <p class="clearfix mb-0"><span class="float-left d-inline-block">2021 &copy; Hokim Qabuli</span><span
+    <p class="clearfix mb-0"><span class="float-left d-inline-block">2021 &copy; {% trans "Hokim Qabuli" %}</span><span
             class="float-right d-sm-inline-block d-none">Crafted with<i
             class="bx bxs-heart pink mx-50 font-small-3"></i>by<a class="text-uppercase"
                                                                   href="https://uicgroup.org/" target="_blank">UIC</a></span>

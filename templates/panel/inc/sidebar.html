@@ -27,14 +27,19 @@
             <li class="nav-item news {% if 'murojatchi' in request.path %}aaa{% endif %}">
                 <a href="{% url 'panel:murojatchi' %}">
                          <span class="menu-item"><i class="fa fa-list mr-1" aria-hidden="true"></i>
-                             Barcha Murojatlar</span></a>
+                             {% trans 'Barcha Murojatlar' %}</span></a>
             </li>
 
 
             <li class="nav-item news {% if 'foydalanuvchi' in request.path %}aaa{% endif %}">
                 <a href="{% url 'panel:foydalanuvchi' %}">
                          <span class="menu-item"><i class="fa fa-users mr-1" aria-hidden="true"></i>
-                            Murojatchilar</span></a>
+                            {% trans "Murojatchilar" %}</span></a>
+            </li>
+         <li class="nav-item news">
+                <a href="#">
+                         <span class="menu-item"><i class="fa fa-envelope mr-1" aria-hidden="true"></i>
+                            {% trans "Hokimga Qabul" %}</span></a>
             </li>
 
 
@@ -42,34 +47,34 @@
             <li class="nav-item news {% if 'qabul' in request.path %}aaa{% endif %}">
                 <a href="{% url 'panel:qabul' %}">
                          <span class="menu-item"><i class="fa fa-envelope mr-1" aria-hidden="true"></i>
-                            Ommaviy Qabul</span></a>
+                            {% trans "Qabullar" %}</span></a>
             </li>
 
 
             <li class="nav-item news">
                 <a href="#"><i class="fa fa-share"></i>
-                    <span class="menu-title">Qo'shimcha sahifalar</span>
+                    <span class="menu-title">{% trans "Qo'shimcha sahifalar" %}</span>
                 </a>
                 <ul class="menu-content">
                     <li>
                         <a href="{% url 'panel:hudud' %}">
                             <i class="fa fa-circle-o"></i><span
-                                class="menu-item">Hududlar</span></a>
+                                class="menu-item">{% trans "Hududlar" %}</span></a>
                     </li>
                     <li>
                         <a href="{% url 'panel:mahalla' %}">
                             <i class="fa fa-circle-o"></i><span
-                                class="menu-item">Mahallalar</span></a>
+                                class="menu-item">{% trans "Mahallalar" %}</span></a>
                     </li>
                      <li>
                         <a href="{% url 'panel:muammo' %}">
                             <i class="fa fa-circle-o"></i><span
-                                class="menu-item">Muammolar</span></a>
+                                class="menu-item">{% trans "Muammolar" %}</span></a>
                     </li>
                     <li>
                         <a href="{% url 'panel:kategoriya' %}">
                             <i class="fa fa-circle-o"></i><span
-                                class="menu-item">Kategoriyalar</span></a>
+                                class="menu-item">{% trans "Kategoriyalar" %}</span></a>
                     </li>
 
 

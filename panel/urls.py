@@ -38,16 +38,11 @@ urlpatterns = [
     path("foydalanuvchi/detail/<int:pk>", FoydalanuvchiDetailView.as_view(), name="foydalanuvchi_detail"),
     path("foydalanuvchi/update/<int:pk>", FoydalanuvchiUpdateView.as_view(), name="foydalanuvchi_update"),
 
-
-
     # HUDUD
     path("hudud/", HududView.as_view(), name="hudud"),
     path("hudud_yaratish/", HududCreateView.as_view(), name="hudud_create"),
     path("hudud/<int:pk>/", HududUpdateView.as_view(), name="hudud_update"),
     path("hudud_uchirish/<int:pk>/", HududDeleteView.as_view(), name="hudud_delete"),
-
-
-
 
     # MUROJATCHI
     path("murojatchi/", MurojatchiView.as_view(), name="murojatchi"),
@@ -56,14 +51,11 @@ urlpatterns = [
     path("murojatchi/<int:pk>/", MurojatchiReplyMessageView.as_view(), name="murojatchi_reply"),
     path("murojatchi_uchirish/<int:pk>/", MurojatchiDeleteView.as_view(), name="murojatchi_delete"),
 
-
-
-
     path("murojatchi_filter/", murojatchi_filter, name="murojatchi_filter"),
+
     # QABUL
     path("qabul/", QabulView.as_view(), name="qabul"),
 
-
-
+   # path('ajax/mahalla_muammo/', ajax_mahalla_muammo, name='ajax_mahalla_muammo'),
 
 ]

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-29 13:49+0500\n"
+"POT-Creation-Date: 2021-04-29 18:01+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,13 +20,13 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: .\hokim_qabuli\settings.py:127 .\hokim_qabuli\settings.py:136
+#: .\hokim_qabuli\settings.py:128 .\hokim_qabuli\settings.py:137
 msgid "O'zbek"
 msgstr "Узбек"
 
-#: .\hokim_qabuli\settings.py:128
+#: .\hokim_qabuli\settings.py:129
 msgid "Русский"
-msgstr ""
+msgstr "Русский"
 
 #: .\panel\models.py:6 .\templates\panel\mahalla\create.html:65
 #: .\templates\panel\mahalla\update.html:65
@@ -37,15 +37,19 @@ msgstr "Название Махалли"
 #: .\templates\panel\mahalla\create.html:145
 #: .\templates\panel\mahalla\index.html:82
 #: .\templates\panel\mahalla\update.html:145
+#: .\templates\panel\murojatchi\reply.html:113
+#: .\templates\panel\murojatchi\see.html:138
 msgid "Manzil"
 msgstr "Расположение"
 
 #: .\panel\models.py:8 .\panel\models.py:79
+#: .\templates\panel\foydalanuvchi\see.html:80
 #: .\templates\panel\foydalanuvchi\update.html:162
 #: .\templates\panel\mahalla\create.html:177
 #: .\templates\panel\mahalla\index.html:83
 #: .\templates\panel\mahalla\update.html:177
 #: .\templates\panel\murojatchi\index.html:89
+#: .\templates\panel\murojatchi\see.html:74
 #: .\templates\panel\qabul\index.html:185
 msgid "Telefon"
 msgstr "Телефон"
@@ -54,11 +58,13 @@ msgstr "Телефон"
 #: .\templates\panel\mahalla\index.html:29
 #: .\templates\panel\murojatchi\index.html:86
 #: .\templates\panel\murojatchi\index.html:186
+#: .\templates\panel\murojatchi\reply.html:91
 #: .\templates\panel\murojatchi\search.html:77
+#: .\templates\panel\murojatchi\see.html:116
 msgid "Mahalla"
 msgstr "Махалла"
 
-#: .\panel\models.py:15
+#: .\panel\models.py:15 .\templates\panel\inc\sidebar.html:62
 msgid "Mahallalar"
 msgstr "Махалли"
 
@@ -67,12 +73,14 @@ msgstr "Махалли"
 msgid "Muammo nomi"
 msgstr "Название проблемы"
 
-#: .\panel\models.py:26
+#: .\panel\models.py:26 .\templates\panel\inc\sidebar.html:67
 msgid "Muammolar"
 msgstr "Проблемы"
 
 #: .\panel\models.py:31 .\templates\panel\kategoriya\index.html:29
 #: .\templates\panel\kategoriya\index.html:81
+#: .\templates\panel\murojatchi\reply.html:103
+#: .\templates\panel\murojatchi\see.html:128
 #: .\templates\panel\qabul\index.html:153
 msgid "Kategoriya"
 msgstr "Категория"
@@ -82,7 +90,7 @@ msgstr "Категория"
 msgid "Kategoriya nomi"
 msgstr "Название категории"
 
-#: .\panel\models.py:38
+#: .\panel\models.py:38 .\templates\panel\inc\sidebar.html:72
 msgid "Kategoriyalar"
 msgstr "Категории"
 
@@ -92,13 +100,15 @@ msgstr "Категории"
 #: .\templates\panel\hudud\update.html:65
 #: .\templates\panel\murojatchi\index.html:85
 #: .\templates\panel\murojatchi\index.html:185
+#: .\templates\panel\murojatchi\reply.html:87
 #: .\templates\panel\murojatchi\search.html:76
+#: .\templates\panel\murojatchi\see.html:112
 msgid "Hudud"
 msgstr "Pегион"
 
 #: .\panel\models.py:55
 msgid "ko'rib chiqilmagan"
-msgstr ""
+msgstr "не прочитано"
 
 #: .\panel\models.py:56
 msgid "ko'rib chiqilmoqda"
@@ -132,6 +142,8 @@ msgstr "Прием"
 #: .\templates\panel\foydalanuvchi\search.html:73
 #: .\templates\panel\foydalanuvchi\update.html:70
 #: .\templates\panel\foydalanuvchi\update.html:82
+#: .\templates\panel\murojatchi\reply.html:77
+#: .\templates\panel\murojatchi\see.html:72
 msgid "Telegram ID"
 msgstr "Телеграм ID"
 
@@ -140,14 +152,18 @@ msgid "Ism Sharifi"
 msgstr "Полное имя"
 
 #: .\panel\models.py:70 .\templates\panel\foydalanuvchi\index.html:85
+#: .\templates\panel\foydalanuvchi\index.html:106
 #: .\templates\panel\foydalanuvchi\index.html:134
 #: .\templates\panel\foydalanuvchi\search.html:75
+#: .\templates\panel\foydalanuvchi\see.html:74
 #: .\templates\panel\foydalanuvchi\update.html:132
 #: .\templates\panel\foydalanuvchi\update.html:144
+#: .\templates\panel\murojatchi\see.html:70
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: .\panel\models.py:76
+#: .\panel\models.py:76 .\templates\panel\murojatchi\reply.html:107
+#: .\templates\panel\murojatchi\see.html:132
 msgid "Media"
 msgstr "Медиа"
 
@@ -155,34 +171,37 @@ msgstr "Медиа"
 msgid "Murojat Matni"
 msgstr "Текст Обращения"
 
-#: .\panel\models.py:80
+#: .\panel\models.py:82 .\templates\panel\murojatchi\reply.html:135
+#: .\templates\panel\murojatchi\reply.html:154
+#: .\templates\panel\murojatchi\see.html:152
 msgid "Javob Matni"
 msgstr "Текст Ответа"
 
-#: .\panel\models.py:80
+#: .\panel\models.py:82
 msgid "Javob berilmagan"
 msgstr "не отвечено"
 
-#: .\panel\models.py:81 .\templates\panel\qabul\index.html:186
+#: .\panel\models.py:83 .\templates\panel\qabul\index.html:186
 msgid "Murojat Sanasi"
 msgstr "Дата Обращения"
 
-#: .\panel\models.py:82
+#: .\panel\models.py:84
 msgid "O'zgartish Kiritilgan Sana"
 msgstr "Дата Внесения Изменений"
 
-#: .\panel\models.py:83
+#: .\panel\models.py:85
 msgid "Murojatchi Statusi"
 msgstr "Статус Заявителя"
 
-#: .\panel\models.py:90 .\templates\panel\murojatchi\index.html:84
+#: .\panel\models.py:93 .\templates\panel\murojatchi\index.html:84
+#: .\templates\panel\murojatchi\index.html:101
 #: .\templates\panel\murojatchi\index.html:184
 #: .\templates\panel\murojatchi\search.html:75
 #: .\templates\panel\qabul\index.html:184
 msgid "Murojatchi"
 msgstr "Заявитель"
 
-#: .\panel\models.py:91
+#: .\panel\models.py:94 .\templates\panel\inc\sidebar.html:37
 msgid "Murojatchilar"
 msgstr "Заявители"
 
@@ -207,17 +226,24 @@ msgstr "Авторизоваться"
 msgid "Murojatchilar Ro'yxati"
 msgstr "Список заявителей"
 
+#: .\templates\panel\foydalanuvchi\index.html:72
+#: .\templates\panel\murojatchi\index.html:72
+msgid "Qidiruv"
+msgstr "Поиск"
+
 #: .\templates\panel\foydalanuvchi\index.html:83
 msgid "telegram ID"
 msgstr "Телеграм ID"
 
 #: .\templates\panel\foydalanuvchi\index.html:84
+#: .\templates\panel\foydalanuvchi\index.html:101
 #: .\templates\panel\foydalanuvchi\index.html:133
 #: .\templates\panel\foydalanuvchi\search.html:74
 msgid "Foydalanuvchi"
 msgstr "Пользователь"
 
 #: .\templates\panel\foydalanuvchi\index.html:111
+#: .\templates\panel\foydalanuvchi\see.html:91
 #: .\templates\panel\murojatchi\index.html:171
 msgid "Qidirish"
 msgstr "Поиск"
@@ -225,6 +251,8 @@ msgstr "Поиск"
 #: .\templates\panel\foydalanuvchi\index.html:135
 #: .\templates\panel\foydalanuvchi\search.html:76
 #: .\templates\panel\murojatchi\index.html:189
+#: .\templates\panel\murojatchi\reply.html:142
+#: .\templates\panel\murojatchi\see.html:166
 msgid "Sana"
 msgstr "Дата"
 
@@ -237,26 +265,34 @@ msgstr "Дата"
 #: .\templates\panel\murojatchi\index.html:191
 #: .\templates\panel\murojatchi\search.html:81
 msgid "Amallar"
-msgstr ""
+msgstr "Действия"
 
 #: .\templates\panel\foydalanuvchi\search.html:16
 msgid "Foydalanuvchilar Qidiruv"
-msgstr ""
+msgstr "Поиск пользователей"
 
 #: .\templates\panel\foydalanuvchi\search.html:59
 #: .\templates\panel\murojatchi\search.html:61
 msgid "Orqaga"
-msgstr ""
+msgstr "Назад"
 
 #: .\templates\panel\foydalanuvchi\search.html:63
 msgid "Topilgan Foydalanuvchilar"
-msgstr ""
+msgstr "Найденные пользователи"
+
+#: .\templates\panel\foydalanuvchi\see.html:72
+#: .\templates\panel\foydalanuvchi\see.html:77
+#: .\templates\panel\murojatchi\see.html:69
+#: .\templates\panel\qabul\index.html:229
+msgid "Telegram"
+msgstr "Телеграм"
 
 #: .\templates\panel\foydalanuvchi\see.html:101
 #: .\templates\panel\foydalanuvchi\update.html:100
 #: .\templates\panel\foydalanuvchi\update.html:112
+#: .\templates\panel\murojatchi\reply.html:82
 msgid "F.I.SH"
-msgstr ""
+msgstr "ФИО"
 
 #: .\templates\panel\foydalanuvchi\see.html:104
 #: .\templates\panel\kategoriya\create.html:65
@@ -266,33 +302,44 @@ msgstr ""
 #: .\templates\panel\muammo\update.html:65
 #: .\templates\panel\murojatchi\index.html:88
 #: .\templates\panel\murojatchi\index.html:188
+#: .\templates\panel\murojatchi\reply.html:99
 #: .\templates\panel\murojatchi\search.html:78
 msgid "Muammo"
-msgstr ""
+msgstr "Проблема"
 
 #: .\templates\panel\foydalanuvchi\see.html:105
 #: .\templates\panel\murojatchi\index.html:90
 #: .\templates\panel\murojatchi\index.html:190
+#: .\templates\panel\murojatchi\reply.html:128
 #: .\templates\panel\murojatchi\search.html:80
+#: .\templates\panel\murojatchi\see.html:159
 msgid "Status"
-msgstr ""
+msgstr "Статус"
 
 #: .\templates\panel\foydalanuvchi\update.html:34
 msgid "Foydalanuvchini Tahrirlash"
-msgstr ""
+msgstr "Редактировать пользователя"
 
 #: .\templates\panel\foydalanuvchi\update.html:174
 msgid "Telefon Raqam"
-msgstr ""
+msgstr "Телефон"
+
+#: .\templates\panel\foydalanuvchi\update.html:196
+#: .\templates\panel\hudud\update.html:143
+#: .\templates\panel\kategoriya\update.html:233
+#: .\templates\panel\mahalla\update.html:204
+#: .\templates\panel\muammo\update.html:143
+msgid "O'zgartirish"
+msgstr "Изменять"
 
 #: .\templates\panel\hudud\create.html:34
 msgid "Yangi Hudud Qo'shish"
-msgstr ""
+msgstr "Добавление Новой Области"
 
 #: .\templates\panel\hudud\create.html:76
 #: .\templates\panel\hudud\update.html:76
 msgid "Hudud nomini kiriting"
-msgstr ""
+msgstr "Введите название области"
 
 #: .\templates\panel\hudud\create.html:143
 #: .\templates\panel\hudud\index.html:64
@@ -303,85 +350,114 @@ msgstr ""
 #: .\templates\panel\muammo\create.html:143
 #: .\templates\panel\muammo\index.html:50
 msgid "Yaratish"
-msgstr ""
+msgstr "Создать"
 
 #: .\templates\panel\hudud\index.html:29
 msgid "Barcha Hududlar"
-msgstr ""
+msgstr "Все Pегионы"
 
 #: .\templates\panel\hudud\update.html:34
 msgid "Hudud Nomini O'zgartirish"
-msgstr ""
+msgstr "Переименовать Pегион"
 
-#: .\templates\panel\hudud\update.html:143
-#: .\templates\panel\kategoriya\update.html:233
-#: .\templates\panel\mahalla\update.html:204
-#: .\templates\panel\muammo\update.html:143
-msgid "O'zgartirish"
-msgstr ""
+#: .\templates\panel\inc\sidebar.html:30
+#: .\templates\panel\murojatchi\see.html:76
+msgid "Barcha Murojatlar"
+msgstr "Все Обращении"
+
+#: .\templates\panel\inc\sidebar.html:45
+msgid "Ommaviy Qabul"
+msgstr "Массовый Прием"
+
+#: .\templates\panel\inc\sidebar.html:51
+msgid "Qo'shimcha sahifalar"
+msgstr "Дополнительные страницы"
+
+#: .\templates\panel\inc\sidebar.html:57
+msgid "Hududlar"
+msgstr "Pегионы"
 
 #: .\templates\panel\kategoriya\create.html:34
 #: .\templates\panel\muammo\create.html:34
 msgid "Yangi Muammo Qo'shish"
-msgstr ""
+msgstr "Добавить новую проблему"
 
 #: .\templates\panel\kategoriya\create.html:171
 #: .\templates\panel\kategoriya\update.html:166
 msgid "Kategoriya nomini kiriting"
-msgstr ""
+msgstr "Введите название категории"
 
 #: .\templates\panel\kategoriya\update.html:34
 msgid "Kategoriyani Tahrirlash"
-msgstr ""
+msgstr "Изменить категорию"
+
+#: .\templates\panel\layout\layout.html:136
+msgid "Logout"
+msgstr "Выйти"
+
+#: .\templates\panel\layout\layout.html:185
+msgid "Hokim Qabuli"
+msgstr "Прием Xакима"
 
 #: .\templates\panel\mahalla\create.html:34
 msgid "Yangi Mahalla Qo'shish"
-msgstr ""
+msgstr "Добавить Hовый Маxалла"
 
 #: .\templates\panel\mahalla\create.html:76
 #: .\templates\panel\mahalla\update.html:76
 msgid "Mahalla nomini kiriting"
-msgstr ""
+msgstr "Введите название Маxалли"
 
 #: .\templates\panel\mahalla\create.html:156
 #: .\templates\panel\mahalla\update.html:156
 msgid "Mahalla manzilini kiriting"
-msgstr ""
+msgstr "Введите адрес маxалли"
 
 #: .\templates\panel\mahalla\create.html:188
 #: .\templates\panel\mahalla\update.html:188
 msgid "Mahalla telefon raqamini kiriting. Masalan: 998907654321"
-msgstr ""
+msgstr "Введите номер телефона маxалли. Например: 998907654321"
 
 #: .\templates\panel\mahalla\index.html:81
 #: .\templates\panel\qabul\index.html:67
 msgid "Mahalla Nomi"
-msgstr ""
+msgstr "Название Mаxалли"
 
 #: .\templates\panel\mahalla\update.html:34
 msgid "Mahalla Ma'lumotlarini O'zgartirish"
-msgstr ""
+msgstr "Изменение Данных Mаxалли"
+
+#: .\templates\panel\main\index.html:20
+msgid "Quick Menu"
+msgstr "Быстрое меню"
+
+#: .\templates\panel\main\index.html:31
+msgid "Vacancies"
+msgstr "Вакансии"
 
 #: .\templates\panel\muammo\create.html:76
 #: .\templates\panel\muammo\update.html:76
 msgid "Muammo nomini kiriting"
-msgstr ""
+msgstr "Введите имя проблемы"
 
 #: .\templates\panel\muammo\index.html:67
 msgid "Muammo Turi"
-msgstr ""
+msgstr "Тип Проблемы"
 
 #: .\templates\panel\muammo\update.html:34
 msgid "Muammo Nomini O'zgartirish"
-msgstr ""
+msgstr "Изменение Имени Проблемы"
 
 #: .\templates\panel\murojatchi\index.html:30
 msgid "Murojatlar Ro'yxati"
-msgstr ""
+msgstr "Список Обращений"
 
 #: .\templates\panel\murojatchi\index.html:87
+#: .\templates\panel\murojatchi\reply.html:95
+#: .\templates\panel\murojatchi\see.html:120
+#: .\templates\panel\murojatchi\see.html:124
 msgid "Murojat Turi"
-msgstr ""
+msgstr "Тип Обращения"
 
 #: .\templates\panel\murojatchi\index.html:106
 #: .\templates\panel\murojatchi\index.html:115
@@ -389,52 +465,110 @@ msgstr ""
 #: .\templates\panel\murojatchi\index.html:134
 #: .\templates\panel\murojatchi\index.html:148
 msgid "Tanlang"
-msgstr ""
+msgstr "Выбрать"
 
 #: .\templates\panel\murojatchi\index.html:149
 msgid "Ko'rib Chiqilmagan"
-msgstr ""
+msgstr "не прочитано"
 
 #: .\templates\panel\murojatchi\index.html:150
 msgid "Ko'rib Chiqilmoqda"
-msgstr ""
+msgstr "Рассматривается"
 
 #: .\templates\panel\murojatchi\index.html:151
 msgid "Qabulga Chaqirildi"
-msgstr ""
+msgstr "Вызвали На Прием"
 
 #: .\templates\panel\murojatchi\index.html:152
 msgid "Ko'rib Chiqildi"
-msgstr ""
+msgstr "Рассмотрено"
 
 #: .\templates\panel\murojatchi\index.html:153
 msgid "Rad Etildi"
-msgstr ""
+msgstr "Отказано"
+
+#: .\templates\panel\murojatchi\reply.html:110
+#: .\templates\panel\murojatchi\see.html:135
+msgid "Muammoga aloqador media mavjud emas."
+msgstr "Нет СМИ, связанных с проблемой."
+
+#: .\templates\panel\murojatchi\reply.html:116
+#, fuzzy
+#| msgid " Muammoga aloqador manzil mavjud emas."
+msgid "Muammoga aloqador manzil mavjud emas."
+msgstr "Нет адреса, связанного с проблемой."
+
+#: .\templates\panel\murojatchi\reply.html:120
+msgid "Ma'lumot"
+msgstr "Информация"
+
+#: .\templates\panel\murojatchi\reply.html:123
+#, fuzzy
+#| msgid " Muammoga aloqador manzil mavjud emas."
+msgid "Muammoga aloqador ma'lumot mavjud emas."
+msgstr "Нет адреса, связанного с проблемой."
+
+#: .\templates\panel\murojatchi\reply.html:149
+msgid "Statusni tanlang"
+msgstr "Выберите статус"
+
+#: .\templates\panel\murojatchi\reply.html:158
+msgid "Javob xatini kiriting."
+msgstr "Введите ответное письмо."
+
+#: .\templates\panel\murojatchi\reply.html:160
+#: .\templates\panel\qabul\index.html:251
+msgid "Yuborish"
+msgstr "Отправить"
 
 #: .\templates\panel\murojatchi\search.html:16
 msgid "Murojatlar Qidiruv"
-msgstr ""
+msgstr "Поиск Обращении"
 
 #: .\templates\panel\murojatchi\search.html:65
 msgid "Murojatlar Soni:"
-msgstr ""
+msgstr "Количество Обращений:"
 
 #: .\templates\panel\murojatchi\search.html:79
 msgid "Murojat Vaqti"
-msgstr ""
+msgstr "Дата Обращения"
+
+#: .\templates\panel\murojatchi\see.html:88
+msgid "Asosiy"
+msgstr "Главный"
+
+#: .\templates\panel\murojatchi\see.html:93
+msgid "Tahrirlash"
+msgstr "Редактировать"
+
+#: .\templates\panel\murojatchi\see.html:98
+msgid "O'chirish"
+msgstr "Удалить"
+
+#: .\templates\panel\murojatchi\see.html:141
+msgid " Muammoga aloqador manzil mavjud emas."
+msgstr "Нет адреса, связанного с проблемой."
+
+#: .\templates\panel\murojatchi\see.html:146
+msgid "Murojat Matn"
+msgstr "Текст Обращения"
+
+#: .\templates\panel\murojatchi\see.html:148
+msgid "Muammoga aloqador murojat matni mavjud emas."
+msgstr "Текст обращения, относящийся к проблеме, отсутствует."
 
 #: .\templates\panel\qabul\index.html:16
 msgid "Yangi Qabul Yaratish"
-msgstr ""
+msgstr "Создать Новый Прием"
 
 #: .\templates\panel\qabul\index.html:107
 msgid "Muammo "
-msgstr ""
+msgstr "Проблема "
 
 #: .\templates\panel\qabul\index.html:214
 msgid "Murojatchilarga xat yuboring..."
-msgstr ""
+msgstr "Отправить письмо заявителям..."
 
-#: .\templates\panel\qabul\index.html:251
-msgid "Yuborish"
-msgstr ""
+#: .\templates\panel\qabul\index.html:243
+msgid "SMS"
+msgstr "СМС"
