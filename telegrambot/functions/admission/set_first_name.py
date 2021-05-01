@@ -1,10 +1,10 @@
 import re
 from django.core.cache import cache
 from telegram import Bot, Update
-
 from telegrambot import states, functions
 from telegrambot.apps import log_errors
 from telegrambot.services import get_user_lang, send_saved_message_text
+from telegrambot.services.services import delete_previous_message_with_button
 
 
 @log_errors
@@ -13,7 +13,6 @@ def set_first_name(bot: Bot, update: Update):
 
     user = get_user_lang(update.effective_chat.id)
     name = update.message.text
-
     if re.search(r"[0-9]", name):
         if user.lang == 'ru':
             err_text = 'Неправильный формат имени. Попробуйте еще раз.'
@@ -32,7 +31,7 @@ def set_first_name(bot: Bot, update: Update):
     request['first_name'] = name
     request['telegram_id'] = update.effective_chat.id
     cache.set(f'request_{update.effective_chat.id}', request)
-
+    delete_previous_message_with_button(bot, update.effective_chat.id)
     send_saved_message_text(user, bot, update)
 
     return functions.admission.get_last_name(bot, update)

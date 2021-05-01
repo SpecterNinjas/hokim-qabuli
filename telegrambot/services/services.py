@@ -1,6 +1,7 @@
 from django.apps import apps
 from django.core.cache import cache
-from telegram import Update, Bot, InlineKeyboardMarkup
+from telegram import Update, Bot, InlineKeyboardMarkup, InlineKeyboardButton
+from panel.models import Murojatchi
 
 
 def get_user_lang(external_id):
@@ -29,7 +30,7 @@ def save_data_to_cache(external_id, data, request_name):
 
 def edit_or_send_message(bot: Bot, update: Update, text, inline_keyboard):
     try:
-        bot.edit_message_text(
+        msg = bot.edit_message_text(
             chat_id=update.effective_chat.id,
             text=text,
             message_id=update.callback_query.message.message_id,
@@ -37,9 +38,38 @@ def edit_or_send_message(bot: Bot, update: Update, text, inline_keyboard):
             parse_mode='Markdown'
         )
     except:
-        bot.send_message(
+        msg = bot.send_message(
             chat_id=update.effective_chat.id,
             text=text,
             reply_markup=InlineKeyboardMarkup(inline_keyboard),
             parse_mode='Markdown',
         )
+    save_data_to_cache(external_id=update.effective_chat.id, data=msg.message_id, request_name='callback_message_id')
+
+
+def delete_previous_message_with_button(bot: Bot, external_id):
+    request = cache.get(f'request_{external_id}')
+    bot.delete_message(
+        chat_id=external_id,
+        message_id=request['callback_message_id'],
+    )
+
+
+def get_suggestion_button(update: Update, model_field, callback_data):
+    user = get_user_lang(update.effective_chat.id)
+
+    inline_keyboard = []
+    if Murojatchi.objects.filter(telegram_id=update.effective_chat.id).exists():
+        data = model_field
+        inline_keyboard.append(
+            [
+                InlineKeyboardButton(data, callback_data=f'{callback_data}')
+            ]
+        )
+    btn_text = '⬅Orqaga' if user.lang == 'uz' else '⬅Назад'
+    inline_keyboard.append(
+        [
+            InlineKeyboardButton(btn_text, callback_data='back_to_admission_menu')
+        ]
+    )
+    return inline_keyboard

@@ -22,10 +22,7 @@ def last_menu(bot: Bot, update: Update):
 
     region = models.RegionBot.objects.get(token=bot.token)
     hudud = Hudud.objects.get(title=region.region)
-    print(request['request_type'])
-    print()
-    print(request['problem_type'])
-    print(request['sub_problem'])
+
     if user.lang == 'ru':
         mahalla = Mahalla.objects.get(title_ru=request['district'])
     else:

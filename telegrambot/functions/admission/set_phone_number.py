@@ -15,7 +15,7 @@ def set_phone_number(bot: Bot, update: Update):
                            request_name='phone_number')
     except:
         phone_number = update.message.text
-        if re.search(r"^\d{7}$", phone_number):
+        if re.search(r"^\d{9}$", phone_number):
             save_data_to_cache(external_id=update.effective_chat.id, data=phone_number,
                                request_name='phone_number')
         else:
@@ -31,7 +31,4 @@ def set_phone_number(bot: Bot, update: Update):
     send_saved_message_text(user, bot, update)
     return functions.main_menu(bot, update)
 
-# {problem_address_sign}Muammo yuzaga kelgan joy: {problem_address}
-# Muammo yuzaga kelgan joy>problem_address|
-# Место происшествия>problem_address|
-# {problem_address_sign}Место происшествия: {problem_address}
+

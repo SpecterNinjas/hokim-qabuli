@@ -125,7 +125,7 @@ def main_menu(bot: Bot, update: Update):
             text=text,
             message_id=update.callback_query.message.message_id,
             reply_markup=InlineKeyboardMarkup(inline_keyboard),
-            parse_mode='HTML'
+            parse_mode='HTML',
         )
     except:
         bot.send_message(

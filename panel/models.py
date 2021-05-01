@@ -67,10 +67,19 @@ class Murojatchi(models.Model):
         ("Murojat", _("Murojat")),
         ("Qabul", _("Qabul")),
     )
-
+    GENDER = (
+        (1, _("Erkak")),
+        (2, _("Ayol")),
+    )
     id = models.BigAutoField(primary_key=True)
     telegram_id = models.PositiveBigIntegerField(_("Telegram ID"), null=True)
     fullname = models.CharField(_("Ism Sharifi"), max_length=256, null=True)
+    last_name = models.CharField(_("Ism Sharifi"), max_length=256, null=True)
+    middle_name = models.CharField(_("Ism Sharifi"), max_length=256, null=True)
+    year_of_birth = models.CharField(_("Tug'ilgan yil"), max_length=256, null=True)
+    month_of_birth = models.CharField(_("Tug'ilgan oy"), max_length=256, null=True)
+    day_of_birth = models.CharField(_("Tug'ilgan kun"), max_length=256, null=True)
+    gender = models.PositiveBigIntegerField(_("Gender"), choices=GENDER, null=True)
     username = models.CharField(_("Username"), max_length=32, null=True)
     hudud = models.ForeignKey(Hudud, on_delete=models.CASCADE, null=True)
     mahalla = models.ForeignKey(Mahalla, on_delete=models.CASCADE, null=True)

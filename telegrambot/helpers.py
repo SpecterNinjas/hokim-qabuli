@@ -21,6 +21,7 @@ def get_request_data(
         media=None,
         location=None,
         phone_number=None,
+        callback_message_id=None,
 ):
     request = {
         'telegram_id': telegram_id,
@@ -42,6 +43,7 @@ def get_request_data(
         'media': media,
         'location': location,
         'phone_number': phone_number,
+        'callback_message_id': callback_message_id,
     }
 
     return request
