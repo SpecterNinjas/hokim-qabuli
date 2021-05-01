@@ -36,30 +36,22 @@ def main_menu(bot: Bot, update: Update):
 
     first_name_sign = '✅️ ' if request['first_name'] else '❗️'
     first_name = request['first_name'] if request['first_name'] else no_data[user.lang]
-
     last_name_sign = '✅️ ' if request['last_name'] else '❗️'
     last_name = request['last_name'] if request['last_name'] else no_data[user.lang]
-
     middle_name_sign = '✅️ ' if request['middle_name'] else '❗️'
     middle_name = request['middle_name'] if request['middle_name'] else no_data[user.lang]
-
     date_of_birth_sign = '✅️ ' if request['year_of_birth'] and request['month_of_birth'] and request[
         'day_of_birth'] else '❗️'
     date_of_birth = request['year_of_birth'] and request['month_of_birth'] and request['day_of_birth'] if request[
         'year_of_birth'] and request['month_of_birth'] and request['day_of_birth'] else no_data[user.lang]
-
     gender_sign = '✅️ ' if request['gender'] else '❗️'
     gender = request['gender'] if request['gender'] else no_data[user.lang]
-
     district_sign = '✅️ ' if request['district'] else '❗️'
     district = request['district'] if request['district'] else no_data[user.lang]
-
     problem_type_sign = '✅️ ' if request['problem_type'] else '❗️'
     problem_type = request['problem_type'] if request['problem_type'] else no_data[user.lang]
-
     sub_problem_sign = '✅️ ' if request['sub_problem'] else '❗️'
     sub_problem = request['sub_problem'] if request['sub_problem'] else no_data[user.lang]
-
     short_description_sign = '✅️ ' if request['short_description'] else '❗️'
     short_description = request['short_description'] if request['short_description'] else no_data[user.lang]
 

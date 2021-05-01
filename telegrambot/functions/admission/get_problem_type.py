@@ -1,9 +1,8 @@
-from telegram import Bot, Update, InlineKeyboardMarkup
-
+from telegram import Bot, Update
 from telegrambot import states
 from telegrambot.helpers import generate_inline_keyboard
 from telegrambot.models import Text
-from telegrambot.services import get_user_lang
+from telegrambot.services import get_user_lang, edit_or_send_message
 
 
 def get_problem_type(bot: Bot, update: Update):
@@ -16,19 +15,5 @@ def get_problem_type(bot: Bot, update: Update):
 
     inline_keyboard = generate_inline_keyboard(data[f"buttons_{user.lang}"], update.effective_chat.id)
 
-    try:
-        bot.edit_message_text(
-            chat_id=update.effective_chat.id,
-            text=text,
-            message_id=update.callback_query.message.message_id,
-            reply_markup=InlineKeyboardMarkup(inline_keyboard),
-            parse_mode='Markdown'
-        )
-    except:
-        bot.send_message(
-            chat_id=update.effective_chat.id,
-            text=text,
-            reply_markup=InlineKeyboardMarkup(inline_keyboard),
-            parse_mode='Markdown',
-        )
+    edit_or_send_message(bot, update, text, inline_keyboard)
     return states.GET_PROBLEM_TYPE
