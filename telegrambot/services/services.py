@@ -55,21 +55,30 @@ def delete_previous_message_with_button(bot: Bot, external_id):
     )
 
 
-def get_suggestion_button(update: Update, model_field, callback_data):
-    user = get_user_lang(update.effective_chat.id)
+def download_cache_data(update: Update):
+    applicant = Murojatchi.objects.filter(telegram_id=update.effective_chat.id).last()
+    request = cache.get(f'request_{update.effective_chat.id}')
+    request['last_name'] = applicant.last_name
+    request['middle_name'] = applicant.last_name
+    request['year_of_birth'] = applicant.year_of_birth
+    request['month_of_birth'] = applicant.month_of_birth
+    request['day_of_birth'] = applicant.day_of_birth
+    request['phone_number'] = applicant.phone
+    cache.set(f'request_{update.effective_chat.id}', request)
 
-    inline_keyboard = []
-    if Murojatchi.objects.filter(telegram_id=update.effective_chat.id).exists():
-        data = model_field
-        inline_keyboard.append(
-            [
-                InlineKeyboardButton(data, callback_data=f'{callback_data}')
-            ]
-        )
-    btn_text = '⬅Orqaga' if user.lang == 'uz' else '⬅Назад'
-    inline_keyboard.append(
-        [
-            InlineKeyboardButton(btn_text, callback_data='back_to_admission_menu')
-        ]
-    )
-    return inline_keyboard
+# def get_suggestion_button(update: Update, model_field, callback_data, user):
+#
+#     inline_keyboard = []
+#     if Murojatchi.objects.filter(telegram_id=update.effective_chat.id).exists():
+#         inline_keyboard.append(
+#             [
+#                 InlineKeyboardButton(model_field, callback_data=f'{callback_data}')
+#             ]
+#         )
+#     btn_text = '⬅Orqaga' if user.lang == 'uz' else '⬅Назад'
+#     inline_keyboard.append(
+#         [
+#             InlineKeyboardButton(btn_text, callback_data='back_to_admission_menu')
+#         ]
+#     )
+#     return inline_keyboard

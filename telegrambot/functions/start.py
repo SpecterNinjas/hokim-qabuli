@@ -1,8 +1,7 @@
 from django.apps import apps
 from django.core.cache import cache
 from telegram import Bot, Update, InlineKeyboardButton, InlineKeyboardMarkup
-
-from telegrambot import states, models
+from telegrambot import states
 from telegrambot.apps import log_errors
 from telegrambot.helpers import get_request_data
 
@@ -10,16 +9,6 @@ from telegrambot.helpers import get_request_data
 @log_errors
 def start(bot: Bot, update: Update):
     print('START')
-
-    user_model = apps.get_model('telegrambot', 'TelegramProfile')
-    try:
-        user = user_model.objects.get(external_id=update.effective_chat.id)
-    except Exception:
-        user = user_model.objects.create(
-            external_id=update.effective_chat.id,
-            username=update.message.from_user.username,
-        )
-
     if cache.get(f'request_{update.effective_chat.id}') is None:
         request = get_request_data()
         cache.set(f'request_{update.effective_chat.id}', request)

@@ -60,13 +60,22 @@ def inline_button_handler(bot: Bot, update: Update):
         admission.get_media(bot, update)
         return states.GET_MEDIA
 
-    # if callback_data == 'location':
-    #     admission.get_location(bot, update)
-    #     return states.GET_FILE
-
     if callback_data == 'phone_number':
         admission.get_phone_number(bot, update)
         return states.GET_PHONE_NUMBER
+    # ---------------------------------------- #
+
+    # ----------SUGGESTION SETTERS------------ #
+    if callback_data == 'set_first_name':
+        pass
+    if callback_data == 'set_last_name':
+        pass
+    if callback_data == 'set_middle_name':
+        pass
+    if callback_data == 'set_set_year_of_birth':
+        pass
+    if callback_data == 'set_set_day_of_birth':
+        pass
     # ---------------------------------------- #
 
     if callback_data == 'back_to_problem_type':

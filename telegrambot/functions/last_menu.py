@@ -28,19 +28,25 @@ def last_menu(bot: Bot, update: Update):
     else:
         mahalla = Mahalla.objects.get(title_uz=request['district'])
 
-    m = Murojatchi.objects.create(telegram_id=update.effective_chat.id)
-    m.fullname = request['first_name'] + request['last_name'] + request['middle_name']
-    m.username = update.effective_chat.username
-    m.hudud = hudud
-    m.mahalla = mahalla
-    # m.murojat_turi = ''
-    # m.muammo = ''
-    # m.category = ''
-    # m.media = ''
-    # m.location = ''
-    m.description = request['short_description']
-    m.phone = request['phone_number']
-    m.save()
+    applicant = Murojatchi.objects.create(telegram_id=update.effective_chat.id)
+    applicant.username = update.effective_chat.username
+    applicant.fullname = request['first_name']
+    applicant.last_name = request['last_name']
+    applicant.middle_name = request['middle_name']
+    applicant.year_of_birth = request['year_of_birth']
+    applicant.month_of_birth = request['month_of_birth']
+    applicant.day_of_birth = request['day_of_birth']
+    applicant.gender = request['gender']
+    applicant.hudud = hudud
+    applicant.mahalla = mahalla
+    applicant.murojat_turi = ''
+    applicant.muammo = ''
+    applicant.category = ''
+    applicant.media = ''
+    applicant.location = ''
+    applicant.description = request['short_description']
+    applicant.phone = request['phone_number']
+    applicant.save()
 
     keyboard = []
     my_admissions_text = "Murojatlar" if user.lang == 'uz' else 'Заявки'
