@@ -1,10 +1,12 @@
 from telegram import Bot, Update, InlineKeyboardMarkup
-
+from telegrambot import states
+from telegrambot.apps import log_errors
 from telegrambot.helpers import generate_inline_keyboard
 from telegrambot.models import Text
 from telegrambot.services import get_user_lang
 
 
+@log_errors
 def get_gender(bot: Bot, update: Update):
     print('get_gender')
 
@@ -30,3 +32,4 @@ def get_gender(bot: Bot, update: Update):
             reply_markup=InlineKeyboardMarkup(inline_keyboard),
             parse_mode='Markdown',
         )
+    return states.GET_GENDER

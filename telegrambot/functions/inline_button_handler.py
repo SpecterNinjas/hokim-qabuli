@@ -45,13 +45,13 @@ def inline_button_handler(bot: Bot, update: Update):
         admission.get_short_description(bot, update)
         return states.GET_SHORT_DESCRIPTION
 
-    # if callback_data == 'problem_address':
-    #     admission.get_problem_address(bot, update)
-    #     return states.GET_PROBLEM_ADDRESS
-    #
-    # if callback_data == 'media':
-    #     admission.get_media(bot, update)
-    #     return states.GET_MEDIA
+    if callback_data == 'problem_address':
+        admission.get_problem_address(bot, update)
+        return states.GET_PROBLEM_ADDRESS
+
+    if callback_data == 'media':
+        admission.get_media(bot, update)
+        return states.GET_MEDIA
 
     if callback_data == 'phone_number':
         admission.get_phone_number(bot, update)
