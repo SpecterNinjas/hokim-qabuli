@@ -28,10 +28,7 @@ msgstr "Узбек"
 msgid "Русский"
 msgstr "Русский"
 
-#: .\panel\models.py:6 .\templates\panel\mahalla\create.html:65
-#: .\templates\panel\mahalla\update.html:65
-msgid "Mahalla nomi"
-msgstr "Название Махалли"
+
 
 #: .\panel\models.py:7 .\panel\models.py:77
 #: .\templates\panel\mahalla\create.html:145
@@ -418,10 +415,7 @@ msgstr "Введите адрес маxалли"
 msgid "Mahalla telefon raqamini kiriting. Masalan: 998907654321"
 msgstr "Введите номер телефона маxалли. Например: 998907654321"
 
-#: .\templates\panel\mahalla\index.html:81
-#: .\templates\panel\qabul\index.html:67
-msgid "Mahalla Nomi"
-msgstr "Название Mаxалли"
+
 
 #: .\templates\panel\mahalla\update.html:34
 msgid "Mahalla Ma'lumotlarini O'zgartirish"

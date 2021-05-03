@@ -4,6 +4,8 @@ from django.utils.translation import ugettext_lazy as _
 
 class Mahalla(models.Model):
     title = models.CharField(_("Mahalla nomi"), max_length=256, null=True)
+    title_ru = models.CharField(_("Mahalla nomi_ru"), max_length=256, null=True)
+    title_uz = models.CharField(_("Mahalla nomi_uz"), max_length=256, null=True)
     region = models.CharField(verbose_name='Tuman', max_length=255, null=True)
     token = models.CharField(max_length=1024, null=True)
     location = models.CharField(_("Manzil"), max_length=256, null=True)
@@ -108,7 +110,7 @@ class Murojatchi(models.Model):
     gender = models.PositiveBigIntegerField(_("Gender"), choices=GENDER, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.fullname}"
+        return f"{str(self.telegram_id)}"
 
     class Meta:
         verbose_name = _('Murojatchi')
@@ -117,7 +119,7 @@ class Murojatchi(models.Model):
 
 class Reception(models.Model):
     title = models.CharField(_("Qabul Nomi"), max_length=256)
-    fullname = models.ForeignKey(Murojatchi, on_delete=models.CASCADE, default=True, null=True)
+    telegram_id = models.ForeignKey(Murojatchi, on_delete=models.CASCADE, default=True, null=True)
     appointment = models.DateField(null=True, blank=True)
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)

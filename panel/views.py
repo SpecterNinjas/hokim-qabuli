@@ -54,6 +54,16 @@ class MainView(LoginRequiredMixin, ListView):
     template_name = 'panel/main/index.html'
 
 
+class StatisticsView(LoginRequiredMixin, ListView):
+    queryset = Murojatchi.objects.all()
+    template_name = 'panel/statistics/statistics.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(StatisticsView, self).get_context_data(**kwargs)
+        context['muammolar'] = Muammo.objects.all()
+        context['a'] = Murojatchi.objects.all()
+        return context
+
 """ Mahalla Part """
 
 
@@ -345,7 +355,7 @@ class FoydalanuvchiUpdateView(LoginRequiredMixin, UpdateView):
 class QabulView(LoginRequiredMixin, ListView):
     template_name = 'panel/qabul/index.html'
     context_object_name = 'object_list'
-    form_class = MurojatchiForm
+    form_class = ReceptionForm
     model = Murojatchi
     queryset = Mahalla.objects.all()
 
@@ -384,7 +394,7 @@ def ajax_mahalla(request):
 
         muammo = Muammo.objects.all()
 
-        json_add = serializers.serialize("json", add, fields=['fullname', 'phone', 'created', 'muammo'],
+        json_add = serializers.serialize("json", add, fields=['fullname', 'phone', 'created', 'muammo','telegram_id'],
                                          use_natural_foreign_keys=True, use_natural_primary_keys=True)
         json_add2 = serializers.serialize("json", muammo, fields=['pk', 'title'])
 
@@ -431,7 +441,7 @@ def ajaxfilter(request):
             if user_count:
                 json_add[str(i)] = user_count
 
-        json_users = serializers.serialize("json", queryset_users, fields=['fullname', 'phone', 'created'])
+        json_users = serializers.serialize("json", queryset_users, fields=['fullname', 'phone', 'created','telegram_id'])
 
         data = {
             'query': json_add,
@@ -469,7 +479,7 @@ def ajax_filter_category(request):
                 Q(category__category=category) & Q(mahalla__title__in=checked_categories))
             add.extend(query_item)
 
-        json_add = serializers.serialize("json", add, fields=['fullname', 'phone', 'created'],
+        json_add = serializers.serialize("json", add, fields=['fullname', 'phone', 'created', 'telegram_id'],
                                          use_natural_foreign_keys=True, use_natural_primary_keys=True)
         data = {
             'query': json_add,

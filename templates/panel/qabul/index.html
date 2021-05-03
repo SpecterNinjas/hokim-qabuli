@@ -205,7 +205,9 @@
             <div class="col-md-3 ml-2">
                 <input type="date" name="appointment" required class="form-control">
             </div>
-            <div class="col-md-9"></div>
+            <div class="col-md-9">
+                {{ form.telegram_id }}
+            </div>
         </div>
         <button class="btn btn-info m-2" type="submit">{% trans 'Yaratish' %}</button>
     </form>
@@ -283,7 +285,7 @@
 
                         json_data.forEach(function (d) {
                             $('.murojatchi-contents').find('tbody').append('<tr>' +
-                                '<td><input type="checkbox" class="murojatchi-checkbox" name="murojatchi"></td>' +
+                                '<td><input type="checkbox" class="murojatchi-checkbox" name="'+ d.fields.telegram_id+ '"></td>' +
                                 '<td class="text-left">' + d.fields.fullname + '</td>' +
                                 '<td class="text-left">' + d.fields.phone + '</td>' +
                                 '<td class="text-left">' + d.fields.created + '</td>' +
@@ -339,7 +341,7 @@
 
                         JSON.parse(data.users).forEach(function (d) {
                             $('.murojatchi-contents').find('tbody').append('<tr>' +
-                                '<td><input type="checkbox" class="murojatchi-checkbox" name="murojatchi"></td>' +
+                                '<td><input type="checkbox" class="murojatchi-checkbox" name="'+ d.fields.telegram_id+ '"></td>' +
                                 '<td class="text-left">' + d.fields.fullname + '</td>' +
                                 '<td class="text-left">' + d.fields.phone + '</td>' +
                                 '<td class="text-left">' + d.fields.created + '</td>' +
@@ -381,7 +383,7 @@
 
                         JSON.parse(data.query).forEach(function (d) {
                             $('.murojatchi-contents').find('tbody').append('<tr>' +
-                                '<td><input type="checkbox" class="murojatchi-checkbox" name="murojatchi"></td>' +
+                                '<td><input type="checkbox" class="murojatchi-checkbox" name="'+ d.fields.telegram_id+ '"></td>' +
                                 '<td class="text-left">' + d.fields.fullname + '</td>' +
                                 '<td class="text-left">' + d.fields.phone + '</td>' +
                                 '<td class="text-left">' + d.fields.created + '</td>' +
@@ -405,7 +407,7 @@
               $('body').on('click', '.murojatchi-checkbox', function () {
                 let choices = {}
 
-                $('input[type=checkbox]:checked').each(function () {
+                $('.murojatchi-checkbox:input[type=checkbox]:checked').each(function () {
 
                     choices[this.name] = this.value
 

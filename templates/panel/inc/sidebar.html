@@ -23,9 +23,9 @@
 
             <li class="navigation-header"><span>{% trans "Ma'muriyat" %}</span></li>
 
-            <li class="nav-item news">
-                <a href="#">
-                         <span class="menu-item"><i class="fa fa-list mr-1" aria-hidden="true"></i>
+            <li class="nav-item news {% if 'statistics' in request.path %}aaa{% endif %}">
+                <a href="{% url 'panel:statistics' %}">
+                         <span class="menu-item"><i class="fa fa-bar-chart mr-1" aria-hidden="true"></i>
                              {% trans 'Statistika' %}</span></a>
             </li>
 
@@ -51,7 +51,7 @@
 
             <li class="nav-item news {% if 'qabul' in request.path %}aaa{% endif %}">
                 <a href="{% url 'panel:qabul' %}">
-                         <span class="menu-item"><i class="fa fa-envelope mr-1" aria-hidden="true"></i>
+                         <span class="menu-item"><i class="fa fa-calendar mr-1" aria-hidden="true"></i>
                             {% trans "Qabullar" %}</span></a>
             </li>
 
@@ -66,6 +66,7 @@
                             <i class="fa fa-circle-o"></i><span
                                 class="menu-item">{% trans "Hududlar" %}</span></a>
                     </li>
+
                     <li>
                         <a href="{% url 'panel:mahalla' %}">
                             <i class="fa fa-circle-o"></i><span

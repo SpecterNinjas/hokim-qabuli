@@ -28,19 +28,11 @@ class SubMuammoAdmin(TranslationAdmin):
 
 
 @admin.register(Murojatchi)
-<<<<<<< HEAD
 class MurojatchiAdmin(TranslationAdmin):
     list_display = ['telegram_id', 'username', 'fullname', 'hudud', 'mahalla', 'muammo', 'category', 'phone',
                     'reply_message', 'created',
                     'status']
 
-=======
-class MurojatchiAdmin(admin.ModelAdmin):
-    list_display = ['telegram_id', 'username', 'fullname', 'year_of_birth',
-                    'month_of_birth', 'day_of_birth', 'gender', 'hudud', 'mahalla', 'muammo', 'category', 'phone',
-                    'description', 'reply_message', 'created', 'status']
->>>>>>> e9dd7abd78320142ff2340b3dbeb4ea79aecd580
-    search_fields = ['fullname', ]
 
 
 @admin.register(Reception)
