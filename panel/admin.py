@@ -29,7 +29,7 @@ class SubMuammoAdmin(admin.ModelAdmin):
 
 @admin.register(Murojatchi)
 class MurojatchiAdmin(admin.ModelAdmin):
-    list_display = ['telegram_id', 'username', 'fullname', 'last_name', 'middle_name', 'year_of_birth',
+    list_display = ['telegram_id', 'username', 'fullname', 'year_of_birth',
                     'month_of_birth', 'day_of_birth', 'gender', 'hudud', 'mahalla', 'muammo', 'category', 'phone',
                     'description', 'reply_message', 'created', 'status']
     search_fields = ['fullname', ]

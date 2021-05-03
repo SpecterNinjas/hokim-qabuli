@@ -30,29 +30,29 @@ def last_menu(bot: Bot, update: Update):
 
     applicant = Murojatchi.objects.create(telegram_id=update.effective_chat.id)
     applicant.username = update.effective_chat.username
-    applicant.fullname = request['first_name']
-    applicant.last_name = request['last_name']
-    applicant.middle_name = request['middle_name']
+    applicant.fullname = request['name']
     applicant.year_of_birth = request['year_of_birth']
     applicant.month_of_birth = request['month_of_birth']
     applicant.day_of_birth = request['day_of_birth']
     applicant.gender = request['gender']
     applicant.hudud = hudud
     applicant.mahalla = mahalla
-    applicant.murojat_turi = ''
-    applicant.muammo = ''
-    applicant.category = ''
-    applicant.media = ''
-    applicant.location = ''
+    # applicant.murojat_turi = ''
+    # applicant.muammo = ''
+    # applicant.category = ''
+    # applicant.media = ''
+    # applicant.location = ''
     applicant.description = request['short_description']
     applicant.phone = request['phone_number']
     applicant.save()
 
     keyboard = []
-    my_admissions_text = "Murojatlar" if user.lang == 'uz' else 'Заявки'
+    admissions_text = "Hokim qabuliga yozish" if user.lang == 'uz' else 'Письмо к приему Хакима'
+    appeal_text = "Hokimga murojat" if user.lang == 'uz' else 'Обращение к Хакиму'
+    my_appeals = "Mening murojatlarim" if user.lang == 'uz' else 'Мои заявки'
     lang_text = "Tilni o'zgartirish" if user.lang == 'uz' else 'Поменять язык'
 
-    keyboard.append([KeyboardButton(my_admissions_text)])
+    keyboard.append([KeyboardButton(admissions_text)])
     keyboard.append([KeyboardButton(lang_text)])
     try:
         bot.delete_message(

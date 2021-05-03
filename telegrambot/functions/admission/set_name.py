@@ -8,8 +8,8 @@ from telegrambot.services.services import delete_previous_message_with_button
 
 
 @log_errors
-def set_first_name(bot: Bot, update: Update):
-    print('set_first_name')
+def set_name(bot: Bot, update: Update):
+    print('set_name')
 
     user = get_user_lang(update.effective_chat.id)
     name = update.message.text
@@ -25,13 +25,12 @@ def set_first_name(bot: Bot, update: Update):
             parse_mode='Markdown'
         )
 
-        return states.GET_FIRST_NAME
+        return states.GET_NAME
 
     request = cache.get(f'request_{update.effective_chat.id}')
-    request['first_name'] = name
+    request['name'] = name
     request['telegram_id'] = update.effective_chat.id
     cache.set(f'request_{update.effective_chat.id}', request)
     delete_previous_message_with_button(bot, update.effective_chat.id)
     send_saved_message_text(user, bot, update)
-
-    return functions.admission.get_last_name(bot, update)
+    return functions.admission.get_birth_year(bot, update)

@@ -4,9 +4,7 @@ from telegram import InlineKeyboardButton
 def get_request_data(
         telegram_id=None,
         request_type=None,
-        first_name=None,
-        last_name=None,
-        middle_name=None,
+        name=None,
 
         year_of_birth=None,
         month_of_birth=None,
@@ -26,9 +24,7 @@ def get_request_data(
     request = {
         'telegram_id': telegram_id,
         'request_type': request_type,
-        'first_name': first_name,
-        'last_name': last_name,
-        'middle_name': middle_name,
+        'name': name,
 
         'year_of_birth': year_of_birth,
         'month_of_birth': month_of_birth,
@@ -70,9 +66,7 @@ def generate_inline_keyboard(data, chat_id=None):
 
 def validate_admission_info(request):
     if (request['telegram_id'] and
-            request['first_name'] and
-            request['last_name'] and
-            request['middle_name'] and
+            request['name'] and
             request['year_of_birth'] and
             request['month_of_birth'] and
             request['day_of_birth'] and

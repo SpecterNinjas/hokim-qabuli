@@ -176,4 +176,4 @@ STATICFILES_DIRS = [STATIC_DIR, ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 TELEGRAM_TOKEN = '688249185:AAHYsn4bQcauJDmd7zUN-MWoaJZSnKQcZJI'
-HOST = 'https://6943fe97c1ba.ngrok.io'
+HOST = 'https://2f756c5974f9.ngrok.io'

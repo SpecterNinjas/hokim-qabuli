@@ -1,4 +1,4 @@
-from telegram import Bot, Update
+from telegram import Bot, Update, InlineKeyboardMarkup
 from telegrambot import states
 from telegrambot.apps import log_errors
 from telegrambot.helpers import generate_inline_keyboard
@@ -7,13 +7,14 @@ from telegrambot.services import get_user_lang, edit_or_send_message
 
 
 @log_errors
-def get_middle_name(bot: Bot, update: Update):
-    print('get_middle_name')
+def get_name(bot: Bot, update: Update):
+    print('get_name')
 
     user = get_user_lang(update.effective_chat.id)
-    data = Text.objects.filter(text_id='GET_MIDDLE_NAME').values()[0]
+    data = Text.objects.filter(text_id='GET_NAME').values()[0]
     text = data[user.lang]
-    inline_keyboard = generate_inline_keyboard(data[f"buttons_{user.lang}"], update.effective_chat.id)
-    edit_or_send_message(bot, update, text, inline_keyboard)
 
-    return states.GET_MIDDLE_NAME
+    inline_keyboard = generate_inline_keyboard(data[f"buttons_{user.lang}"], update.effective_chat.id)
+
+    edit_or_send_message(bot, update, text, inline_keyboard)
+    return states.GET_NAME

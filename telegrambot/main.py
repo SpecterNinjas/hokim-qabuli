@@ -25,19 +25,9 @@ conv_handler = ConversationHandler(
             main_handler,
         ],
 
-        states.GET_FIRST_NAME: [
+        states.GET_NAME: [
             start_handler,
-            MessageHandler(Filters.text, admission.set_first_name),
-            main_handler,
-        ],
-        states.GET_LAST_NAME: [
-            start_handler,
-            MessageHandler(Filters.text, admission.set_last_name),
-            main_handler,
-        ],
-        states.GET_MIDDLE_NAME: [
-            start_handler,
-            MessageHandler(Filters.text, admission.set_middle_name),
+            MessageHandler(Filters.text, admission.set_name),
             main_handler,
         ],
         states.GET_BIRTH_YEAR: [

@@ -20,17 +20,9 @@ def inline_button_handler(bot: Bot, update: Update):
         return states.MAIN
 
     # ---ADMISSION MENU BUTTONS HANDLERS--- #
-    if callback_data == 'first_name':
-        admission.get_first_name(bot, update)
-        return states.GET_FIRST_NAME
-
-    if callback_data == 'last_name':
-        admission.get_last_name(bot, update)
-        return states.GET_LAST_NAME
-
-    if callback_data == 'middle_name':
-        admission.get_middle_name(bot, update)
-        return states.GET_MIDDLE_NAME
+    if callback_data == 'full_name':
+        admission.get_name(bot, update)
+        return states.GET_NAME
 
     if callback_data == 'date_of_birth':
         admission.get_birth_year(bot, update)
