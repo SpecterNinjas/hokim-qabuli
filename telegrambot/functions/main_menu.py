@@ -12,7 +12,7 @@ from telegrambot.services import get_user_lang
 def main_menu(bot: Bot, update: Update):
     print('main_menu')
 
-    user = get_user_lang(update.effective_chat.id)
+    user = get_user_lang(update)
 
     data = Text.objects.filter(text_id='LAST_MENU').values()[0]
     text = data[user.lang]

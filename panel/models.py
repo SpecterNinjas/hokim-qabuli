@@ -4,8 +4,6 @@ from django.utils.translation import ugettext_lazy as _
 
 class Mahalla(models.Model):
     title = models.CharField(_("Mahalla nomi"), max_length=256, null=True)
-    name_uz = models.CharField(max_length=256, null=True)
-    name_ru = models.CharField(max_length=256, null=True)
     region = models.CharField(verbose_name='Tuman', max_length=255, null=True)
     token = models.CharField(max_length=1024, null=True)
     location = models.CharField(_("Manzil"), max_length=256, null=True)

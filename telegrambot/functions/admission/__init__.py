@@ -34,12 +34,12 @@ from .set_social_security_problem import set_social_security_problem
 from .get_short_description import get_short_description
 from .set_short_description import set_short_description
 
-# from .get_media import get_media
-# from .set_media import set_media
-#
-# from .get_problem_address import get_problem_address
-# from .set_problem_address import set_problem_address
-#
+from .get_media import get_media
+from .set_media import set_media
+
+from .get_problem_address import get_problem_address
+from .set_problem_address import set_problem_address
+
 # from .get_location import get_location
 # from .set_location import set_location
 

@@ -22,7 +22,7 @@ def set_gender(bot: Bot, update: Update):
                 gender = button.split('>')[0]
 
     if update.callback_query.data == 'back_to_admission_menu':
-        functions.main_menu(bot, update)
+        functions.request_menu(bot, update)
         return states.MAIN
 
     # delete_previous_message_with_button(bot, update)
