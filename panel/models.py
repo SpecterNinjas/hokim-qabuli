@@ -3,9 +3,11 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class Mahalla(models.Model):
-    title = models.CharField(_("Mahalla nomi"), max_length=256)
-    location = models.CharField(_("Manzil"), max_length=256)
-    phone = models.CharField(_("Telefon"), max_length=13)
+    title = models.CharField(_("Mahalla nomi"), max_length=256, null=True)
+    region = models.CharField(verbose_name='Tuman', max_length=255, null=True)
+    token = models.CharField(max_length=1024, null=True)
+    location = models.CharField(_("Manzil"), max_length=256, null=True)
+    phone = models.CharField(_("Telefon"), max_length=13, null=True)
 
     def __str__(self):
         return self.title
@@ -38,7 +40,7 @@ class Muammo(models.Model):
 
 class SubMuammo(models.Model):
     title = models.ForeignKey(Muammo, on_delete=models.CASCADE, default='')
-    category = models.CharField(_("Kategoriya"), max_length=64)
+    category = models.CharField(_("Kategoriya"), max_length=64, default="Default")
 
     def __str__(self):
         return str(self.category)
@@ -74,29 +76,55 @@ class Murojatchi(models.Model):
         ("Qabul", _("Qabul")),
     )
 
+    GENDER = (
+        (1, _("Erkak")),
+        (2, _("Ayol")),
+    )
+
     id = models.BigAutoField(primary_key=True)
-    telegram_id = models.PositiveBigIntegerField(_("Telegram ID"))
-    fullname = models.CharField(_("Ism Sharifi"), max_length=256)
-    username = models.CharField(_("Username"), max_length=32)
-    hudud = models.ForeignKey(Hudud, on_delete=models.CASCADE, default=0)
-    mahalla = models.ForeignKey(Mahalla, on_delete=models.CASCADE)
-    murojat_turi = models.CharField(max_length=16, choices=MUROJAT_TURI, default=2)
-    muammo = models.ForeignKey(Muammo, on_delete=models.CASCADE)
-    category = models.ForeignKey(SubMuammo, on_delete=models.CASCADE)
+    telegram_id = models.PositiveBigIntegerField(_("Telegram ID"), blank=True, null=True)
+    fullname = models.CharField(_("Ism Sharifi"), max_length=256, blank=True, null=True)
+    username = models.CharField(_("Username"), max_length=32, blank=True, null=True)
+    hudud = models.ForeignKey(Hudud, on_delete=models.CASCADE, blank=True, null=True)
+    mahalla = models.ForeignKey(Mahalla, on_delete=models.CASCADE, blank=True, null=True)
+    murojat_turi = models.CharField(max_length=16, choices=MUROJAT_TURI, blank=True, null=True)
+    muammo = models.ForeignKey(Muammo, on_delete=models.CASCADE, blank=True, null=True)
+    category = models.ForeignKey(SubMuammo, on_delete=models.CASCADE, blank=True, null=True)
     media = models.FileField(_("Media"), upload_to='muammo_media/', blank=True, null=True)
     location = models.CharField(_("Manzil"), max_length=300, blank=True, null=True)
-    description = models.TextField(_("Murojat Matni"))
-    phone = models.CharField(_("Telefon"), max_length=13)
+    description = models.TextField(_("Murojat Matni"), null=True, blank=True)
+    phone = models.CharField(_("Telefon"), max_length=13, blank=True, null=True)
+    accepted = models.BooleanField(_("Qabulga Chaqirildi"), default=False)
 
-    reply_message = models.TextField(_("Javob Matni"), default=_("Javob berilmagan"))
-    created = models.DateField(_("Murojat Sanasi"), auto_now_add=True)
-    updated = models.DateField(_("O'zgartish Kiritilgan Sana"), auto_now_add=True)
+    reply_message = models.TextField(_("Javob Matni"), default=_("Javob berilmagan"), blank=True, null=True)
+    created = models.DateField(_("Murojat Sanasi"), auto_now_add=True, null=True, blank=True)
+    updated = models.DateField(_("O'zgartish Kiritilgan Sana"), auto_now_add=True, null=True, blank=True)
     status = models.CharField(_("Murojatchi Statusi"), max_length=32, choices=MUROJATCHI_STATUSI,
-                              default=MUROJATCHI_STATUSI[0][0])
+                              default=MUROJATCHI_STATUSI[0][0], null=True, blank=True)
+
+    year_of_birth = models.CharField(_("Tug'ilgan yil"), max_length=256, null=True, blank=True)
+    month_of_birth = models.CharField(_("Tug'ilgan oy"), max_length=256, null=True, blank=True)
+    day_of_birth = models.CharField(_("Tug'ilgan kun"), max_length=256, null=True, blank=True)
+    gender = models.PositiveBigIntegerField(_("Gender"), choices=GENDER, null=True, blank=True)
 
     def __str__(self):
-        return self.fullname
+        return f"{self.fullname}"
 
     class Meta:
         verbose_name = _('Murojatchi')
         verbose_name_plural = _('Murojatchilar')
+
+
+class Reception(models.Model):
+    title = models.CharField(_("Qabul Nomi"), max_length=256)
+    fullname = models.ForeignKey(Murojatchi, on_delete=models.CASCADE, default=True, null=True)
+    appointment = models.DateField(null=True, blank=True)
+    created = models.DateField(auto_now_add=True)
+    updated = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = _('Qabul')
+        verbose_name_plural = _('Qabullar')

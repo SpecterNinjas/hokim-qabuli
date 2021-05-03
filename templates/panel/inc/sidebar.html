@@ -23,6 +23,11 @@
 
             <li class="navigation-header"><span>{% trans "Ma'muriyat" %}</span></li>
 
+            <li class="nav-item news">
+                <a href="#">
+                         <span class="menu-item"><i class="fa fa-list mr-1" aria-hidden="true"></i>
+                             {% trans 'Statistika' %}</span></a>
+            </li>
 
             <li class="nav-item news {% if 'murojatchi' in request.path %}aaa{% endif %}">
                 <a href="{% url 'panel:murojatchi' %}">

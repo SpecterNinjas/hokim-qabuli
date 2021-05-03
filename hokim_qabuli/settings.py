@@ -59,7 +59,7 @@ INSTALLED_APPS = [
 
     # APPS
     'panel',
-    'telegrambot',
+
 
     # INSTALLED
     'corsheaders',  # To avoid Cors Error

@@ -1,0 +1,67 @@
+[
+	{
+		"title": "January",
+        "title_uz": "Yanvar",
+        "title_ru": "Январь"
+
+	},
+	{
+		"title": "February",
+        "title_uz": "Fevral",
+        "title_ru": "Февраль"
+      },
+	{
+		"title": "March",
+        "title_uz": "Mart",
+        "title_ru": "Март"
+
+	},
+	{
+		"title": "April",
+        "title_uz": "Aprel",
+        "title_ru": "Апрель"
+      },
+	{
+		"title": "May",
+        "title_uz": "May",
+        "title_ru": "Май"
+
+	},
+	{
+		"title": "June",
+        "title_uz": "Iyun",
+        "title_ru": "Июнь"
+      },
+	{
+		"title": "July",
+        "title_uz": "Iyul",
+        "title_ru": "Июль"
+
+	},
+	{
+		"title": "August",
+        "title_uz": "Avgust",
+        "title_ru": "Август"
+      },
+	{
+		"title": "September",
+        "title_uz": "Sentyabar",
+        "title_ru": "Сентябрь"
+	},
+	{
+		"title": "October",
+        "title_uz": "Oktyabr",
+        "title_ru": "Октябрь"
+      },
+	{
+		"title": "November",
+        "title_uz": "Noyabr",
+        "title_ru": "Ноябрь"
+
+	},
+	{
+		"title": "December",
+        "title_uz": "Dekabr",
+        "title_ru": "Декабрь"
+	}
+]

@@ -31,6 +31,8 @@ urlpatterns = [
     path("kategoriya_yaratish/", KategoriyaCreateView.as_view(), name="kategoriya_create"),
     path("kategoriya/<int:pk>/", KategoriyaUpdateView.as_view(), name="kategoriya_update"),
     path("kategoriya_uchirish/<int:pk>/", KategoriyaDeleteView.as_view(), name="kategoriya_delete"),
+    path("ajax/filter_category", ajax_filter_category, name = "ajax_filter_category"),
+
 
     # Foydalanuvchi
     path("foydalanuvchi/", FoydalanuvchiView.as_view(), name="foydalanuvchi"),
