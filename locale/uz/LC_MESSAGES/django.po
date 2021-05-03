@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-29 13:49+0500\n"
+"POT-Creation-Date: 2021-04-29 18:01+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: .\hokim_qabuli\settings.py:127 .\hokim_qabuli\settings.py:136
+#: .\hokim_qabuli\settings.py:128 .\hokim_qabuli\settings.py:137
 msgid "O'zbek"
 msgstr ""
 
-#: .\hokim_qabuli\settings.py:128
+#: .\hokim_qabuli\settings.py:129
 msgid "Русский"
 msgstr ""
 
@@ -35,15 +35,19 @@ msgstr ""
 #: .\templates\panel\mahalla\create.html:145
 #: .\templates\panel\mahalla\index.html:82
 #: .\templates\panel\mahalla\update.html:145
+#: .\templates\panel\murojatchi\reply.html:113
+#: .\templates\panel\murojatchi\see.html:138
 msgid "Manzil"
 msgstr ""
 
 #: .\panel\models.py:8 .\panel\models.py:79
+#: .\templates\panel\foydalanuvchi\see.html:80
 #: .\templates\panel\foydalanuvchi\update.html:162
 #: .\templates\panel\mahalla\create.html:177
 #: .\templates\panel\mahalla\index.html:83
 #: .\templates\panel\mahalla\update.html:177
 #: .\templates\panel\murojatchi\index.html:89
+#: .\templates\panel\murojatchi\see.html:74
 #: .\templates\panel\qabul\index.html:185
 msgid "Telefon"
 msgstr ""
@@ -52,11 +56,13 @@ msgstr ""
 #: .\templates\panel\mahalla\index.html:29
 #: .\templates\panel\murojatchi\index.html:86
 #: .\templates\panel\murojatchi\index.html:186
+#: .\templates\panel\murojatchi\reply.html:91
 #: .\templates\panel\murojatchi\search.html:77
+#: .\templates\panel\murojatchi\see.html:116
 msgid "Mahalla"
 msgstr ""
 
-#: .\panel\models.py:15
+#: .\panel\models.py:15 .\templates\panel\inc\sidebar.html:62
 msgid "Mahallalar"
 msgstr ""
 
@@ -65,12 +71,14 @@ msgstr ""
 msgid "Muammo nomi"
 msgstr ""
 
-#: .\panel\models.py:26
+#: .\panel\models.py:26 .\templates\panel\inc\sidebar.html:67
 msgid "Muammolar"
 msgstr ""
 
 #: .\panel\models.py:31 .\templates\panel\kategoriya\index.html:29
 #: .\templates\panel\kategoriya\index.html:81
+#: .\templates\panel\murojatchi\reply.html:103
+#: .\templates\panel\murojatchi\see.html:128
 #: .\templates\panel\qabul\index.html:153
 msgid "Kategoriya"
 msgstr ""
@@ -80,7 +88,7 @@ msgstr ""
 msgid "Kategoriya nomi"
 msgstr ""
 
-#: .\panel\models.py:38
+#: .\panel\models.py:38 .\templates\panel\inc\sidebar.html:72
 msgid "Kategoriyalar"
 msgstr ""
 
@@ -90,7 +98,9 @@ msgstr ""
 #: .\templates\panel\hudud\update.html:65
 #: .\templates\panel\murojatchi\index.html:85
 #: .\templates\panel\murojatchi\index.html:185
+#: .\templates\panel\murojatchi\reply.html:87
 #: .\templates\panel\murojatchi\search.html:76
+#: .\templates\panel\murojatchi\see.html:112
 msgid "Hudud"
 msgstr ""
 
@@ -130,6 +140,8 @@ msgstr ""
 #: .\templates\panel\foydalanuvchi\search.html:73
 #: .\templates\panel\foydalanuvchi\update.html:70
 #: .\templates\panel\foydalanuvchi\update.html:82
+#: .\templates\panel\murojatchi\reply.html:77
+#: .\templates\panel\murojatchi\see.html:72
 msgid "Telegram ID"
 msgstr ""
 
@@ -138,14 +150,18 @@ msgid "Ism Sharifi"
 msgstr ""
 
 #: .\panel\models.py:70 .\templates\panel\foydalanuvchi\index.html:85
+#: .\templates\panel\foydalanuvchi\index.html:106
 #: .\templates\panel\foydalanuvchi\index.html:134
 #: .\templates\panel\foydalanuvchi\search.html:75
+#: .\templates\panel\foydalanuvchi\see.html:74
 #: .\templates\panel\foydalanuvchi\update.html:132
 #: .\templates\panel\foydalanuvchi\update.html:144
+#: .\templates\panel\murojatchi\see.html:70
 msgid "Username"
 msgstr ""
 
-#: .\panel\models.py:76
+#: .\panel\models.py:76 .\templates\panel\murojatchi\reply.html:107
+#: .\templates\panel\murojatchi\see.html:132
 msgid "Media"
 msgstr ""
 
@@ -153,34 +169,37 @@ msgstr ""
 msgid "Murojat Matni"
 msgstr ""
 
-#: .\panel\models.py:80
+#: .\panel\models.py:82 .\templates\panel\murojatchi\reply.html:135
+#: .\templates\panel\murojatchi\reply.html:154
+#: .\templates\panel\murojatchi\see.html:152
 msgid "Javob Matni"
 msgstr ""
 
-#: .\panel\models.py:80
+#: .\panel\models.py:82
 msgid "Javob berilmagan"
 msgstr ""
 
-#: .\panel\models.py:81 .\templates\panel\qabul\index.html:186
+#: .\panel\models.py:83 .\templates\panel\qabul\index.html:186
 msgid "Murojat Sanasi"
 msgstr ""
 
-#: .\panel\models.py:82
+#: .\panel\models.py:84
 msgid "O'zgartish Kiritilgan Sana"
 msgstr ""
 
-#: .\panel\models.py:83
+#: .\panel\models.py:85
 msgid "Murojatchi Statusi"
 msgstr ""
 
-#: .\panel\models.py:90 .\templates\panel\murojatchi\index.html:84
+#: .\panel\models.py:93 .\templates\panel\murojatchi\index.html:84
+#: .\templates\panel\murojatchi\index.html:101
 #: .\templates\panel\murojatchi\index.html:184
 #: .\templates\panel\murojatchi\search.html:75
 #: .\templates\panel\qabul\index.html:184
 msgid "Murojatchi"
 msgstr ""
 
-#: .\panel\models.py:91
+#: .\panel\models.py:94 .\templates\panel\inc\sidebar.html:37
 msgid "Murojatchilar"
 msgstr ""
 
@@ -205,17 +224,24 @@ msgstr ""
 msgid "Murojatchilar Ro'yxati"
 msgstr ""
 
+#: .\templates\panel\foydalanuvchi\index.html:72
+#: .\templates\panel\murojatchi\index.html:72
+msgid "Qidiruv"
+msgstr ""
+
 #: .\templates\panel\foydalanuvchi\index.html:83
 msgid "telegram ID"
 msgstr ""
 
 #: .\templates\panel\foydalanuvchi\index.html:84
+#: .\templates\panel\foydalanuvchi\index.html:101
 #: .\templates\panel\foydalanuvchi\index.html:133
 #: .\templates\panel\foydalanuvchi\search.html:74
 msgid "Foydalanuvchi"
 msgstr ""
 
 #: .\templates\panel\foydalanuvchi\index.html:111
+#: .\templates\panel\foydalanuvchi\see.html:91
 #: .\templates\panel\murojatchi\index.html:171
 msgid "Qidirish"
 msgstr ""
@@ -223,6 +249,8 @@ msgstr ""
 #: .\templates\panel\foydalanuvchi\index.html:135
 #: .\templates\panel\foydalanuvchi\search.html:76
 #: .\templates\panel\murojatchi\index.html:189
+#: .\templates\panel\murojatchi\reply.html:142
+#: .\templates\panel\murojatchi\see.html:166
 msgid "Sana"
 msgstr ""
 
@@ -250,9 +278,17 @@ msgstr ""
 msgid "Topilgan Foydalanuvchilar"
 msgstr ""
 
+#: .\templates\panel\foydalanuvchi\see.html:72
+#: .\templates\panel\foydalanuvchi\see.html:77
+#: .\templates\panel\murojatchi\see.html:69
+#: .\templates\panel\qabul\index.html:229
+msgid "Telegram"
+msgstr ""
+
 #: .\templates\panel\foydalanuvchi\see.html:101
 #: .\templates\panel\foydalanuvchi\update.html:100
 #: .\templates\panel\foydalanuvchi\update.html:112
+#: .\templates\panel\murojatchi\reply.html:82
 msgid "F.I.SH"
 msgstr ""
 
@@ -264,6 +300,7 @@ msgstr ""
 #: .\templates\panel\muammo\update.html:65
 #: .\templates\panel\murojatchi\index.html:88
 #: .\templates\panel\murojatchi\index.html:188
+#: .\templates\panel\murojatchi\reply.html:99
 #: .\templates\panel\murojatchi\search.html:78
 msgid "Muammo"
 msgstr ""
@@ -271,7 +308,9 @@ msgstr ""
 #: .\templates\panel\foydalanuvchi\see.html:105
 #: .\templates\panel\murojatchi\index.html:90
 #: .\templates\panel\murojatchi\index.html:190
+#: .\templates\panel\murojatchi\reply.html:128
 #: .\templates\panel\murojatchi\search.html:80
+#: .\templates\panel\murojatchi\see.html:159
 msgid "Status"
 msgstr ""
 
@@ -281,6 +320,14 @@ msgstr ""
 
 #: .\templates\panel\foydalanuvchi\update.html:174
 msgid "Telefon Raqam"
+msgstr ""
+
+#: .\templates\panel\foydalanuvchi\update.html:196
+#: .\templates\panel\hudud\update.html:143
+#: .\templates\panel\kategoriya\update.html:233
+#: .\templates\panel\mahalla\update.html:204
+#: .\templates\panel\muammo\update.html:143
+msgid "O'zgartirish"
 msgstr ""
 
 #: .\templates\panel\hudud\create.html:34
@@ -311,11 +358,21 @@ msgstr ""
 msgid "Hudud Nomini O'zgartirish"
 msgstr ""
 
-#: .\templates\panel\hudud\update.html:143
-#: .\templates\panel\kategoriya\update.html:233
-#: .\templates\panel\mahalla\update.html:204
-#: .\templates\panel\muammo\update.html:143
-msgid "O'zgartirish"
+#: .\templates\panel\inc\sidebar.html:30
+#: .\templates\panel\murojatchi\see.html:76
+msgid "Barcha Murojatlar"
+msgstr ""
+
+#: .\templates\panel\inc\sidebar.html:45
+msgid "Ommaviy Qabul"
+msgstr ""
+
+#: .\templates\panel\inc\sidebar.html:51
+msgid "Qo'shimcha sahifalar"
+msgstr ""
+
+#: .\templates\panel\inc\sidebar.html:57
+msgid "Hududlar"
 msgstr ""
 
 #: .\templates\panel\kategoriya\create.html:34
@@ -330,6 +387,14 @@ msgstr ""
 
 #: .\templates\panel\kategoriya\update.html:34
 msgid "Kategoriyani Tahrirlash"
+msgstr ""
+
+#: .\templates\panel\layout\layout.html:136
+msgid "Logout"
+msgstr "Chiqish"
+
+#: .\templates\panel\layout\layout.html:185
+msgid "Hokim Qabuli"
 msgstr ""
 
 #: .\templates\panel\mahalla\create.html:34
@@ -360,6 +425,14 @@ msgstr ""
 msgid "Mahalla Ma'lumotlarini O'zgartirish"
 msgstr ""
 
+#: .\templates\panel\main\index.html:20
+msgid "Quick Menu"
+msgstr ""
+
+#: .\templates\panel\main\index.html:31
+msgid "Vacancies"
+msgstr ""
+
 #: .\templates\panel\muammo\create.html:76
 #: .\templates\panel\muammo\update.html:76
 msgid "Muammo nomini kiriting"
@@ -378,6 +451,9 @@ msgid "Murojatlar Ro'yxati"
 msgstr ""
 
 #: .\templates\panel\murojatchi\index.html:87
+#: .\templates\panel\murojatchi\reply.html:95
+#: .\templates\panel\murojatchi\see.html:120
+#: .\templates\panel\murojatchi\see.html:124
 msgid "Murojat Turi"
 msgstr ""
 
@@ -409,6 +485,36 @@ msgstr ""
 msgid "Rad Etildi"
 msgstr ""
 
+#: .\templates\panel\murojatchi\reply.html:110
+#: .\templates\panel\murojatchi\see.html:135
+msgid "Muammoga aloqador media mavjud emas."
+msgstr ""
+
+#: .\templates\panel\murojatchi\reply.html:116
+msgid "Muammoga aloqador manzil mavjud emas."
+msgstr ""
+
+#: .\templates\panel\murojatchi\reply.html:120
+msgid "Ma'lumot"
+msgstr ""
+
+#: .\templates\panel\murojatchi\reply.html:123
+msgid "Muammoga aloqador ma'lumot mavjud emas."
+msgstr ""
+
+#: .\templates\panel\murojatchi\reply.html:149
+msgid "Statusni tanlang"
+msgstr ""
+
+#: .\templates\panel\murojatchi\reply.html:158
+msgid "Javob xatini kiriting."
+msgstr ""
+
+#: .\templates\panel\murojatchi\reply.html:160
+#: .\templates\panel\qabul\index.html:251
+msgid "Yuborish"
+msgstr ""
+
 #: .\templates\panel\murojatchi\search.html:16
 msgid "Murojatlar Qidiruv"
 msgstr ""
@@ -419,6 +525,30 @@ msgstr ""
 
 #: .\templates\panel\murojatchi\search.html:79
 msgid "Murojat Vaqti"
+msgstr ""
+
+#: .\templates\panel\murojatchi\see.html:88
+msgid "Asosiy"
+msgstr ""
+
+#: .\templates\panel\murojatchi\see.html:93
+msgid "Tahrirlash"
+msgstr ""
+
+#: .\templates\panel\murojatchi\see.html:98
+msgid "O'chirish"
+msgstr ""
+
+#: .\templates\panel\murojatchi\see.html:141
+msgid " Muammoga aloqador manzil mavjud emas."
+msgstr ""
+
+#: .\templates\panel\murojatchi\see.html:146
+msgid "Murojat Matn"
+msgstr ""
+
+#: .\templates\panel\murojatchi\see.html:148
+msgid "Muammoga aloqador murojat matni mavjud emas."
 msgstr ""
 
 #: .\templates\panel\qabul\index.html:16
@@ -433,6 +563,6 @@ msgstr ""
 msgid "Murojatchilarga xat yuboring..."
 msgstr ""
 
-#: .\templates\panel\qabul\index.html:251
-msgid "Yuborish"
+#: .\templates\panel\qabul\index.html:243
+msgid "SMS"
 msgstr ""

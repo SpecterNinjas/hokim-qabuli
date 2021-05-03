@@ -68,7 +68,7 @@
             </div>
             <div class="content-body">
                 <!-- table Transactions start -->
-                <h3>Qidiruv</h3>
+                <h3>{% trans "Qidiruv" %}</h3>
                 <form method="get" action="{% url 'panel:murojatchi_search' %}" autocomplete="off">
                     {% csrf_token %}
                     <section id="table-transactions">
@@ -97,7 +97,7 @@
 
                                         <td class="pl-1">
                                             <input type="text" name="fullname" style="width: 100px;"
-                                                   class="form-control" placeholder="Murojatchi">
+                                                   class="form-control" placeholder="{% trans "Murojatchi" %}">
                                         </td>
                                         <td class="text-left">
                                             <select name="hudud" class="form-control"

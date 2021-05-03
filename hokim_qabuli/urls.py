@@ -9,11 +9,11 @@ from django.conf.urls.i18n import i18n_patterns
 #
 #
 # )
-urlpatterns = [
+urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('panel/', include('panel.urls')),
-    url('bot/', include(u'telegrambot.urls')),
-]
+   # url('bot/', include(u'telegrambot.urls')),
+)
 
 
 if settings.DEBUG:

@@ -35,22 +35,10 @@ class FoydalanuvchiForm(forms.ModelForm):
         fields = ("telegram_id", "username", "fullname", "phone")
 
 
-# class MurojatchiForm(forms.ModelForm):
-#     class Meta:
-#         model = Murojatchi
-#         fields = (
-#         "fullname", "telegram_id", "hudud", "mahalla", "muammo", "category", "media", "location", "description",
-#         "phone",
-#         "reply_message", "status")
-#         widgets = {
-#             'status': forms.Select(attrs={'class': 'form-control'}),
-#             'category': forms.Select(attrs={'class': 'form-control'})
-#         }
-#
-#     def __init__(self, *args, **kwargs):
-#         super(MurojatchiForm, self).__init__(*args, **kwargs)
-#         field = self.fields.get('status')
-#         field.choices = field.choices[1:]
+class MurojatchiForm(forms.ModelForm):
+    class Meta:
+        model = Murojatchi
+        fields = ("fullname", "status")
 
 
 class MurojatchiReplyMessageForm(forms.ModelForm):
@@ -60,3 +48,9 @@ class MurojatchiReplyMessageForm(forms.ModelForm):
         widgets = {
             'status': forms.Select(attrs={'class': 'form-control px-1 ml-3 mb-2'}),
         }
+
+
+class ReceptionForm(forms.ModelForm):
+    class Meta:
+        model = Reception
+        fields = ['title', 'appointment']

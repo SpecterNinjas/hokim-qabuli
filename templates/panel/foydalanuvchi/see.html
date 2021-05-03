@@ -69,15 +69,15 @@
                                              src="{% static 'panel/login/images/user2-160x160.jpg' %}"
                                              alt="{{ murojatchi.fullname }}" style="width:70%;padding-left: 50px;">
                                         <h5 class="text-center pt-1">{{ murojatchi.fullname }}</h5>
-                                        <p class="title text-center">Telegram</p>
+                                        <p class="title text-center">{% trans 'Telegram' %}</p>
                                         {% if murojatchi.username %}
-                                            <h6 class="ml-2">Username: <span class="text-dark">{{ murojatchi.username }}</span></h6>
+                                            <h6 class="ml-2">{% trans 'Username' %}: <span class="text-dark">{{ murojatchi.username }}</span></h6>
                                             <hr>{% endif %}
                                         {% if murojatchi.telegram_id %}
-                                            <h6 class="ml-2">Telegram ID: <span class="text-dark">{{ murojatchi.telegram_id }}
+                                            <h6 class="ml-2">{% trans 'Telegram' %} ID: <span class="text-dark">{{ murojatchi.telegram_id }}
                                           <hr></span></h6>{% endif %}
                                         {% if murojatchi.phone %}
-                                            <h6 class="ml-2">Telefon: <span class="text-dark">{{ murojatchi.phone }}</span>
+                                            <h6 class="ml-2">{% trans 'Telefon' %}: <span class="text-dark">{{ murojatchi.phone }}</span>
                                             </h6>{% endif %}
 
 
@@ -88,7 +88,7 @@
 
 
                                 <div class="col-md-9">
-                                <input id="myInput" type="text" maxlength="50" class="form-control mb-3" placeholder="Qidirish">
+                                <input id="myInput" type="text" maxlength="50" class="form-control mb-3" placeholder="{% trans 'Qidirish' %}">
                                     <section id="table-transactions box-shadow-3">
                                         <div class="card">
                                             <!-- datatable start -->

@@ -66,14 +66,14 @@
                                     <div class="card p-2 box-shadow-3" style="border-top: 4px solid rgb(60,141,188);">
                                         <img class="rounded-circle" src="{% static 'panel/login/images/user2-160x160.jpg' %}" alt="{{ murojatchi.fullname }}" style="width:70%;padding-left: 50px;">
                                         <h5 class="text-center pt-1">{{ murojatchi.fullname }}</h5>
-                                        <p class="title text-center">Telegram</p>
-                                      {% if murojatchi.username %} <h6>Username: <span class="text-dark">{{ murojatchi.username }}</span></h6>
+                                        <p class="title text-center">{% trans 'Telegram' %}</p>
+                                      {% if murojatchi.username %} <h6>{% trans 'Username' %}: <span class="text-dark">{{ murojatchi.username }}</span></h6>
                                           <hr>{% endif %}
-                                      {% if murojatchi.telegram_id %} <h6>Telegram ID: <span class="text-dark">{{ murojatchi.telegram_id }}
+                                      {% if murojatchi.telegram_id %} <h6>{% trans 'Telegram ID' %}: <span class="text-dark">{{ murojatchi.telegram_id }}
                                           <hr></span></h6>{% endif %}
-                                      {% if murojatchi.phone %} <h6>Telefon: <span class="text-dark">{{ murojatchi.phone }}</span></h6>{% endif %}
+                                      {% if murojatchi.phone %} <h6>{% trans 'Telefon' %}: <span class="text-dark">{{ murojatchi.phone }}</span></h6>{% endif %}
 
-                                        <a href="{% url 'panel:foydalanuvchi_detail' murojatchi.id  %}"><button class="btn btn-success mt-1 mx-auto d-block">Barcha Murojatlar</button></a>
+                                        <a href="{% url 'panel:foydalanuvchi_detail' murojatchi.id  %}"><button class="btn btn-success mt-1 mx-auto d-block">{% trans 'Barcha Murojatlar' %}</button></a>
 
                                     </div>
 
@@ -85,17 +85,17 @@
                                             <li class="nav-item mr-auto">
                                                 <a class="nav-link text-white active" id="home-tab" data-toggle="tab"
                                                    href="#home" role="tab" aria-controls="home"
-                                                   aria-selected="true">Asosiy</a>
+                                                   aria-selected="true">{% trans 'Asosiy' %}</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link text-white" style="background-color: rgb(0,166,90)" id="profile-tab"
                                                    href="{% url 'panel:murojatchi_reply' murojatchi.id %}" role="tab" aria-controls="profile"
-                                                   aria-selected="false">Tahrirlash</a>
+                                                   aria-selected="false">{% trans 'Tahrirlash' %}</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link text-white" style="background-color: rgb(221,75,57)" id="contact-tab"
                                                    href="{% url 'panel:murojatchi_delete' murojatchi.id %}" role="tab" aria-controls="contact"
-                                                   aria-selected="false">O'chirish</a>
+                                                   aria-selected="false">{% trans "O'chirish" %}</a>
                                             </li>
                                         </ul>
                                         <div class="tab-content" id="myTabContent">
@@ -109,61 +109,61 @@
                                                         <td>{{ murojatchi.id }}</td>
                                                     </tr>
                                                     <tr>
-                                                        <th class="font-weight-bold">Hudud</th>
+                                                        <th class="font-weight-bold">{% trans 'Hudud' %}</th>
                                                         <td>{{ murojatchi.hudud.title }}</td>
                                                     </tr>
                                                     <tr>
-                                                        <th class="font-weight-bold">Mahalla</th>
+                                                        <th class="font-weight-bold">{% trans 'Mahalla' %}</th>
                                                         <td>{{ murojatchi.mahalla.title }}</td>
                                                     </tr>
                                                  <tr>
-                                                        <th class="font-weight-bold">Murojat Turi</th>
+                                                        <th class="font-weight-bold">{% trans 'Murojat Turi' %}</th>
                                                         <td>{{ murojatchi.murojat_turi}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <th class="font-weight-bold">Muammo</th>
+                                                        <th class="font-weight-bold">{% trans 'Murojat Turi' %}x</th>
                                                         <td>{{ murojatchi.muammo.title }}</td>
                                                     </tr>
                                                     <tr>
-                                                        <th class="font-weight-bold">Kategoriya</th>
+                                                        <th class="font-weight-bold">{% trans 'Kategoriya' %}</th>
                                                         <td>{{ murojatchi.category.category }}</td>
                                                     </tr>
                                                     <tr>
-                                                        <th class="font-weight-bold">Media</th>
+                                                        <th class="font-weight-bold">{% trans 'Media' %}</th>
                                                         <td>{% if murojatchi.media %}
                                                             <a href="{{ murojatchi.media.url }}">{{ murojatchi.media.url }}</a>{% else %}
-                                                            Muammoga aloqador <u>media</u> mavjud emas.{% endif %}</td>
+                                                            {% trans 'Muammoga aloqador media mavjud emas.' %}{% endif %}</td>
                                                     </tr>
                                                     <tr>
-                                                        <th class="font-weight-bold">Manzil</th>
+                                                        <th class="font-weight-bold">{% trans 'Manzil' %}</th>
                                                         <td>{% if murojatchi.location %}
-                                                            {{ murojatchi.location }}{% else %}Muammoga aloqador
-                                                            <u>manzil</u> mavjud emas.{% endif %}</td>
+                                                            {{ murojatchi.location }}{% else %}
+                                                            {% trans ' Muammoga aloqador manzil mavjud emas.' %}
+                                                           {% endif %}</td>
 
                                                     </tr>
                                                     <tr>
-                                                        <th class="font-weight-bold">Murojat Matni</th>
+                                                        <th class="font-weight-bold">{% trans 'Murojat Matn' %}i</th>
                                                         <td>{% if murojatchi.description %}
-                                                            {{ murojatchi.description }}{% else %}Muammoga aloqador
-                                                            <u>murojat matni</u> mavjud emas.{% endif %}</td>
+                                                            {{ murojatchi.description }}{% else %}{% trans 'Muammoga aloqador murojat matni mavjud emas.' %}{% endif %}</td>
 
                                                     </tr>
                                                     <tr>
-                                                        <th class="font-weight-bold">Javob Matni</th>
+                                                        <th class="font-weight-bold">{% trans 'Javob Matni' %}</th>
                                                         <td>
                                                             {{ murojatchi.reply_message }}
                                                         </td>
                                                     </tr>
 
                                                     <tr>
-                                                        <th class="font-weight-bold">Status</th>
+                                                        <th class="font-weight-bold">{% trans 'Status' %}</th>
                                                         <td>
                                                           <span class="text-lowercase"> {{ murojatchi.status.title }}</span>
                                                         </td>
 
                                                     </tr>
                                                     <tr>
-                                                        <th class="font-weight-bold">Sana</th>
+                                                        <th class="font-weight-bold">{% trans 'Sana' %}</th>
                                                         <td>{{ murojatchi.created | date:"d.m.Y" }}</td>
                                                     </tr>
                                                 </table>
