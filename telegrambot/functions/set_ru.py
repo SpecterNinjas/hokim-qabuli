@@ -7,7 +7,7 @@ from telegrambot.services import get_user_lang
 @log_errors
 def set_ru(bot: Bot, update: Update):
     print('set_ru')
-    user = get_user_lang(update.effective_chat.id)
+    user = get_user_lang(update)
     user.lang = 'ru'
     user.save()
     bot.delete_message(
@@ -19,4 +19,4 @@ def set_ru(bot: Bot, update: Update):
         text='Выбран русский язык.'
     )
 
-    return functions.main_menu(bot, update)
+    return functions.statement_type(bot, update)

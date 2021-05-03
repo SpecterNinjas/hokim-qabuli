@@ -8,10 +8,10 @@ from telegrambot.services.services import get_user_lang
 
 
 @log_errors
-def main_menu(bot: Bot, update: Update):
-    print('main_menu')
+def request_menu(bot: Bot, update: Update):
+    print('request_menu')
 
-    user = get_user_lang(update.effective_chat.id)
+    user = get_user_lang(update)
     try:
         if update.callback_query.data != 'back_to_admission_menu':
             request_type = update.callback_query.data

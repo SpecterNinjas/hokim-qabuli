@@ -30,27 +30,27 @@ conv_handler = ConversationHandler(
             MessageHandler(Filters.text, admission.set_name),
             main_handler,
         ],
-        states.GET_BIRTH_YEAR: [
-            start_handler,
-            MessageHandler(Filters.regex("(Назад|Orqaga)"), functions.request_menu),
-            MessageHandler(Filters.text, admission.set_birth_year),
-            main_handler,
-        ],
-        states.GET_BIRTH_MONTH: [
-            start_handler,
-            MessageHandler(Filters.regex("(Назад|Orqaga)"), functions.request_menu),
-            MessageHandler(Filters.text, admission.set_birth_month),
-            main_handler,
-        ],
-        states.GET_BIRTH_DAY: [
-            start_handler,
-            MessageHandler(Filters.text, admission.set_birth_day),
-            main_handler,
-        ],
-        states.GET_GENDER: [
-            start_handler,
-            CallbackQueryHandler(admission.set_gender),
-        ],
+        # states.GET_BIRTH_YEAR: [
+        #     start_handler,
+        #     MessageHandler(Filters.regex("(Назад|Orqaga)"), functions.request_menu),
+        #     MessageHandler(Filters.text, admission.set_birth_year),
+        #     main_handler,
+        # ],
+        # states.GET_BIRTH_MONTH: [
+        #     start_handler,
+        #     MessageHandler(Filters.regex("(Назад|Orqaga)"), functions.request_menu),
+        #     MessageHandler(Filters.text, admission.set_birth_month),
+        #     main_handler,
+        # ],
+        # states.GET_BIRTH_DAY: [
+        #     start_handler,
+        #     MessageHandler(Filters.text, admission.set_birth_day),
+        #     main_handler,
+        # ],
+        # states.GET_GENDER: [
+        #     start_handler,
+        #     CallbackQueryHandler(admission.set_gender),
+        # ],
         states.GET_DISTRICT: [
             start_handler,
             MessageHandler(Filters.regex("(Назад|Orqaga)"), functions.request_menu),
@@ -78,20 +78,20 @@ conv_handler = ConversationHandler(
             main_handler,
             MessageHandler(Filters.text, admission.set_short_description),
         ],
-        states.GET_PROBLEM_ADDRESS: [
-            start_handler,
-            MessageHandler(Filters.all, admission.set_problem_address)
-        ],
-        states.GET_MEDIA: [
-            start_handler,
-            main_handler,
-            MessageHandler(Filters.photo, admission.set_media),
-        ],
-        states.GET_LOCATION: [
-            start_handler,
-            main_handler,
-            MessageHandler(Filters.all, admission.set_location),
-        ],
+        # states.GET_PROBLEM_ADDRESS: [
+        #     start_handler,
+        #     MessageHandler(Filters.all, admission.set_problem_address)
+        # ],
+        # states.GET_MEDIA: [
+        #     start_handler,
+        #     main_handler,
+        #     MessageHandler(Filters.photo, admission.set_media),
+        # ],
+        # states.GET_LOCATION: [
+        #     start_handler,
+        #     main_handler,
+        #     MessageHandler(Filters.all, admission.set_location),
+        # ],
         states.GET_PHONE_NUMBER: [
             start_handler,
             MessageHandler(Filters.text, admission.set_phone_number),

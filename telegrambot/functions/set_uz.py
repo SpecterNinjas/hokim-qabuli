@@ -22,4 +22,4 @@ def set_uz(bot: Bot, update: Update):
         text="O'zbek tili tanlandi."
     )
 
-    return functions.main_menu(bot, update)
+    return functions.statement_type(bot, update)
