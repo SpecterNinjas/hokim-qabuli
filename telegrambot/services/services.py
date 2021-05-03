@@ -1,4 +1,5 @@
 from django.apps import apps
+from django.core.cache import cache
 from telegram import Update, Bot
 
 
@@ -21,7 +22,9 @@ def send_saved_message_text(user, bot: Bot, update: Update):
 
 
 def save_data_to_cache(update: Update, data, request_name):
-    pass
+    request = cache.get(f'request_{update.effective_chat.id}')
+    request[f'{request_name}'] = data
+    cache.set(f'request_{update.effective_chat.id}', request)
 
 
 def delete_previous_message_with_button(bot: Bot, update: Update):

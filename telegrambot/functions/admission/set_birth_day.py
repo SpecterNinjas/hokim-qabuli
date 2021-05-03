@@ -4,6 +4,7 @@ from django.core.cache import cache
 from telegram import Update, Bot
 from telegrambot import states
 from telegrambot.apps import log_errors
+from telegrambot.functions import admission
 
 
 @log_errors
@@ -35,3 +36,4 @@ def set_birth_day(bot: Bot, update: Update):
         chat_id=update.effective_chat.id,
         text=text,
     )
+    return admission.get_gender(bot, update)

@@ -5,6 +5,7 @@ from telegram import Update, Bot, ReplyKeyboardRemove
 from telegrambot import states, functions
 from telegrambot.apps import log_errors
 from telegrambot.functions import admission
+from telegrambot.services import send_saved_message_text
 
 
 @log_errors
@@ -28,14 +29,5 @@ def set_birth_year(bot: Bot, update: Update):
     request['year_of_birth'] = birth_year
     cache.set(f'request_{update.effective_chat.id}', request)
 
-    if user.lang == 'uz':
-        text = 'Saqlandi'
-    else:
-        text = 'Сохранено'
-
-    bot.send_message(
-        chat_id=update.effective_chat.id,
-        text=text,
-        reply_markup=ReplyKeyboardRemove()
-    )
+    send_saved_message_text(user, bot, update)
     return admission.get_birth_month(bot, update)

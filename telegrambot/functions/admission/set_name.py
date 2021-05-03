@@ -32,7 +32,7 @@ def set_name(bot: Bot, update: Update):
         return states.GET_NAME
 
     request = cache.get(f'request_{update.effective_chat.id}')
-    request['first_name'] = name
+    request['name'] = name
     request['telegram_id'] = update.effective_chat.id
     cache.set(f'request_{update.effective_chat.id}', request)
 

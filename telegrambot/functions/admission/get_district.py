@@ -13,7 +13,7 @@ def get_district(bot: Bot, update: Update):
     user_model = apps.get_model('telegrambot', 'TelegramProfile')
     user = user_model.objects.get(external_id=update.effective_chat.id)
 
-    districts = apps.get_model('telegrambot', 'District').objects.all().order_by('title_uz')
+    districts = apps.get_model('panel', 'Mahalla').objects.all().order_by('title')
 
     data = Text.objects.filter(text_id='GET_DISTRICT').values()[0]
     text = data[user.lang]
