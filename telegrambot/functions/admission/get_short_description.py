@@ -14,6 +14,7 @@ def get_short_description(bot: Bot, update: Update):
 
     data = Text.objects.filter(text_id='GET_SHORT_DESCRIPTION').values()[0]
     text = data[user.lang]
+    inline_keyboard = generate_inline_keyboard(data[f"buttons_{user.lang}"], update.effective_chat.id)
 
     bot.delete_message(
         chat_id=update.effective_chat.id,
@@ -22,7 +23,7 @@ def get_short_description(bot: Bot, update: Update):
     bot.send_message(
         chat_id=update.effective_chat.id,
         text=text,
-        reply_markup=InlineKeyboardMarkup(generate_inline_keyboard(data[f"buttons_{user.lang}"], update.effective_chat.id)),
+        reply_markup=InlineKeyboardMarkup(inline_keyboard),
         parse_mode='Markdown',
     )
 

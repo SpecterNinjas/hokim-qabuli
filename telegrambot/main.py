@@ -78,10 +78,10 @@ conv_handler = ConversationHandler(
             main_handler,
             MessageHandler(Filters.text, admission.set_short_description),
         ],
-        # states.GET_PROBLEM_ADDRESS: [
-        #     start_handler,
-        #     MessageHandler(Filters.all, admission.set_problem_address)
-        # ],
+        states.GET_PROBLEM_ADDRESS: [
+            start_handler,
+            MessageHandler(Filters.all, admission.set_problem_address)
+        ],
         # states.GET_MEDIA: [
         #     start_handler,
         #     main_handler,

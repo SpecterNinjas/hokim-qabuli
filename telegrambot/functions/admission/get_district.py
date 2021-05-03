@@ -4,14 +4,14 @@ from telegram import Bot, Update, KeyboardButton, ReplyKeyboardMarkup
 from telegrambot import states
 from telegrambot.apps import log_errors
 from telegrambot.models import Text
+from telegrambot.services import get_user_lang
 
 
 @log_errors
 def get_district(bot: Bot, update: Update):
     print('get_district')
 
-    user_model = apps.get_model('telegrambot', 'TelegramProfile')
-    user = user_model.objects.get(external_id=update.effective_chat.id)
+    user = get_user_lang(update)
 
     districts = apps.get_model('panel', 'Mahalla').objects.all().order_by('title')
 

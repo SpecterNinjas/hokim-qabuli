@@ -1,9 +1,10 @@
-from telegram import Update, Bot, InlineKeyboardMarkup
+from telegram import Update, Bot
 from telegrambot import states
 from telegrambot.apps import log_errors
 from telegrambot.helpers import generate_inline_keyboard
 from telegrambot.models import Text
 from telegrambot.services import get_user_lang
+from telegrambot.services.services import edit_or_send_message
 
 
 @log_errors
@@ -16,20 +17,6 @@ def get_birth_year(bot: Bot, update: Update):
     text = data[user.lang]
 
     inline_keyboard = generate_inline_keyboard(data[f"buttons_{user.lang}"], update.effective_chat.id)
+    edit_or_send_message(bot, update, inline_keyboard=inline_keyboard, text=text)
 
-    try:
-        bot.edit_message_text(
-            chat_id=update.effective_chat.id,
-            message_id=update.callback_query.message.message_id,
-            text=text,
-            reply_markup=InlineKeyboardMarkup(inline_keyboard),
-            parse_mode='Markdown',
-        )
-    except:
-        bot.send_message(
-            chat_id=update.effective_chat.id,
-            text=text,
-            reply_markup=InlineKeyboardMarkup(inline_keyboard),
-            parse_mode='Markdown',
-        )
     return states.GET_BIRTH_YEAR

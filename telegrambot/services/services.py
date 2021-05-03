@@ -1,6 +1,6 @@
 from django.apps import apps
 from django.core.cache import cache
-from telegram import Update, Bot
+from telegram import Update, Bot, InlineKeyboardMarkup
 
 
 def get_user_lang(update: Update):
@@ -29,3 +29,21 @@ def save_data_to_cache(update: Update, data, request_name):
 
 def delete_previous_message_with_button(bot: Bot, update: Update):
     pass
+
+
+def edit_or_send_message(bot: Bot, update: Update, inline_keyboard, text):
+    try:
+        bot.edit_message_text(
+            chat_id=update.effective_chat.id,
+            text=text,
+            message_id=update.callback_query.message.message_id,
+            reply_markup=InlineKeyboardMarkup(inline_keyboard),
+            parse_mode='Markdown'
+        )
+    except:
+        bot.send_message(
+            chat_id=update.effective_chat.id,
+            text=text,
+            reply_markup=InlineKeyboardMarkup(inline_keyboard),
+            parse_mode='Markdown',
+        )

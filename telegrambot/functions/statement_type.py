@@ -1,16 +1,15 @@
 from django.apps import apps
 from telegram import Update, Bot, InlineKeyboardMarkup
-
 from telegrambot import states
 from telegrambot.apps import log_errors
 from telegrambot.helpers import generate_inline_keyboard
+from telegrambot.services import get_user_lang
 
 
 @log_errors
 def statement_type(bot: Bot, update: Update):
     print('statement_type')
-    user_model = apps.get_model('telegrambot', 'TelegramProfile')
-    user = user_model.objects.get(external_id=update.effective_chat.id)
+    user = get_user_lang(update)
 
     Text = apps.get_model('telegrambot', 'Text')
     data = Text.objects.filter(text_id='STATEMENT_TYPE').values()[0]

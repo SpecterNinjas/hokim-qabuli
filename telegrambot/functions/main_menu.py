@@ -19,31 +19,31 @@ def main_menu(bot: Bot, update: Update):
 
     request = cache.get(f'request_{update.effective_chat.id}')
 
-    # region = models.RegionBot.objects.get(token=bot.token)
-    # hudud = Hudud.objects.get(title=region.region)
-    #
-    # if user.lang == 'ru':
-    #     mahalla = Mahalla.objects.get(title_ru=request['district'])
-    # else:
-    #     mahalla = Mahalla.objects.get(title_uz=request['district'])
-    #
-    # applicant = Murojatchi.objects.create(telegram_id=update.effective_chat.id)
-    # applicant.username = update.effective_chat.username
-    # applicant.fullname = request['name']
-    # applicant.year_of_birth = request['year_of_birth']
-    # applicant.month_of_birth = request['month_of_birth']
-    # applicant.day_of_birth = request['day_of_birth']
-    # applicant.gender = request['gender']
-    # applicant.hudud = hudud
-    # applicant.mahalla = mahalla
-    # # applicant.murojat_turi = ''
-    # # applicant.muammo = ''
-    # # applicant.category = ''
-    # # applicant.media = ''
-    # # applicant.location = ''
-    # applicant.description = request['short_description']
-    # applicant.phone = request['phone_number']
-    # applicant.save()
+    region = models.RegionBot.objects.get(token=bot.token)
+    hudud = Hudud.objects.get(title=region.region)
+
+    if user.lang == 'ru':
+        mahalla = Mahalla.objects.get(title_ru=request['district'])
+    else:
+        mahalla = Mahalla.objects.get(title_uz=request['district'])
+
+    applicant = Murojatchi.objects.create(telegram_id=update.effective_chat.id)
+    applicant.username = update.effective_chat.username
+    applicant.fullname = request['name']
+    applicant.year_of_birth = request['year_of_birth']
+    applicant.month_of_birth = request['month_of_birth']
+    applicant.day_of_birth = request['day_of_birth']
+    applicant.gender = request['gender']
+    applicant.hudud = hudud
+    applicant.mahalla = mahalla
+    # applicant.murojat_turi = ''
+    applicant.muammo = request['problem_type']
+    applicant.category = request['sub_problem']
+    # applicant.media = ''
+    # applicant.location = ''
+    applicant.description = request['short_description']
+    applicant.phone = request['phone_number']
+    applicant.save()
 
     keyboard = []
     admissions_text = "Hokim qabuliga yozish" if user.lang == 'uz' else 'Письмо к приему Хакима'

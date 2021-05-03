@@ -23,18 +23,19 @@ def get_request_data(
 ):
     request = {
         'telegram_id': telegram_id,
+
         'request_type': request_type,
         'name': name,
-
         'year_of_birth': year_of_birth,
         'month_of_birth': month_of_birth,
         'day_of_birth': day_of_birth,
+
         'gender': gender,
         'district': district,
-
         'problem_type': problem_type,
         'sub_problem': sub_problem,
         'short_description': short_description,
+
         'problem_address': problem_address,
         'media': media,
         'location': location,

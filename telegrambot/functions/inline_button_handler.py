@@ -92,4 +92,4 @@ def inline_button_handler(bot: Bot, update: Update):
         return states.GET_PHONE_NUMBER
 
     if callback_data == 'save_admission_info':
-        functions.request_menu(bot, update)
+        functions.main_menu(bot, update)

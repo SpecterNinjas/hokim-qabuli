@@ -1,20 +1,18 @@
 from django.apps import apps
-from django.core.cache import cache
-from telegram import Bot, Update, ReplyKeyboardRemove
-
-from telegrambot import states, functions
+from telegram import Bot, Update
+from telegrambot import states
 from telegrambot.apps import log_errors
 from telegrambot.functions import admission
+from telegrambot.services import send_saved_message_text, save_data_to_cache, get_user_lang
 
 
 @log_errors
 def set_birth_month(bot: Bot, update: Update):
     print('set_birth_month')
 
-    user_model = apps.get_model('telegrambot', 'TelegramProfile')
-    user = user_model.objects.get(external_id=update.effective_chat.id)
+    user = get_user_lang(update)
 
-    birth_month = update.message.text
+    month_of_birth = update.message.text
 
     if user.lang == 'ru':
         months = apps.get_model('telegrambot', 'Month').objects.all(
@@ -23,7 +21,7 @@ def set_birth_month(bot: Bot, update: Update):
         months = apps.get_model('telegrambot', 'Month').objects.all(
         ).values_list('title_uz', flat=True)
 
-    if birth_month not in months:
+    if month_of_birth not in months:
         if user.lang == 'ru':
             text = 'Вы ввели некорректный месяц рождения. Попробуйте еще раз'
         else:
@@ -32,18 +30,6 @@ def set_birth_month(bot: Bot, update: Update):
             chat_id=update.effective_chat.id, text=text, parse_mode='Markdown')
         return states.GET_BIRTH_MONTH
 
-    request = cache.get(f'request_{update.effective_chat.id}')
-    request['month_of_birth'] = birth_month
-    cache.set(f'request_{update.effective_chat.id}', request)
-
-    if user.lang == 'uz':
-        text = 'Saqlandi'
-    else:
-        text = 'Сохранено'
-
-    bot.send_message(
-        chat_id=update.effective_chat.id,
-        text=text,
-        reply_markup=ReplyKeyboardRemove()
-    )
+    save_data_to_cache(update, month_of_birth, request_name='month_of_birth')
+    send_saved_message_text(user, bot, update)
     return admission.get_birth_day(bot, update)

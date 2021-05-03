@@ -4,7 +4,7 @@ from telegrambot import states
 from telegrambot.apps import log_errors
 from telegrambot.helpers import get_request_data, generate_inline_keyboard, validate_admission_info
 from telegrambot.models import Text
-from telegrambot.services.services import get_user_lang
+from telegrambot.services.services import get_user_lang, save_data_to_cache
 
 
 @log_errors
@@ -12,6 +12,7 @@ def request_menu(bot: Bot, update: Update):
     print('request_menu')
 
     user = get_user_lang(update)
+    save_data_to_cache(update, update.callback_query.data, request_name='request_type')
     try:
         if update.callback_query.data != 'back_to_admission_menu':
             request_type = update.callback_query.data
