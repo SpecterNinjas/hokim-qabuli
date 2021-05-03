@@ -32,13 +32,13 @@ conv_handler = ConversationHandler(
         ],
         states.GET_BIRTH_YEAR: [
             start_handler,
-            MessageHandler(Filters.regex("(Назад|Orqaga)"), functions.main_menu),
+            MessageHandler(Filters.regex("(Назад|Orqaga)"), functions.request_menu),
             MessageHandler(Filters.text, admission.set_birth_year),
             main_handler,
         ],
         states.GET_BIRTH_MONTH: [
             start_handler,
-            MessageHandler(Filters.regex("(Назад|Orqaga)"), functions.main_menu),
+            MessageHandler(Filters.regex("(Назад|Orqaga)"), functions.request_menu),
             MessageHandler(Filters.text, admission.set_birth_month),
             main_handler,
         ],
@@ -53,7 +53,7 @@ conv_handler = ConversationHandler(
         ],
         states.GET_DISTRICT: [
             start_handler,
-            MessageHandler(Filters.regex("(Назад|Orqaga)"), functions.main_menu),
+            MessageHandler(Filters.regex("(Назад|Orqaga)"), functions.request_menu),
             MessageHandler(Filters.text, admission.set_district),
         ],
         states.GET_PROBLEM_TYPE: [
@@ -97,6 +97,14 @@ conv_handler = ConversationHandler(
             MessageHandler(Filters.text, admission.set_phone_number),
             MessageHandler(Filters.contact, admission.set_phone_number),
         ],
+        states.MAIN_MENU: [
+            start_handler,
+            MessageHandler(Filters.regex(r"Hokim qabuliga yozish|Письмо к приему Хакима"),
+                           functions.application_type_handler),
+            MessageHandler(Filters.regex(r"Hokimga murojat|Обращение к Хакиму"), functions.application_type_handler),
+            MessageHandler(Filters.regex(r"Mening murojatlarim|Мои заявки"), functions.my_appeals),
+            MessageHandler(Filters.regex(r"Sozlamalar|Настройки"), functions.profile_settings),
+        ]
     },
     fallbacks=[],
 )

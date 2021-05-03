@@ -15,6 +15,15 @@ def start(bot: Bot, update: Update):
     else:
         request = cache.get(f'request_{update.effective_chat.id}')
 
+    user_model = apps.get_model('telegrambot', 'TelegramProfile')
+    try:
+        user = user_model.objects.get(external_id=update.effective_chat.id)
+    except Exception:
+        user = user_model.objects.create(
+            external_id=update.effective_chat.id,
+            username=update.message.from_user.username,
+        )
+
     cache.set(f'request_{update.effective_chat.id}', request)
 
     keyboard = [

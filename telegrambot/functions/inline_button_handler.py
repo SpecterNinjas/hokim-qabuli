@@ -11,10 +11,11 @@ def inline_button_handler(bot: Bot, update: Update):
 
     if callback_data == 'ru_':
         functions.set_ru(bot, update)
+        return states.MAIN_MENU
 
     if callback_data == 'uz_':
         functions.set_uz(bot, update)
-
+        return states.MAIN_MENU
     if callback_data == 'admission' or callback_data == 'appeal':
         functions.main_menu(bot, update)
         return states.MAIN
@@ -91,4 +92,4 @@ def inline_button_handler(bot: Bot, update: Update):
         return states.GET_PHONE_NUMBER
 
     if callback_data == 'save_admission_info':
-        functions.last_menu(bot, update)
+        functions.main_menu(bot, update)

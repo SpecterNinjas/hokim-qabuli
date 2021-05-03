@@ -2,8 +2,10 @@ from django.apps import apps
 from telegram import Bot, Update
 
 from telegrambot import functions
+from telegrambot.apps import log_errors
 
 
+@log_errors
 def set_uz(bot: Bot, update: Update):
     print('set_uz')
     user_model = apps.get_model('telegrambot', 'TelegramProfile')
@@ -20,4 +22,4 @@ def set_uz(bot: Bot, update: Update):
         text="O'zbek tili tanlandi."
     )
 
-    return functions.statement_type(bot, update)
+    return functions.main_menu(bot, update)
