@@ -76,3 +76,12 @@ class RegionBot(models.Model):
     class Meta:
         verbose_name = 'Bot'
         verbose_name_plural = 'Botlar'
+
+
+class Month(models.Model):
+    title = models.CharField(max_length=255, null=True)
+    title_uz = models.CharField(max_length=255, null=True)
+    title_ru = models.CharField(max_length=255, null=True)
+
+    def __str__(self):
+        return f'{self.title}'

@@ -4,6 +4,8 @@ from telegram import Bot, Update
 
 from telegrambot.apps import log_errors
 from telegrambot.functions import admission
+from telegrambot.models import Text
+from telegrambot.services import send_saved_message_text
 
 
 @log_errors
@@ -31,13 +33,5 @@ def set_land_issues_problem(bot: Bot, update: Update):
     request['sub_problem'] = sub_problem
     cache.set(f'request_{update.effective_chat.id}', request)
 
-    if user.lang == 'uz':
-        text = 'Saqlandi'
-    else:
-        text = 'Сохранено'
-
-    bot.send_message(
-        chat_id=update.effective_chat.id,
-        text=text,
-    )
+    send_saved_message_text(user, bot, update)
     return admission.get_short_description(bot, update)

@@ -25,13 +25,13 @@ def inline_button_handler(bot: Bot, update: Update):
         admission.get_name(bot, update)
         return states.GET_NAME
 
-    # if callback_data == 'date_of_birth':
-    #     admission.get_birth_year(bot, update)
-    #     return states.GET_BIRTH_YEAR
-    #
-    # if callback_data == 'gender':
-    #     admission.get_gender(bot, update)
-    #     return states.GET_GENDER
+    if callback_data == 'date_of_birth':
+        admission.get_birth_year(bot, update)
+        return states.GET_BIRTH_YEAR
+
+    if callback_data == 'gender':
+        admission.get_gender(bot, update)
+        return states.GET_GENDER
 
     if callback_data == 'district':
         admission.get_district(bot, update)

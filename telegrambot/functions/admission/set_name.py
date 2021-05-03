@@ -4,13 +4,15 @@ from django.apps import apps
 from django.core.cache import cache
 from telegram import Bot, Update
 
-from telegrambot import states, functions
+from telegrambot import states
 from telegrambot.apps import log_errors
+from telegrambot.functions import admission
+from telegrambot.services import send_saved_message_text
 
 
 @log_errors
 def set_name(bot: Bot, update: Update):
-    print('set_first_name')
+    print('set_name')
     user_model = apps.get_model('telegrambot', 'TelegramProfile')
     user = user_model.objects.get(external_id=update.effective_chat.id)
     name = update.message.text
@@ -27,21 +29,13 @@ def set_name(bot: Bot, update: Update):
             parse_mode='Markdown'
         )
 
-        return states.GET_FIRST_NAME
+        return states.GET_NAME
 
     request = cache.get(f'request_{update.effective_chat.id}')
     request['first_name'] = name
     request['telegram_id'] = update.effective_chat.id
     cache.set(f'request_{update.effective_chat.id}', request)
 
-    if user.lang == 'uz':
-        text = 'Saqlandi'
-    else:
-        text = 'Сохранено'
+    send_saved_message_text(user, bot, update)
 
-    bot.send_message(
-        chat_id=update.effective_chat.id,
-        text=text,
-    )
-
-    return functions.admission.get_last_name(bot, update)
+    return admission.get_birth_year(bot, update)

@@ -3,6 +3,7 @@ from django.core.cache import cache
 from telegram import Bot, Update
 
 from telegrambot import functions
+from telegrambot.services import send_saved_message_text
 
 
 def set_phone_number(bot: Bot, update: Update):
@@ -17,13 +18,5 @@ def set_phone_number(bot: Bot, update: Update):
     request['phone_number'] = phone_number
     cache.set(f'request_{update.effective_chat.id}', request)
 
-    if user.lang == 'uz':
-        text = 'Saqlandi'
-    else:
-        text = 'Сохранено'
-
-    bot.send_message(
-        chat_id=update.effective_chat.id,
-        text=text,
-    )
+    send_saved_message_text(user, bot, update)
     return functions.admission_menu(bot, update)

@@ -3,6 +3,7 @@ from telegram import Bot, Update, KeyboardButton, ReplyKeyboardMarkup
 
 from telegrambot import states
 from telegrambot.apps import log_errors
+from telegrambot.models import Text
 
 
 @log_errors
