@@ -157,9 +157,18 @@
 
                                                     <tr>
                                                         <th class="font-weight-bold">{% trans 'Status' %}</th>
-                                                        <td>
-                                                          <span class="text-lowercase"> {{ murojatchi.status.title }}</span>
-                                                        </td>
+                                                       <td class="text-left">{% if murojatchi.status == "ko'rib chiqilmagan" %}
+                                            <span class="badge badge-info text-capitalize font-weight-bold">Ko'rib Chiqilmagan </span>
+                                        {% elif murojatchi.status == "ko'rib chiqilmoqda" %}
+                                            <span class="badge badge-warning text-capitalize font-weight-bold">Ko'rib Chiqilmoqda </span>
+                                        {% elif murojatchi.status == "ko'rib chiqildi" %}
+                                            <span class="badge badge-success text-capitalize font-weight-bold">Ko'rib Chiqildi </span>
+                                        {% elif murojatchi.status == "rad etildi" %}
+                                            <span class="badge badge-danger text-capitalize font-weight-bold">Rad Etildi </span>
+
+                                       {% endif %}
+
+                                       </td>
 
                                                     </tr>
                                                     <tr>

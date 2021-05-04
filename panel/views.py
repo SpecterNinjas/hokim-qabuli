@@ -231,7 +231,18 @@ class MurojatchiDetailView(DetailView):
     template_name = 'panel/murojatchi/see.html'
 
 
-class FoydalanuvchiDetailView(DetailView):
+class StatisticsView(LoginRequiredMixin, ListView):
+    queryset = Murojatchi.objects.all()
+    template_name = 'panel/statistics/statistics.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(StatisticsView, self).get_context_data(**kwargs)
+        context['muammolar'] = Muammo.objects.all()
+        context['a'] = Murojatchi.objects.all()
+        return context
+
+
+class FoydalanuvchiDetailView(LoginRequiredMixin, DetailView):
     model = Murojatchi
     context_object_name = 'murojatchi'
     queryset = Murojatchi.objects.all()
@@ -279,6 +290,7 @@ class MurojatchiReplyMessageView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy("panel:murojatchi")
 
 
+
 class MurojatchiDeleteView(LoginRequiredMixin, DeleteView):
     model = Murojatchi
     success_url = reverse_lazy("panel:murojatchi")
@@ -287,7 +299,11 @@ class MurojatchiDeleteView(LoginRequiredMixin, DeleteView):
         return self.post(request, *args, **kwargs)
 
 
-""" End Murojatchi Part """
+class AcceptedDetailView(LoginRequiredMixin, DetailView):
+    model = Reception
+    context_object_name = 'reception'
+    queryset = Reception.objects.all()
+    template_name = 'panel/accepted_applicants/see.html'
 
 
 class KategoriyaView(LoginRequiredMixin, ListView):
@@ -342,6 +358,23 @@ class FoydalanuvchiUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy("panel:foydalanuvchi")
 
 
+class AcceptedUpdateView(LoginRequiredMixin, UpdateView):
+    model = Reception
+    template_name = "panel/accepted_applicants/update.html"
+    context_object_name = 'reception'
+    form_class = ReceptionForm
+    success_url = reverse_lazy("panel:accepted")
+
+    def get_context_data(self, **kwargs):
+        context = super(AcceptedUpdateView, self).get_context_data(**kwargs)
+        context['mahallalar'] = Mahalla.objects.all()
+        context['muammolar'] = Muammo.objects.all()
+        context['kategoriyalar'] = SubMuammo.objects.all()
+        return context
+
+
+
+
 class QabulView(LoginRequiredMixin, ListView):
     template_name = 'panel/qabul/index.html'
     context_object_name = 'object_list'
@@ -359,13 +392,16 @@ class QabulView(LoginRequiredMixin, ListView):
         return context
 
     def post(self, request):
-        form = ReceptionForm(request.POST)
-        if form.is_valid():
+        form1 = ReceptionForm(request.POST)
 
-            form.save()
-            return redirect('panel:login')
+        if form1.is_valid():
+
+            form1.save()
+
+            return redirect('panel:accepted')
         else:
-            return render(request, 'panel/qabul/index.html', {'form': form})
+
+            return render(request, 'panel/qabul/index.html', {'form1': form1})
 
 
 @csrf_exempt
@@ -384,7 +420,8 @@ def ajax_mahalla(request):
 
         muammo = Muammo.objects.all()
 
-        json_add = serializers.serialize("json", add, fields=['fullname', 'phone', 'created', 'muammo'],
+        json_add = serializers.serialize("json", add,
+
                                          use_natural_foreign_keys=True, use_natural_primary_keys=True)
         json_add2 = serializers.serialize("json", muammo, fields=['pk', 'title'])
 
@@ -431,7 +468,7 @@ def ajaxfilter(request):
             if user_count:
                 json_add[str(i)] = user_count
 
-        json_users = serializers.serialize("json", queryset_users, fields=['fullname', 'phone', 'created'])
+        json_users = serializers.serialize("json", queryset_users, fields=['fullname', 'telegram_id', 'created', ])
 
         data = {
             'query': json_add,
@@ -469,7 +506,7 @@ def ajax_filter_category(request):
                 Q(category__category=category) & Q(mahalla__title__in=checked_categories))
             add.extend(query_item)
 
-        json_add = serializers.serialize("json", add, fields=['fullname', 'phone', 'created'],
+        json_add = serializers.serialize("json", add,
                                          use_natural_foreign_keys=True, use_natural_primary_keys=True)
         data = {
             'query': json_add,
@@ -484,5 +521,41 @@ def ajax_filter_category(request):
     return JsonResponse(data, safe=False)
 
 
+class AcceptedView(LoginRequiredMixin, ListView):
+    template_name = 'panel/accepted_applicants/index.html'
+    context_object_name = 'accepted_list'
+    queryset = Reception.objects.all().order_by('-created')
+    paginate_by = 15
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(AcceptedView, self).get_context_data(**kwargs)
+    #     context['mahallalar'] = Mahalla.objects.all()
+    #     context['muammolar'] = Muammo.objects.all()
+    #     context['hududlar'] = Hudud.objects.all()
+    #
+    #     return context
+
+
+class AcceptedSearchView(LoginRequiredMixin, ListView):
+    template_name = 'panel/accepted_applicants/search.html'
+    model = Reception
+
+    def get_queryset(self):
+        queryset = Reception.objects.all()
+        if self.request.GET.get('title') != '':
+            title = self.request.GET.get('title')
+            queryset = self.model.objects.filter(title__icontains=title)
+        if self.request.GET.get('appointment') != '':
+            appointment = self.request.GET.get('appointment')
+            queryset &= self.model.objects.filter(appointment=appointment)
+        if self.request.GET.get('status') != '':
+            status = self.request.GET.get('status')
+            queryset &= self.model.objects.filter(status=status)
+        return queryset
+
+
 def murojatchi_filter(request):
     pass
+
+
+

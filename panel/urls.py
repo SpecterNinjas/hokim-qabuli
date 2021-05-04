@@ -31,8 +31,7 @@ urlpatterns = [
     path("kategoriya_yaratish/", KategoriyaCreateView.as_view(), name="kategoriya_create"),
     path("kategoriya/<int:pk>/", KategoriyaUpdateView.as_view(), name="kategoriya_update"),
     path("kategoriya_uchirish/<int:pk>/", KategoriyaDeleteView.as_view(), name="kategoriya_delete"),
-    path("ajax/filter_category", ajax_filter_category, name = "ajax_filter_category"),
-
+    path("ajax/filter_category", ajax_filter_category, name="ajax_filter_category"),
 
     # Foydalanuvchi
     path("foydalanuvchi/", FoydalanuvchiView.as_view(), name="foydalanuvchi"),
@@ -53,11 +52,19 @@ urlpatterns = [
     path("murojatchi/<int:pk>/", MurojatchiReplyMessageView.as_view(), name="murojatchi_reply"),
     path("murojatchi_uchirish/<int:pk>/", MurojatchiDeleteView.as_view(), name="murojatchi_delete"),
 
-    path("murojatchi_filter/", murojatchi_filter, name="murojatchi_filter"),
-
     # QABUL
     path("qabul/", QabulView.as_view(), name="qabul"),
 
-   # path('ajax/mahalla_muammo/', ajax_mahalla_muammo, name='ajax_mahalla_muammo'),
+    # Statistics
+    path('statistics/', StatisticsView.as_view(), name='statistics'),
+
+    # ACCEPTED APPLICANTS
+    path("accepted/", AcceptedView.as_view(), name="accepted"),
+    path("accepted/search/", AcceptedSearchView.as_view(), name="accepted_search"),
+    path("accepted/see/<int:pk>", AcceptedDetailView.as_view(), name="accepted_detail"),
+    path("accepted/<int:pk>", AcceptedUpdateView.as_view(), name="accepted_update"),
+
+    # Ajax
+    path("murojatchi_filter/", murojatchi_filter, name="murojatchi_filter"),
 
 ]

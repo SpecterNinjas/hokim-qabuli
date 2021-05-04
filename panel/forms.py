@@ -53,4 +53,8 @@ class MurojatchiReplyMessageForm(forms.ModelForm):
 class ReceptionForm(forms.ModelForm):
     class Meta:
         model = Reception
-        fields = ['title', 'appointment']
+        fields = ['title', 'users', 'appointment', 'status']
+
+        widgets = {
+            'status': forms.Select(attrs={'class':'form-control'})
+        }

@@ -67,13 +67,12 @@ class Murojatchi(models.Model):
         ("ko'rib chiqilmagan", _("ko'rib chiqilmagan")),
         ("ko'rib chiqilmoqda", _("ko'rib chiqilmoqda")),
         ("ko'rib chiqildi", _("ko'rib chiqildi")),
-        ("qabulga chaqirildi", _("qabulga chaqirildi")),
         ("rad etildi", _("rad etildi")),
     )
     MUROJAT_TURI = (
-        ("Taklif", _("Taklif")),
-        ("Murojat", _("Murojat")),
-        ("Qabul", _("Qabul")),
+
+        ("appeal", _("Murojat")),
+        ("admission", _("Qabul")),
     )
 
     GENDER = (
@@ -81,7 +80,6 @@ class Murojatchi(models.Model):
         (2, _("Ayol")),
     )
 
-    id = models.BigAutoField(primary_key=True)
     telegram_id = models.PositiveBigIntegerField(_("Telegram ID"), blank=True, null=True)
     fullname = models.CharField(_("Ism Sharifi"), max_length=256, blank=True, null=True)
     username = models.CharField(_("Username"), max_length=32, blank=True, null=True)
@@ -108,19 +106,27 @@ class Murojatchi(models.Model):
     gender = models.PositiveBigIntegerField(_("Gender"), choices=GENDER, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.fullname}"
+        return f"{str(self.fullname)}"
 
     class Meta:
         verbose_name = _('Murojatchi')
         verbose_name_plural = _('Murojatchilar')
 
 
+RECEPTION_STATUS = (
+    (1, _("Ko'rib Chiqildi")),
+    (2, _("Ko'rib Chiqilmoqda")),
+    (3, _("Ko'rib Chiqilmagan")),
+)
+
+
 class Reception(models.Model):
     title = models.CharField(_("Qabul Nomi"), max_length=256)
-    fullname = models.ForeignKey(Murojatchi, on_delete=models.CASCADE, default=True, null=True)
+    users = models.ManyToManyField(Murojatchi)
     appointment = models.DateField(null=True, blank=True)
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
+    status = models.IntegerField(default=3, choices=RECEPTION_STATUS)
 
     def __str__(self):
         return self.title

@@ -371,7 +371,7 @@ msgstr "Массовый Прием"
 
 #: .\templates\panel\inc\sidebar.html:51
 msgid "Qo'shimcha sahifalar"
-msgstr "Дополнительные страницы"
+msgstr "Настройки"
 
 #: .\templates\panel\inc\sidebar.html:57
 msgid "Hududlar"

@@ -122,7 +122,6 @@
                                             <select name="murojat_turi" class="form-control"
                                                     style="margin-left: -33px;width: 100px;">
                                                 <option selected value="">{% trans 'Tanlang' %}</option>
-                                                <option value="Taklif">{% trans "Taklif" %}</option>
                                                 <option value="Murojat">{% trans "Murojat" %}</option>
                                                 <option value="Qabul">{% trans "Qabul" %}</option>
                                             </select>
@@ -147,7 +146,6 @@
                                                 <option selected value="">{% trans 'Tanlang' %}</option>
                                                 <option value="ko'rib chiqilmagan">{% trans "Ko'rib Chiqilmagan" %}</option>
                                                 <option value="ko'rib chiqilmoqda">{% trans "Ko'rib Chiqilmoqda" %}</option>
-                                                <option value="qabulga chaqirildi">{% trans "Qabulga Chaqirildi" %}</option>
                                                 <option value="ko'rib chiqildi">{% trans "Ko'rib Chiqildi" %}</option>
                                                 <option value="rad etildi">{% trans "Rad Etildi" %}</option>
                                             </select>
@@ -202,8 +200,18 @@
                                         <td class="text-left">{{ murojatchi.mahalla }}</td>
                                         <td class="text-left">{{ murojatchi.muammo }}</td>
                                         <td class="text-left">{{ murojatchi.created | date:"d.m.Y" }}</td>
-                                        <td class="text-left" id="status-row">{{ murojatchi.status }}</td>
+                                        <td class="text-left">{% if murojatchi.status == "ko'rib chiqilmagan" %}
+                                            <span class="badge badge-info text-capitalize font-weight-bold">Ko'rib Chiqilmagan </span>
+                                        {% elif murojatchi.status == "ko'rib chiqilmoqda" %}
+                                            <span class="badge badge-warning text-capitalize font-weight-bold">Ko'rib Chiqilmoqda </span>
+                                        {% elif murojatchi.status == "ko'rib chiqildi" %}
+                                            <span class="badge badge-success text-capitalize font-weight-bold">Ko'rib Chiqildi </span>
+                                        {% elif murojatchi.status == "rad etildi" %}
+                                            <span class="badge badge-danger text-capitalize font-weight-bold">Rad Etildi </span>
 
+                                       {% endif %}
+
+                                       </td>
 
                                         <td class="text-center amallar">
 

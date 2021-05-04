@@ -2,27 +2,6 @@
 {% load static i18n %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'panel/back/app-assets/vendors/css/vue-ctk-date-time-picker.css' %}">
-    <link rel="stylesheet" href="{% static 'panel/back/app-assets/vendors/css/vue2-editor.css' %}">
-    <link rel="stylesheet" href="{% static 'panel/back/app-assets/vendors/css/katex.min.css' %}">
-    <link rel="stylesheet" href="{% static 'panel/back/app-assets/vendors/css/monokai-sublime.min.css' %}">
-    <link rel="stylesheet" href="{% static 'panel/back/app-assets/css/quill.snow.css' %}"/>
-    <link rel="stylesheet" href="{% static 'panel/back/app-assets/css/quill.imageUploader.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'panel/back/app-assets/css/main-editor.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'panel/back/app-assets/vendors/css/ui/prism.min.css' %}">
-    <link rel="stylesheet" type="text/css"
-          href="{% static 'panel/back/app-assets/vendors/css/file-uploaders/dropzone.min.css' %}">
-    <link rel="stylesheet" type="text/css"
-          href="{% static 'panel/back/app-assets/css/plugins/file-uploaders/dropzone.min.css' %}">
-    <link rel="stylesheet" href="{% static 'panel/back/app-assets/vendors/css/filepond.min.css' %}">
-    <link rel="stylesheet"
-          href="{% static 'panel/back/app-assets/vendors/css/filepond-plugin-image-preview.min.css' %}">
-    <link rel="stylesheet" type="text/css"
-          href="{% static 'panel/back/app-assets/vendors/css/forms/select/select2.min.css' %}">
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 {% endblock %}
 
 
@@ -71,13 +50,16 @@
                                         <h5 class="text-center pt-1">{{ murojatchi.fullname }}</h5>
                                         <p class="title text-center">{% trans 'Telegram' %}</p>
                                         {% if murojatchi.username %}
-                                            <h6 class="ml-2">{% trans 'Username' %}: <span class="text-dark">{{ murojatchi.username }}</span></h6>
+                                            <h6 class="ml-2">{% trans 'Username' %}: <span
+                                                    class="text-dark">{{ murojatchi.username }}</span></h6>
                                             <hr>{% endif %}
                                         {% if murojatchi.telegram_id %}
-                                            <h6 class="ml-2">{% trans 'Telegram' %} ID: <span class="text-dark">{{ murojatchi.telegram_id }}
+                                            <h6 class="ml-2">{% trans 'Telegram' %} ID: <span
+                                                    class="text-dark">{{ murojatchi.telegram_id }}
                                           <hr></span></h6>{% endif %}
                                         {% if murojatchi.phone %}
-                                            <h6 class="ml-2">{% trans 'Telefon' %}: <span class="text-dark">{{ murojatchi.phone }}</span>
+                                            <h6 class="ml-2">{% trans 'Telefon' %}: <span
+                                                    class="text-dark">{{ murojatchi.phone }}</span>
                                             </h6>{% endif %}
 
 
@@ -86,9 +68,9 @@
                                 </div>
 
 
-
                                 <div class="col-md-9">
-                                <input id="myInput" type="text" maxlength="50" class="form-control mb-3" placeholder="{% trans 'Qidirish' %}">
+                                    <input id="myInput" type="text" maxlength="50" class="form-control mb-3"
+                                           placeholder="{% trans 'Qidirish' %}">
                                     <section id="table-transactions box-shadow-3">
                                         <div class="card">
                                             <!-- datatable start -->
@@ -98,11 +80,12 @@
                                                     <thead>
                                                     <tr>
 
-                                                        <th class="pl-3">{% trans 'F.I.SH' %}</th>
+                                                        <th class="pl-2">{% trans 'F.I.SH' %}</th>
                                                         <th class="pl-0">{% trans 'Hudud' %}</th>
                                                         <th class="pl-0">{% trans 'Mahalla' %}</th>
                                                         <th class="pl-0">{% trans 'Muammo' %}</th>
                                                         <th class="pl-0">{% trans 'Status' %}</th>
+
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -112,7 +95,7 @@
 
                                                             <tr id="js-filter">
 
-                                                                <td class="pl-3 pr-0">
+                                                                <td class="pl-2 pr-1">
                                                                     {{ murojat.fullname }}
                                                                 </td>
                                                                 <td class="pl-0 text-left">
@@ -123,19 +106,32 @@
                                                                     {{ murojat.mahalla.title }}
                                                                 </td>
                                                                 <td class="text-left">
-                                                                   {{ murojat.muammo }}
+                                                                    {{ murojat.muammo }}
                                                                 </td>
 
-                                                                <td class="text-left pl-1">
-                                                                    <span class="pr-2">{{ murojat.status }}</span>
+                                                                <td class="text-left pl-1" style="font-size: 13px;">
+                                                                    <span class="pr-2">{% if murojat.status == "ko'rib chiqilmagan" %}
+                                                                        <span class="badge badge-info text-capitalize font-weight-bold">Ko'rib Chiqilmagan </span>
+                                                                    {% elif murojat.status == "ko'rib chiqilmoqda" %}
+                                                                        <span class="badge badge-warning text-capitalize font-weight-bold">Ko'rib Chiqilmoqda </span>
+                                                                    {% elif murojat.status == "ko'rib chiqildi" %}
+                                                                        <span class="badge badge-success text-capitalize font-weight-bold">Ko'rib Chiqildi </span>
+                                                                    {% elif murojat.status == "rad etildi" %}
+                                                                        <span class="badge badge-danger text-capitalize font-weight-bold">Rad Etildi </span>
 
-                                                                    <a class="mr-1 ml-1" href="{% url 'panel:murojatchi_detail' murojat.id %}"><i class="fa fa-eye"
-                                                                                                     style="font-size: 19px;"
-                                                                                                     aria-hidden="true"></i></a>
-                                                                    <a href="{% url 'panel:murojatchi_reply' murojat.id %}"><i class="fa fa-edit"
-                                                                                   style="font-size: 19px;"
-                                                                                   aria-hidden="true"></i></a>
+                                                                    {% endif %}
 
+                                       </span>
+
+                                                                    <a class="mr-1"
+                                                                       href="{% url 'panel:murojatchi_detail' murojat.id %}"><i
+                                                                            class="fa fa-eye"
+                                                                            style="font-size: 19px;"
+                                                                            aria-hidden="true"></i></a>
+                                                                    <a href="{% url 'panel:murojatchi_reply' murojat.id %}"><i
+                                                                            class="fa fa-edit"
+                                                                            style="font-size: 19px;"
+                                                                            aria-hidden="true"></i></a>
                                                                 </td>
 
 
@@ -186,16 +182,16 @@
     <script src="{% static 'panel/back/app-assets/js/scripts/forms/select/form-select2.min.js' %}"></script>
 
 
-<script>
-        $(document).ready(function(){
-          $("#myInput").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
-            $("#js-filter").filter(function() {
-              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    <script>
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#js-filter").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
             });
-          });
         });
-</script>
+    </script>
 
 
 {% endblock %}

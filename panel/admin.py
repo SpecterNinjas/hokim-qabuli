@@ -29,7 +29,7 @@ class SubMuammoAdmin(TranslationAdmin):
 
 @admin.register(Murojatchi)
 class MurojatchiAdmin(TranslationAdmin):
-    list_display = ['telegram_id', 'username', 'fullname', 'hudud', 'mahalla', 'muammo', 'category', 'phone',
+    list_display = ['fullname', 'hudud', 'mahalla', 'muammo', 'category', 'phone',
                     'reply_message', 'created',
                     'status']
 
@@ -38,5 +38,5 @@ class MurojatchiAdmin(TranslationAdmin):
 
 @admin.register(Reception)
 class ReceptionAdmin(admin.ModelAdmin):
-    list_display = ['title', 'appointment', 'created', 'updated']
+    list_display = ['title', 'appointment', 'created', 'status']
     search_fields = ['title', ]

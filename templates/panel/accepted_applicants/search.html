@@ -1,0 +1,130 @@
+{% extends 'panel/layout/layout.html' %}
+{% load static i18n %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+    {#    {% if user|has_role:"admin_temp" %}#}
+    {% include 'panel/inc/sidebar.html' %}
+    {#    {% endif %}#}
+    <!-- BEGIN: Content-->
+
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="content-wrapper">
+            <h1 class="text-center">{% trans "Hokim Qabul Qidiruvi" %}</h1>
+            <div class="content-header row">
+                <div class="content-header-left col-12 mb-2 mt-1">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <div class="heading-elements">
+                                <ul class="list-inline mb-0 main-list-heading">
+                                    <li class="main-search">
+                                        {% comment %} {% if request.GET.q %}
+                                            <fieldset class="position-relative">
+                                                <form action="" method="GET">
+                                                    <input type="text" name="q" class="form-control single-daterange" placeholder="{% trans 'Izlash' %}" value="{{ request.GET.q }}"/>
+                                                    <input type="text" name="q" class="form-control single-daterange" placeholder="{% trans 'Izlash' %}" value="rad"/>
+                                                    <div class="form-control-position">
+                                                        <a href="{% url 'navigation' %}"><i
+                                                                class="bx bx-x font-medium-2"></i></a>
+                                                    </div>
+                                                </form>
+                                            </fieldset>
+                                        {% else %}
+                                            <fieldset class="has-icon-left">
+                                                <form action="" method="GET">
+                                                    <input type="text" name="q" class="form-control single-daterange" placeholder="{% trans 'Izlash' %}" value="{{ request.GET.q }}"/>
+                                                    <input type="text" name="q" class="form-control single-daterange" placeholder="{% trans 'Izlash' %}" value="rad0"/>
+                                                    <div class="form-control-position">
+                                                        <i class="bx bx-search font-medium-2"></i>
+                                                    </div>
+                                                </form>
+
+                                            </fieldset>
+                                        {% endif %}{% endcomment %}
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-body">
+                <!-- table Transactions start -->
+
+            <a style="float: right;margin-bottom: 15px;" href="{% url 'panel:accepted' %}"><button class="btn btn-info"><i class="fa fa-angle-double-left" style="padding-right: 3px;font-size: 20px;" aria-hidden="true"></i> {% trans 'Orqaga' %}</button></a>
+
+                <br><br>
+                <hr>
+              <p class="font-weight-bold" style="font-size: 1.1em;">{% trans 'Topilgan Hokim Qabullari' %}</p>
+
+                <section id="table-transactions">
+                    <div class="card">
+                        <!-- datatable start -->
+                              <div class="table-responsive">
+                            <table id="table-extended-transactions" class="table mb-0">
+                                <thead>
+                                <tr>
+                                    <th class="pr-2">№</th>
+                                    <th class="pl-0">{% trans 'Qabul Nomi' %}</th>
+                                    <th class="pl-2">{% trans 'Qabul Sanasi' %}</th>
+                                    <th class="pl-2">{% trans 'Yaratilgan Sanasi' %}</th>
+                                    <th class="pl-5">{% trans 'Holat' %}</th>
+
+                                    <th class="pr-0">{% trans 'Amallar' %}</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for accepted in object_list %}
+                                    <tr>
+                                        <td class="pr-2">{{ forloop.counter }}</td>
+                                        <td class="pl-0">
+                                            <a href="#">{{ accepted.title|safe | truncatechars:"150" }}</a>
+                                        </td>
+                                        <td class="text-left">{{ accepted.appointment | date:"d.m.Y" }}</td>
+                                        <td class="text-left">{{ accepted.created | date:"d.m.Y" }}</td>
+                                        <td class="text-left">{% if accepted.status == 1 %}
+                                            <span class="badge badge-success text-capitalize font-weight-bold">Ko'rib Chiqildi </span>
+                                        {% elif accepted.status == 2 %}
+                                            <span class="badge badge-warning text-capitalize font-weight-bold">Ko'rib Chiqilmoqda </span>
+                                        {% else %}
+                                            <span class="badge badge-danger text-capitalize font-weight-bold">Ko'rib Chiqilmagan </span>
+                                        {% endif %}</td>
+
+
+                                        <td class="text-left amallar">
+
+                                            <a class="mr-1" href="#"><i
+                                                    class="fa fa-eye" style="font-size: 19px;"
+                                                    aria-hidden="true"></i></a>
+                                            <a href="#"><i
+                                                    class="fa fa-edit" style="font-size: 19px;" aria-hidden="true"></i></a>
+
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- datatable ends -->
+                    </div>
+
+                </section>
+
+                <!-- table Transactions end -->
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+{% endblock %}
+
+{% block js %}
+{% endblock %}

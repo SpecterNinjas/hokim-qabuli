@@ -91,10 +91,10 @@
                                                     <th class="font-weight-bold">{% trans 'Mahalla' %}</th>
                                                     <td>{{ murojatchi.mahalla.title }}</td>
                                                 </tr>
-                                                    <tr>
-                                                        <th class="font-weight-bold">{% trans 'Murojat Turi' %}</th>
-                                                        <td>{{ murojatchi.murojat_turi}}</td>
-                                                    </tr>
+                                                <tr>
+                                                    <th class="font-weight-bold">{% trans 'Murojat Turi' %}</th>
+                                                    <td>{{ murojatchi.murojat_turi }}</td>
+                                                </tr>
                                                 <tr>
                                                     <th class="font-weight-bold">{% trans 'Muammo' %}</th>
                                                     <td>{{ murojatchi.muammo.title }}</td>
@@ -107,7 +107,8 @@
                                                     <th class="font-weight-bold">{% trans 'Media' %}</th>
                                                     <td>{% if murojatchi.media %}
                                                         <a href="{{ murojatchi.media.url }}">{{ murojatchi.media.url }}</a>{% else %}
-                                                        {% trans 'Muammoga aloqador media mavjud emas.' %}{% endif %}</td>
+                                                        {% trans 'Muammoga aloqador media mavjud emas.' %}{% endif %}
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <th class="font-weight-bold">{% trans 'Manzil' %}</th>
@@ -126,8 +127,18 @@
 
                                                 <tr>
                                                     <th class="font-weight-bold">{% trans 'Status' %}</th>
-                                                    <td class="text-lowercase">
-                                                        {{ murojatchi.status.title }}
+                                                    <td class="text-left text-lowercase">
+                                                        {% if murojatchi.status == "ko'rib chiqilmagan" %}
+                                                            <span class="badge badge-info text-capitalize font-weight-bold">Ko'rib Chiqilmagan </span>
+                                                        {% elif murojatchi.status == "ko'rib chiqilmoqda" %}
+                                                            <span class="badge badge-warning text-capitalize font-weight-bold">Ko'rib Chiqilmoqda </span>
+                                                        {% elif murojatchi.status == "ko'rib chiqildi" %}
+                                                            <span class="badge badge-success text-capitalize font-weight-bold">Ko'rib Chiqildi </span>
+                                                        {% elif murojatchi.status == "rad etildi" %}
+                                                            <span class="badge badge-danger text-capitalize font-weight-bold">Rad Etildi </span>
+
+                                                        {% endif %}
+
                                                     </td>
 
                                                 </tr>
@@ -146,7 +157,9 @@
 
                                             </table>
                                             <div style="width: 175px;">
-                                                <label for="id_status"><span class="text-capitalize font-weight-bold pl-2 text-dark" style="font-size: 1.2em;"><strong>{% trans 'Statusni tanlang' %}</strong></span></label>
+                                                <label for="id_status"><span
+                                                        class="text-capitalize font-weight-bold pl-2 text-dark"
+                                                        style="font-size: 1.2em;"><strong>{% trans 'Statusni tanlang' %}</strong></span></label>
                                                 {{ form.status }}
                                             </div>
                                             <label for="reply_message"
@@ -157,7 +170,8 @@
                                                 rows="7"
                                                 placeholder="{% trans 'Javob xatini kiriting.' %}"></textarea>
 
-                                            <button type="submit" class="btn btn-outline-info my-1 ml-3">{% trans 'Yuborish' %}
+                                            <button type="submit"
+                                                    class="btn btn-outline-info my-1 ml-3">{% trans 'Yuborish' %}
                                             </button>
                                         </form>
                                     </div>
