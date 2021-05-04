@@ -87,11 +87,6 @@ conv_handler = ConversationHandler(
         #     main_handler,
         #     MessageHandler(Filters.photo, admission.set_media),
         # ],
-        # states.GET_LOCATION: [
-        #     start_handler,
-        #     main_handler,
-        #     MessageHandler(Filters.all, admission.set_location),
-        # ],
         states.GET_PHONE_NUMBER: [
             start_handler,
             MessageHandler(Filters.text, admission.set_phone_number),
@@ -99,11 +94,20 @@ conv_handler = ConversationHandler(
         ],
         states.MAIN_MENU: [
             start_handler,
-            MessageHandler(Filters.regex(r"Hokim qabuliga yozish|Письмо к приему Хакима"),
-                           functions.application_type_handler),
-            MessageHandler(Filters.regex(r"Hokimga murojat|Обращение к Хакиму"), functions.application_type_handler),
+            MessageHandler(
+                Filters.regex(r"Hokim qabuliga yozish|Письмо к приему Хакима|Hokimga murojat|Обращение к Хакиму"),
+                functions.application_type_handler),
             MessageHandler(Filters.regex(r"Mening murojatlarim|Мои заявки"), functions.my_appeals),
             MessageHandler(Filters.regex(r"Sozlamalar|Настройки"), functions.profile_settings),
+        ],
+        states.PROFILE_SETTINGS: [
+            start_handler,
+            MessageHandler(Filters.regex(r"Tilni o'zgartirish|Поменять язык"), functions.get_change_language),
+            MessageHandler(Filters.regex(r"Orqaga|Назад"), functions.main_menu),
+        ],
+        states.CHANGE_LANGUAGE: [
+            start_handler,
+            MessageHandler(Filters.regex(r"Русский язык|O'zbek tili"), functions.set_change_language)
         ]
     },
     fallbacks=[],

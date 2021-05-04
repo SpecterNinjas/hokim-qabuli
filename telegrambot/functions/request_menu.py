@@ -1,18 +1,16 @@
 from django.core.cache import cache
-from telegram import Bot, Update, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram import Bot, Update, InlineKeyboardButton
 from telegrambot import states
 from telegrambot.apps import log_errors
 from telegrambot.helpers import get_request_data, generate_inline_keyboard, validate_admission_info
 from telegrambot.models import Text
-from telegrambot.services.services import get_user_lang, save_data_to_cache
+from telegrambot.services.services import get_user_lang, edit_or_send_message
 
 
 @log_errors
 def request_menu(bot: Bot, update: Update):
     print('request_menu')
-
     user = get_user_lang(update)
-    save_data_to_cache(update, update.callback_query.data, request_name='request_type')
     try:
         if update.callback_query.data != 'back_to_admission_menu':
             request_type = update.callback_query.data
@@ -40,8 +38,10 @@ def request_menu(bot: Bot, update: Update):
 
     date_of_birth_sign = '✅️ ' if request['year_of_birth'] and request['month_of_birth'] and request[
         'day_of_birth'] else '❗️'
-    date_of_birth = request['year_of_birth'] and request['month_of_birth'] and request['day_of_birth'] if request[
-        'year_of_birth'] and request['month_of_birth'] and request['day_of_birth'] else no_data[user.lang]
+    date_of_birth = request['year_of_birth'] and request['month_of_birth'] and request['day_of_birth'] \
+        if request['year_of_birth'] and request['month_of_birth'] and request['month_of_birth'] and \
+           request['day_of_birth'] else no_data[user.lang]
+
     gender_sign = '✅️ ' if request['gender'] else '❗️'
     gender = request['gender'] if request['gender'] else no_data[user.lang]
 
@@ -66,7 +66,7 @@ def request_menu(bot: Bot, update: Update):
     phone_number_sign = '✅️ ' if request['phone_number'] else '❗️'
     phone_number = request['phone_number'] if request['phone_number'] else no_data[user.lang]
 
-    if request['request_type'] == 'appeal' or request['request_type'] == 'offer':
+    if request['request_type'] == 'appeal':
         data = Text.objects.filter(text_id='APPEAL_MENU').values()[0]
     else:
         data = Text.objects.filter(text_id='ADMISSION_MENU').values()[0]
@@ -99,34 +99,16 @@ def request_menu(bot: Bot, update: Update):
 
     inline_keyboard = generate_inline_keyboard(data[f"buttons_{user.lang}"], update.effective_chat.id)
 
-    if validate_admission_info(request):
-        save_btn_text = "✉️Saqlash" if user.lang == 'uz' else '✉️Сохранить'
-        back_btn_text = "⬅️️Orqaga" if user.lang == 'uz' else '⬅️ Назад'
-        inline_keyboard.append(
-            [
-                InlineKeyboardButton(back_btn_text, callback_data='back_to_statement_type'),
-                InlineKeyboardButton(save_btn_text, callback_data='save_admission_info'),
-            ],
-        )
-    else:
-        back_btn_text = "⬅️️Orqaga" if user.lang == 'uz' else '⬅️ Назад'
-        inline_keyboard.append(
-            [InlineKeyboardButton(back_btn_text, callback_data='back_to_statement_type')]
-        )
+    save_btn_text = "✉️Saqlash" if user.lang == 'uz' else '✉️Сохранить'
+    back_btn_text = "⬅️️Orqaga" if user.lang == 'uz' else '⬅️ Назад'
 
-    try:
-        bot.edit_message_text(
-            chat_id=update.effective_chat.id,
-            text=text,
-            message_id=update.callback_query.message.message_id,
-            reply_markup=InlineKeyboardMarkup(inline_keyboard),
-            parse_mode='HTML',
-        )
-    except:
-        bot.send_message(
-            chat_id=update.effective_chat.id,
-            text=text,
-            reply_markup=InlineKeyboardMarkup(inline_keyboard),
-            parse_mode='HTML',
-        )
+    if validate_admission_info(request):
+        inline_keyboard.append([
+            InlineKeyboardButton(back_btn_text, callback_data='back_to_statement_type'),
+            InlineKeyboardButton(save_btn_text, callback_data='save_admission_info')])
+    else:
+        inline_keyboard.append([InlineKeyboardButton(back_btn_text, callback_data='back_to_statement_type')])
+
+    edit_or_send_message(bot, update, inline_keyboard, text)
+
     return states.MAIN

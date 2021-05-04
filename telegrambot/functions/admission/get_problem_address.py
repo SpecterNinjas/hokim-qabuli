@@ -1,7 +1,8 @@
-from telegram import Bot, Update, KeyboardButton, ReplyKeyboardMarkup
+from telegram import Bot, Update, KeyboardButton
 from telegrambot import states
 from telegrambot.models import Text
 from telegrambot.services import get_user_lang
+from telegrambot.services.services import delete_or_send_message
 
 
 def get_problem_address(bot: Bot, update: Update):
@@ -19,22 +20,6 @@ def get_problem_address(bot: Bot, update: Update):
         keyboard = [
             [KeyboardButton('📍Joylashuv ulashish', request_contact=True)]
         ]
-    try:
-        bot.delete_message(
-            chat_id=update.effective_chat.id,
-            message_id=update.callback_query.message.message_id,
-        )
-        bot.send_message(
-            chat_id=update.effective_chat.id,
-            text=text,
-            reply_markup=ReplyKeyboardMarkup(keyboard, resize_keyboard=True, one_time_keyboard=True),
-            parse_mode='Markdown'
-        )
-    except:
-        bot.send_message(
-            chat_id=update.effective_chat.id,
-            text=text,
-            reply_markup=ReplyKeyboardMarkup(keyboard, resize_keyboard=True, one_time_keyboard=True),
-            parse_mode='Markdown',
-        )
+
+    delete_or_send_message(bot, update, keyboard, text)
     return states.GET_PROBLEM_ADDRESS

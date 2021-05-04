@@ -1,22 +1,19 @@
-from django.apps import apps
 from django.core.cache import cache
-from telegram import Update, Bot, ReplyKeyboardRemove
-
-from telegrambot import states, functions
+from telegram import Update, Bot
+from telegrambot import states
 from telegrambot.apps import log_errors
 from telegrambot.functions import admission
-from telegrambot.services import send_saved_message_text
+from telegrambot.services import send_saved_message_text, get_user_lang, save_data_to_cache
 
 
 @log_errors
 def set_birth_year(bot: Bot, update: Update):
     print('set_birth_year')
-    user_model = apps.get_model('telegrambot', 'TelegramProfile')
-    user = user_model.objects.get(external_id=update.effective_chat.id)
+    user = get_user_lang(update)
 
-    birth_year = update.message.text
+    year_of_birth = update.message.text
 
-    if int(birth_year) not in range(1970, 2013):
+    if int(year_of_birth) not in range(1970, 2013):
         if user.lang == 'ru':
             text = 'Вы ввели некорректный год рождения. Попробуйте еще раз'
         else:
@@ -25,9 +22,6 @@ def set_birth_year(bot: Bot, update: Update):
             chat_id=update.effective_chat.id, text=text, parse_mode='Markdown')
         return states.GET_BIRTH_YEAR
 
-    request = cache.get(f'request_{update.effective_chat.id}')
-    request['year_of_birth'] = birth_year
-    cache.set(f'request_{update.effective_chat.id}', request)
-
+    save_data_to_cache(update, year_of_birth, request_name='year_of_birth')
     send_saved_message_text(user, bot, update)
     return admission.get_birth_month(bot, update)

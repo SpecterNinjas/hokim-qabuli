@@ -9,3 +9,5 @@ from .my_appeals import my_appeals
 from .profile_settings import profile_settings
 from .application_type_handler import application_type_handler
 
+from .get_change_language import get_change_language
+from .set_change_language import set_change_language

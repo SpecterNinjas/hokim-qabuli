@@ -5,6 +5,7 @@ from telegrambot import states
 from telegrambot.apps import log_errors
 from telegrambot.models import Text
 from telegrambot.services import get_user_lang
+from telegrambot.services.services import delete_or_send_message
 
 
 @log_errors
@@ -28,20 +29,5 @@ def get_district(bot: Bot, update: Update):
         else:
             keyboard.append([KeyboardButton(district.title_ru)])
 
-    try:
-        bot.delete_message(
-            chat_id=update.effective_chat.id,
-            message_id=update.callback_query.message.message_id,
-        )
-        bot.send_message(
-            chat_id=update.effective_chat.id,
-            text=text,
-            reply_markup=ReplyKeyboardMarkup(keyboard, resize_keyboard=True, one_time_keyboard=True)
-        )
-    except:
-        bot.send_message(
-            chat_id=update.effective_chat.id,
-            text=text,
-            reply_markup=ReplyKeyboardMarkup(keyboard, resize_keyboard=True, one_time_keyboard=True)
-        )
+    delete_or_send_message(bot, update, keyboard, text)
     return states.GET_DISTRICT

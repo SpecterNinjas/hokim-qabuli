@@ -12,10 +12,8 @@ def get_gender(bot: Bot, update: Update):
     print('get_gender')
 
     user = get_user_lang(update)
-
     data = Text.objects.filter(text_id='GET_GENDER').values()[0]
     text = data[user.lang]
-
-    inline_keyboard = generate_inline_keyboard(data[f"buttons_{user.lang}"], update.effective_chat.id)
-    edit_or_send_message(bot, update, inline_keyboard=inline_keyboard, text=text)
+    edit_or_send_message(bot, update, inline_keyboard=generate_inline_keyboard(data[f"buttons_{user.lang}"],
+                                                                               update.effective_chat.id), text=text)
     return states.GET_GENDER
