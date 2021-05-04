@@ -82,11 +82,11 @@ conv_handler = ConversationHandler(
             start_handler,
             MessageHandler(Filters.all, admission.set_problem_address)
         ],
-        # states.GET_MEDIA: [
-        #     start_handler,
-        #     main_handler,
-        #     MessageHandler(Filters.photo, admission.set_media),
-        # ],
+        states.GET_MEDIA: [
+            start_handler,
+            main_handler,
+            MessageHandler(Filters.photo, admission.set_media),
+        ],
         states.GET_PHONE_NUMBER: [
             start_handler,
             MessageHandler(Filters.text, admission.set_phone_number),

@@ -12,9 +12,7 @@ def get_problem_type(bot: Bot, update: Update):
 
     data = Text.objects.filter(text_id='GET_PROBLEM_TYPE').values()[0]
     text = data[user.lang]
-
     inline_keyboard = generate_inline_keyboard(data[f"buttons_{user.lang}"], update.effective_chat.id)
-
     try:
         bot.delete_message(
             chat_id=update.effective_chat.id,

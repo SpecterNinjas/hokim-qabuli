@@ -59,16 +59,17 @@ def inline_button_handler(bot: Bot, update: Update):
     # ---------------------------------------- #
 
     # ----------SUGGESTION SETTERS------------ #
-    if callback_data == 'set_first_name':
-        pass
-    if callback_data == 'set_last_name':
-        pass
-    if callback_data == 'set_middle_name':
-        pass
-    if callback_data == 'set_set_year_of_birth':
-        pass
-    if callback_data == 'set_set_day_of_birth':
-        pass
+    if callback_data == 'set_name':
+        admission.set_name(bot, update)
+        return states.GET_BIRTH_YEAR
+    if callback_data == 'set_year_of_birth':
+        admission.set_birth_year(bot, update)
+        return states.GET_BIRTH_MONTH
+    if callback_data == 'set_month_of_birth':
+        admission.set_birth_month(bot, update)
+    if callback_data == 'set_day_of_birth':
+        admission.set_birth_day(bot, update)
+        return states.GET_GENDER
     # ---------------------------------------- #
 
     if callback_data == 'back_to_problem_type':

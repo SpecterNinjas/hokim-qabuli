@@ -15,7 +15,6 @@ def set_gender(bot: Bot, update: Update):
         functions.request_menu(bot, update)
         return states.MAIN
 
-    # delete_previous_message_with_button(bot, update)
     save_data_to_cache(update, data=update.callback_query.data, request_name='gender')
     send_saved_message_text(user, bot, update)
 
