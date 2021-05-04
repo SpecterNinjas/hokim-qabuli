@@ -252,11 +252,11 @@ class StatisticsView(LoginRequiredMixin, ListView):
 
             year_25 = muammo.murojatchi_set.filter(year_of_birth__gte=curr_year - 25).count()  # [1996 -> ]
             year_26_35 = muammo.murojatchi_set.filter(
-                Q(year_of_birth__gte=curr_year - 35) and Q(year_of_birth__lte=curr_year - 26)).count()  # [1986-1995]
+                Q(year_of_birth__gte=curr_year - 35) & Q(year_of_birth__lte=curr_year - 26)).count()  # [1986-1995]
             year_36 = muammo.murojatchi_set.filter(year_of_birth__lte=curr_year - 36).count()  # [0 - 1985]
             obj['year_25_percent'] = round(0 if obj['total'] == 0 else year_25/obj['total']*100, 2)
-            obj['year_26_35_percent'] = round(0 if obj['total'] == 0 else year_26_35/obj['total']*100, 2)
             obj['year_36_percent'] = round(0 if obj['total'] == 0 else year_36/obj['total']*100, 2)
+            obj['year_26_35_percent'] = round(0 if obj['total'] == 0 else year_26_35/obj['total'] * 100, 2)
 
             context['muammolar'].append(obj)
         return context
