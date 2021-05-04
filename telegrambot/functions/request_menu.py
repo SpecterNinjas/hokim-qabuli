@@ -8,7 +8,7 @@ from telegrambot.services.services import get_user_lang, edit_or_send_message
 
 
 @log_errors
-def request_menu(bot: Bot, update: Update):
+def request_menu(bot: Bot, update: Update, edit: bool = False):
     print('request_menu')
     user = get_user_lang(update)
     try:
@@ -38,9 +38,11 @@ def request_menu(bot: Bot, update: Update):
 
     date_of_birth_sign = '✅️ ' if request['year_of_birth'] and request['month_of_birth'] and request[
         'day_of_birth'] else '❗️'
-    date_of_birth = request['year_of_birth'] and request['month_of_birth'] and request['day_of_birth'] \
-        if request['year_of_birth'] and request['month_of_birth'] and request['month_of_birth'] and \
-           request['day_of_birth'] else no_data[user.lang]
+    try:
+        date_of_birth = request['day_of_birth'] + '. ' + request['month_of_birth'] + '. ' + request['year_of_birth']
+    except:
+        date_of_birth = ''
+    date_of_birth = date_of_birth if date_of_birth else no_data[user.lang]
 
     gender_sign = '✅️ ' if request['gender'] else '❗️'
     gender = request['gender'] if request['gender'] else no_data[user.lang]
@@ -102,12 +104,17 @@ def request_menu(bot: Bot, update: Update):
     save_btn_text = "✉️Saqlash" if user.lang == 'uz' else '✉️Сохранить'
     back_btn_text = "⬅️️Orqaga" if user.lang == 'uz' else '⬅️ Назад'
 
+    if edit:
+        back_button = InlineKeyboardButton(back_btn_text, callback_data='back_to_main_menu')
+    else:
+        back_button = InlineKeyboardButton(back_btn_text, callback_data='back_to_statement_type')
+
     if validate_admission_info(request):
         inline_keyboard.append([
-            InlineKeyboardButton(back_btn_text, callback_data='back_to_statement_type'),
+            back_button,
             InlineKeyboardButton(save_btn_text, callback_data='save_admission_info')])
     else:
-        inline_keyboard.append([InlineKeyboardButton(back_btn_text, callback_data='back_to_statement_type')])
+        inline_keyboard.append([back_button])
 
     edit_or_send_message(bot, update, inline_keyboard, text)
 

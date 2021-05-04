@@ -1,9 +1,10 @@
 from telegram import Bot, Update, KeyboardButton, ReplyKeyboardMarkup
-
 from telegrambot import states
+from telegrambot.apps import log_errors
 from telegrambot.services import get_user_lang
 
 
+@log_errors
 def get_change_language(bot: Bot, update: Update):
     print('get_change_language')
     user = get_user_lang(update)
@@ -21,4 +22,3 @@ def get_change_language(bot: Bot, update: Update):
         reply_markup=ReplyKeyboardMarkup(keyboard, resize_keyboard=True, one_time_keyboard=True),
     )
     return states.CHANGE_LANGUAGE
-

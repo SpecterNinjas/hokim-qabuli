@@ -10,7 +10,7 @@ def inline_button_handler(bot: Bot, update: Update):
 
     if callback_data == 'ru_':
         functions.set_ru(bot, update)
-        return states.STATEMENT_TYPE
+        return states.MAIN_MENU
 
     if callback_data == 'uz_':
         functions.set_uz(bot, update)
@@ -84,9 +84,13 @@ def inline_button_handler(bot: Bot, update: Update):
         functions.statement_type(bot, update)
         return states.STATEMENT_TYPE
 
-    # if callback_data == 'skip_file':
-    #     admission.get_location(bot, update)
-    #     return states.GET_LOCATION
+    if callback_data == 'back_to_main_menu':
+        functions.main_menu(bot, update)
+        return states.MAIN_MENU
+
+    if callback_data == 'back_to_my_appeals_list':
+        functions.my_appeals_list(bot, update)
+        return states.MY_APPEALS_LIST
 
     if callback_data == 'skip_location':
         admission.get_phone_number(bot, update)

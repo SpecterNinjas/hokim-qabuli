@@ -14,11 +14,11 @@ def get_problem_address(bot: Bot, update: Update):
 
     if user.lang == 'ru':
         keyboard = [
-            [KeyboardButton('📍Поделиться локацией', request_contact=True)]
+            [KeyboardButton('📍Поделиться локацией', request_location=True)]
         ]
     else:
         keyboard = [
-            [KeyboardButton('📍Joylashuv ulashish', request_contact=True)]
+            [KeyboardButton('📍Joylashuv ulashish', request_location=True)]
         ]
 
     delete_or_send_message(bot, update, keyboard, text)

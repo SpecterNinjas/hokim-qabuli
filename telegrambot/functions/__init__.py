@@ -5,9 +5,11 @@ from .set_uz import set_uz
 from .statement_type import statement_type
 from .request_menu import request_menu
 from .main_menu import main_menu
-from .my_appeals import my_appeals
+from .my_appeals_list import my_appeals_list
 from .profile_settings import profile_settings
 from .application_type_handler import application_type_handler
-
+from .my_appeals_list import my_appeals_list
+from .show_my_appeal import show_my_appeal
+from .my_profile import my_profile
 from .get_change_language import get_change_language
 from .set_change_language import set_change_language

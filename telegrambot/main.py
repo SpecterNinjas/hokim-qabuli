@@ -97,18 +97,24 @@ conv_handler = ConversationHandler(
             MessageHandler(
                 Filters.regex(r"Hokim qabuliga yozish|Письмо к приему Хакима|Hokimga murojat|Обращение к Хакиму"),
                 functions.application_type_handler),
-            MessageHandler(Filters.regex(r"Mening murojatlarim|Мои заявки"), functions.my_appeals),
+            MessageHandler(Filters.regex(r"Mening murojatlarim|Мои заявки"), functions.my_appeals_list),
             MessageHandler(Filters.regex(r"Sozlamalar|Настройки"), functions.profile_settings),
+            MessageHandler(Filters.regex(r"Mening murojatlarim|Мои заявки"), functions.my_appeals_list),
         ],
         states.PROFILE_SETTINGS: [
             start_handler,
             MessageHandler(Filters.regex(r"Tilni o'zgartirish|Поменять язык"), functions.get_change_language),
+            MessageHandler(Filters.regex(r"Profil|Мой профиль"), functions.my_profile),
             MessageHandler(Filters.regex(r"Orqaga|Назад"), functions.main_menu),
         ],
         states.CHANGE_LANGUAGE: [
             start_handler,
             MessageHandler(Filters.regex(r"Русский язык|O'zbek tili"), functions.set_change_language)
-        ]
+        ],
+        states.MY_APPEALS_LIST: [
+            start_handler,
+            CallbackQueryHandler(functions.show_my_appeal),
+        ],
     },
     fallbacks=[],
 )

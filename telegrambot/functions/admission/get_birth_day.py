@@ -1,4 +1,4 @@
-from telegram import Update, Bot, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram import Update, Bot, InlineKeyboardButton
 from panel.models import Murojatchi
 from telegrambot import states
 from telegrambot.apps import log_errors

@@ -1,8 +1,8 @@
-from django.apps import apps
 from telegram import Bot, Update, KeyboardButton, ReplyKeyboardMarkup, InlineKeyboardButton
 from panel.models import Murojatchi
 from telegrambot import states
 from telegrambot.apps import log_errors
+from telegrambot.helpers import generate_keyboard
 from telegrambot.models import Text
 from telegrambot.services import get_user_lang, edit_or_send_message
 
@@ -16,16 +16,9 @@ def get_birth_month(bot: Bot, update: Update):
     data = Text.objects.filter(text_id='GET_BIRTH_MONTH').values()[0]
     text = data[user.lang]
 
-    keyboard = []
+    keyboard = generate_keyboard(data[f"buttons_{user.lang}"])
     back_btn_text = "⬅️️Orqaga" if user.lang == 'uz' else '⬅️ Назад'
     keyboard.append([KeyboardButton(back_btn_text)])
-
-    months = apps.get_model('telegrambot', 'Month').objects.all().order_by('id')
-    for month in months:
-        if user.lang == 'uz':
-            keyboard.append([KeyboardButton(month.title_uz)])
-        else:
-            keyboard.append([KeyboardButton(month.title_ru)])
 
     bot.send_message(
         chat_id=update.effective_chat.id,

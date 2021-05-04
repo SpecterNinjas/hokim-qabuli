@@ -19,4 +19,4 @@ def set_ru(bot: Bot, update: Update):
         text='Выбран русский язык.'
     )
 
-    return functions.statement_type(bot, update)
+    return functions.main_menu(bot, update)

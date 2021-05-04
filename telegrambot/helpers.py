@@ -1,4 +1,4 @@
-from telegram import InlineKeyboardButton
+from telegram import InlineKeyboardButton, KeyboardButton
 
 
 def get_request_data(
@@ -44,6 +44,27 @@ def get_request_data(
     }
 
     return request
+
+
+def _generate_rows(rows):
+    x = [rows[i:i + 4] for i in range(0, len(rows), 4)]
+    return x
+
+
+def generate_keyboard(data):
+    keyboard = []
+    rows = data.splitlines()
+    for row in rows:
+        keyboard_rows = []
+        buttons = row.split("|")
+        for button in buttons:
+            if button.find('{request_contact}') != -1:
+                keyboard_rows.append(KeyboardButton(button.replace("{request_contact}", "").strip(),
+                                                    request_contact=True))
+            keyboard_rows.append(KeyboardButton(button.strip()))
+        keyboard.append(keyboard_rows)
+        keyboard = _generate_rows(keyboard[0])
+    return keyboard
 
 
 def _generate_inline_rows(rows):

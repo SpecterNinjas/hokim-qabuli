@@ -73,8 +73,8 @@ class Murojatchi(models.Model):
         ("rad etildi", _("rad etildi")),
     )
     MUROJAT_TURI = (
-        ("Murojat", _("Murojat")),
-        ("Qabul", _("Qabul")),
+        ("appeal", _("Murojat")),
+        ("admission", _("Qabul")),
     )
 
     GENDER = (
@@ -114,6 +114,21 @@ class Murojatchi(models.Model):
     class Meta:
         verbose_name = _('Murojatchi')
         verbose_name_plural = _('Murojatchilar')
+
+
+class ProfileSuggestion(models.Model):
+    GENDER = (
+        (1, _("Erkak")),
+        (2, _("Ayol")),
+    )
+    id = models.BigAutoField(primary_key=True)
+    telegram_id = models.PositiveBigIntegerField(_("Telegram ID"), blank=True, null=True)
+    fullname = models.CharField(_("Ism Sharifi"), max_length=256, blank=True, null=True)
+    phone = models.CharField(_("Telefon"), max_length=13, blank=True, null=True)
+    year_of_birth = models.CharField(_("Tug'ilgan yil"), max_length=256, null=True, blank=True)
+    month_of_birth = models.CharField(_("Tug'ilgan oy"), max_length=256, null=True, blank=True)
+    day_of_birth = models.CharField(_("Tug'ilgan kun"), max_length=256, null=True, blank=True)
+    gender = models.PositiveBigIntegerField(_("Gender"), choices=GENDER, null=True, blank=True)
 
 
 class Reception(models.Model):
