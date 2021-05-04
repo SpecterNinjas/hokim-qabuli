@@ -7,11 +7,12 @@ from django.core import serializers
 from django.db.models import Q
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, DeleteView, UpdateView, CreateView, DetailView
 from .forms import *
 from .models import *
+from datetime import datetime
 
 
 def admin_login_view(request):
@@ -224,7 +225,7 @@ class MurojatchiSearchView(LoginRequiredMixin, ListView):
         return queryset
 
 
-class MurojatchiDetailView(DetailView):
+class MurojatchiDetailView(LoginRequiredMixin, DetailView):
     model = Murojatchi
     context_object_name = 'murojatchi'
     queryset = Murojatchi.objects.all()
@@ -237,8 +238,27 @@ class StatisticsView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super(StatisticsView, self).get_context_data(**kwargs)
-        context['muammolar'] = Muammo.objects.all()
-        context['a'] = Murojatchi.objects.all()
+        context['muammolar'] = []
+        for muammo in Muammo.objects.all():
+            obj = {}
+
+            obj['title'] = muammo.title
+            obj['total'] = muammo.murojatchi_set.count()
+            obj['completed'] = muammo.murojatchi_set.filter(status=Murojatchi.MUROJATCHI_STATUSI[2][0]).count()
+            obj['completed_percent'] = int(0 if obj['total'] == 0 else obj['completed'] / obj['total'] * 100)
+            obj['women'] = muammo.murojatchi_set.filter(gender=Murojatchi.GENDER[1][0]).count()
+            obj['men'] = muammo.murojatchi_set.filter(gender=Murojatchi.GENDER[0][0]).count()
+            curr_year = datetime.now().year  # 2021
+
+            year_25 = muammo.murojatchi_set.filter(year_of_birth__gte=curr_year - 25).count()  # [1996 -> ]
+            year_26_35 = muammo.murojatchi_set.filter(
+                Q(year_of_birth__gte=curr_year - 35) and Q(year_of_birth__lte=curr_year - 26)).count()  # [1986-1995]
+            year_36 = muammo.murojatchi_set.filter(year_of_birth__lte=curr_year - 36).count()  # [0 - 1985]
+            obj['year_25_percent'] = round(0 if obj['total'] == 0 else year_25/obj['total']*100, 2)
+            obj['year_26_35_percent'] = round(0 if obj['total'] == 0 else year_26_35/obj['total']*100, 2)
+            obj['year_36_percent'] = round(0 if obj['total'] == 0 else year_36/obj['total']*100, 2)
+
+            context['muammolar'].append(obj)
         return context
 
 
@@ -288,7 +308,6 @@ class MurojatchiReplyMessageView(LoginRequiredMixin, UpdateView):
     context_object_name = 'murojatchi'
     form_class = MurojatchiReplyMessageForm
     success_url = reverse_lazy("panel:murojatchi")
-
 
 
 class MurojatchiDeleteView(LoginRequiredMixin, DeleteView):
@@ -357,6 +376,10 @@ class FoydalanuvchiUpdateView(LoginRequiredMixin, UpdateView):
     form_class = FoydalanuvchiForm
     success_url = reverse_lazy("panel:foydalanuvchi")
 
+    # def get_success_url(self, **kwargs):
+    #     # obj = form.instance or self.object
+    #     return reverse("profile", kwargs={'pk': self.object.pk})
+
 
 class AcceptedUpdateView(LoginRequiredMixin, UpdateView):
     model = Reception
@@ -371,8 +394,6 @@ class AcceptedUpdateView(LoginRequiredMixin, UpdateView):
         context['muammolar'] = Muammo.objects.all()
         context['kategoriyalar'] = SubMuammo.objects.all()
         return context
-
-
 
 
 class QabulView(LoginRequiredMixin, ListView):
@@ -556,6 +577,3 @@ class AcceptedSearchView(LoginRequiredMixin, ListView):
 
 def murojatchi_filter(request):
     pass
-
-
-

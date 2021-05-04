@@ -58,3 +58,6 @@ class ReceptionForm(forms.ModelForm):
         widgets = {
             'status': forms.Select(attrs={'class':'form-control'})
         }
+
+
+

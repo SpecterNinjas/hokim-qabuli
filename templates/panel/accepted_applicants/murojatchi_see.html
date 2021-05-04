@@ -1,0 +1,225 @@
+{% extends 'panel/layout/layout.html' %}
+{% load static i18n %}
+
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/vendors/css/vue-ctk-date-time-picker.css' %}">
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/vendors/css/vue2-editor.css' %}">
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/vendors/css/katex.min.css' %}">
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/vendors/css/monokai-sublime.min.css' %}">
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/css/quill.snow.css' %}"/>
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/css/quill.imageUploader.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/css/main-editor.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'panel/back/app-assets/vendors/css/ui/prism.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'panel/back/app-assets/vendors/css/file-uploaders/dropzone.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'panel/back/app-assets/css/plugins/file-uploaders/dropzone.min.css' %}">
+    <link rel="stylesheet" href="{% static 'panel/back/app-assets/vendors/css/filepond.min.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'panel/back/app-assets/vendors/css/filepond-plugin-image-preview.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'panel/back/app-assets/vendors/css/forms/select/select2.min.css' %}">
+
+
+{% endblock %}
+
+
+{% block body %}
+    {#    {% if user|has_role:"admin_temp" %}#}
+    {% include 'panel/inc/sidebar.html' %}
+    {#    {% endif %}#}
+    <!-- BEGIN: Content-->
+
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="content-wrapper">
+            <h1 class="text-center mb-3">{{ murojatchi.fullname }} #{{ murojatchi.id }}</h1>
+            <div class="content-body">
+                <!-- app invoice View Page -->
+
+                <section class="invoice-edit-wrapper">
+                    <div class="row">
+                        <!-- invoice view page -->
+                        <div class="col-xl-12 col-md-12 col-12">
+                            {#                                <ul class="nav nav-pills">#}
+                            {#                                    <li class="nav-item">#}
+                            {#                                        <a class="nav-link active" id="uzbek-tab" data-toggle="pill" href="#uzbek"#}
+                            {#                                           aria-expanded="true"><i class="flag-icon flag-icon-uz mr-50"></i>#}
+                            {#                                            O‘zbekcha</a>#}
+                            {#                                    </li>#}
+                            {#                                    <li class="nav-item">#}
+                            {#                                        <a class="nav-link" id="russian-tab" data-toggle="pill" href="#russian"#}
+                            {#                                           aria-expanded="false"><i class="flag-icon flag-icon-ru mr-50"></i> Русский#}
+                            {#                                        </a>#}
+                            {#                                    </li>#}
+                            {#                                    <li class="nav-item">#}
+                            {#                                        <a class="nav-link" id="english-tab" data-toggle="pill" href="#english"#}
+                            {#                                           aria-expanded="false"><i class="flag-icon flag-icon-gb mr-50"></i> English#}
+                            {#                                        </a>#}
+                            {#                                    </li>#}
+                            {#                                </ul>#}
+
+                            <div class="row">
+                                <div class="col-md-3">
+
+                                    <div class="card p-2 box-shadow-3" style="border-top: 4px solid rgb(60,141,188);">
+                                        <img class="rounded-circle" src="{% static 'panel/login/images/user2-160x160.jpg' %}" alt="{{ murojatchi.fullname }}" style="width:70%;padding-left: 50px;">
+                                        <h5 class="text-center pt-1">{{ murojatchi.fullname }}</h5>
+                                        <p class="title text-center">{% trans 'Telegram' %}</p>
+                                      {% if murojatchi.username %} <h6>{% trans 'Username' %}: <span class="text-dark">{{ murojatchi.username }}</span></h6>
+                                          <hr>{% endif %}
+                                      {% if murojatchi.telegram_id %} <h6>{% trans 'Telegram ID' %}: <span class="text-dark">{{ murojatchi.telegram_id }}
+                                          <hr></span></h6>{% endif %}
+                                      {% if murojatchi.phone %} <h6>{% trans 'Telefon' %}: <span class="text-dark">{{ murojatchi.phone }}</span></h6>{% endif %}
+
+                                        <a href="{% url 'panel:foydalanuvchi_detail' murojatchi.id  %}"><button class="btn btn-success mt-1 mx-auto d-block">{% trans 'Barcha Murojatlar' %}</button></a>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-md-9">
+
+                                    <div class="card box-shadow-2">
+                                        <ul class="nav nav-tabs p-2" id="myTab" role="tablist">
+                                            <li class="nav-item mr-auto">
+                                                <a class="nav-link text-white active" id="home-tab" data-toggle="tab"
+                                                   href="#home" role="tab" aria-controls="home"
+                                                   aria-selected="true">{% trans 'Asosiy' %}</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link text-white" style="background-color: rgb(0,166,90)" id="profile-tab"
+                                                   href="{% url 'panel:murojatchi_reply' murojatchi.id %}" role="tab" aria-controls="profile"
+                                                   aria-selected="false">{% trans 'Tahrirlash' %}</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link text-white" style="background-color: rgb(221,75,57)" id="contact-tab"
+                                                   href="{% url 'panel:murojatchi_delete' murojatchi.id %}" role="tab" aria-controls="contact"
+                                                   aria-selected="false">{% trans "O'chirish" %}</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content" id="myTabContent">
+                                            <div class="tab-pane fade show active m-2" id="home" role="tabpanel"
+                                                 aria-labelledby="home-tab">
+
+                                                <table class="table table-striped table-bordered">
+                                                    <tr>
+                                                        <th class="font-weight-bold">№</th>
+
+                                                        <td>{{ murojatchi.id }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="font-weight-bold">{% trans 'Hudud' %}</th>
+                                                        <td>{{ murojatchi.hudud.title }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="font-weight-bold">{% trans 'Mahalla' %}</th>
+                                                        <td>{{ murojatchi.mahalla.title }}</td>
+                                                    </tr>
+                                                 <tr>
+                                                        <th class="font-weight-bold">{% trans 'Murojat Turi' %}</th>
+                                                        <td>{{ murojatchi.murojat_turi}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="font-weight-bold">{% trans 'Murojat Turi' %}x</th>
+                                                        <td>{{ murojatchi.muammo.title }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="font-weight-bold">{% trans 'Kategoriya' %}</th>
+                                                        <td>{{ murojatchi.category.category }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="font-weight-bold">{% trans 'Media' %}</th>
+                                                        <td>{% if murojatchi.media %}
+                                                            <a href="{{ murojatchi.media.url }}">{{ murojatchi.media.url }}</a>{% else %}
+                                                            {% trans 'Muammoga aloqador media mavjud emas.' %}{% endif %}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="font-weight-bold">{% trans 'Manzil' %}</th>
+                                                        <td>{% if murojatchi.location %}
+                                                            {{ murojatchi.location }}{% else %}
+                                                            {% trans ' Muammoga aloqador manzil mavjud emas.' %}
+                                                           {% endif %}</td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="font-weight-bold">{% trans 'Murojat Matn' %}i</th>
+                                                        <td>{% if murojatchi.description %}
+                                                            {{ murojatchi.description }}{% else %}{% trans 'Muammoga aloqador murojat matni mavjud emas.' %}{% endif %}</td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="font-weight-bold">{% trans 'Javob Matni' %}</th>
+                                                        <td>
+                                                            {{ murojatchi.reply_message }}
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <th class="font-weight-bold">{% trans 'Status' %}</th>
+                                                       <td class="text-left">{% if murojatchi.status == "ko'rib chiqilmagan" %}
+                                            <span class="badge badge-info text-capitalize font-weight-bold">Ko'rib Chiqilmagan </span>
+                                        {% elif murojatchi.status == "ko'rib chiqilmoqda" %}
+                                            <span class="badge badge-warning text-capitalize font-weight-bold">Ko'rib Chiqilmoqda </span>
+                                        {% elif murojatchi.status == "ko'rib chiqildi" %}
+                                            <span class="badge badge-success text-capitalize font-weight-bold">Ko'rib Chiqildi </span>
+                                        {% elif murojatchi.status == "rad etildi" %}
+                                            <span class="badge badge-danger text-capitalize font-weight-bold">Rad Etildi </span>
+
+                                       {% endif %}
+
+                                       </td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="font-weight-bold">{% trans 'Sana' %}</th>
+                                                        <td>{{ murojatchi.created | date:"d.m.Y" }}</td>
+                                                    </tr>
+                                                </table>
+
+
+                                            </div>
+{#                                            <div class="tab-pane fade" id="profile" role="tabpanel"#}
+{#                                                 aria-labelledby="profile-tab">Menu2#}
+{#                                            </div>#}
+{#                                            <div class="tab-pane fade" id="contact" role="tabpanel"#}
+{#                                                 aria-labelledby="contact-tab">Menu3#}
+{#                                            </div>#}
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </section>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+{% endblock %}
+
+
+{% block js %}
+    <script src="{% static 'panel/back/app-assets/vendors/js/filepond-plugin-image-preview.js' %}"></script>
+    <script src="{% static 'panel/back/app-assets/vendors/js/filepond.js' %}"></script>
+    <script src="{% static 'panel/back/app-assets/js/vue.js' %}"></script>
+    <script src="{% static 'panel/back/app-assets/vendors/js/vue-ctk-date-time-picker.umd.js' %}"></script>
+    <script src="{% static 'panel/back/app-assets/vendors/js/katex.min.js' %}"></script>
+    <script src="{% static 'panel/back/app-assets/vendors/js/highlight.min.js' %}"></script>
+    <script src="{% static 'panel/back/app-assets/vendors/js/quill.imageUploader.min.js' %}"></script>
+    <script src="{% static 'panel/back/app-assets/vendors/js/vue-filepond.min.js' %}"></script>
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{% static 'panel/back/app-assets/vendors/js/forms/select/select2.full.min.js' %}"></script>
+    <!-- END: Page Vendor JS-->
+    <script src="{% static 'panel/back/app-assets/js/scripts/forms/select/form-select2.min.js' %}"></script>
+{% endblock %}

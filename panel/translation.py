@@ -24,4 +24,4 @@ class HududTranslationOptions(TranslationOptions):
 
 @register(Murojatchi)
 class MurojatchiTranslationOptions(TranslationOptions):
-    fields = ['location', 'description']
+    fields = ['location', ]

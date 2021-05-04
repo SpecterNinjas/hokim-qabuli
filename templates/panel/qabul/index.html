@@ -437,6 +437,14 @@
         });
     </script>
 
+    <script>
+    $('form').submit(function(e) {
+        if ($('[name="users"]:checked').length === 0) {
+            e.preventDefault()
+            alert('Murojatchilarni tanlang')
+        }
+    });
+    </script>
 
 
 

@@ -92,7 +92,6 @@ class Murojatchi(models.Model):
     location = models.CharField(_("Manzil"), max_length=300, blank=True, null=True)
     description = models.TextField(_("Murojat Matni"), null=True, blank=True)
     phone = models.CharField(_("Telefon"), max_length=13, blank=True, null=True)
-    accepted = models.BooleanField(_("Qabulga Chaqirildi"), default=False)
 
     reply_message = models.TextField(_("Javob Matni"), default=_("Javob berilmagan"), blank=True, null=True)
     created = models.DateField(_("Murojat Sanasi"), auto_now_add=True, null=True, blank=True)
@@ -100,7 +99,7 @@ class Murojatchi(models.Model):
     status = models.CharField(_("Murojatchi Statusi"), max_length=32, choices=MUROJATCHI_STATUSI,
                               default=MUROJATCHI_STATUSI[0][0], null=True, blank=True)
 
-    year_of_birth = models.CharField(_("Tug'ilgan yil"), max_length=256, null=True, blank=True)
+    year_of_birth = models.PositiveIntegerField(_("Tug'ilgan yil"),  null=True, blank=True)
     month_of_birth = models.CharField(_("Tug'ilgan oy"), max_length=256, null=True, blank=True)
     day_of_birth = models.CharField(_("Tug'ilgan kun"), max_length=256, null=True, blank=True)
     gender = models.PositiveBigIntegerField(_("Gender"), choices=GENDER, null=True, blank=True)
@@ -122,11 +121,11 @@ RECEPTION_STATUS = (
 
 class Reception(models.Model):
     title = models.CharField(_("Qabul Nomi"), max_length=256)
-    users = models.ManyToManyField(Murojatchi)
+    users = models.ManyToManyField(Murojatchi, blank=True)
     appointment = models.DateField(null=True, blank=True)
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
-    status = models.IntegerField(default=3, choices=RECEPTION_STATUS)
+    status = models.IntegerField(default=3, choices=RECEPTION_STATUS, null=True,blank=True)
 
     def __str__(self):
         return self.title
