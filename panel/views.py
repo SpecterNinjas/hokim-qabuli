@@ -55,6 +55,16 @@ class MainView(LoginRequiredMixin, ListView):
     template_name = 'panel/main/index.html'
 
 
+class StatisticsView(LoginRequiredMixin, ListView):
+    queryset = Murojatchi.objects.all()
+    template_name = 'panel/statistics/statistics.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(StatisticsView, self).get_context_data(**kwargs)
+        context['muammolar'] = Muammo.objects.all()
+        context['a'] = Murojatchi.objects.all()
+        return context
+
 """ Mahalla Part """
 
 
@@ -399,7 +409,7 @@ class AcceptedUpdateView(LoginRequiredMixin, UpdateView):
 class QabulView(LoginRequiredMixin, ListView):
     template_name = 'panel/qabul/index.html'
     context_object_name = 'object_list'
-    form_class = MurojatchiForm
+    form_class = ReceptionForm
     model = Murojatchi
     queryset = Mahalla.objects.all()
 
@@ -441,8 +451,12 @@ def ajax_mahalla(request):
 
         muammo = Muammo.objects.all()
 
+<<<<<<< HEAD
         json_add = serializers.serialize("json", add,
 
+=======
+        json_add = serializers.serialize("json", add, fields=['fullname', 'phone', 'created', 'muammo','telegram_id'],
+>>>>>>> 729b75a552689e0588acf7e760dc0369ce12ef15
                                          use_natural_foreign_keys=True, use_natural_primary_keys=True)
         json_add2 = serializers.serialize("json", muammo, fields=['pk', 'title'])
 
@@ -489,7 +503,11 @@ def ajaxfilter(request):
             if user_count:
                 json_add[str(i)] = user_count
 
+<<<<<<< HEAD
         json_users = serializers.serialize("json", queryset_users, fields=['fullname', 'telegram_id', 'created', ])
+=======
+        json_users = serializers.serialize("json", queryset_users, fields=['fullname', 'phone', 'created','telegram_id'])
+>>>>>>> 729b75a552689e0588acf7e760dc0369ce12ef15
 
         data = {
             'query': json_add,
@@ -527,7 +545,11 @@ def ajax_filter_category(request):
                 Q(category__category=category) & Q(mahalla__title__in=checked_categories))
             add.extend(query_item)
 
+<<<<<<< HEAD
         json_add = serializers.serialize("json", add,
+=======
+        json_add = serializers.serialize("json", add, fields=['fullname', 'phone', 'created', 'telegram_id'],
+>>>>>>> 729b75a552689e0588acf7e760dc0369ce12ef15
                                          use_natural_foreign_keys=True, use_natural_primary_keys=True)
         data = {
             'query': json_add,

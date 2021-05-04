@@ -51,8 +51,13 @@ class MurojatchiReplyMessageForm(forms.ModelForm):
 
 
 class ReceptionForm(forms.ModelForm):
+    telegram_id = forms.ModelMultipleChoiceField(
+        queryset=Murojatchi.objects.all()
+    )
+
     class Meta:
         model = Reception
+<<<<<<< HEAD
         fields = ['title', 'users', 'appointment', 'status']
 
         widgets = {
@@ -61,3 +66,6 @@ class ReceptionForm(forms.ModelForm):
 
 
 
+=======
+        fields = ['title', 'telegram_id', 'appointment']
+>>>>>>> 729b75a552689e0588acf7e760dc0369ce12ef15

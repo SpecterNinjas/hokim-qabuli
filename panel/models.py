@@ -5,6 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 class Mahalla(models.Model):
     title = models.CharField(_("Mahalla nomi"), max_length=256, null=True)
     region = models.CharField(verbose_name='Tuman', max_length=255, null=True)
+    title_ru = models.CharField(_("Mahalla nomi_ru"), max_length=256, null=True)
+    title_uz = models.CharField(_("Mahalla nomi_uz"), max_length=256, null=True)
     token = models.CharField(max_length=1024, null=True)
     location = models.CharField(_("Manzil"), max_length=256, null=True)
     phone = models.CharField(_("Telefon"), max_length=13, null=True)
@@ -70,7 +72,10 @@ class Murojatchi(models.Model):
         ("rad etildi", _("rad etildi")),
     )
     MUROJAT_TURI = (
+<<<<<<< HEAD
 
+=======
+>>>>>>> 729b75a552689e0588acf7e760dc0369ce12ef15
         ("appeal", _("Murojat")),
         ("admission", _("Qabul")),
     )
@@ -105,23 +110,47 @@ class Murojatchi(models.Model):
     gender = models.PositiveBigIntegerField(_("Gender"), choices=GENDER, null=True, blank=True)
 
     def __str__(self):
+<<<<<<< HEAD
         return f"{str(self.fullname)}"
+=======
+        return f"{str(self.telegram_id)}"
+>>>>>>> 729b75a552689e0588acf7e760dc0369ce12ef15
 
     class Meta:
         verbose_name = _('Murojatchi')
         verbose_name_plural = _('Murojatchilar')
 
 
+<<<<<<< HEAD
 RECEPTION_STATUS = (
     (1, _("Ko'rib Chiqildi")),
     (2, _("Ko'rib Chiqilmoqda")),
     (3, _("Ko'rib Chiqilmagan")),
 )
+=======
+class ProfileSuggestion(models.Model):
+    GENDER = (
+        (1, _("Erkak")),
+        (2, _("Ayol")),
+    )
+    id = models.BigAutoField(primary_key=True)
+    telegram_id = models.PositiveBigIntegerField(_("Telegram ID"), blank=True, null=True)
+    fullname = models.CharField(_("Ism Sharifi"), max_length=256, blank=True, null=True)
+    phone = models.CharField(_("Telefon"), max_length=13, blank=True, null=True)
+    year_of_birth = models.CharField(_("Tug'ilgan yil"), max_length=256, null=True, blank=True)
+    month_of_birth = models.CharField(_("Tug'ilgan oy"), max_length=256, null=True, blank=True)
+    day_of_birth = models.CharField(_("Tug'ilgan kun"), max_length=256, null=True, blank=True)
+    gender = models.PositiveBigIntegerField(_("Gender"), choices=GENDER, null=True, blank=True)
+>>>>>>> 729b75a552689e0588acf7e760dc0369ce12ef15
 
 
 class Reception(models.Model):
     title = models.CharField(_("Qabul Nomi"), max_length=256)
+<<<<<<< HEAD
     users = models.ManyToManyField(Murojatchi, blank=True)
+=======
+    telegram_id = models.ForeignKey(Murojatchi, on_delete=models.CASCADE, default=True, null=True)
+>>>>>>> 729b75a552689e0588acf7e760dc0369ce12ef15
     appointment = models.DateField(null=True, blank=True)
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
