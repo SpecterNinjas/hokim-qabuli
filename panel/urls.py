@@ -56,7 +56,6 @@ urlpatterns = [
     # QABUL
     path("qabul/", QabulView.as_view(), name="qabul"),
 
-
     # Statistics
     path('statistics/', StatisticsView.as_view(), name='statistics'),
     path('statistics/<int:id>', StatisticsDetailView.as_view(), name='statistics_detail'),
@@ -71,5 +70,12 @@ urlpatterns = [
 
     # Ajax
     path("murojatchi_filter/", murojatchi_filter, name="murojatchi_filter"),
+
+
+    # Statistics
+    path('statistics/', StatisticsView.as_view(), name= 'statistics')
+
+   # path('ajax/mahalla_muammo/', ajax_mahalla_muammo, name='ajax_mahalla_muammo'),
+
 
 ]

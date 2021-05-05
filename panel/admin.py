@@ -17,8 +17,8 @@ class MuammoAdmin(TranslationAdmin):
 
 @admin.register(Hudud)
 class HududAdmin(TranslationAdmin):
-    list_display = ['title', ]
-    search_fields = ['title', ]
+    list_display = ['title']
+    search_fields = ['title']
 
 
 @admin.register(SubMuammo)
@@ -33,10 +33,18 @@ class MurojatchiAdmin(TranslationAdmin):
                     'reply_message', 'created',
                     'status']
 
-    search_fields = ['fullname', ]
+
+# @admin.register(MurojatchiAdmin)
+# class MurojatchiAdmin(admin.ModelAdmin):
+#     list_display = ['telegram_id', 'username', 'fullname', 'year_of_birth',
+#                     'month_of_birth', 'day_of_birth', 'gender', 'hudud', 'mahalla', 'muammo', 'category', 'phone',
+#                     'description', 'reply_message', 'created', 'status']
+#     search_fields = ['fullname']
+
 
 
 @admin.register(Reception)
 class ReceptionAdmin(admin.ModelAdmin):
     list_display = ['title', 'appointment', 'created', 'status']
     search_fields = ['title', ]
+

@@ -4,7 +4,7 @@ from modeltranslation.translator import register, TranslationOptions
 
 @register(Mahalla)
 class MahallaTranslationOptions(TranslationOptions):
-    fields = ['title', 'location']
+    fields = ['location']
 
 
 @register(Muammo)

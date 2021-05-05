@@ -59,14 +59,15 @@ INSTALLED_APPS = [
 
     # APPS
     'panel',
+    'telegrambot',
 
 
     # INSTALLED
-    'corsheaders',  # To avoid Cors Error
+    # 'corsheaders',
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
+    # 'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -192,4 +193,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 TELEGRAM_TOKEN = '688249185:AAHYsn4bQcauJDmd7zUN-MWoaJZSnKQcZJI'
-HOST = 'https://56c556eec9bf.ngrok.io'
+HOST = 'https://3cb7fd4c576e.ngrok.io'
+

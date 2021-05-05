@@ -211,7 +211,9 @@
             <div class="col-md-3 ml-1">
                 <input type="date" name="appointment" required class="form-control">
             </div>
-            <div class="col-md-9"></div>
+            <div class="col-md-9">
+                {{ form.telegram_id }}
+            </div>
         </div>
         <div class="row mx-2">
             <button class="btn btn-info ml-2 mt-2" id="checkBtn" type="submit">{% trans 'Yaratish' %}</button>
@@ -293,7 +295,11 @@
 
                         json_data.forEach(function (d) {
                             $('.murojatchi-contents').find('tbody').append('<tr>' +
+<<<<<<< HEAD
                                 '<td><input type="checkbox" class="murojatchi-checkbox" name="users" value="' + d.pk + '"></td>' +
+=======
+                                '<td><input type="checkbox" class="murojatchi-checkbox" name="'+ d.fields.telegram_id+ '"></td>' +
+>>>>>>> 729b75a552689e0588acf7e760dc0369ce12ef15
                                 '<td class="text-left">' + d.fields.fullname + '</td>' +
                                 '<td class="text-left">' + d.fields.phone + '</td>' +
                                 '<td class="text-left">' + d.fields.created + '</td>' +
@@ -350,7 +356,11 @@
                         JSON.parse(data.users).forEach(function (d) {
                             console.log(data.users)
                             $('.murojatchi-contents').find('tbody').append('<tr>' +
+<<<<<<< HEAD
                                 '<td><input type="checkbox" class="murojatchi-checkbox" name="users" value="' + d.pk + '"></td>' +
+=======
+                                '<td><input type="checkbox" class="murojatchi-checkbox" name="'+ d.fields.telegram_id+ '"></td>' +
+>>>>>>> 729b75a552689e0588acf7e760dc0369ce12ef15
                                 '<td class="text-left">' + d.fields.fullname + '</td>' +
                                 '<td class="text-left">' + d.fields.phone + '</td>' +
                                 '<td class="text-left">' + d.fields.created + '</td>' +
@@ -392,7 +402,11 @@
 
                         JSON.parse(data.query).forEach(function (d) {
                             $('.murojatchi-contents').find('tbody').append('<tr>' +
+<<<<<<< HEAD
                                 '<td><input type="checkbox" class="murojatchi-checkbox" name="users"  value="' + d.pk + '"></td>' +
+=======
+                                '<td><input type="checkbox" class="murojatchi-checkbox" name="'+ d.fields.telegram_id+ '"></td>' +
+>>>>>>> 729b75a552689e0588acf7e760dc0369ce12ef15
                                 '<td class="text-left">' + d.fields.fullname + '</td>' +
                                 '<td class="text-left">' + d.fields.phone + '</td>' +
                                 '<td class="text-left">' + d.fields.created + '</td>' +
@@ -412,9 +426,17 @@
     </script>
 
     <script>
+<<<<<<< HEAD
         $(document).ready(function (e) {
             $('body').on('click', '.murojatchi-checkbox', function () {
                 let choices = []
+=======
+    $(document).ready(function (e) {
+              $('body').on('click', '.murojatchi-checkbox', function () {
+                let choices = {}
+
+                $('.murojatchi-checkbox:input[type=checkbox]:checked').each(function () {
+>>>>>>> 729b75a552689e0588acf7e760dc0369ce12ef15
 
                 $('.murojatchi-checkbox:input[type=checkbox]:checked').each(function () {
 

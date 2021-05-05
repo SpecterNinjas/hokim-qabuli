@@ -42,6 +42,7 @@
                         <table id="table-extended-transactions" class="table mb-0">
                             <thead class="text-center">
                             <tr>
+
                                 <th rowspan="2">{% trans 'Muammo' %}</th>
                                 <th rowspan="2">{% trans 'Jami' %}</th>
                                 <th rowspan="2">{% trans "Hal Bo'ldi" %}</th>
@@ -50,9 +51,9 @@
                                 <th colspan="3" class="text-center">{% trans 'Yosh' %}</th>
                             </tr>
                             <tr>
-                                <th>{% trans 'Ayol' %}</th>
-                                <th>{% trans 'Erkak' %}</th>
-                                <th><25</th>
+                                <th>Ayol</th>
+                                <th>Erkak</th>
+                                <th>18-25</th>
                                 <th>26-35</th>
                                 <th>36+</th>
                             </tr>
@@ -69,6 +70,7 @@
                                     <td>{{ muammo.year_25_percent }}%</td>
                                     <td>{{ muammo.year_26_35_percent }}%</td>
                                     <td>{{ muammo.year_36_percent }}%</td>
+
                                 </tr>
                             {% endfor %}
                             </tbody>
