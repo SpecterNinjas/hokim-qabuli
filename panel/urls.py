@@ -6,7 +6,7 @@ app_name = 'panel'
 
 urlpatterns = [
 
-    path('', MainView.as_view(), name="main_page"),
+
     path('login/', admin_login_view, name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 
@@ -52,17 +52,22 @@ urlpatterns = [
     path("murojatchi/<int:pk>/", MurojatchiReplyMessageView.as_view(), name="murojatchi_reply"),
     path("murojatchi_uchirish/<int:pk>/", MurojatchiDeleteView.as_view(), name="murojatchi_delete"),
 
+
     # QABUL
     path("qabul/", QabulView.as_view(), name="qabul"),
 
+
     # Statistics
     path('statistics/', StatisticsView.as_view(), name='statistics'),
+    path('statistics/<int:id>', StatisticsDetailView.as_view(), name='statistics_detail'),
+
 
     # ACCEPTED APPLICANTS
     path("accepted/", AcceptedView.as_view(), name="accepted"),
     path("accepted/search/", AcceptedSearchView.as_view(), name="accepted_search"),
     path("accepted/see/<int:pk>", AcceptedDetailView.as_view(), name="accepted_detail"),
     path("accepted/<int:pk>", AcceptedUpdateView.as_view(), name="accepted_update"),
+
 
     # Ajax
     path("murojatchi_filter/", murojatchi_filter, name="murojatchi_filter"),

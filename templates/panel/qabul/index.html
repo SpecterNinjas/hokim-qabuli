@@ -118,11 +118,11 @@
                                        data-url="{% url 'panel:muammo_filter' %}">
                                     <thead>
                                     <tr>
-                                        <th class="pl-1"><input id="select-all-category"
+                                         <th class="pl-1"><input id="select-all-category"
                                                                 class="form-check category-checkbox"
                                                                 type="checkbox"></th>
-                                        <th class="text-center">{% trans 'Kategoriya' %}</th>
-                                        <th class="text-left"></th>
+                                        <th class="text-left pl-0">{% trans 'Kategoriya' %}</th>
+
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -341,7 +341,7 @@
                             const [key, value] = entry;
 
                             $('.category-contents').find('tbody').append(' <tr class = "kategory_list"><td class="pl-1"><input type="checkbox" name="' + key + '" class ="category-checkbox"></td>' +
-                                '<td class="text-center ajax-category" >' +
+                                '<td class="text-left pl-0 ajax-category" >' +
                                 key +
                                 '</td>' +
                                 '</tr>');

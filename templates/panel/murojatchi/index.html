@@ -122,8 +122,8 @@
                                             <select name="murojat_turi" class="form-control"
                                                     style="margin-left: -33px;width: 100px;">
                                                 <option selected value="">{% trans 'Tanlang' %}</option>
-                                                <option value="Murojat">{% trans "Murojat" %}</option>
-                                                <option value="Qabul">{% trans "Qabul" %}</option>
+                                                <option value="appeal">{% trans "Murojat" %}</option>
+                                                <option value="admission">{% trans "Qabul" %}</option>
                                             </select>
                                         </td>
 
@@ -209,9 +209,9 @@
                                         {% elif murojatchi.status == "rad etildi" %}
                                             <span class="badge badge-danger text-capitalize font-weight-bold">Rad Etildi </span>
 
-                                       {% endif %}
+                                        {% endif %}
 
-                                       </td>
+                                        </td>
 
                                         <td class="text-center amallar">
 
@@ -293,5 +293,4 @@
 {% endblock %}
 
 {% block js %}
-
 {% endblock %}

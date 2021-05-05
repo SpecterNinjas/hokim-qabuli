@@ -3,31 +3,12 @@
 
 <!-- BEGIN: Main Menu-->
 <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
-    <div class="navbar-header">
-        <ul class="nav navbar-nav flex-row">
-            <li class="nav-item mr-auto">
-                <a class="navbar-brand" href="{% url 'panel:main_page' %}">
-                    {#                <a class="navbar-brand" href="{% url 'index-admin_temp' %}">#}
-                    <div class="brand-logo">
-                        <img class="logo" style="width: 130px; height: 60px;"
-                             src="{% static 'panel/login/images/Group.svg' %}"/>
-                    </div>
-                </a></li>
-        </ul>
-    </div>
-
     <div class="shadow-bottom"></div>
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation"
             data-icon-style="lines">
 
-            <li class="navigation-header"><span>{% trans "Ma'muriyat" %}</span></li>
-
-            <li class="nav-item news {% if 'statistics' in request.path %}aaa{% endif %}">
-                <a href="{% url 'panel:statistics' %}">
-                         <span class="menu-item"><i class="fa fa-bar-chart mr-1" aria-hidden="true"></i>
-                             {% trans 'Statistika' %}</span></a>
-            </li>
+            <li class="navigation-header"><span class="h4 text-capitalize text-dark">{% trans "Ma'muriyat" %}</span></li>
 
             <li class="nav-item news {% if 'murojatchi' in request.path %}aaa{% endif %}">
                 <a href="{% url 'panel:murojatchi' %}">
@@ -54,7 +35,11 @@
                          <span class="menu-item"><i class="fa fa-calendar mr-1" aria-hidden="true"></i>
                             {% trans "Qabullar" %}</span></a>
             </li>
-
+            <li class="nav-item news {% if 'statistics' in request.path %}aaa{% endif %}">
+                <a href="{% url 'panel:statistics' %}">
+                         <span class="menu-item"><i class="fa fa-bar-chart mr-1" aria-hidden="true"></i>
+                             {% trans 'Statistika' %}</span></a>
+            </li>
 
             <li class="nav-item news">
                 <a href="#"><i class="fa fa-share"></i>

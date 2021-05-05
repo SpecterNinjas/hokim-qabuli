@@ -5,7 +5,7 @@ from .models import *
 
 @admin.register(Mahalla)
 class MahallaAdmin(TranslationAdmin):
-    list_display = ['title', 'region', 'location', 'phone']
+    list_display = ['id','title', 'region', 'location', 'phone']
     search_fields = ['location', 'title']
 
 

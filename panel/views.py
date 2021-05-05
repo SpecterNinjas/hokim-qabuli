@@ -5,11 +5,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 import requests
 from django.core import serializers
 from django.db.models import Q
-from django.http import JsonResponse, HttpResponse
-from django.shortcuts import render, redirect
+from django.http import JsonResponse, HttpResponse, Http404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, DeleteView, UpdateView, CreateView, DetailView
+from django.http import request, JsonResponse, HttpResponse, HttpResponseRedirect, HttpRequest
 from .forms import *
 from .models import *
 from datetime import datetime
@@ -35,7 +36,7 @@ def admin_login_view(request):
 
                 if result['success']:
                     login(request, user)
-                    return redirect('panel:mahalla')
+                    return redirect('panel:murojatchi')
                 else:
                     messages.error(request, 'Yaroqsiz reCAPTCHA kiritildi')
                     return redirect('panel:login')
@@ -49,10 +50,6 @@ def admin_login_view(request):
     elif request.method == 'GET':
         return render(request, 'panel/AdminLogin/index.html')
 
-
-class MainView(LoginRequiredMixin, ListView):
-    queryset = Mahalla.objects.all()
-    template_name = 'panel/main/index.html'
 
 
 """ Mahalla Part """
@@ -212,7 +209,12 @@ class MurojatchiSearchView(LoginRequiredMixin, ListView):
             queryset &= self.model.objects.filter(mahalla_id=mahalla)
         if self.request.GET.get('murojat_turi') != '':
             murojat_turi = self.request.GET.get('murojat_turi')
-            queryset &= self.model.objects.filter(murojat_turi=murojat_turi)
+
+            if murojat_turi == 'appeal':
+                queryset &= self.model.objects.filter(murojat_turi=Murojatchi.MUROJAT_TURI[0][0])
+            elif murojat_turi == 'admission':
+                queryset &= self.model.objects.filter(murojat_turi=Murojatchi.MUROJAT_TURI[1][0])
+
         if self.request.GET.get('hudud') != '':
             hudud = self.request.GET.get('hudud')
             queryset &= self.model.objects.filter(hudud_id=hudud)
@@ -238,6 +240,7 @@ class StatisticsView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super(StatisticsView, self).get_context_data(**kwargs)
+        context['mahallalar'] = Mahalla.objects.all()
         context['muammolar'] = []
         for muammo in Muammo.objects.all():
             obj = {}
@@ -254,9 +257,49 @@ class StatisticsView(LoginRequiredMixin, ListView):
             year_26_35 = muammo.murojatchi_set.filter(
                 Q(year_of_birth__gte=curr_year - 35) & Q(year_of_birth__lte=curr_year - 26)).count()  # [1986-1995]
             year_36 = muammo.murojatchi_set.filter(year_of_birth__lte=curr_year - 36).count()  # [0 - 1985]
-            obj['year_25_percent'] = round(0 if obj['total'] == 0 else year_25/obj['total']*100, 2)
-            obj['year_36_percent'] = round(0 if obj['total'] == 0 else year_36/obj['total']*100, 2)
-            obj['year_26_35_percent'] = round(0 if obj['total'] == 0 else year_26_35/obj['total'] * 100, 2)
+            obj['year_25_percent'] = round(0 if obj['total'] == 0 else year_25 / obj['total'] * 100, 2)
+            obj['year_36_percent'] = round(0 if obj['total'] == 0 else year_36 / obj['total'] * 100, 2)
+            obj['year_26_35_percent'] = round(0 if obj['total'] == 0 else year_26_35 / obj['total'] * 100, 2)
+
+            context['muammolar'].append(obj)
+        return context
+
+
+class StatisticsDetailView(LoginRequiredMixin, ListView):
+    queryset = Murojatchi
+    slug_field = "id"
+    template_name = 'panel/statistics/statistics_detail.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(StatisticsDetailView, self).get_context_data(**kwargs)
+        context['mahalla'] = get_object_or_404(Mahalla, id=self.kwargs.get('id'))
+        context['mahallalar'] = Mahalla.objects.all()
+        context['muammolar'] = []
+        for muammo in Muammo.objects.all():
+            obj = {}
+
+            obj['title'] = muammo.title
+            obj['total'] = muammo.murojatchi_set.filter(mahalla_id=self.kwargs.get('id')).count()
+            obj['completed'] = muammo.murojatchi_set.filter(
+                Q(status=Murojatchi.MUROJATCHI_STATUSI[2][0]) & Q(mahalla_id=self.kwargs.get('id'))).count()
+
+            obj['completed_percent'] = int(0 if obj['total'] == 0 else obj['completed'] / obj['total'] * 100)
+            obj['women'] = muammo.murojatchi_set.filter(
+                Q(gender=Murojatchi.GENDER[1][0]) & Q(mahalla_id=self.kwargs.get('id'))).count()
+            obj['men'] = muammo.murojatchi_set.filter(
+                Q(gender=Murojatchi.GENDER[0][0]) & Q(mahalla_id=self.kwargs.get('id'))).count()
+            curr_year = datetime.now().year  # 2021
+
+            year_25 = muammo.murojatchi_set.filter(
+                Q(year_of_birth__gte=curr_year - 25) & Q(mahalla_id=self.kwargs.get('id'))).count()  # [1996 -> ]
+            year_26_35 = muammo.murojatchi_set.filter(
+                Q(year_of_birth__gte=curr_year - 35) & Q(year_of_birth__lte=curr_year - 26) & Q(
+                    mahalla_id=self.kwargs.get('id'))).count()  # [1986-1995]
+            year_36 = muammo.murojatchi_set.filter(
+                Q(year_of_birth__lte=curr_year - 36) & Q(mahalla_id=1)).count()  # [0 - 1985]
+            obj['year_25_percent'] = round(0 if obj['total'] == 0 else year_25 / obj['total'] * 100, 2)
+            obj['year_36_percent'] = round(0 if obj['total'] == 0 else year_36 / obj['total'] * 100, 2)
+            obj['year_26_35_percent'] = round(0 if obj['total'] == 0 else year_26_35 / obj['total'] * 100, 2)
 
             context['muammolar'].append(obj)
         return context
@@ -376,10 +419,6 @@ class FoydalanuvchiUpdateView(LoginRequiredMixin, UpdateView):
     form_class = FoydalanuvchiForm
     success_url = reverse_lazy("panel:foydalanuvchi")
 
-    # def get_success_url(self, **kwargs):
-    #     # obj = form.instance or self.object
-    #     return reverse("profile", kwargs={'pk': self.object.pk})
-
 
 class AcceptedUpdateView(LoginRequiredMixin, UpdateView):
     model = Reception
@@ -436,7 +475,7 @@ def ajax_mahalla(request):
         checked_mahallar = mahallar[:-1]
 
         for mahalla in checked_mahallar:
-            query_item = Murojatchi.objects.filter(mahalla__title=mahalla)
+            query_item = Murojatchi.objects.filter(Q(mahalla__title=mahalla) & Q(murojat_turi='admission'))
             add.extend(query_item)
 
         muammo = Muammo.objects.all()
@@ -474,9 +513,10 @@ def ajaxfilter(request):
             query_item = SubMuammo.objects.filter(title__title=muammo)
             if Murojatchi.objects.filter(muammo__title__in=checked_muammolar):
                 query_users = Murojatchi.objects.filter(
-                    Q(muammo__title=muammo) & Q(mahalla__title__in=checked_muammolar))
+                    Q(muammo__title=muammo) & Q(mahalla__title__in=checked_muammolar) & Q(murojat_turi='admission'))
             else:
-                query_users = Murojatchi.objects.filter(mahalla__title__in=checked_muammolar)
+                query_users = Murojatchi.objects.filter(
+                    Q(mahalla__title__in=checked_muammolar) & Q(murojat_turi='admission'))
 
             add.extend(query_item)
             queryset_users.extend(query_users)
@@ -485,7 +525,8 @@ def ajaxfilter(request):
 
         for i in add:
             user_count = Murojatchi.objects.filter(
-                Q(category__category=str(i)) & Q(mahalla__title__in=checked_muammolar)).count()
+                Q(category__category=str(i)) & Q(mahalla__title__in=checked_muammolar) & Q(
+                    murojat_turi='admission')).count()
             if user_count:
                 json_add[str(i)] = user_count
 
@@ -519,12 +560,13 @@ def ajax_filter_category(request):
             if Murojatchi.objects.filter(muammo__title__in=checked_categories):
                 for category in checked_categories:
                     query_item = Murojatchi.objects.filter(
-                        Q(muammo__title=category) & Q(mahalla__title__in=checked_categories))
+                        Q(muammo__title=category) & Q(mahalla__title__in=checked_categories) & Q(
+                            murojat_turi='admission'))
                     add.extend(query_item)
 
         for category in checked_categories:
             query_item = Murojatchi.objects.filter(
-                Q(category__category=category) & Q(mahalla__title__in=checked_categories))
+                Q(category__category=category) & Q(mahalla__title__in=checked_categories) & Q(murojat_turi='admission'))
             add.extend(query_item)
 
         json_add = serializers.serialize("json", add,
